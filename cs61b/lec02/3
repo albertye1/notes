@@ -1,0 +1,41 @@
+\documentclass{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\setlength{\parindent}{0pt}
+
+\title{Classes}
+\author{albert ye}
+\date{May 2022}
+
+\begin{document}
+\maketitle
+
+\section{Classes}
+\subsection{Compilation}
+x.java $\rightarrow$ x.class $\rightarrow$ output through javac, then java
+
+IntelliJ is secretly calling these things, so basically this means IntelliJ
+doesn't need to be used in the first place. We use vim
+
+\subsection{Generally just classes}
+
+Executable classes need a \texttt{main} method, but that's not necessary for
+classes that interact with executable classes (but aren't executable
+themselves).
+
+\subsection{Class Abstraction}
+Classes can contain functions and data. Classes can also be instantiated
+as objects. This saves a lot of redundancy for largely similar object
+types.
+
+\end{document}

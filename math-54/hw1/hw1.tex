@@ -1,0 +1,48 @@
+\documentclass{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\setlength{\parindent}{0pt}
+
+\title{Problemset 1}
+\author{albert ye}
+\date{May 2022}
+
+\makeatletter
+\newcommand{\skipitems}[1]{%
+  \addtocounter{\@enumctr}{#1}%
+}
+\makeatother
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+	\item We know that the force of friction must be equivalent to the force of gravity on the mass, because
+	the forces of action and reaction must be equal for the mass to remain at rest. Therefore, we see that The
+	frictional force must equal $\langle \begin{bmatrix}0 \\ 9.8 \end{bmatrix},
+	\begin{bmatrix} \cos 30 \\ \sin 30 \end{bmatrix} \rangle = 9.8 \sin 30 = \boxed{4.9}$.
+	\skipitems{1}
+	\item Because $\vec{AB} + \vec{BC} = \vec{AC}$, we can extend this to get $\vec{AB} + \vec{BC} + \cdots +
+	\vec{DE} = \vec{AE}$. Therefore, the expression evaluates to $\vec{AE} + \vec{EA} = \vec{AE} - \vec{AE} = \vec 0$.
+	\item We set that $\vec{OA} = \vec{OM} + \vec{MA}$. The expression $\vec{OA} + \vec{OB} + \vec{OC}$ thus
+	evaluates to $3\vec{OM} + \vec{MA} + \vec{MB} + \vec{MC}$. Because $\vec{MA} + \vec{MB} + \vec{MC} = 0$,
+	we see that $\vec{OM} = \frac{1}{3}(\vec{OA} + \vec{OB} + \vec{OC})$.
+	\item Because $AM = \frac{2}{3} AA'$, we see that $AM + BM + CM = \frac{2}{3}(AA' + BB' + CC')$. 
+	From the results of problem 7 (which we prove later) we see that $AM + BM + CM = \frac{1}{3}( 
+		AB + AC + BA + BC + CA + CB
+	) = 0$.
+	\skipitems{1}
+	\item $AB = AA' + A'B$ and $AC = AA' + A'C$, and because $A'$ is the midpoint $A'B, A'C$ cancel out. 
+	Thus, $AB + AC = 2AA'$, so $AA' = \frac{1}{2}(AB + AC)$.
+	\item add arrows later lmao
+\end{enumerate}
+\end{document}

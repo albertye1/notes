@@ -1,0 +1,124 @@
+\documentclass{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\setlength{\parindent}{0pt}
+
+\title{Lecture 1}
+\author{albert ye}
+\date{May 2022}
+
+\begin{document}
+\maketitle
+\section{Grading}
+\begin{enumerate}
+	\item Homework: 0\%
+	\item Quizzes: 20\%
+	\item Participation: 10\%
+	\item Midterms: 15\% each, 2 Midterms
+	\item Final: 40\%
+\end{enumerate}
+
+\section{What's Linalg?}
+\vocab{Linear}: Multiplication and addition, generally.
+
+\vocab{Algebra}: Formal structure of math, including weird things like Abstract Algebra
+(and I'm pretty sure there's gonna be some group theory sprinkled in because HONORS FIFTY FOUR)
+
+\subsection{Basic Definitions} % did i lie? did i lie? did i fucking lie?
+\begin{itemize}
+	\item Groups, incl. Linear Group. Can be added and subtracted from with closure, invertibility, 
+	associativity, and the existence of some identity value.
+	\item Rings, incl. Polynomial Ring. (set, addition, multiplication, basically the same
+	properties as a group except you don't need to invert multiply entirely
+	\item Fields, where you can invert multiplication entirely as well.
+\end{itemize}
+
+\vocab{Vector}:
+\begin{itemize}
+	\item Something w/ magnitude and direction
+	\item A column of numbers
+	\item An element of a vector space
+	\item An ordered collection of "magnitude".
+\end{itemize}
+
+\newpage
+For vectors on a plane:
+\begin{itemize}
+	\item Directed segment $\vec{AB}$.
+	\item Translations don't change the vector. If $\vec{AB}$ is translated to $\vec{A'B'}$, then 
+	$\vec{AB} = \vec{A'B'}$.
+	\begin{itemize}
+		\item More formally, a vector is an equivalence class of directed segments modulo translation.
+		\item So $\vec{AB}$ and $\vec{A'B'}$ are different as dir. seg. and equal as vectors
+	\end{itemize}
+\end{itemize}
+
+Notation: $[\vec{AB}]$ is the vector, whereas $\vec{AB}$ is just the segment.
+
+\subsection{Vector Operations}
+\begin{itemize}
+	\item \textbf{addition:} $[\vec{AB}], [\vec{CD}]$ are two vectors. $[\vec{AB}]+[\vec{BE}] = [\vec{AE}]$. 
+	\begin{lemma}[Commutativity of vectors]
+		$[\vec{AB}] + [\vec{CD}] = [\vec{CD}] + [\vec{AB}]$.
+	\end{lemma}
+	\begin{proof}
+		Let $E$ be defined such that $\vec{AE} \parallel \vec{CD}$ and let $F$ be defined such that 
+		$\vec{BF} \parallel \vec{CD}$. Then, $\vec{EF} \parallel \vec{AB}$, meaning that the polygon
+		formed by $A, B, E, F$ is a parallelogram. Letting $[\vec{AB}] = [\vec{EF}] = \vec u$ and
+		$[\vec{AF}] = [\vec{BE}] = \vec v$, we see that $\vec u + \vec v = \vec v + \vec u = [\vec{AF}]$.
+	\end{proof}
+	\item \textbf{scalar multiplication:} $3 \cdot \vec v = \vec v + \vec v + \vec v$. We can cut a third
+	of $\vec v$ out of $\vec v$, and that segment would equal $\frac{1}{3} \vec v$.
+	\item \textbf{linear combinations:} If $\vec v, \vec w$ are vectors and $a, b \in \RR$, then
+	$a \cdot \vec v + b \cdot \vec w$ is well-defined.
+	\item \textbf{inner (dot) product:} given two vectors $\vec v, \vec u$ we define $\langle\vec v, \vec u\rangle \in \RR$.
+	$\langle \vec v, \vec u \rangle = |\vec u| |\vec v| \cos \theta$. 
+	\begin{itemize}
+		\item The inner product is associative. 
+		\item $\langle \vec v_1 + \vec v_2, \vec w \rangle = \langle \vec v_1, 
+		\vec w \rangle + \langle \vec v_2, \vec w \rangle$.
+		\item $\langle \vec v_1 + \vec v_2, \vec w_1 + \vec w_2 \rangle = \langle \vec v_1, 
+		\vec w_1 \rangle + \langle \vec v_2, \vec w_1 \rangle + \langle \vec v_1, \vec w_2 \rangle + 
+		\langle \vec v_2, \vec w_2 \rangle$.
+		\item $\langle 3 \vec v, \vec w \rangle = 3 \langle \vec v, \vec w \rangle$.
+		\item So the inner product is a bilinear operation as it keeps linear properties in both inputs
+		and it maps everything into a third vector space.
+	\end{itemize}
+\end{itemize}
+
+\subsection{Vector Spaces}
+A set that supports addition into itself and scalar multiplication. We can call a vector space an 
+Abelian group because vector addition is commutative and vector spaces necessarily satisfy all other 
+conditions.
+
+\subsection{Basis Vector}
+Most notable example is $\vec i, \vec j, \vec k$. All other vectors in a vector space can be made with a 
+linear combination of the bases.
+\begin{lemma}
+	$V = \langle V, e_1 \rangle e_1 + \langle V, e_2 \rangle e_2$ for a 2-dimension space. 
+\end{lemma}
+\begin{proof}
+	Suppose $V = a_1 e_1 + a_2 e_2$. Then we apply $\langle \cdot, e_1 \rangle$ to both 
+	$\langle v, e_1 \rangle = \langle a_1e_1 + a_2e_2, e_1 \rangle = a_1 \langle e_1, e_1 \rangle + a_2
+	\langle e_2, e_1 \rangle$. Since $\langle e_2, e_1 \rangle$ must be $0$ since $e_1, e_2$ are both
+	bases, then $V$ must equal $a_1 e_1$. The same logic can be used for the $a_2 e_2$ side. 
+\end{proof}
+
+In general, if two vectors $E_1, E_2 \in \RR^2$ satisfy the property that any vector $v \in \RR^2$ can be 
+written as $V = a_1E_1 + a_2E_2$, then we say $(E_1, E_2)$ is a basis. In quantum, one notable basis is $\left \{ \begin{bmatrix}
+ \frac{1}{\sqrt 2} \\ \frac{1}{\sqrt 2} \end{bmatrix}, 
+\begin{bmatrix} \frac{1}{\sqrt 2} \\ -\frac{1}{\sqrt 2} \end{bmatrix} \right \}$ or $\{ \ket +, \ket - \}$.
+
+In a basis $E_1, E_2$, we say a vector $V$ has coordinate $(a_1, a_2)$ if $V = a_1E_1 + a_2E_2$. If the basis changes, the
+ coordinates also change.
+\end{document}
