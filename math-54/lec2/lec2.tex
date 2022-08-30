@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{scrartcl}
 \usepackage[utf8]{inputenc}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
@@ -17,12 +17,62 @@
 \author{albert ye}
 \date{May 2022}
 
-\makeatletter
-\newcommand{\skipitems}[1]{%
-  \addtocounter{\@enumctr}{#1}%
-}
-\makeatother
-
 \begin{document}
 \maketitle
+\section{Outline}
+\begin{enumerate}
+	\item Motivation by picture
+	\item DEfinition using equations
+		\begin{enumerate}
+			\item Examples
+			\item Classification
+		\end{enumerate}
+	\item Linear Transformation: Quadratic forms
+\end{enumerate}
+
+\section{Conic Sections}
+As slope of the plane increases, we get ellipses, parabolas, and hyperbolas. These are all
+cross-sections of a cone, or in the case of a hyperbola two cones arranged in hourclass shape.
+
+A line in $\RR_2$ can be generalized as $a_1x_1 + a_2x_2 = a_0$, and similarly, a plane in $\RR^3$ 
+can be generalized as $a_1x_1 + a_2x_2 + x_3x_3 = a_0$. A cone is given by $x_1^2 + x_2^2 = x_3^2$. 
+So a conic section is defined by all $(x_1, x_2, x_3)$ s.t. $a_1x_1 + a_2x_2 + a_3x_3 = 0$ and
+$x_1^2 + x_2^2 = x_3^2$.
+
+\begin{definition}{Conic Curve}
+	A \vocab{conic curve} in $\RR^2$ is $\{(x_1, x_2) \in \RR^2 | Ax_1^2 
+		+ Bx_1x_2 + Cx_2^2 + Dx_1 + Ex_2 + F = 0$.
+\end{definition}
+
+Basic equations for each curve:
+\begin{enumerate}
+	\item Hyperbola: $x_1^2 - x_2^2 = 1$
+	\item Ellipse: $x_1^2 + x_2^2 = 1$
+	\item Parabola: $x_1^2 = x_2$
+\end{enumerate}
+
+\section{Linear Transformation}
+
+\begin{definition}
+	A \vocab{linear transformation} $T : \RR^2 \to \RR^2$ uses a matrix to turn
+a vector $\begin{bmatrix}x_1 \\ x_2 \end{bmatrix}$ into $\begin{bmatrix}a_{11} & a_{12}
+\\ a_{21} & a_{22} \end{bmatrix} \begin{bmatrix}x_1 \\ x_2\end{bmatrix}$. 
+\end{definition}
+
+\begin{proposition}
+	A linear transformation $T : \RR^2 \to \RR^2$ is determined by how it acts on the basis vectors.
+\end{proposition}
+
+\begin{proof}
+	Any vector $\vec v \in \RR^2$ can be written as $\vec v = a_1\vec e_1 + a_2\vec e_2$ by definition
+	of basis. By linearity of $T$, we have $T(\vec v) = T(a_1 \vec e_1 + a_2 \vec e_2) = 
+	T(a_1 \vec e_1) + T(a_2 \vec e_2) = a_1 T(\vec e_1) + a_2 T(\vec e_2)$. Hence, $T(\vec v)$ is 
+	determined.
+\end{proof}
+
+A linear transformation $T$ transforms the bases into $T(e_1) = a_{11} \vec e_1 + a_{12} \vec e_2$
+and $T(e_2) = a_{21} \vec e_1 + a_{22} \vec e_2$.
+
+In general: $AB_{i, j} = \sum A_{i, k} B_{k, j}$.
+
 \end{document}
