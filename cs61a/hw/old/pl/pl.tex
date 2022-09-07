@@ -1,0 +1,45 @@
+\documentclass{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\setlength{\parindent}{0pt}
+
+\title{Programs as Data}
+\author{albert ye}
+\date{May 2022}
+
+\begin{document}
+\maketitle
+
+\section{Programming Languages}
+Machine language is just 0's and 1's. Assembly has some simpler commands. HL languages have more abstraction
+than Assembly and can be interpreted / compiled into a lower level language.
+
+A compiler eventually turns source code into machine code, which is able to be output.
+An interpreter turns source code into output. Some implementations, such as CPython, have both a compilation
+step (C) and an interpretation step (Python).
+
+\subsection{Phases of an interpreter/compiler}
+To comprehend source code, you need lexing, parsing, and an abstract syntax tree (whatever that is).
+
+\vocab{Parsing} involves turning a string representation of an expression into a structured object representing the expression.
+For example in Lisp-like languages you take each individual expression (including like \texttt{(} and \texttt{)} and try to see 
+if the expression compiles.
+
+\vocab{Lexical analysis} checks each of the tokens and makes sure they aren't malformed and determines their type iteratively.
+
+\vocab{Syntactic analysis} is a recursive process that tries to balance the parentheses and return a tree structure. Symbols will
+be the base case, while the combinations of subexpressions will be the recursion.
+
+With this recursive quality, we can make a Scheme compiler in Python (although that's kinda wack)
+
+\end{document}

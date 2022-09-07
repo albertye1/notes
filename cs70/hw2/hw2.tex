@@ -1,0 +1,118 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=0.5in, top=0.8in, bottom=0.3in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\usepackage{sectsty}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\lhead{Problemset 2}
+\rhead{Albert Ye}
+
+\title{Problemset 2}
+\author{albert ye}
+\date{May 2022}
+
+
+\begin{document}
+\maketitle
+
+\section{Airport}
+For $n=1$, we must have a scalene triangle $\triangle ABC$. If $BC$ is 
+the shortest edge, then $B$ will point to $C$ and $C$ will point to $B$. Then 
+$A$ will point to the closer of $B$ and $C$, but nothing will point to $A$.
+
+Given $n$, we seek to prove the same thing for $n+1$. Let $A$
+be an airport such that there is no flight towards it. If we were to add two 
+vertices such that none of them affected $A$, we would still have no flights 
+destined to $A$. Thus, we do not care about such cases. 
+
+Now, let's add one vertex $B$ close to $A$ such that a flight would be destined to $A$. Then, 
+$B$ would be the closest vertex to $A$ as well, so we would have a cycle of size $2$
+and a remaining network of size $2n$. Now, let's add the final vertex $C$. 
+
+If $C$ is
+closer to a vertex on the cycle of size $2$, we would be able to split the problem 
+into a network of size $3$ and a network of size $2n$, and the part of size $3$ would 
+necessarily have a vertex without inbound flights. Analogously, if $C$ is closer to 
+the network of size $2n$, then we would split the graph into a cycle of size 2 
+and a flight network of size $2n+1$, which we assume to have a vertex without inbound flights. 
+
+Therefore, regardless of how we add two airports, there will 
+always still be an airport without inbound flights for $n+1$ if there is such 
+an airport for $n$. \qed
+
+\section{Proving Inequality}
+For $n \in \ZZ^+$, let $a_n = \frac{1}{3^1} + \frac{1}{3^2} + \cdots + \frac{1}{3^n}$.
+We strengthen the inductive hypothesis, claiming that 
+$a_n = \frac{3^0 + 3^1 + \cdots + 3^{n-1}}{3^n} < \frac{1}{2}$ for all $n$.
+
+Plugging in $n=1$, we see that $a_1 = \frac{3^0}{3^1} = \frac{1}{3}$ is true. Now,
+we can use induction to prove this over all positive integer $n$. Given 
+$a_n = \frac{3^0 + 3^1 + \cdots + 3^{n-1}}{3^n}$, we add $\frac{1}{3^{n+1}}$ to get 
+$a_{n+1}$. Thus, we have 
+\begin{align*}
+	a_{n+1} &= \frac{3^0 + 3^1 + \cdots + 3^{n-1}}{3^n} + \frac{1}{3^{n+1}} \\
+	&= \frac{3^1 + 3^2 + \cdots + 3^n}{3^{n+1}} + \frac{1}{3^{n+1}} \\
+	&= \frac{1 + 3^1 + 3^2 + \cdots + 3^n}{3^{n+1}} \\
+	&= \frac{3^0 + 3^1 + \cdots + 3^n}{3^{n+1}}.
+\end{align*}
+
+We see that the formula still holds for $n+1$ given $n$, so $a_n < \frac{1}{2}$ must be 
+true for all $n \in \ZZ^+$. \qed
+
+\section{Inductive Charging}
+\begin{enumerate}[label=\alph*.]
+	\item Assume for the sake of contradiction that $f_i < d_i$ for all $i$. 
+		Then, $\sum_{i=0}^{n} f_i < \sum_{i=0}^n d_i = D$, meaning that 
+		there is not enough total fuel for one car to circle the track. 
+		Since that is a given for this problem, we have a contradiction. 
+		Thus, at least one car must have enough fuel to reach the next. \qed
+	\item We can once again use induction. We start with $n=1$, which clearly works 
+		as $n=1$ means $f_1 = D$ in order for the one car to have enough fuel to go 
+		around the track. 
+
+		Now, given that $n$ satisfies the claim, we try to prove the same for $n+1$. 
+		From part (a), we know that one car has enough fuel to travel to the next car. 
+		Without loss of generality, let that car be the first one. Then $f_1 > d_1$. 
+
+		Our first car can thus reach the second car, and then transfer the fuel from the second 
+		car. Thus, we need a total fuel count of $f_1 + f_2$ to go a distance of 
+		$d_1 + d_2$. We can combine the two into one segment: $(f_1+f_2) + f_3 + \cdots + f_{n+1} = (d_1+d_2) 
+		+ \cdots + d_{n+1}$. Doing this essentially reduces the problem from $n+1$ cars into $n$ cars,
+		which we can assume already works. \qed 
+\end{enumerate}
+
+\section{A Coin Game}
+Clearly, if $n = 1$, then the resulting score must be 0 since there are no ways 
+to split the coins. We seek to prove that if $n = a+b$, then $\frac{a(a-1)}{2} + \frac{b(b-1)}{2} + ab =
+\frac{n(n-1)}{2}$. 
+
+Adding this together, we have
+\begin{align*}
+	\frac{a(a-1)}{2} + \frac{b(b-1)}{2} + ab &= \frac{a^2-a + b^2-b}{2} + ab \\
+	&= \frac{a^2 + b^2 + 2ab - a - b}{2} \\
+	&= \frac{(a+b)^2 - (a+b)}{2} \\
+	&= \frac{n^2 - n}{2} \\
+	&= \frac{n(n-1)}{2}.
+\end{align*}
+
+Using this, we can divide a stack of $n$ coins into stacks of smaller coins. Since 
+we already know $n=1$ must hold true, our claim that the score will always be 
+$\frac{n(n-1)}{2}$ holds for all $n$ from induction. \qed
+
+\section{Pairing Up}
+
+\section{Nothing Can Be Better Than Something}
+
+\end{document}
