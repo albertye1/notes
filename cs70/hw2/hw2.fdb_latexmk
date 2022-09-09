@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1662512932 "/Users/albertye/Documents/notes/cs70/hw2/hw2.tex" "hw2.pdf" "hw2" 1662512932
-  "/Users/albertye/Documents/notes/cs70/hw2/hw2.tex" 1662512931 4976 ab804b7c04aeca5e9bdd1c71bab4a328 ""
+["pdflatex"] 1662765099 "/Users/albertye/Documents/notes/cs70/hw2/hw2.tex" "hw2.pdf" "hw2" 1662765100
+  "/Users/albertye/Documents/notes/cs70/hw2/hw2.tex" 1662765099 6690 b6c3c3a7b321970ff278043efb4a5e51 ""
   "/opt/homebrew/Cellar/texlive/20220321_1/share/texmf-dist/fonts/map/fontname/texfonts.map" 1647894602 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/opt/homebrew/Cellar/texlive/20220321_1/share/texmf-dist/fonts/map/pdftex/updmap/pdftex.map" 1647894602 4385071 4481eb56d8dc7e3e247ed9a139c582cd ""
   "/opt/homebrew/Cellar/texlive/20220321_1/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1647894602 1004 54797486969f23fa377b128694d548df ""
@@ -213,10 +213,10 @@
   "/opt/homebrew/Cellar/texlive/20220321_1/share/texmf-dist/tex/latex/zref/zref-base.sty" 1647894602 20688 beaddf14d96104d4bf016523be5395c5 ""
   "/opt/homebrew/Cellar/texlive/20220321_1/share/texmf-dist/web2c/texmf.cnf" 1647894602 40174 4e2f94c7b252db2ad3c0cfdef6912ab3 ""
   "/opt/homebrew/Cellar/texlive/20220321_1/share/texmf-var/web2c/pdftex/pdflatex.fmt" 1647894602 2826561 f78812c67eb0b74b120bb52a2362fc06 ""
-  "hw2.aux" 1662512932 1403 a6f8cc0b7134eb2cf7cc5f3801e46ebc "pdflatex"
-  "hw2.out" 1662512932 788 bad7de9cd8d07da047f37708f7669e5b "pdflatex"
+  "hw2.aux" 1662765100 1403 e1ef5a4cea20000326263177c6d312ef "pdflatex"
+  "hw2.out" 1662765100 788 bad7de9cd8d07da047f37708f7669e5b "pdflatex"
   "hw2.pre" 0 -1 0 "pdflatex"
-  "hw2.tex" 1662512931 4976 ab804b7c04aeca5e9bdd1c71bab4a328 ""
+  "hw2.tex" 1662765099 6690 b6c3c3a7b321970ff278043efb4a5e51 ""
   "test.sty" 1662488149 26717 3ac24bb98c9a3a62c7f0a348982adf3b ""
   (generated)
   "hw2.aux"

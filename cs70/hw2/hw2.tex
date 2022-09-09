@@ -113,6 +113,39 @@ $\frac{n(n-1)}{2}$ holds for all $n$ from induction. \qed
 
 \section{Pairing Up}
 
+Let's construct the solution for just one pair. 
+
+Imagine the case where $J_1$ prefers $C_2 > C_1$ and $J_2$ prefers 
+$J_2 > J_1$, while $C_1$ prefers $J_1 > J_2$ and $C_2$ prefers $J_2 > J_1$. 
+Then the pairs $(J_1, C_1), (J_2, C_2)$ are a stable matching since the candidates 
+both prefer the jobs they've received. But the pairs $(J_1, C_2), (J_2, C_1)$ are 
+also a stable matching because the jobs both prefer the candidates they've received. 
+Therefore, we can construct an instance of $2$ jobs and $2$ candidates 
+with $2^{2/2} = 2$ stable matchings.
+
+For a larger $n$ jobs and $n$ candidates, we can divide them into $\frac{n}{2}$ pairs $(i, i+1)$ 
+and run the same preference scheme between $J_i, J_{i+1}$ and $C_i, C_{i+1}$. To avoid 
+some other job $J_k$ or candidate $C_k$ causing the matchings between $J_i, J_{i+1}$ and 
+$C_i, C_{i+1}$ to be rogue, we can put $J_i$ and $J_{i+1}$ as the top preferences 
+for $C_i$ and $C_{i+1}$, and vice versa.
+
+For each pair, we can create two stable matchings: $(J_i, C_i), (J_{i+1}, C_{i+1})$ and 
+$(J_i, C_{i+1}), (J_{i+1}, C_i)$. As there are $\frac{n}{2}$ pairs, we can create  
+$2^{n/2}$ stable matchings by choosing one of the stable matchings in each pair.
+
+
 \section{Nothing Can Be Better Than Something}
+\begin{enumerate}[label=\alph*.]
+	\item Let the jobs be $J_1, J_2, \ldots, J_n$ and let the matching  
+		candidates by $C_1, C_2, \ldots, C_n$. Let's introduce a "phantom" 
+		set of jobs $J_1', J_2', \ldots, J_n'$ where $J_i'$ is the job 
+		$C_i$ takes if it does not like any of the jobs it gets. We 
+		introduce another phantom set of candidates $C_1', C_2', \ldots, C_n'$ 
+		where $C_i'$ is the candidate job $J_i$ takes if it does not like 
+		any of its candidates. 
+
+		
+	\item 
+\end{enumerate}
 
 \end{document}
