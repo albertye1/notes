@@ -1,7 +1,12 @@
 # Dynamic Method Selection
 
-For classes that inherit other classes, for example `A x = new B();`, the methods run are going to be those in A unless you cast A to B.
-If there is a method `m` that is only in B, the only way to run `m` is to do `(B)x.m()`
+For an object `x` such that `A x = new B();`
+- `A` is **static type**
+- `B` is **dynamic type**
+For inherited methods, if method is static choose from `A`, if non-static choose from `B`.
+For non-static methods, parameters are pulled from `A`. If there are no functions in `B` with the same
+parameters, we use the function in `A`. Parameters must be exact; if there is a function in `B` that takes
+in a subclass of the parameter used for `A`, we still use the method in `A`.
 
 # DSU
 
