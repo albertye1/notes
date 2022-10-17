@@ -9,7 +9,7 @@ Should unite, check connection, find set. Shouldn't unite two in the same set as
 
 Below are some implementations of DSU:
 
-## QuickFind`
+## QuickFind
 Create optimal solution to impelement `isConnected(a, b)`. Use an array `par` of ints to track which set each element belongs to, and check 
 if `par[a] = par[b]`. Only problem is that `connect` is slow, we need to change all values of one set when connecting two sets.
 
@@ -34,7 +34,7 @@ A binary tree where left child of a node is always less and right child is alway
 New items in the BST are always inserted as leaves. Move down, going to the left child if our current node is too big, and right child of our current node
 is too small. Duplicate nodes cannot exist.
 
-## Delertion
+## Deletion
 If there are zero children, deletion is very easy, as you can delete the node without affecting the rest of the tree. 
 
 If there is one child, we simply update the parent of the child to be the parent of the current node. The order is still here, because $a < b$ and $b < c$ means $a < c$.
