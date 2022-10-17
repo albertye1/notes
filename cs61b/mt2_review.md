@@ -27,6 +27,25 @@ to root of larger tree. Store the parent and the rank, and then merge by size.
 ## WQU + Path Compression
 When we do findSet, we set `root(i) = findSet(root(i))`, which is essentially taking the log of a log of a log -> $\Theta(1)$ on average.
 
+# BST
+A binary tree where left child of a node is always less and right child is always greater.
+
+## Insertion
+New items in the BST are always inserted as leaves. Move down, going to the left child if our current node is too big, and right child of our current node
+is too small. Duplicate nodes cannot exist.
+
+## Delertion
+If there are zero children, deletion is very easy, as you can delete the node without affecting the rest of the tree. 
+
+If there is one child, we simply update the parent of the child to be the parent of the current node. The order is still here, because $a < b$ and $b < c$ means $a < c$.
+
+If there are two children, this is harder. We can replace the node with either the largest descendant on the left subtree, or the smallest descendant on the right subtree.
+
+Asymptotics:
+- Bushy BST -- searching, insertion, deletion are all $\Theta(\log N)$ because the height is $\log N$.
+- Spindly BST -- searching, insertion, deletion are all $\Theta(N)$ because the height is $N$.
+- Taller trees run slower.
+
 # 2-3 Tree
 
 A 2-3 tree is a tree with two types of nodes.
@@ -36,14 +55,34 @@ A 2-3 tree is a tree with two types of nodes.
 This is a bijection to a red-black tree. Construction of a red-black tree involves
 turning the 3-nodes of a 2-3 tree into *red* edges connecting two nodes. 
 
+## Insertion
+- Insert into a leaf node, according to BST rules
+- When travelling from the root to the leaf, if we see any nodes @ capacity then push the middle element up & split
+- Split nodes after inserting
 
----insert more on how to do this---
+## Red-Black Tree
+Representation of a B-tree (2-3, 2-3-4 tree) that is easier to work with
+- Color a branch *red* to indicate it's in a stuffed node
+- Path from root to any leaf will see the same number of black branches $\Theta(\log N)$ to travel through.
 
 ## LLRB
 
 It's a red-black tree, but in case of any dispute, all red edges must be towards a 
 left child. If they say LLRB, in most cases they're just talking about something
 that a binary search can do. In C++, `std::set` is defined by RB trees.
+
+### Insertion
+When inserting into an LLRB we insert pretty much like a BST:
+- Insert the item as a new leaf but color its edge red
+- We have 3 operations:
+	- `rotateLeft(A)`: we have $A$ as parent and $B$ as right child of $A$ with children $C, D$. then $B$ is new parent, $C$ becomes child of $A$.
+	- `rotateRight(A)`: we have $A$ as parent and $B$ as left child of $A$ with children $C, D$. then $B$ is new parent, $C$ becomes child of $A$.
+	- `colorFlip(B)`: if $B$ has two red children, we flip colors of all nodes linking to $B$.
+
+Rules:
+- Nodes are always inserted as red children
+- If nodes are added to the right, the tree will be rotated until it's left-leaning again.
+- If there are two children with red edges leading, perform a color flip.
 
 # Hash Table
 
@@ -81,6 +120,24 @@ set.
 Only consider the largest term, ignore coefficients. $O(f(n))$ works if $f(n)$ is any upper bound for the runtime, and $\Omega(f(n))$ works
 if $f(n)$ is any lower bound for the runtime, so like $\Omega(1)$ always works.
 
+If we want to find asymptotics in terms of $N$, we try to find the complexity for $N$ approaching infinity. So any "edge cases" for small $N$ will not cut it
+
 # Heap
 
-Add stuff
+Min-Heap Property: The root of a tree/subtree is the minimum value, and other values are all less.
+- Max-Heap property is pretty much the same thing.
+
+In Java, we store the min-heap as an array, `[x, 1, 2, 4, 5, 3, 7, 8]`. Tree is traversed in level-order (which is just breadth first).
+So we do level 1 (root), then level 2 (children of root), etc. So `parent[i] = i / 2;`, `leftChild(i) = 2*i`, `rightChild(i) = 2*i+1`.
+
+## Insertion
+Insert the new element to the end of the array, which is the bottom-most layer & left-most element. 
+To make it agree with the principle, we bubble-up by swapping it with any parent that is larger than it. 
+
+Because heaps are bushy by construction, the complexity is logarithmic.
+
+## Deletion
+Delete the root node, and switch it with the bottom-most level & right-most element (last element). 
+TO make it agree with the principle, we bubble-down by swapping it with its smaller child.
+
+Again, the complexity is logarithmic.
