@@ -8,6 +8,16 @@ For non-static methods, parameters are pulled from `A`. If there are no function
 parameters, we use the function in `A`. Parameters must be exact; if there is a function in `B` that takes
 in a subclass of the parameter used for `A`, we still use the method in `A`.
 
+# Iteration
+
+Any class that extends the interface `Iterable` must have a function `iterator` that returns an `Iterator`.
+An iterator basically gives the current value and a way of getting to the next value until an end value.
+
+Although practically this should be done to iterate through the entire DS, we will need to look at how it's actually
+implemented in order to check how it actually behaves.
+
+Fall 2020 Problem 3 is a good example of when the iterator behaves counter-intuitively.
+
 # DSU
 
 Should unite, check connection, find set. Shouldn't unite two in the same set as well
