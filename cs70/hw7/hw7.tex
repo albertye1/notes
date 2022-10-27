@@ -1,0 +1,200 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=0.5in, top=0.8in, bottom=0.3in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\usepackage{sectsty}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\lhead{Problemset 7}
+\rhead{Albert Ye}
+
+\title{Problemset 7}
+\author{albert ye}
+\date{May 2022}
+
+\begin{document}
+	\maketitle
+	\section{Counting, Counting, and More Counting}
+	\begin{enumerate}[label=\alph*)]
+		\item $\dbinom{n+k}{n}$
+		\item $3 \cdot 2^6$
+		\item 
+			\begin{enumerate}[label=(\roman*)]
+				\item $\dbinom{52}{13}$
+				\item $\dbinom{48}{13}$
+				\item $\dbinom{48}{9}$
+				\item $\dbinom{13}{6} \dbinom{39}{7}$
+			\end{enumerate}
+		\item $\dfrac{104!}{2^{52}}$
+		\item $2^{98}$
+		\item 
+			\begin{enumerate}[label=(\roman*)]
+				\item $\dfrac{7!}{4!}$
+				\item $\dfrac{7!}{2!2!}$
+			\end{enumerate}
+		\item 
+			\begin{enumerate}[label=(\roman*)]
+				\item $5! = 120$
+				\item $\frac{6!}{2}$
+			\end{enumerate}
+		\item $27^9$
+		\item $\dbinom{36}{8}$
+		\item $\dbinom{8}{6}$
+		\item $\prod_{i=1}^{10} \dbinom{2i}{2}$, $\dfrac{20!}{2^{10}}$
+		\item $\dbinom{n+k}{k}$
+		\item $n-1$
+		\item $\dbinom{n-1}{k}$
+	\end{enumerate}
+	\section{Grids and Trees!}
+	\begin{enumerate}[label=\alph*)]
+		\item A shortest path can only go upwards and rightwards from $(0,0)$ to $(n,n)$, so 
+			there are $n$ upwards moves and $n$ rightwards moves for $\dbinom{2n}{n}$ total
+			moves.
+		\item Using the same logic there are $n+1$ upwards moves and $n-1$ rightwards moves for
+			$\dbinom{2n}{n-1}$ total moves.
+		\item Let's say the path crosses at a point $(i, i)$. That means that it ends up reaching
+			$(i, i+1)$. If we were to reflect the path before $(i, i+1)$ across the line $y = x+1$,
+			we find that the path ends at $(-1, 1)$ instead of $(0, 0)$. Therefore, for each path
+			that reaches $(i, i+1)$ on its way to $(n, n)$, there is an equivalent path
+			of size $(n+1)$. Therefore, the number of paths crossing $y = x$ is $\dbinom{2n}{n-1}$.
+		\item We find that the total number of paths from $(0,0)$ to $(n,n)$ that don't cross $y=x$
+			is $\dbinom{2n}{n} - \dbinom{2n}{n-1} = \dfrac{1}{n+1} \dbinom{2n}{n}$.
+		\item Assume without loss of generality that the path goes at or below the line $y=x$.
+			If the path intersects $y=x$ for the last time at $(i, i)$,
+			the path from $(0, 0)$ to $(i, i)$ must go at or below 
+			$y=x$, and the path from $(i, i)$ to $(n, n)$ should go strictly below $y=x$. 
+
+			The part from $(0, 0)$ to $(i, i)$ is clearly equivalent to $F_i$ ways. For the 
+			part from $(i, i)$ to $(n, n)$, the first move must be rightwards and the last move 
+			must be upwards, and the remaining moves must be at or below the line $y = x-1$. 
+			Observe that translation of the entire grid keeps 
+			the number of paths the same. Therefore, this problem is equivalent to that going from
+			$(0, 0)$ to $(n-i-1, n-i-1)$. therefore, this segment is clearly equivalent to 
+			$F_{n-i-1}$ ways. \qed
+		\item The last time the path intersects $y=x$ before reaching the end can be at any point
+			between $(0, 0)$ and $(n-1, n-1)$. From part (e), the answer for each $i$ equals
+			$F_i F_{n-i-1}$. Therefore, the total number of ways to reach $(n, n)$ from $(0, 0$
+			is the total for all possible $i$, which is $\sum_{i = 0}^{n - 1} F_i F_{n-i-1}$.
+		\item Let $T_k$ be the number of ways to construct a tree of size $k$. We claim $T_n = F_n$.
+
+			To construct each subtree for a tree of size $k$, we will need to put
+			$i$ nodes into the left subtree for some integer $i$. Then, the other $k-i-1$ nodes
+			that aren't in the root or the left subtree must necessarily be in the right 
+			subtree. But we also have to loop over all possible sizes $i$ from $0$ to $k-1$
+			as the $(0, k)$ and $(k, 0)$ cases are equal, so 
+			$T_k = \sum_{i=0}^{k-1} T_i T_{k-i-1}$.
+
+			This is the same relation as is used to find $F_n$. Moreover, note that $T_0 = T_1 = 1$,
+			similar to how $F_0 = F_1 = 1$, so the base cases are also identical. Therefore,
+			we must have $T_n = F_n$ for all $n \in \ZZ$.
+
+	\end{enumerate}
+	\section{Fermat's Wristband}
+	\begin{enumerate}[label=\alph*)]
+		\item $k^p$
+		\item $k^p - k$
+		\item Because $p$ is prime, there are $p$ equivalent rotations for each string 
+			with two or more different colors, and only $1$ equivalent rotation for each string
+			with one color only. 
+
+			Thus, the number of possible rotations is $\frac{k^p-k}{p} + k$.
+		\item Because the number of possible rotations is a whole number, $k^p - k$ must
+			be divisible by $p$, or, in other words, $k^p \equiv k \pmod p$.
+	\end{enumerate}
+
+	\newpage
+	\section{Counting on Graphs + Symmetry}
+	\begin{enumerate}[label=\alph*)]
+		\item There are $6! = 720$ ways to color the six faces. Each face has six possible locations,
+			and if one location is fixed, there are four possible rotations of the cube. Therefore,
+			there must be $6 \times 4 = 24$ rotations of each colors. Therefore, there are
+			$\frac{720}{24} = 30$ colorings.
+		\item There are $n$! ways to rearrange the beads and $n$ ways to rotate each arrangement, for
+			a total of $\frac{n!}{n} = (n-1)!$ ways.
+		\item There are $\frac{n(n-1)}{2} = \binom{n}{2}$ possible edges, and any subset of them
+			will form a valid undirected graph. Therefore, there are $2^{\binom{n}{2}}$ graphs.
+		\item For every subset of the vertices of size $k \geq 3$, we must have at least one cycle.
+			There are $\binom{n}{k}$ possible unordered subsets of size $k$. Each subset 
+			can be ordered in $k!$ ways, but rotations of the same sequence are considered
+			identical and each sequence has $k$ rototations. Therefore, there are $(k-1)!$
+			rotations for each subset. Thus, for each $k$ we have $\binom{n}{k}(k-1)!$ ways, so
+			the total is 
+			\[\sum_{k=3}^n \binom{n}{k}(k-1)!\]
+			\qed
+	\end{enumerate}
+
+	\section{Proofs of the Combinatorial Variety}
+	\begin{enumerate}[label=\alph*)]
+		\item Imagine we have $n$ people in a club, we want to choose $k$ officers and
+			one president for any $k \in [0, n]$. There are a total of $k \binom{n}{k}$ 
+			ways to do that for each $k$. Summing for all valid $k$, we find a sum of 
+			$\sum_{k=0}^n k \binom{n}{k}$. However, now let's choose a president first
+			and then choose remaining officers. We have $n$ ways to choose the president,
+			and among the $n-1$ other club members, we can choose an arbitrary number of 
+			officers. There are $\sum_{k=0}^{n-1} \binom{n-1}{k}$ ways to get the 
+			arbitrary number of officers, so there are $n \cdot \sum_{k=0}^{n-1} \binom{n-1}{k}$
+			ways to select the same scheme using this method. Therefore, the left and right
+			hand sides must be equivalent. \qed
+		\item Let's have three committees $A, B, C$, such that there are $n$ members each.
+			We try to form a super-committee with $m$ members, some from each of $A, B,$ or $C$.
+			However, it does not matter how many are from each. Note that there are $\dbinom{3n}{m}$
+			ways to choose such a supercommittee because the number in each committee doesn't 
+			matter. However, if we were to go by committee, we can choose $a$ from $A$, $b$
+			from $B$, and $c$ from $C$. We see that $a + b + c = m$. The total number of
+			ways to choose subcommittees from members of $A, B, C$ is the sum over 
+			$\binom{n}{a} \binom{n}{b} \binom{n}{c}$ over all valid $(a, b, c)$. Therefore, the
+			left hand side and right hand side count equivalent values. \qed
+	\end{enumerate}
+
+	\section{Fibonacci Fashion}
+	\begin{enumerate}[label=\alph*)]
+		\item We use induction on $t$. For $t = 1$, we have that there are $2 = F_{1+2} = F_3$
+			such sequences. For $t = 2$ we have $3 = F_{2+2} = F_4$ such sequences: all of them
+			except for $00$. 
+
+			Let's claim that for all $i < n$, there are $F_{i+2}$ ways to get a sequence of $i$ 
+			bits. Now, let's add a character to an existing bit string to get a sequence of 
+			length $n$. If the last character equals $1$, there is no extra restriction on the 
+			rest of the sequee, and there are $F_{n+1}$ ways to build it. 
+
+			However, if the
+			last character equals $0$, the second-to-last character must be $1$. There are 
+			no extra restrictions on the other characters, so there are $F_n$ ways for this
+			case.
+
+			Therefore, the total number of sequences for $n$ is $F_n + F_{n+1} = F_{n+2}$, and
+			we are done by induction. \qed
+		\item Let each accessory be represented by a bit string of length $t$, where $1$ means
+			the accessory is not used and $0$ means the accessory is used. Note that there
+			are $F_{t+2}$ ways to make a sequence of days where no accessory is used in two
+			consecutive days from part (a). Since there are $n$ accessories the total number
+			of ways is $(F_{t+2})^n$. 
+
+			Now, we count inductively by days. Starting on day $1$, we can pick $x_1$ accessories
+			in $\binom{n}{x_1}$ ways. Assuming we've picked a certain $x_i$ accessories on day $i$,
+			we cannot pick the same accessories on day $i+1$, so we must choose $x_{i+1}$ 
+			accessories from the $n - x_i$ given. Therefore on day $1$ we have a total of 
+			$\binom{n}{x_1}$ and on a given day $i$ from day $2$ to day $t$, we have a total
+			of $\binom{n-x_{i-1}}{i}$ ways. Now, all that remains is for us to add all possible 
+			values of each $x_i$ and multiply all days together to get the total number of ways
+			to choose $n$ accessories over the next $t$ days such that no accessory is worn
+			two days in a row. The result of that equation is
+			\[\sum_{x_1 \geq 0} \sum_{x_2 \geq 0} \cdots \sum_{x_t \geq 0} \dbinom{n}{x_1} \dbinom{n - x_1}{x_2} \cdots \dbinom{n-x_{t-1}}{x_t}. \]
+
+			Since the left-hand-side and right-hand-side of this equation end up calculating
+			the same thing with two different approaches, the equation must hold. \qed
+	\end{enumerate}
+\end{document}

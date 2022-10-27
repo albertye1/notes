@@ -8,6 +8,9 @@ For non-static methods, parameters are pulled from `A`. If there are no function
 parameters, we use the function in `A`. Parameters must be exact; if there is a function in `B` that takes
 in a subclass of the parameter used for `A`, we still use the method in `A`.
 
+Casting changes the static type, but not the dynamic type. If casting makes the dynamic type above the static type, it does RE but not CE.
+When an object is cast, it's viewed by the compiler in its static type and not its dynamic type (obviously).
+
 # Iteration
 
 Any class that extends the interface `Iterable` must have a function `iterator` that returns an `Iterator`.
