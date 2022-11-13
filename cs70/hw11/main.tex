@@ -1,0 +1,185 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=0.5in, top=0.8in, bottom=0.3in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\usepackage{sectsty}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+
+\newcommand{\p}{\mathbb{P}}
+\newcommand{\ex}{\mathbb{E}}
+\newcommand{\Var}{\text{Var}}
+
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\lhead{Problemset 11}
+\rhead{Albert Ye}
+
+\title{Problemset 11}
+\author{albert ye}
+\date{May 2022}
+
+\begin{document}
+\maketitle
+\section{Balls in Bins}
+Let the indicator variable $I_k$ be $1$ if bin $k$ has exactly $1$ ball inside. This gives us $\ex[X] = \ex[I_1] + \ex[I_2] + \cdots + \ex[I_m]$. We know that $\ex[I_k] = \p[I_k] = \dfrac{(n-1)^{m-1} \cdot n}{n^m}$, as of the $n^m$ total ways to put $n$ balls in $m$ bins, $n(n-1)^{m-1}$ of them have exactly one ball in the $k$th bin. There are $n-1$ balls remaining, $m-1$ slots remaining, and $n$ ways to choose the ball that is put in the $k$th bin.
+
+Therefore, $\ex[x] = \sum_{k=0}^n \ex[I_k] = n\left(\dfrac{n-1}{n}\right)^{m-1} = \dfrac{(n-1)^{m-1}}{n^{m-2}}$.
+
+The formula for $\Var(x)$ is $\ex[x^2] - \ex[x]^2$, so we need to find $\ex[x^2]$ as well. We find that this equals
+\begin{align*}
+	\ex[x^2] &= \sum_{k = 1}^n \ex[I_k^2] + 2\sum_{1 \leq k_1 < k_2 \leq n} \ex[I_{k_1} I_{k_2}] \\
+	&= \sum_{k=1}^n \ex[I_k] + 2\sum_{1 \leq k_1 < k_2 \leq n} \ex[I_{k_1} I_{k_2}] \\
+	&= \ex[x] = 2\sum_{1 \leq k_1 < \leq n} \ex[I_{k_1} I_{k_2}].
+\end{align*}
+
+We can evaluate $2\sum_{1 \leq k_1 < k_2 \leq n} \ex[I_{k_1} I_{k_2}]$ through linearity of expectation on $\ex[I_{k_1} I_{k_2}] = \p[I_{k_1} = 1 \wedge I_{k_2} = 1]$. For a given $k_1, k_2$, there are $n(n-1)$ ways to choose the two balls to put in bins $k_1, k_2$, and $(n-2)^{m-2}$ ways to arrange the remaining balls out of a total of $n^m$ arrangements. Therefore, the probability equals $\dfrac{(n-2)^{m-2} \cdot n(n-1)}{n^m} = \dfrac{(n-1)(n-2)^{m-2}}{n^{m-1}}$. Multiplying this by the number of possible $k_1, k_2$, we get $2\sum_{1 \leq k_1 < k_2 \leq n} \ex[I_{k_1} I_{k_2}] = 2\left(\dfrac{n(n-1)}{2}\right)\left(\dfrac{(n-2)^{m-2}(n-1)}{n^{m-1}}\right)$.
+
+Hence, $$\ex[x^2] = \dfrac{(n-1)^m + (n-1)^2(n-2)^{m-2}}{n^{m-2}} = \dfrac{n^{m-2}(n-1)^m + n^{m-2}(n-1)^2(n-2)^{m-2}}{n^{2m-4}},$$
+and $$\ex[x]^2 = \dfrac{(n-1)^{2m-2}}{n^{2m-4}}.$$
+
+Therefore, $$\Var(x) = \ex[x^2] - \ex[x]^2 = 
+\boxed{\dfrac{n^{m-2}(n-1)^m + n^{m-2}(n-1)^2(n-2)^{m-2} - (n-1)^{2m-2}}{n^{m-2}}}.$$
+
+\newpage
+\section{Will I Get My Package?}
+\begin{enumerate}[label=(\alph*)]
+	\item Let $X_i$ be a variable that equals $0$ if person $i$ gets their package, and $Y_i$ be a variable that equals $0$ if person $i$'s package is opened. We see that $X_i$ and $Y_i$ are completely independent because whether or not person $i$ gets their package does not influence whether or not the mailman is going to open the package. Therefore, we see that $X_i \cap Y_i = X_iY_i$, and $\ex[X] = \sum_{i=0}^n \ex[X_i] \ex[Y_i]$.
+	
+	Because $\ex[Y_i] = \dfrac{1}{2}$ for all $i$, we can ignore it for now and only look for $\ex[X_i]$. For a given index $i$, there are $(n-1)!$ permutations that give person $i$ the correct package out of $n!$ total, so $\ex[X_i] = \dfrac{(n-1)!}{n!} = \dfrac{1}{n}$.
+
+	Plugging this back to our equation for $\ex[X]$, we get $\ex[X] = \sum_{i=0}^n \ex[X_i] \ex[Y_i] = \dfrac{1}{2} \ex[X] \sum_{i=0}^n \ex[X_i] \ex[Y_i] = \sum_{i=0}^n \dfrac{1}{2n} = \boxed{\dfrac{1}{2}}$.
+	\item Since $\Var(X) = \ex[X^2] - \ex[X]^2$, we need to find $\ex[X^2]$.
+	
+	This is equal to $(\ex[X_1] + \ex[X_2] + \cdots + \ex[X_n])^2 = \sum_{i = 1}^n \ex[X_i^2] + 2 \sum_{1 \leq i < j \leq n} \ex[X_i X_j]$. We find that $\ex[X_i X_j] = \p[X_i = 1 \wedge X_j = 1]$ To compute the number of ways to satisfy $X_i=1 \wedge X_j=1$, we give person $i$ and person $j$ their respective packages (with a $\dfrac{1}{4}$ chance that neither are open), and rearrange the other $(n-2)!$ packages randomly. This leads to a total of $(n-2)!$ ways out of $n!$ total, so $\p[X_i=1 \wedge X_j=1] = \dfrac{(n-2)!}{4n!} = \dfrac{1}{4n(n-1)}$.
+
+	Therefore, the second term evaluates to $2 \sum_{1 \leq i < j \leq n} \ex[X_i X_j] = 2 \sum_{1 \leq i < j \leq n} \dfrac{1}{n(n-1)} = 2 \cdot \dfrac{n(n-1)}{2} \cdot \dfrac{1}{4n(n-1)} = \dfrac{1}{4}$. The first term evaluates to $\sum_{i = 1}^n \ex[X_i^2] = \sum_{i = 1}^n \ex[X_i] = \dfrac{1}{2}$. Hence, $\ex[X^2] = \dfrac{3}{4}$.
+
+	Finally, we just need to plug this into the variance formula to get $\Var(X) = \dfrac{3}{4} - \dfrac{1}{4} = \boxed{\dfrac{1}{2}}$.
+\end{enumerate}
+
+\newpage
+\section{Double-Check Your Intuition Again}
+\begin{enumerate}[label=(\alph*)]
+	\item 
+	\begin{enumerate}[label=(\roman*)]
+		\item From the covariance formula, $\text{Cov}(X+Y, X-Y) = \ex[(X+Y)(X-Y)] - \ex[X+Y]\ex[X-Y]$. The second term can be calculated pretty direction: from linearity of expectation, $\ex[X+Y] = \ex[X] + \ex[Y] = \dfrac{7}{2} + \dfrac{7}{2} = 7$ and $\ex[X-Y] = \ex[X] - \ex[Y] = \dfrac{7}{2} - \dfrac{7}{2} = 0$, so $\ex[X+Y]\ex[X-Y] = 0$. The first term can be found by expanding $\ex[(X+Y)(X-Y)] = \ex[X^2 - Y^2]$. From linearity of expectation this equals $\ex[X^2] - \ex[Y^2] = 0$. Therefore, the final expected value is $\boxed{0}$.
+		\item Consider the case of $X+Y = 12$. Then, our probability distribution for $X-Y$ equals $\p[X-Y = 0] = 1$ and $\p[X-Y = i] = 0$ for remaining $i$. However, $\p[X-Y = 0]$ is not necessarily $1$: examine the case of $X+Y = 11$; $\p[X-Y = 0] = 0$ because an odd $X + Y$ implies that $X \neq Y$. Therefore, the value of $X-Y$ depends on $X+Y$. \qed
+	\end{enumerate}
+	\item Yes. Assume for the sake of contradiction that there is a distribution with unequal value with variance of $0$. The variance is the sum of squares, meaning that it must be nonnegative; the only way for the variance to equal $0$ is for all the terms to be equal to $0$, so all $x - \overline x$ must be $0$. If we have another distinct value $y \neq x$, then $y - \overline x \neq 0$, which is a contradiction. \qed
+	\item This is false. The formula for variance is $\sum_{x \in X} (x - \overline x)^2$, so $\Var(cx)$ is equivalent to $\sum_{x \in X} (cx - \overline cx)^2 = c^2 \sum_{x \in X} (x - \overline x)^2 = c^2 \Var(x)$. \qed 
+	\item No, part (a) is a good example of this.
+	\item $\text{Corr}(X, Y) = 0$ implies that $\text{Cov}(X, Y) = 0$, so \begin{align}\ex[XY] = \ex[X]\ex[Y]\end{align}. Therefore, 
+	\begin{align*}
+		\Var(X+Y) - (\Var(X) + \Var(Y)) &= \ex[(X+Y)^2]-\ex[X+Y]^2 - (\ex[X^2] - \ex[X]^2) - (\ex[Y^2] - \ex[Y]^2) \\ 
+		&= \ex[X^2 + Y^2 + 2XY] - \ex[X + Y]^2 - (\ex[X^2] - \ex[X]^2) - (\ex[Y^2] - \ex[Y]^2) \\ 
+		&= \ex[X^2 + Y^2 + 2XY] - (\ex[X] + \ex[Y])^2 - (\ex[X^2] - \ex[X]^2) - (\ex[Y^2] - \ex[Y]^2) \\
+		&= \ex[X^2] + \ex[Y^2] + 2\ex[XY] - \ex[X]^2 - \ex[Y]^2 - 2\ex[X]\ex[Y] \\
+		&\qquad - \ex[X^2] + \ex[X]^2 -\ex[Y^2] + \ex[Y]^2. \\
+		&= 2\ex[XY] - 2\ex[X]\ex[Y].
+	\end{align*} 
+	
+	From (1), we see that this must equal 0, so $\Var(X+Y) = \Var(X) + \Var(Y)$. \qed
+	\item Note that $\max(X, Y)$ and $\min(X, Y)$ are both going to take on either $X$ or $Y$, and both values are going to be considered. Therefore, $\max(X, Y) \min(X, Y) = XY$ so $\ex[\max(X, Y)\min(X, Y)] = \ex[XY]$. \qed
+	\item Note that $$\text{Corr}(\max(X, Y), \min(X, Y)) = \dfrac{\text{Cov}(\max(X, Y), \min(X, Y))}{\sigma(\max(X, Y)) \sigma(\min(X, Y))}.$$ For the numerator, $\text{Cov}(\max(X, Y), \min(X, Y)) = \text{Cov}(X, Y)$ because the order of the terms does not matter, and one of $\max(X, Y), \min(X, Y)$ will equal $X$ and the other will equal $Y$. For the same reason, the denominator $\sigma(\max(X, Y)) \sigma(\min(X, Y)) = \sigma(X) \sigma(Y)$. Therefore, $$\text{Corr}(\max(X, Y), \min(X, Y)) = \dfrac{\text{Cov}(X, Y)}{\sigma(X) \sigma(Y)} = \text{Corr}(X, Y).$$ \qed
+\end{enumerate}
+
+\newpage
+\section{Fishy On Me}
+\begin{enumerate}[label=(\alph*)]
+	\item The distribution is seen to be $\text{poisson}(20)$. Therefore, the probability $\p[X=7] = \dfrac{20^7}{7!} e^{-20} = \boxed{\dfrac{20^7}{7! e^{-20}}}$.
+	\item The distribution is $\text{poisson}(2)$, so our probability is $\p[X \leq 1] = \dfrac{2^0}{0!} e^{-2} + \dfrac{2^1}{1!} e^{-2} = \boxed{\dfrac{3}{e^2}}$.
+	\item The distribution is $\text{poisson}(11.4)$, so we want to find $\p[X \geq 3]$, letting $X$ be the number of boats in these two days. Note that the probability of $X \geq 3$ is the complement of $\p[X < 3]$, which is much easier to calculate. This sum is 
+	\begin{align*}
+		\p[X \geq 3] &= 1 - \p[X < 3] \\
+		&= 1 - \p[X = 0] - \p[X = 1] - \p[X = 2] \\
+		&= 1 - \dfrac{11.4^0}{0!} e^{-11.4} - \dfrac{11.4^1}{1!} e^{-11.4} - \dfrac{11.4^2}{2!} e^{-11.4} \\
+		&= 1 - e^{-11.4} (1 + 11.4 + 64.98) \\
+		&= \boxed{1 - 77.38 e^{-11.4}}.
+	\end{align*}
+\end{enumerate}
+
+\newpage
+\section{Geometric and Poisson}
+Using the Total Probability Rule, $\p[X > Y] = \sum_{i = 1}^\infty \p[Y = i \cap X > i]$. As $X$ and $Y$ are independent, this is equal to
+\begin{align*}
+	\p[X > Y] &= \sum_{i=0}^\infty \p[Y = i] \p[X > i] = \sum_{i=1}^\infty \frac{\lambda^i}{i!} e^{-\lambda} \cdot (1-p)^i \\
+	&= \sum_{i=0}^\infty \frac{(\lambda-\lambda p)^i}{i!} e^{-\lambda}
+\end{align*}
+We can now create another Poisson distribution $\text{poisson}(\lambda - \lambda p)$.
+\begin{align*}
+	\sum_{i=0}^\infty \frac{(\lambda-\lambda p)^i}{i!} e^{-\lambda} &= e^{-\lambda p} \sum_{i=0}^\infty \frac{(\lambda-\lambda p)^i}{i!} e^{-\lambda(\lambda p)} \\
+	&= \boxed{e^{-\lambda p}}.
+\end{align*}
+
+\newpage
+\section{Poisson Coupling}
+\begin{enumerate}[label=(\alph*)]
+	\item Let's consider the case of $|\p[X = k] - \p[Y = k]|$. From the Total Probability Rule, we have $\p[X = k] = \p[X = k, Y = k] + \p[X = k, Y \neq k]$ and $\p[Y = k] = \p[Y = k, X = k] + \p[Y = k, X \neq k]$. Therefore, 
+	\begin{align*}
+		|\p[X = k] - \p[Y = k]| &= |\p[X = k, Y = k] + \p[X = k, Y \neq k] - \p[Y = k, X = k] - \p[Y = k, X \neq k]| \\
+		&= |\p[X = k, Y \neq K] - \p[Y = k, X \neq K]| \\
+		&\leq \p[X = k, Y \neq K] + \p[Y = k, X \neq K].
+	\end{align*}
+
+	Taking the sum of this and then dividing by $2$, we get 
+	\begin{align*}
+		\frac{1}{2} \sum_{k = 0}^\infty |\p[X = k] - \p[Y = k]| &\leq \frac{1}{2} \sum_{k = 0}^\infty \p[X = k, Y \neq k] + \p[Y = k, X \neq k] \\
+		&= \frac{1}{2}\p[X \neq Y] \leq \p[X \neq Y].
+	\end{align*}
+	\qed
+	\item Using the union bound, we have that $$\p\left[\bigcup_{i = 1}^n X_i \neq Y_i\right] \leq \sum_{i = 1}^n \p[X_i \neq Y_i].$$ Thus, all we have left to prove is $$\p\left[\sum_{i = 1}^N X_i \neq \sum_{i = 1}^N Y_i\right] \leq \p\left[\bigcup_{i = 1}^n X_i \neq Y_i\right].$$
+	
+	If $\sum_{i=1}^N X_i \neq \sum_{i=1}^N Y_i$, then for some $i$, $X_i \neq Y_i$. However, the converse is not always true; if $X_i \neq Y_i$ then it is not always true that $\sum_{i=1}^N X_i \neq \sum_{i=1}^N Y_i$. For example, consider the case where $N=2$, and $X_1 = X_2 = 1$ while $Y_0 = 0, Y_1 = 2$. Obviously $X_i \neq Y_i$ for some $i$, but the sum of all $X_i$ equals the sum of all $Y_i$.
+
+	Therefore, 
+	\begin{align*}
+		(\sum_{i = 0}^n X_i \neq \sum_{i=0}^n Y_i) &\subseteq (\bigcup_{i = 0}^n X_i \neq Y_i) \\
+		\implies \p[\sum_{i = 0}^n X_i \neq \sum_{i=0}^n Y_i] &\leq \bigcup_{i = 0}^n X_i \neq Y_i.
+	\end{align*}\qed
+	\item We must check that all probabilities are between 0 and 1, and that the probabilities sum to 1.
+	
+	Since the probabilities $\p[X_i = 0, Y_i = 0]$ and $\p[X_i = 1, Y_i = 0]$ are singular cases, we can just add them together. The first event has probability $1 - p_i \in [0, 1]$. The second has a probability of $e^{-p_i} - (1 - p_i) = \dfrac{1}{e^{p_i}} + p_i - 1$, which is less clearly between $0$ and $1$. Because $\dfrac{d}{dp_i} \dfrac{1}{e^{p_i}} + p_i - 1 = 1-e^{-p_i}$, we know that $\dfrac{1}{e^{p_i}} + p_i - 1$ is monotonically increasing. As $\dfrac{1}{e^{0}} + 0 - 1 = 0$ and $\dfrac{1}{e^{1}} + 1 - 1 = \dfrac{1}{e}$, we know that all values of $\dfrac{1}{e^{p_i}} + p_i - 1$ are between $0$ and $\dfrac{1}{e}$ for all $p_i \in [0,1]$. Therefore, the first criterion of a valid distribution is satisfied.
+
+	The sum of probabilities is 
+	\[1-p_i + \dfrac{1}{e^{p_i}} + p_i - 1 + \sum_{y=1}^\infty \dfrac{e^{-p_i}p_i^y}{y!} = \dfrac{1}{e^{p_i}} + \sum_{y=1}^\infty \dfrac{e^{-p_i}p_i^y}{y!} = \sum_{y=0}^\infty \dfrac{e^{-p_i}p_i^y}{y!},\]
+	which is essentially the sum of an entire Poisson distribution. This must equal $1$ by definition. \qed
+	\item $\p[X_i = 0, Y_i = 0] = 1 - p_i$ is the only equation ih tye system that includes the event of $X_i = 0$, so $\p[X_i = 0] = 1 - p_i$. Therefore, as $\p[X_i \geq 2] = 0$, the remaining $p$ must belong to the case of $\p[X_i = 1]$. Therefore, $X_i$ has the Bernoulli distribution with probability $p_i$. Thus, this joint distribution must be valid. \qed 
+	\item For cases of $Y_i = 0$, we have the two cases of $X_i = 0, X_i = 1$. The first case has probabiltiy $1-p_i$ and the second case has probability $e^{-p_i} - (1-p_i)$, so the sum of these two cases is just $\p[Y_i = 0] = e^{-p_i}$. This is just the value of the Poisson distribution at 0. 
+	
+	For cases of $Y_i \neq 0$, the former case is equal to $0$ so we only have to contend with $X_i = 1$. For each $y$, the value $\p[Y_i = y] = e^{-p_i}\dfrac{p_i^y}{y!}$, which equals the value of the Poisson distribution at $y$. \qed
+	\item We once again only need to consider two cases $X_i = 0, 1$. For the case of $X_i = 0$, the probability $\p[X_i \neq Y_i] = 0$ because $\p[X_i = 0, Y_i \neq 0] = 0$. And for the case of $X_i = 1$, we have 
+	\begin{align*}
+		\p[X_i \neq Y_i] &= \p[X_i = 1] - \p[X_i = 1, Y_i = 1] \\
+		&= \sum_{y = 0}^\infty \dfrac{e^{-p_i}p_i^y}{y!} - (p_i - 1) - p_ie^{-p_i}\\
+		&= 1 - (1 - p_i) - p_ie^{-p_i} \\
+		&= p_i - p_ie^{-p_i} \\
+		&= p_i(1 - e^{-p_i}).
+	\end{align*} 
+	To prove that this probability is at most $p_i^2$, we need $1 - e^{-p_i} \leq p_i \implies e^{-p_i} + p_i - 1 \geq 0$, which we established in part (c). Therefore, $\p[X_i \neq Y_i] \leq p_i^2$. \qed
+	\item Let's look at individual terms of $d(X_i, Y_i)$. 
+	\begin{align*}
+		d(X_i, Y_i) &= \frac{1}{2}(\p[X_i = 0] + \p[X_i = 1] - \p[Y_i = 0] - \p[Y_i = 1] + \p[Y_i \geq 2]) \\
+		&= \frac{1}{2}(p_i + (1-p_i) + 1 - 2(\p[Y_i = 0] + \p[Y_i = 1])) \\
+		&= 1 - \p[Y_i = 0] - \p[Y_i = 1] \\
+		&= 1 - \dfrac{e^{-p_i}p_i^0}{0!} - \dfrac{e^{-p_i}p_i^1}{1!} \\
+		&= 1 - e^{-p_i} - e^{-p_i}p_i \\
+		&= 1 - e^{-p_i}(1 + p_i). 
+	\end{align*}
+
+	We claim the difference $\p[X_i \neq Y_i] - d(X_i, Y_i) \geq 0$. Plugging in our results for the two values gives us $p_i(1-e^{-p_i}) - (1-e^{-p_i}(1+p_i)) = p_i - p_ie^{-p_i} - 1 + e^{-p_i} + p_ie^{-p_i} = p_i - 1 + e^{-p_i}$. Again, from part (c), we get that this is nonnegative so $d(X_i, Y_i) \leq \p[X_i \neq Y_i]$. 
+
+	Using this information, we have that $d(\sum_{i=1}^n X_i, \sum_{i=1}^n Y_i) \leq \sum_{i=1}^n \p[X_i \neq Y_i] \leq \sum_{i=1}^n p_i^2$ as desired. \qed
+\end{enumerate}
+
+\end{document}

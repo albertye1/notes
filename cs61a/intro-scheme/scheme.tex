@@ -1,0 +1,118 @@
+\documentclass{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\setlength{\parindent}{0pt}
+
+\title{Scheme}
+\author{albert ye}
+\date{May 2022}
+
+\begin{document}
+\maketitle
+Scheme is a dialect of lisp from the '70s but somehow
+Berkeley decides it's still relevant
+to teach.
+\section{Scheme expressions}
+Scheme has two types of expressions, which can
+either be \vocab{primitive} or \vocab{combinations}.
+
+From what I gather \vocab{primitive expressions} are just
+one variable/function (such as "2" or "quotient") whereas
+combinations are adding variables and functions to evaluate
+things. Call expressions include an operator and 0 or more
+operands in parentheses.
+
+For example: \texttt{(quotient 10 2)} is a valid expression
+that returns \texttt{5}.
+\section{Special forms}
+A \vocab{special form} is a combination that isn't a call 
+expression.
+\begin{itemize}
+	\item if expressions: \\ \texttt{(if <predicate> <consequent> <alternative>)} 
+	\item and/or: \\ \texttt{(and <e1> ... <en>)} \\ \texttt{(or <e1> ... <en>)}
+	\item binding symbols: \\ \texttt{(define <symbol> <expression>)}
+	\item new procedures: \\ \texttt{(define (<symbol> <formal parameters>) <body>)}
+\end{itemize}
+\subsection{define form}
+Takes an expression and binds the value of the expression to a name (which must be 
+a valid Scheme symbol)
+
+For example, \texttt{(define x 2)} sets \texttt{x}
+to the value \texttt{2}.
+
+Using the \texttt{let} command allows you to set the value 
+temporarily without binding it to the name. For example:
+\texttt{(define c (let ((a 3) (b (+ 2 2))) (sqrt (+ (* a a) (* b b)))))}
+
+\subsection{define procedure}
+Constructs a new procedure with specified parameters
+and uses the \texttt{body} expressions as its body
+which it binds to \texttt{name}.
+
+For example \texttt{(define (double x) (* 2 x))} defines 
+a function 
+
+A \vocab{lambda expression} is just an anonymous procedure.
+
+\subsection{list procedure}
+\say{you use a lot of recursion \\
+and lists are linked lists} -chez
+
+The \vocab{list} procedure takes in an arbitrary number
+of arguments and constructs a list with the values of 
+these arguments.
+
+\texttt{(list 1 2 3)} makes a list \texttt{1, 2, 3}
+
+\texttt{(list 1 (list 2 3) 4)} makes a list \texttt{1, (2, 3), 4}
+
+\texttt{(list (cons 1 (cons 2 nil)) 3 4)} makes \texttt{(1, 2), 3, 4}
+
+\subsection{car and cdr and cons}
+Not related to quotation but it first showed up here; 
+\vocab{car} is the first element of a list, \vocab{cdr}
+is the list of remaining elements after the first, and 
+\vocab{cons} is short for construct which appends to a list. 
+
+\vocab{car} and \vocab{cdr} pretty much make all lists follow the
+linked list paradigm.
+
+If you only want to construct one element 
+with another element, then you can just use \texttt{(cons 1 nil)}.
+
+\section{Quotation}
+Symbols typically refer to values, and quotation is used to refer 
+to the symbols directly. 
+
+\texttt{(list 'a 'b)} makes the list \texttt{a, b}
+while \texttt{(list a b)} makes the list \texttt{1, 2}
+if $a=1, b=2$.
+
+\texttt{'(neverseen)} returns "neverseen" because it's still a symbol,
+the only caveat is that nothing can be done with "neverseen".
+
+\section{List Processing}
+\begin{itemize}
+	\item \texttt{append a b}, adds the value \texttt{b} to the list
+		\texttt{a}.
+	\item \texttt{filter cond list}, returns a list of all $x \in list$
+		that satisfy \texttt{cond}
+	\item \texttt{apply func list} applies \texttt{func} over all
+		values in \texttt{list}.
+	\item \texttt{map lambda(x) list} returns the elements of a list
+		after applying a lambda over it.
+	\item \texttt{eval exp} basically allows you to run 
+		a program \texttt{exp} you just put into a list
+\end{itemize}
+
+\end{document}

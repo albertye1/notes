@@ -1,0 +1,134 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=0.5in, top=0.8in, bottom=0.3in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\usepackage{sectsty}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\lhead{Problemset 10}
+\rhead{Albert Ye}
+
+\title{Problemset 10}
+\author{albert ye}
+\date{May 2022}
+
+\newcommand{\p}{\mathbb{P}}
+
+\begin{document}
+\maketitle
+\section{Cookie Jars}
+If there are $x$ cookies in jar 2, there is a $\frac{1}{2^{2n-x}} \binom{2n-x}{n}$
+probability that $x$ cookies are taken. Therefore, the distribution of $X$, the 
+number of cookies left in the other jar, is $\p[X = a] = \boxed{\frac{1}{2^{2n-a}}
+\binom{2n-a}{n}}$.
+
+\section{Maybe Lossy Maybe Not}
+\begin{enumerate}[label=(\alph*)]
+	\item At most one packet can be lost without losing the message, so the
+	probability of the message staying intact is $\p[0] + \p[1]$, where 
+	$\p[x]$ is the probability of $x$ packets being dropped. This equals 
+	$(1-p)^7 + p(1-p)^6 \binom{7}{1} = \boxed{(1-p)^7 + 7p(1-p)^6}$.
+	\item One packet may be corrupted after the deletions, so we need at least
+	$6+2 = 8$ packets to remain intact after packets are lost. We can thus drop 
+	at most $2$ packets, so the probability is now $\p[0] + \p[1] + \p[2]$.
+	This is found to be $(1-p)^{10} + p(1-p)^9 \binom{10}{1} + p^2(1-p)^8
+	\binom{10}{2} = \boxed{(1-p)^{10} + 10p(1-p)^9 + 45p^2(1-p)^8}$.
+	\item There is a probability of $p$ that a packet is dropped. After this, There
+	is a probability of $q$ that a packet is corruptted. We can afford one drop 
+	and no subsequent corruption in either case. 
+
+	There is a probability of $p$ that a packet is dropped, and if not there is a
+	probability of $q$ that it will be corrupted. There is a $(1-p)(1-q)$ chance 
+	that a package is neither dropped nor corrupted. Thus, our desired probability 
+	is $\p[0,0] + \p[1,0]$ where $\p[x,y]$ is $x$ drops and $y$ corruptions. 
+	This equals $[(1-p)(1-q)]^7 + \binom{7}{6} p(1-p)^6(1-q)^7 = 
+	\boxed{(1-q)^7[(1-p)^7 + 7(1-p)^6]}$.
+\end{enumerate}
+
+\newpage
+\section{Class Enrollment}
+\begin{enumerate}[label=(\alph*)]
+	\item The probability of Lydia getting the geography class on day $g$ is 
+	the chance that she does not get the class on all days $1$ to $g-1$ and 
+	does get it on day $g$. This has a probability of $\mu (1-\mu)^{g-1}$, so 
+	the distribution of $G$ is $\boxed{\p[G = g] = \mu (1-\mu)^{g-1}}$.  
+	\item $\p[G = i | G > 7]$ is the sum of all probabilities $\p[G = i]$ for 
+	$i > 7$, or $\sum_{i=8}^{\infty} \p[G = i] = \sum_{i=8}^{\infty} \mu (1-\mu)^{i-1}$
+	which can be evaluated with the geometric series formula to get 
+	\[\p[G = i | G > 7] = \frac{\mu(1-\mu)^7}{1-(1-\mu)} = 
+		\boxed{\frac{\mu(1-\mu)^7}{\mu}}.\] 
+	\item $\mathbb{E}[H]$ is $\mathbb{E}[G] + \mathbb{E}[H-G]$, where the former 
+	is the expected number of days to get geography and the latter is the expected 
+	number of days to get history. Then $\mathbb{E}[G] = \sum_{i=1}^\infty i\mu(1-\mu)^{i-1}$. 
+	This sum equals 
+	\begin{align*} 
+		\sum_{j=1}^\infty \sum_{i=j}^\infty \mu(1-\mu)^{i-1} &= 
+		\sum_{j=1}^\infty \dfrac{\mu(1-\mu)^{j-1}}{\mu} \\
+		&= \sum_{j=1}^\infty (1-\mu)^{j-1} \\
+		&= \frac{1}{\mu}.
+	\end{align*}
+	
+	The expected number of days to get the history class alone is the same, 
+	$\frac{1}{\lambda}$, using the same calculations.
+	So the total $\mathbb{E}[H] = \boxed{\frac{1}{\mu} + \frac{1}{\lambda}}$.
+
+	\item The distribution of $G$ is still $\p[G = g] = \mu (1-\mu)^{g-1}$,
+	but the distribution of $H$ is now completely \textbf{independent} of $G$,
+	being $\boxed{\p[H = h] = \lambda (1 - \lambda)^{h-1}}$. 
+	\item The probability that Lydia gets either a geography or a history class on day $i$ is equal to $\p[G \cup H] = \p[G] + \p[H] - \p[G \cap H]$, which is equal to $\mu(1-\mu)^{i-1} + \lambda(1-\lambda)^{i-1} - (\lambda \mu) (1 - \lambda \mu)^{i-1}$ because $G, H$ are independent. Thus, the distribution for $A$ equals $\p[A = i] = \boxed{\mu(1-\mu)^{i-1} + \lambda(1-\lambda)^{i-1} - (\lambda \mu) (1 - \lambda \mu)^{i-1}}$.
+	\item Instead of placing the two actions of signing up for geography and signing up for history in sequential order, we instead do the two actions simultaneously. This leads to $\mathbb{E}[B]$ being the maximum of $\mathbb{E}[G]$ and $\mathbb{E}[H]$, which equals $\frac{1}{\mu} + \frac{1}{\lambda} - \mathbb{E}[A]$. 
+
+	We find that $\mathbb{E}[A] = \mathbb{E}[G] + \mathbb{E}[H] - \mathbb{E}[G \cap H]$. From part (b), this equals $\frac{1}{\lambda} + \frac{1}{\mu} - \frac{1}{\lambda \mu}$. The former two terms cancel, so $\mathbb{E}[B] = \boxed{\frac{1}{\lambda \mu}}$.
+	\item Let $I_1$ be $1$ if Lydia gets geography by day 30, and $I_2$ be $1$ if Lydia gets history by day 30. From linearity of expectation, we find that the expected number of classes Lydia gets by day 30 is $\mathbb{E}[I_1] + \mathbb{E}[I_2]$. Furthermore, we know that $\mathbb{E}[I] = \p[I = 1]$, so this is just the sum of the probability that we get either geography or history by day 30. For the case of geography, this equals $\p[I_1 = 1] = \sum_{i=0}^{29} \mu(1-\mu)^i = \frac{\mu(1-(1-\mu)^{30})}{\mu} = (1-(1-\mu)^{30})$. Similarly, we get that $\p[I_2 = 1] = (1-(1-\lambda)^{30})$. Therefore, $\mathbb{E}[I_1] + \mathbb{E}[I_2] = \boxed{2-(1-\mu)^{30}-(1-\lambda)^{30}}$.
+\end{enumerate}
+
+\newpage
+\section{Two Sides of a Coin}
+\begin{enumerate}[label=(\alph*)]
+	\item We want the expected value $n$ such that the $n$th toss is the first one that differs from toss $1$. This has a value of $\sum_{i=2}^\infty \frac{i}{2^i}$, which equals \[\sum_{i=2}^\infty \frac{1}{2^i} + \sum_{j=2}^\infty \sum_{i=j}^\infty \frac{1}{2^i} = \frac{1}{2} + \sum_{i=2}^\infty \frac{1}{2^{i-1}} = \boxed{\frac{3}{2}}.\]
+	\item It's expected that there are $\frac{3}{2}$ flips for both sides of the first coin to be seen, and then there are $\frac{3}{2}$ flips for both sides of the second coin to be seen, so the total expected number of flips for both sides of both coins to be seen is $\boxed{3}$ from linearity of expectation.
+	\item Let the two random variables for seeing heads and tails of each coin be $X$ and $Y$. Then both $X$ and $Y$ are identically distributed, and as such the answer will be the same as in part (a), which is $\boxed{\frac{3}{2}}$.
+\end{enumerate}
+
+\section{Throwing Frisbees}
+\begin{enumerate}[label=(\alph*)]
+	\item The probability that the frisbee is returned after $x$ turns is $\dfrac{1}{n-1} \left(\dfrac{n}{n-1}\right)^{x-2}$, so the expected value is 
+	\[\sum_{x=2}^\infty \dfrac{x}{n-1} \left(\dfrac{n-2}{n-1}\right)^{x-2} = \sum_{x = 2}^\infty \frac{1}{n-1} \left(\frac{n-2}{n-1}\right)^{x-2} + \sum_{i=2}^\infty \sum_{x=i}^\infty \frac{1}{n-1} \left(\frac{n-2}{n-1}\right)^{x-2} = 1 + \sum_{i=2}^\infty \left(\frac{n-2}{n-1}\right)^{i-2} = \boxed{1 + \frac{(n-2)^{i-2}}{(n-1)^{i-3}}}.\]
+	\item Let the indicator variable $I_k$ be $1$ if player $k$ gets the frisbee, and $0$ otherwise. Furthermore, let Shahzar be player $n$. Then, the expected number of people who never feel the loving grasp of a frisbee equals $\sum_{k=1}^{n-1}(1-\mathbb{E}[I_k])$ by linearity of expectation.
+	
+	We first calculate the individual $\mathbb{E}[I_k]$. There is a $\frac{1}{n-1}$ chance that $k$ gets the frisbee on the first turn. Then, if we were to add another turn, we should not throw to either Shahzar or player $k$ on the first turn, so of the $n-1$ players we could throw to $n-3$ players. So the probability of getting a frisbee to $k$ in $2$ turns is $\frac{n-3}{n-1} \cdot \frac{1}{n-1}$. Similarly, we find that in 3 turns we have a probability of $\frac{1}{n-1} \left(\frac{n-3}{n-1}\right)^2$, and for $n$ turns we have a probability of $\frac{1}{n-1} \left(\frac{n-3}{n-1}\right)^{n-1}$. 
+
+	Therefore, $\mathbb{E}[I_k]$ can be evaluated with a geometric series to be $\dfrac{\frac{1}{n-1}}{1-\frac{n-3}{n-1}} = \dfrac{\frac{1}{n-1}}{\frac{2}{n-1}} = \dfrac{1}{2}$ for all $k \in [1, n-1]$. Therefore, our answer is 
+	\[\sum_{k=1}^{n-1}(1-\mathbb{E}[I_k]) = \boxed{\frac{n-1}{2}}.\]
+\end{enumerate}
+
+\newpage
+\section{Swaps and Cycles}
+\begin{enumerate}[label=(\alph*)]
+	\item Let an indicator variable $I_k$ equal $1$ if $k$ is being switched with some other index, and $0$ otherwise. Then, the number of switches $n$ is equal to $\frac{1}{2} \sum_{k=1}^n I_k$, so by linearity of expectation $\mathbb{E}[n] = \frac{1}{2} \sum_{k=1}^n \mathbb{E}[I_k]$.
+
+	We know that $\mathbb{E}[I_k]$ is equal to the probability of putting $I_k$ in a switch pair, and there are $n-1$ possible elements for the other pair. The probability that a fixed $k_1, k_2$ are in a pair is $\frac{(n-2)!}{n!} = \frac{1}{n(n-1)}$, so the probability that $k$ is in a switch pair with anything else is $\frac{1}{n}$. 
+
+	Thus, \[\mathbb{E}[n] = \frac{1}{2} \sum_{k=1}^n \frac{1}{n} = \boxed{\frac{1}{2}}.\]
+	\item We claim that the answer is $\boxed{\frac{1}{k}}$. 
+	
+	Let $I_j$ be an indicator variable that equals $1$ if index $j$ is in a $k$-cycle and $0$ otherwise. Similarly to part (a), the expected number of $k$-cycles in $\pi(n)$ is the sum of $\frac{1}{k} \sum_{j=1}^{n} 1-\mathbb{E}[I_j]$.
+
+	For a given index $j$, there are $\frac{(n-1)!}{(n-k)!}$ ways to pick and order $k-1$ other elements to put in the cycle, and then a probability of $\frac{(n-k)!}{n!}$ that a cycle with fixed elements $j_1, j_2, \ldots, j_k$ exists. 
+	Therefore, the expected value of $I_j$ is still $\frac{1}{n}$, so \[\mathbb{E}[n] = \frac{1}{k} \sum_{k=1}^n \frac{1}{n} = \frac{1}{k}.\] \qed
+
+\end{enumerate}
+\end{document}
