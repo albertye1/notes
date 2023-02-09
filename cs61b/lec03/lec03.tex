@@ -1,0 +1,61 @@
+
+\documentclass{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=0.5in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\setlength{\parindent}{0pt}
+
+\title{Testing}
+\author{albert ye}
+\date{May 2022}
+
+\begin{document}
+\maketitle
+
+\section{Ad Hoc testing}
+Most naive way to test is to just check manually and output something when it is wrong. Like I'd
+do in competitive programming.
+
+Use \texttt{org.junit.Assert.assertArrayEquals} for a simpler way to check if two arrays are
+the same, and if so, to check where the differences are at.
+
+This method has to be run with expected first and input second. 
+
+We can find one string instead of an entire array to get the current smallest.
+
+\subsection{Assertions}
+\begin{enumerate}
+	\item assertEquals
+	\item assertArrayEquals
+	\item assertFalse/assertTrue
+	\item assertNotNull
+	\item a lot of other things
+\end{enumerate}
+
+\section{JUnit}
+
+Give an annotation \texttt{org.JUnit.Test} before a function and then delete the \texttt{static}
+and then delete the main function because JUnit doesn't run as an executable java class. 
+
+This is why we need IntelliJ I guess, it's too difficult to set all of this up. 
+
+\subsection{Even Better JUnit}
+Need 
+\begin{verbatim}
+import org.junit.Test; // don't need to run @org.junit.Test just @Test
+import static org.junit.Assert; // just need to run Assert.assertEquals() etc
+\end{verbatim}
+and then we won't even need the ugly org.junit.* headers behind everything related to JUnit.
+
+Unlike in Python, all Java libraries are in the system without imports, you just import to
+make calling classes in the libraries less verbosely (even though everything Java is verbose)
+\end{document}

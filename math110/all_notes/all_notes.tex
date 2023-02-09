@@ -1,0 +1,172 @@
+\documentclass{book}
+\usepackage{michael}
+
+\title{Math 110: Linear Algebra Done Wrong}
+\author{Albert Ye}
+\date{\today}
+
+\begin{document}
+\maketitle
+\mytoc 
+\chapter{Week 1}
+\section{Lecture 1}
+\subsection{Logistics}
+\begin{itemize}
+	\item 30\% HW, 30\% MT, 40\% final
+	\item or if two midterms, 20\% HW, 20+20\% MT, 40\% final 
+	\item OH Saturday 2-3 @ Free Speech Cafe, Friday 6-7PM online
+	\item If in doubt, refer to the book
+\end{itemize}
+\subsection{Complex Numbers}
+\begin{definition}[Complex Number]
+	A \vocab{complex number} is an ordered pair of real numbers $(a, b)$, which can be then represented as $a + bi$ where $i = \sqrt{-1}$.
+\end{definition}
+A complex number can also be represented in exponential form, so $z = pe^{i\varphi}$, where $\varphi$ is the angle / \vocab{argument} of $z$.
+
+\begin{theorem}[DeMoivre's]
+	Complex numbers can be written both in the form of $pe^{i\varphi}$ or $p(\cos \varphi + i \sin \varphi)$.
+\end{theorem}
+
+The proof for this uses Taylor expansion but I forgot / I am too lazy to actually write it down and it doesn't matter much for this course regardless.
+
+\section{Lecture 2}
+\subsection{Fields}
+\begin{definition}[Field]
+	A \vocab{field} is a set and two operations of addition and multiplication that also satisfies a number of properties.
+
+	Addition must be \textbf{closed}, be \textbf{commutative}, have an \textbf{additive identity}, be \textbf{invertible}, and be \textbf{associative}.
+
+	Multiplication excludes the additive identity, but it must also be \textbf{closed}, be \textbf{commutative}, have a \textbf{multiplicative identity}, be \textbf{associative}, be \textbf{invertible} (once again excluding the additive identity), and be \textbf{distributive}. 
+\end{definition}
+
+Common examples of fields include $\RR$ and $\CC$, but we can also prove that $\ZZ / p\ZZ$ is a field for prime $p$ under modular addition and multiplication.
+
+\begin{lemma}
+	$\ZZ / 2\ZZ$ is a field.
+\end{lemma}
+\textit{Proof.} fill in later lol \qed
+
+However, for non-primes, $\ZZ / p\ZZ$ is not a field. Consider the case for $\ZZ / 6\ZZ$. $3x = 1 \implies 2 (3 \cdot x) = 2 \cdot 1 = 2$, but $2 \cdot (3 \cdot x) = (2 \cdot 3) \cdot x = 0 \cdot x = 0$. This means that $\ZZ / 6\ZZ$ isn't a field. More generally, for $pq$, we can use the case of $qx = 1$ and then try associativity on $p \cdot q \cdot x$. 
+\subsection{Vector Spaces}
+\begin{definition}[Vector Space]
+	A \vocab{vector space} can be written as $(V, \mathbb{F}, +, \cdot)$ where $V$ is a set, $\mathbb{F}$ is the field over which the space is defined, $+$ is a function $+ : V \to V$ (in other wodes, $V$ should be closed under vector addition), and $\cdot$ is a function $\cdot : \mathbb{F} \to V$ which represents scalar multiplication.
+\end{definition}
+
+From this definition, we gather that $V$ is an abelian group under $+$, and $\cdot$ is associative with regards to scalar multiplication in $\mathbb{F}$. Also, $+$ and $\cdot$ must be distributive, or $(a + b) \cdot x = ax + bx$ and $a \cdot (x + y)$ = $ax + ay$. Be careful as to which operations are numerical multiplication and which ones are scalar multiplication.
+
+\section{Discussion 1}
+$\mathbb{F}^n$ is the coordinate space. The reason $\mathbb{F}$ must be a field is because it would be much more difficult otherwise because both working addition and working multiplication are needed in a vector space.
+
+An example of a coordinate space is $\RR^3 = \{(a, b, c) : a, b, c \in \RR\}.$
+
+\subsection{Complex Numbers}
+Complex numbers exist because some equations are not closed in the real numbers (i.e. $x^2 + 1$ not closed for $x \in \RR$).
+
+\begin{hw}
+	Show that $\CC$ is an $\RR$-vector space with usual definitions of $+$ and $\cdot$.
+\end{hw}
+
+We need to check all conditions. 
+
+\begin{itemize}
+	\item Commutativity, associativity, and invertibility in $+$ is pretty much given by the definition of the operation.
+	\item Commutativity and invertibility for $\cdot$ are als o given by the operation. We also know from definition that $\cdot$ is distributive in the form of $\lambda (u + v) = \lambda u + \lambda v$, $(\lambda_1 + \lambda_2) u = \lambda_1 u + \lambda_2 u$, and that $\cdot$ is associative in $(\lambda_1 \lambda_2) v = \lambda_1 (\lambda_2 v)$. 
+	\item Remember which multiplication operations are scalar and which multiplication operations are vector.
+	\item Closure: Note that $(a + bi) + (c + di) = (a + c) + (b + d)i \in \CC$, and that $a + c$ and $b + d$ are reals by definition. Moreover, note that $\lambda (a + bi) = (\lambda a) + (\lambda b)i \in \CC$, as $\lambda a$ and $\lambda b$ are in $\RR$ by definition as well.
+	\item Additive identity: the value $0 + 0i$ represents the $\vec 0$ vector in this case. If $\vec v = a + bi$, then $\vec 0 + \vec v = (0 + 0i) + (a + bi) = (0 + a) + (0 + b)i = a + bi = \vec v$.
+	\item "Multiplicative identity": $1 \cdot (a + bi) = a + bi$. This follows because $1 \cdot (a + bi) = 1 \cdot a + 1 \cdot bi = a + bi$.
+\end{itemize}
+
+\begin{hw}
+	If $V$ is a $\FF$-vector space and $\FF' \subset \FF$, then $V$ is an $\FF'$-vector space.
+\end{hw}
+
+\begin{proof}
+	Addition, and its properties, make no reference to the field.
+
+	All other axioms are carried over from $V$ being an $\FF$-vector space, because $\FF'$ is a subfield of $\FF$. We know that invertibility, associativity, and distributivity are guaranteed within $\FF$ by the property of being a field. Closure of multiplication is also given in $V$ because $\FF'$ is a subset of $\FF$ so $f \in \FF'$ must also be an element of $\FF$.
+\end{proof}
+
+\chapter{Week 2}
+
+\section{Lecture 3}
+Given a field $\FF$ and $n \in \NN$, consider $\FF^n = \{(f_1, f_2, \ldots, f_n)\}$ with componentwise addition and multiplication. 
+
+\subsection{Vector Spaces with Infinite Vectors}
+\subsubsection{Countable}
+If we take $n \to \infty$, then we have an infinitely long list $\FF^\infty : \{(x_1, x_2, \ldots) : x_j \in \FF\}$ for a countably infinite number of elements in the list.
+
+\begin{hw}
+Consider this with componentwise addition and componentwise scalar multiplication. Is this a space?
+\end{hw}
+
+\begin{solution}
+	We would need to prove five axioms given componentwise addition and multiplication, as the rest follow from the nature of the operation.
+
+	There is guaranteed to be a zero in the list $(0, 0, \ldots).$ 
+
+	The additive inverse of $(x_1, x_2, \ldots)$ is $(-x_1, -x_2, \ldots).$ 
+
+	The multiplicative inverse of $c(x_1, x_2, \ldots)$ is $\frac{1}{c}(x_1, x_2, \ldots)$. 
+
+	Associativity and distributivity are extrapolatable from shorter sequences because the addition and multiplication schemes are the same.
+\end{solution}
+
+\subsubsection{Uncountable}
+If we now consider the case of $\FF^\RR$, we see that traditional list format breaks. Thus, we can try defining by function. $\FF^S$ is defined as the set of functions $f : \FF \to S$. Notice that $\FF^\infty$ is equivalent to $\FF^\NN$ in this format.
+
+If addition and multiplication are component-wise for squares, we can think of them as point-wise for functions. Thus, we have $h = f:g \implies h(a) = f(a) + g(a)$ for $a \in S$. For $a \in \FF$ and $f \in \FF^S$, we have that $\lambda f \in \FF^S$ is define by $(\lambda f)(a) = \lambda \cdot f(a)$ for $a \in S$. 
+
+\subsection{Structure of a Vector Space}
+Ignoring all tangible formations of a vector space as a set of lists or functions, what information do we have?
+
+\begin{itemize}
+	\item The 0 element/vector of a vector space is unique. Suppose there are two zeroes, $0$ and $0'$. Then, $0' = 0 + 0' = 0$.
+	\item Additive inverses must thus be unique. If $a + b = 0$ and $a + c = 0$, then $b = b + 0 \implies b = b + a + c = 0 + c = c$.
+	\item Also notice that additive inverse is actually always $-1 \cdot v$. 
+\end{itemize}
+
+\subsection{Subspaces}
+A subspace is a vector space defined inside another vector space, with the same rules for addition and multiplication applied over a subset of the values in the space.
+
+\begin{theorem}
+	$W \subseteq V$ is a vector subspace of $V$ wrt $+, \cdot$ iff
+	\begin{enumerate}[label=\alph*)]
+		\item $0 \in W$
+		\item $\lambda v \in W \forall v \in W, \lambda \in \FF$
+		\item $w_1 + w_2 \in W \forall w_1, w_2 \in W$
+	\end{enumerate}
+\end{theorem}
+
+\section{Lecture 4}
+Continuing from previuos lecture\dots 
+
+\begin{example}
+	If $W_1, W_2$ are subspaces of a vector space $V$, is $W_1 \cap W_2$ a subspace?
+\end{example}
+
+\begin{solution} 
+	Yes. For zero, we have that $0 \in W_1, W_2$ by definition. Now, all there is to check is if $W_1 \cap W_2$ is additively and multiplicatively closed.
+
+	\textbf{Additive Closure.} If we have $u, v \in W_1 \cap W_2$, this means that $u, v \in W_1$ must hold AND $u, v \in W_2$ must hold. Therefore, we have that $W_1$ is a subspace, so $u + v \in W_1$; and $W_2$ is a subspace, so $u + v \in W_2$. Therefore, $u + v \in W_1 \cap W_2$ as well, so $W_1 \cap W_2$ is additively closed.
+
+	\textbf{Multiplicative Closure.} Similarly, note that if $u \in W_1 \cap W_2$, then $u \in W_1$ and $u \in W_2$. Therefore, $\lambda u \in W_1$ and $\lambda u \in W_2$, so $\lambda u \in W_1 \cap W_2$.
+\end{solution}
+
+\begin{example}
+	If $W_1, W_2$ are subspaces of a vector space $V$, is $W_1 \cup W_2$ a subspace?
+\end{example}
+
+\begin{solution}
+	No. Consider $a \in W_1$ but $a \not\in W_2$, and $b \in W_2, b \not\in W_1$. Then, $a + b$ is not closed because it takes an element solely of $W_1$ and an element solely of $W_2$, so the result cannot be of $W_1$ because one of the summands isn't in $W_1$ and the result cannot be of $W_2$ because one of the summands isn't in $W_2$. Therefore, $W_1 \cup W_2$ is not additively closed, so it cannot be a subspace.
+\end{solution}
+
+So how are we going to restrict $W_1, W_2$? The only case is if one of the spaces is a subspace of the other.
+
+\subsection{Sums}
+How are we going to replace the union? With a sum!
+
+\begin{definition}
+	The \vocab{sum} $W_1 + W_2$ is defined as $W_1 + W_2 = \{w_1 + w_2 : w_1 \in W_1, w_2 \in W_2\}$.
+\end{definition}
+\end{document}

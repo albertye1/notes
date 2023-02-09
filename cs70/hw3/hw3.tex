@@ -1,0 +1,224 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=0.5in, top=0.8in, bottom=0.3in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\usepackage{sectsty}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\lhead{Problemset 3}
+\rhead{Albert Ye}
+
+\title{Problemset 3}
+\author{albert ye}
+\date{May 2022}
+
+\begin{document}
+	\maketitle
+	\section{Build-Up Error?}
+	A counterexample to this would be a graph with $4$ vertices and $2$ edges 
+	such that $1, 2$ and $3, 4$ both have one edge between them. All vertices 
+	have a degree of at least one, but there is no connection between the 
+	two components so the graph is disconnected.
+
+	This proof is incorrect because it relies on a specific construction for 
+	a graph of $n+1$ vertices. It relies on there being $n+1$ vertices such that 
+	the last vertex is linked to another vertex, and the other $n$ nodes being connected.
+	However, the logic of the proof does not apply for all constructions, and there are 
+	cases where the induction would fail. For example, consider the case where instead of
+	going to another one of the $n$ nodes, the $n+1$th vertex had an edge 
+	connecting to itself. Then, we would not be able to assume that the inductive step holds. 
+
+	Generally in an induction, the inductive step must cover all possible cases for 
+	the $k+1$ case, as opposed to just a specific construction that works.
+
+	\section{Tournament}
+	For a (really boring) two-player tournament, we would have $2$ vertices connected by 
+	one edge, Regardless of who wins, we can traverse the graph by going from the losing vertex 
+	to the winning vertex.
+
+	Assume that the case holds for $n$ players. Then, we can add the $n+1$th player as a vertex 
+	that has edges leading to or from all $n$ existing players. Assume WLOG that the Hamiltonian path 
+	is $1 \to 2 \to \ldots \to n$, implying that player $1$ loses to player $2$ and so on to player $n$.
+
+	Clearly, if player $n+1$ beats player $n$, then we have another Hamiltonian path. If $n+1$ loses
+	to $n$, then we can run the same comparison but with $n-1$. We will be back to the same two conditions:
+	either $n+1$ beats $n-1$ and goes between $n-1$ and $n$ in the Hamiltonian path, or it loses and 
+	gets handed down to $n-2$. We can repeat this all the way down to player 1. If player $n+1$ loses to 
+	player $1$, it is placed at the beginning of the Hamiltonian path. Regardless of how player $n+1$ plays,
+	it will always have a place in our Hamiltonian path. Hence, we are done by induction. \qed
+	\section{Proofs in Graphs}
+	\begin{enumerate}[label=\alph*.]
+		\item For the base case $n=2$, we have one vertex leading to another vertex. The 
+		destination vertex will be reachable from the other vertex in distance 1.
+
+		Assuming that we have $n$ vertices such that all vertices reach vertex $k$ in 
+		at most two moves. Equivalently, all vertices are a distance $2$ from $k$.
+		Then, for vertex $n+1$, we have a few possible constructions:
+
+		The first would be if $n+1$ led to $k$. Then, we would be done because $n+1$ 
+		would lead to $k$ in just one move. 
+
+		The second would be if $k$ led to $n+1$, but $n+1$ led to a vertex $j$ that led to $k$.
+		The claim would still hold because $n+1$ is a distance of $2$ away from $k$.
+		
+		Finally, if $n+1$ does not lead to any vertices a distance of $0$ or $1$ from $k$, that 
+		means it only leads to vertices a distance $2$ from $k$. Therefore, $k$ and all vertices 
+		leading to $k$ must have a direct connection to $n+1$. All vertices of distance $2$ from $k$
+		must directly connect to a vertex of distance $1$ from $k$ by definition, so they must 
+		also be a distance of $2$ from $n+1$.
+		
+		All possible constructions of $n+1$ nodes lead to some vertex being a distance of at most $2$ 
+		from every other vertex, so the claim is proven by induction. \qed
+		\item Denote the odd-degree vertices as $o_1, o_2, \ldots, o_{2m}$. Then, we add $m$ 
+		"phantom" edges $(o_1, o_2), (o_3, o_4), \ldots, (o_{2m-1}, o_{2m})$, making the degree
+		of $o_i$ even for all $i \in [1, 2m]$. 
+
+		Now, we will have an Eulerian tour containing all of the real and phantom edges. Without
+		loss of generality, assume that this Euler tour ends with a phantom edge. Then, when 
+		we remove the $m$ phantom edges from the graph we have $m$ walks that all collectively
+		traverse the whole graph.
+		\item If $G$ is bipartite, then assume it has two sides $V_1$ and $V_2$. A move from 
+		a node in $V_1$ would necessarily end up in $V_2$ by definition, and a move from $V_2$ 
+		would necessarily end up in $V_1$, so an even number of moves is needed to go between 
+		two nodes in $V_1$. Similarly, an even number of moves is needed to traverse a tour in $G$.
+
+		Now, assume there are no tours of odd length in $G$. Fix an arbitrary vertex $v$ in a 
+		connected component $C$. Then, let's color the nodes in $C$ that are an odd distance from $C$ 
+		black, and color the nodes in $C$ that are an even distance from $C$ white. Because 
+		the cycle length is even, we see that black nodes necessarily link only with white nodes, 
+		and vice versa. Therefore, the graph that results by iterating over all vertices $v$ and 
+		components $C$ must be bipartite. \qed
+	\end{enumerate}
+	\section{Planarity and Graph Complements}
+	\begin{enumerate}[label=\alph*.]
+		\item $\overline G$ must have all $\frac{v(v-1)}{2}$ edges of $K_v$ except 
+		for the $e$ edges in $G$, so there are a total of $\boxed{\frac{v^2-v-2e}{2}}$ edges.
+		\item Using Euler's theorem, we have $e \leq 3v - 6$ for a planar graph with $e$ edges 
+		and $v$ vertices. For a graph with 13 vertices, 
+		a planar graph can have at most $3 \cdot 13 - 6 = 33$ edges. However, there are 
+		a total of $\frac{13 \cdot 12}{2} = 78$ edges. Regardless of how many edges we 
+		give $G$, we cannot keep $G$ as a planar graph while also having a planar graph $\overline G$
+		because $\overline G$ would need at least $78-33 = 45$ edges.
+
+		For $13 + k$ edges, we can have $p = 2(33 + 3k)$ total edges to keep $G, \overline G$ planar and need
+		$q = \frac{k^2-k}{2}$ edges total between $G$ and $\overline G$. As $p$ grows 
+		linearly with $k$ and $q$ grows quadratically with $k$, we can ensure that $q > p$ must hold.
+		Therefore, we cannot have both $G, \overline G$ be planar for $v > 13$.
+		\item Imagine $\overline G = K_5$. We know that $\overline G$ cannot be planar 
+		by Kuratowski's theorem. Then, $G$ would have $p \geq 8$ remaining vertices all completely connected. 
+		This means that we can pick $5$ vertices in $G$ such that they are all interconnected
+		with each other, implying that $G$ also has a subgraph of $K_5$. This construction 
+		leads to a case where neither $G$ nor $\overline G$ are planar, contradicting the claim. \qed
+	\end{enumerate}
+	\section{Touring Hypercube}	
+	\begin{enumerate}[label=\alph*.]
+		\item For a hypercube in $n$ dimensions, each vertex connects to exactly $n$ 
+		other vertices, one vertex per bit. Therefore, if $n$ is even, all vertices have 
+		even degree so an Eulerian tour is possible. Otherwise, no vertices will have even 
+		degree so an Eulerian tour is not possible. Therefore, there exists an Eulerian 
+		tour in an $n$-D hypercube if and only if $n$ is even. \qed
+		\item Let's once again define each vertex of the cube by a number from $00\ldots0_2 = 0$
+		to $11\ldots1_2 = 2^n-1$ with $n$ zeroes and $n$ ones, respectively. Now, for a $0$-dimensional
+		hypercube we just have a single point (which automatically has a Hamiltonian path).
+
+		We can use induction to prove a Hamiltonian path exists for $n+1$ dimensions given the 
+		Hamiltonian path for $n$ dimensions.
+		WLOG, assume that the Hamiltonian path starts at vertex $0$ and ends at vertex $2^n-1$ for the $n$-
+		dimensional hypercube.
+
+		Now, for each vertex of the $n+1$-dimensional hypercube, consider the last $n$ vertices. 
+		We find that we have two copies of each number from $00\ldots0$ to $11\ldots1$ such that 
+		one copy is a vertex $v < 2^n$ (or first digit $0$), and one copy is a vertex $v \geq 2^n$
+		(first digit 1). We must then have two copies of the Hamiltonian path from vertex $0$ to vertex $2^n-1$, 
+		one for the vertices with first digit $0$ and one for those with first digit $1$.
+		
+		We can use this to construct a Hamiltonian path for an $n+1$-dimensional hypercube:
+		start at vertex $0$ and use the Hamiltonian path for an $n$-dimensional hypercube to get to vertex 
+		$2^n-1
+		= 011\ldots1$. At this point, we can go from vertex $2^n-1 = 011\ldots1$ to vertex $2^{n+1}-1 = 
+		111\ldots1$.
+		However, we also know there exists a Hamiltonian path from vertex $2^n+0 = 2^n$ to vertex 
+		$2^n+2^n-1 = 2^{n+1}-1$. We can reverse every edge along this path to get a Hamiltonian 
+		path from $2^{n+1}-1$ to $2^n$. Since all vertices are covered by this traversal, we have a
+		Hamiltonian path for an $n+1$-dimensional hypercube given an $n$-dimensional one. \qed
+	\end{enumerate}
+
+	\section{Connectivity}
+	\begin{enumerate}[label=\alph*.]
+		\item We prove the stricter claim that for any two non-adjacent vertices $u, v$, there must 
+		be a third vertex $w$ such that $u,v$ are both adjacent to $w$. Let the set of adjacent nodes 
+		to $u$ be $U_a$, and the set of adjacent nodes to $v$ be $V_a$. Then, $|U_a| + |V_a| \geq n-1
+		\implies |U_a| + |V_a| > n-2 = |U_a \cup V_a|$, so $|U_a \cap V_A| \geq 1$ must hold. Thus,
+		if all non-adjacent vertices $u, v$ satisfy $\deg u + \deg v \geq n-1$, then there must be 
+		some vertex $w$ that is adjacent to both $u$ and $v$. 
+
+		If $u$ can reach $v$ for all non-adjacent pairs of vertices $(u, v)$, then the graph must 
+		be connected by definition. \qed
+		\item In the following graph with $4$ vertices, all vertices have degree $1$ so all 
+		pairs of vertices have a total degree of $4-2 = 2$. However, this graph is evidently not connected:
+		\begin{center}
+			\begin{tikzpicture}
+				\clip (-1, -1) rectangle (8, 2.1);
+				\node[circ] (ma) at (2, 0) {};
+		        \node[circ] (mb) at (2, 2) {};
+		        \node[circ] (mc) at (4, 2) {};
+		        \node[circ] (md) at (4, 0) {};
+				\draw (ma) -- (mb);
+				\draw (mc) -- (md);
+			\end{tikzpicture}
+		\end{center}
+		\item If all vertices have degree at least $\frac{n}{2}$, then for every non-adjacent 
+		pair of vertices $u, v$, we would have $\deg u + \deg v \geq \frac{n}{2} + \frac{n}{2} > n-1$.
+		Therefore, by part (a) the claim must hold.
+		\item By the Handshake Lemma, the number of vertices with odd degree.
+		Thus, it is impossible for the sum of degrees in a connected component 
+		to be odd. Therefore, if there are only 2 nodes with odd degree in a graph, then both will 
+		need to be in the 
+		same connected component to ensure that the sum of degrees in said component remains even.
+	\end{enumerate}
+
+	\section{Edge Colorings}
+	\begin{enumerate}[label=\alph*.]
+		\item One possible coloring is as follows:
+		\begin{center}
+			\begin{tikzpicture}
+				\clip (-1, -1) rectangle (8, 3);
+				\node[circ] (m1) at (2, 0) {};
+	        	\node[circ] (m2) at (2, 2) {};
+	        	\node[circ] (m3) at (4, 2) {};
+	        	\node[circ] (m4) at (4, 0) {};
+	        	\draw (m1) -- node[left]{1} (m2) -- node[above]{3} (m3) -- node[right]{1} (m4) -- node[below]{3} (m1);
+	        	\draw (m2) -- node[above right]{2} (m4);
+	        	\draw (m1) edge[out=-60, in=-30, looseness=2.5] node[below right]{2} (m3);
+			\end{tikzpicture}
+		\end{center}
+		\item Given an edge $e$, no other edges adjacent to $e$ can have the same color. Each end of the edge 
+		$e$ can have at most $d-1$ other edges in order to have maximum degree of $d$. Therefore,
+		the maximum number of edges adjacent to any current edge is $2(d-1) = 2d-2$. If $2d-1$ colors 
+		were used, then there will always exist an open color for every edge.
+		\item In a tree, each edge $e$ between vertices $p, v$ (where $p$ is closer to the root than $v$)
+		can still have $d-1$ adjacent edges on each end, but the nature of 
+		the connected vertices differ on each end. Assume that both sides of $e$ have $d-1$ adjacent edges. 
+		Then the $d-1$ adjacent nodes connected to $v$ are child nodes and the $d-1$ adjacent nodes 
+		connected to $p$ are sibling nodes.
+
+		By the definition of a tree, sibling nodes and child nodes cannot have edges between them, since 
+		that would add a cycle to the graph. Therefore, the $d-1$ edges leading from $p$ and the $d-1$ 
+		edges leading from $v$ do not affect each other, so we can make a stricter bound of $d$ colors
+		for trees.
+	\end{enumerate}
+
+\end{document}

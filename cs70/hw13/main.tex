@@ -1,0 +1,219 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage[portrait, margin=0.5in, top=0.8in, bottom=0.3in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\usepackage{sectsty}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+
+\newcommand{\p}{\mathbb{P}}
+\newcommand{\ex}{\mathbb{E}}
+\newcommand{\Var}{\text{Var}}
+
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\lhead{Problemset 13}
+\rhead{Albert Ye}
+
+\title{Problemset 13}
+\author{albert ye}
+\date{May 2022}
+
+\begin{document}
+\maketitle
+\section{Continuous Intro}
+\begin{enumerate}[label=(\alph*)]
+	\item It is a valid density function, since all values of $f(x)$ are nonnegative, and
+	\begin{align*}
+		\int_{-\infty}^\infty f(x) &= \int_{-\infty}^0 0 + \int_0^1 2x + \int_1^\infty 0 \\
+		&= 0 + (1^2-0^2) + 0 = 1.
+	\end{align*}
+
+	However, it isn't a valid CDF since $\lim_{x \to \infty} f(x) = 0$, while it should equal 1.
+	\item \begin{align*}
+		f_x(x) &= \frac{d}{dx} F_x(x) \\
+		&= \begin{cases}
+			\frac{1}{l} & \text{for } 0 \leq x \leq l \\
+			0 & \text{otherwise}
+			\end{cases}.
+		\end{align*}
+	\item Because $X, Y$ are independent, we see that
+	\begin{align*} 
+		f(x, y) dx dy &= \p[X \in [x, x+dx], Y \in [y, y+dy]] \\
+		&= \p[X \in [x, x+dx]] \p[Y \in [y, y+dy]] \\
+		&\approx f_X(x) f_Y(y) dx dy.
+	\end{align*}
+	Therefore, the joint distribution is $f(x, y) = f_x(x) f_y(y) = 2x$ for $0 \leq x,y \leq 1$.
+	\item \begin{align*}
+		\ex[XY] &= \int_0^1 \int_0^1 xyf(x,y) dxdy \\
+		&= \int_0^1 \int_0^1 2x^2y dxdy \\
+		&= \int_0^1 (\frac{2}{3}(1)^3y)-0 dy \\
+		&= \int_0^1 \frac{2}{3}y dy \\
+		&= (\frac{2}{3} \frac{1}{2}(1)) - 0 \\
+		&= \boxed{\frac{1}{3}}.
+	\end{align*}
+\end{enumerate}
+\newpage
+\section{Lunch Meeting}
+As the distribution of Alice and Bob's arrival times are uniform, we can think of the distribution as a uniform square with opposing corners $(0,0)$ and $(1,1)$. Then, if Alice arrives first at time $a$, she will leave at time $a+0.25$, and if Bob arrives first at time $b$, then he will leave at time $b+0.25$.
+
+Therefore, we would want $\p[|a-b| < 0.25]$, where $a, b$ are Alice and Bob's times of arrival, respectively. Ignoring the constraints of $0 \leq a,b \leq 1$, we would have a total probability of $\int_0^1 0.50 da = 0.50$. However, we need to remove cases of $b < 0$ or $b > 1$, which happens with probability $$\int_0^{0.25} 0.25-a \phantom{|} da + \int_{0.75}^{1} a-0.75 \phantom{|} da= \left(0.25a - \frac{a^2}{2}\right|^{0.25}_0 + \left(\frac{a^2}{2} - 0.75a\right|^{1}_{0.75} = \frac{1}{16} - \frac{1}{32} + \frac{1}{16} - \frac{1}{32} = \frac{1}{16}.$$ Therefore, our probability is $\dfrac{1}{2} - \dfrac{1}{16} = \boxed{\frac{7}{16}}$. 
+
+\section{Darts with Friends}
+\begin{enumerate}[label=(\alph*)]
+	\item The cumulative distribution function $F_X(x)$ for $X$ is the probability of getting the dart in a disk of radius $x$. The larger disk has an area of $\pi$ and the smaller disk has an area of $\pi x^2$, so the cumulative distribution function $\boxed{F_X(x) = x^2}$. Similarly, the CDF $F_Y(y)$ for $Y$ is the probability of getting the dart in a disk of radius $y$, but the larger disk has an area of $4\pi$. Therefore, $\boxed{F_Y(y) = \frac{y^2}{4}}$.
+
+	Using this, we can get $f_X(x) = \dfrac{d}{dx} F_X(x) = 2x$ and $f_Y(y) = \dfrac{d}{dx} F_Y(y) = \dfrac{y}{2}$.
+	\item Because $X, Y$ are independent, the probability that $X=x, Y=y$ is $f_X(x) f_Y(y)$. So 
+	\begin{align*}
+		\p[X \leq Y] &= \int_0^1 \int_x^2 f_X(x) f_Y(y) dydx \\
+		&= \int_0^1 \left(f_X(x) F_Y(y) \right|_x^2 dx \\
+		&= \int_0^1 f_X(x) \left(1-\frac{x^2}{4}\right) dx \\
+		&= \int_0^1 2x\left(1-\frac{x^3}{2}\right) \\ 
+		&= \left(x^2-\frac{x^2}{8}\right|_0^1 \\
+		&= \boxed{\frac{7}{8}}.
+	\end{align*}
+
+	The probability that Alex's throw is closer to the center must thus be $1-\dfrac{7}{8} = \boxed{\dfrac{1}{8}}$.
+	\item Note that $\p[U \leq k] = \p[X \leq k \cap Y \leq k] = \p[X \leq k] \p[Y \leq k]$ because $X, Y$ are independent. Therefore, this equals $f_X(k) f_Y(k) = \dfrac{k^4}{4}$ assuming $0 \leq k \leq 1$. If $k < 0$, then $\p[U \leq k] = 0$. If $1 \leq k \leq 2$, then $\p[\max(X, Y) \leq k] = \p[Y \leq k] = \dfrac{k^2}{4}$. And if $k > 2$, then $\p[U \leq k] = 1$. Therefore, the cumulative distribution function for $U$ is  
+	\begin{align*}
+		F_{U}(c_k) = \begin{cases}
+			0 & \text{for } c_k \leq 0 \\
+			\dfrac{c_k^4}{4} & \text{for } 0 < c_k \leq 1 \\
+			\dfrac{c_k^2}{4} & \text{for } 1 < k \leq 2 \\
+			1 & \text{for } c_k > 2.
+		\end{cases}
+	\end{align*}
+	\item Note that $\p[V \leq k] = \p[X \leq k] + \p[Y \leq k] - \p[X \leq k \cap Y \leq k]$. The third term is just $F_{U}(k)$, so this because $\p[X \leq k] + \p[Y \leq k] + F_{U}(k)$. For $k \leq 0$, we have that $\p[V \leq k] = 0$ as before. For $k > 1$, we have that $\p[V \leq k] = 1$ because $X \leq 1$. So all that's left to consider is $0 \leq k \leq 1$, where $F_{U}(k) = \dfrac{k^4}{4}$. So in this range, $\p[V \leq k] = F_X(k) + F_Y(k) - F_{U}(k) = k^2 + \dfrac{k^2}{4} - \dfrac{k^4}{4} = \dfrac{5}{4}k^2 + \dfrac{k^4}{4}$.
+
+	Therefore, 
+	\begin{align*} 
+		F_{V}(k) = \begin{cases}
+			0 & \text{for } k < 0 \\
+			\dfrac{5}{4}k^2 - \dfrac{k^4}{4} & \text{for } 0 \leq k \leq 1 \\
+			1 & \text{for } k > 1
+		\end{cases}.
+	\end{align*}
+	\item Note that $\ex[|X-Y|] = \ex[U-V]$ for $U, V$ from parts (c) and (d).We can use the tail sum formula to get this expected value.
+	\begin{align*}
+\ex[U - V] = \ex[U] - \ex[V] &= \int_0^\infty y \pr[U \geq u] du - \int_0^\infty v \p[V \geq v] dv \\
+&= \int_0^\infty u(1-F_U(u))du - \int_0^\infty v(1-F_V(v)) dv \\
+&= \int_0^1 u(1-\frac{u^4}{4})du + \int_1^2 u(1-\frac{u^2}{4})du - \int_0^1 v(1-\frac{5}{4} v^2 + \frac{v^4}{4}) dv \\
+&= \int_0^1 u - \frac{u^5}{4} + \int_1^2 u-\frac{u^3}{4} du - \int_0^1 v-\frac{5}{4}v^3+\frac{v^5}{4} dv \\
+&= \left(\frac{u^2}{2} - \frac{u^6}{4} du \right|_0^1 \left(\frac{u^2}{2} - \frac{u^4}{16}\right|_1^2 - \left(\frac{v^2}{2} - \frac{5}{16}v^4 + \frac{v^6}{24}\right|^1_0 \\
+&= \frac{1}{2} - \frac{1}{24} + \frac{4}{2} - \frac{16}{16} - \frac{1}{2} + \frac{1}{16} - \frac{1}{2} + \frac{5}{16} - \frac{1}{24} \\
+&= \frac{1}{2} + \frac{3}{8} - \frac{1}{2} = \frac{12 + 9 - 2}{24} = \boxed{\frac{19}{24}}.
+	\end{align*}
+\end{enumerate}
+
+\newpage
+\section{Waiting for the Bus}
+\begin{enumerate}[label=(\alph*)]
+\item We want to find $\p[Y_1 \leq X_1]$, or, in other words, 
+\[\int_0^\infty \int_0^x f(x)F(y) dy dx,\]
+where $f(x)$ is the probability distribution function at $X = x$ and $F(y)$ is the cumulative distribution function $Y \leq y$.
+
+We find that $f(x) = \lambda e^{-\lambda i}$ by definition, and
+\begin{align*}
+F(y) = \p[Y \leq y] &= \int_0^x \mu e^{-\mu y} dy \\
+&= \left(-e^{-\mu x} \right|_0^x = (-e^{-\mu x}) - (-e^\mu(0)) \\
+&= 1 - e^{-\mu x}.
+\end{align*}
+
+From this, we can find that 
+\begin{align*}
+\p[Y_1 \leq X_1] &= \int_0^\infty \lambda e^{-\lambda x} (1-e^{-\mu x}) dx \\
+&= \int_0^\infty \lambda e^{-\lambda x} - \lambda e^{-(\lambda + \mu)x} dx \\
+&= \left( e^{-\lambda x} \right| _0^\infty - \left( \frac{\lambda}{\lambda + \mu} e^{-(\lambda + \mu)x} \right|_0^\infty \\
+&= (1-0) - \left(\frac{\lambda}{\lambda + \mu}-0\right) \\
+&= \boxed{\frac{\mu}{\lambda + \mu}}.
+\end{align*}
+
+\item We claim that the distribution of $D$ is identical to the distribution of $X$. 
+
+Note that we want to find $\p[D = k]$, or essentially, that we want to find the probability of $X = 20+k$ given that $X \geq 20$. Obviously, note that if $k < 0$ then the probability is just $0$. However, if $k \geq 0$, then we have $\p[D = k] = \frac{\p[X_i = 20+k]}{\int_{20}^\infty \p[X_i = x] dx}$. The top is evidently equal to $\lambda e^{-\lambda (20+k)}$ from our initial formula, and the bottom must equal
+\begin{align*}
+\int_{20}^\infty \p[X = x] dx &= \int_{20}^\infty \lambda e^{-\lambda x} dx \\
+&= \left(e^{-\lambda x} \right|_{20}^\infty \\
+&= 0 - (-e^20\lambda) = e^{-20\lambda}.
+\end{align*}
+
+Thus, we can find $\p[D = k]$ to be 
+\[\dfrac{\lambda e^{-\lambda k + 20}}{e^{-20\lambda}} = \lambda e^{\lambda(20-(k+20)} = \boxed{\lambda e^{-\lambda k}}, \]
+which is equal to the exponential distribution for $\lambda$. \qed
+
+\item We have
+\begin{align*}
+\p[Z \leq k] &= \p[\min(X, Y) \leq k] \\
+&= \p[X \leq k \cup Y \leq k] \\
+&= \p[X \leq k] + \p[Y \leq k] - \p[X \leq k \cap Y \leq k].
+\end{align*}
+
+Because $X$ and $Y$ are indepedent, we have that
+\begin{align*}
+\p[Z \leq k] &= \p[X \leq k] + \p[Y \leq k] - \p[X \leq k] \p[Y \leq k] \\
+&= (1 - e^{-\lambda k}) + (1 - e^{-\mu k}) - (1 - e^{-\lambda k})(1 - e^{-\mu k}) \\
+&= 2 - e^{-\lambda k} - e^{-\mu k} - 1 + e^{-\lambda k} + e^{-\mu k} - e^{-\lambda k} e^{-\mu k} \\
+&= 1 - e^{-(\lambda + \mu)k}.
+\end{align*}
+
+Therefore,
+\begin{align*}
+\p[Z = k] = \dfrac{d}{dk} \p[Z \leq k] &= \dfrac{d}{dk} 1 - e^{-(\lambda + \mu)k} \\ &= (\lambda + \mu) e^{\lambda + \mu}.
+\end{align*}
+
+This means that $\boxed{Z \sim \text{Expo}(\lambda + \mu).}$
+
+\item We can think of $T = k$ as $X_1 = x$ and $X_2 = k-x$. We will have to integrate over all possible such $x$.
+\begin{align*}
+\p[T = k] &= \int_0^k \p[X_1 = x] \p[X_2 = k-x] dx \\
+&= \int_0^k (\lambda e^{-\lambda x}) (\lambda e^{-\lambda(k-x)}) dx \\
+&= \left(x\lambda^2 e^{-\lambda k} \right|_0^k \\
+&= k\lambda^2 e^{-\lambda k}
+\end{align*}
+\end{enumerate}
+
+\newpage
+\section{Chebyshev's Inequality vs. Central Limit Theorem}
+\begin{enumerate}[label=(\alph*)]
+\item 
+\begin{itemize}
+\item 
+\begin{align*}
+\ex[X_1] &= -1\left(\frac{1}{12}\right) + 1 \left(\frac{9}{12}\right) + 2 \left(\frac{2}{12}\right) \\
+&= -\frac{1}{12} + \frac{9}{12} + \frac{4}{12} = \boxed{1}.\\
+\Var(X_1) &= \ex[(X-\ex(X))^2] \\
+&= (-2)^2 \left(\frac{1}{12}\right) + (0)^2 \left(\frac{9}{12}\right) + (1)^2 \left(\frac{2}{12}\right) \\
+&= \frac{4}{12} + \frac{2}{12} = \frac{6}{12} = \boxed{\frac{1}{2}}.
+\end{align*}
+\item Let $Y$ be $\sum_{i=0}^n X_i$.
+\[\ex[Y] = \sum_{i = 0}^n \ex[X_i] = \sum_{i=0}^n 1 = \boxed{n}. \]
+\[\Var(Y) = \sum_{i = 0}^n \Var(X_i) = \sum_{i=0}^n \frac{1}{2} = \boxed{\frac{n}{2}}.\]
+\item 
+\[\ex\left[\sum_{i=0}^n X_i - \ex[X_i]\right] = \ex[Y] - \ex[\ex[X_i] + \ex[X_2] + \cdots + \ex[X_n]] = n - \ex[n] = \boxed{0}.\]
+\[\Var\left(\sum_{i=0}^n X_i - \ex[X_i]\right) = \ex\left[\sum_{i=0}^n (X_i - \ex[X_i] - 0)^2\right] = \Var(Y) = \boxed{\frac{n}{2}}.\]
+\item We know that $\ex[Z_n] = 0$ because it is simply the previous expression divided by $\sqrt{n/2}$. Moreover, $\Var(Z_n) = 1$ because it is once again the previous expression divided by $\sqrt{n/2}$, so we must divide the variance by $\frac{n}{2}$.
+\end{itemize}
+\item From Chebyshev's Inequality, we have
+\begin{align*}
+\p[|Y - \ex[Y]| \geq 2] &\leq \frac{\Var(Y)}{c^2} \\
+\p\left[\left|\frac{Y}{\sqrt{n/2}}\right| \geq 2\right] &\leq \frac{\frac{\Var(Y)}{n/2}}{4} \\
+\p[|Z_n| \geq 2] &\leq \frac{\frac{n/2}{n/2}}{4} \\
+\p[|Z_n] \geq 2] &\leq \frac{1}{4}. 
+\end{align*}
+
+Therefore, $b = \boxed{\frac{1}{4}}$.
+\item No, because there is no guarantee that $Z_n$ is symmetric.
+\item From the Central Limit Theorem, it becomes the normal distribution $N(0, 1)$.
+\item Yes, because a normal distribution is symmetric and as $n \to \infty$ $Z_n$ is normal.
+\end{enumerate}
+\end{document}

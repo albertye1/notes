@@ -1,0 +1,108 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage[portrait, margin=0.5in, top=0.8in, bottom=0.3in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\usepackage{sectsty}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+
+\newcommand{\p}{\mathbb{P}}
+\newcommand{\ex}{\mathbb{E}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\code}{\texttt}
+
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\lhead{CS 61B Final Review}
+\rhead{Albert Ye}
+
+\title{CS 61B Final Review}
+\author{albert ye}
+\date{May 2022}
+
+\begin{document}
+\maketitle
+\section{Midterm 1}
+remember what's here LMAO
+\section{Midterm 2}
+\subsection{Dynamic Method Selection}
+For an object \code{x} such that \code{A x = new B();}
+\begin{itemize}
+\item \code{A} is static type, which is what \code{x} is declared to be.
+\item \code{B} is dynamic type, which is what \code{x} is initialized as.
+\end{itemize}
+
+Casting changes the \textbf{static type}, but not the \textbf{dynamic type}. If casting makes the dynamic type above the static type, it throws a runtime error but not a compilation error. When an object is cast, it's viewed by the compiler in its static type and not its dynamic type (obviously). Casts cannot be performed by turning a class into a class that is neither above nor below the static type, and this would cause a compile error.
+
+For overridden methods, if method is static choose from \code{A}, if non-static choose from \code{B}. For non-static methods, parameters are pulled from \code{A}. If there are no functions in \code{B} with the same parameters, we use the function in \code{A}. Parameters must be exact; if there is a function in \code{B} that takes in a subclass of the parameter used for \code{A}, we still use the method in \code{A}.
+\subsection{Iteration}
+Any class that extends the interface \code{Iterable} must have a function \code{iterator} that returns an \code{Iterator}. An iterator basically gives the current value and a way of getting to the next value until an end value.
+
+Although practically this should be done to iterate through the entire DS, we will need to look at how it's actually implemented in order to check how it actually behaves.
+
+When iterating, the \code{next} function doesn't reset. Running the for all loop creates a new iterator and loops through it. Slightly confusing to work with compared to python, where \code{list(generator)} starts from the current position of the generator.
+\subsection{Asymptotics}
+Only consider the largest term, ignore coefficients. $O(f(n))$ works if $f(n)$ is any upper bound for the runtime, and $\Omega(f(n))$ works
+if $f(n)$ is any lower bound for the runtime, so like $\Omega(1)$ always works.
+
+If the upperbound $O$ is equal to the lowerbound $\Omega$, then we can use $\Theta$.
+
+If we want to find asymptotics in terms of $N$, we try to find the complexity for $N$ approaching infinity. So any "edge cases" for small $N$ will not cut it
+\subsection{DSU}
+\subsection{Binary Search Trees}
+\subsection{Hash Table}
+\subsection{Heap}
+Heaps are also represented as priority queues, but we can cast that aside for a quick second...
+
+\begin{definition}[Min-Heap Property]
+The root of a tree/subtree is the minimum value, and other values are all less. Max-Heap property is pretty much the same thing, but replace min with max.
+\end{definition}
+
+In Java, we store the min-heap as an array, \code{[x, 1, 2, 4, 5, 3, 7, 8]}. Tree is traversed in level-order (which is just breadth first).
+So we do level 1 (root), then level 2 (children of root), etc. So \code{parent[i] = i / 2;}, \code{leftChild(i) = 2*i}, \code{rightChild(i) = 2*i+1}.
+
+\subsubsection{Insertion}
+Insert the new element to the end of the array, which is the bottom-most layer \& left-most element. 
+To make it agree with the principle, we bubble-up by swapping it with any parent that is larger than it. 
+
+Because heaps are bushy by construction, the complexity is logarithmic.
+
+\subsubsection{Deletion}
+Delete the root node, and switch it with the bottom-most level \& right-most element (last element). 
+TO make it agree with the principle, we bubble-down by swapping it with its smaller child.
+
+Again, the complexity is logarithmic.
+\section{Post-Midterm 2}
+\subsection{Sorting}
+Bubble sort is too easy I guess, and takes up to quadratic time.
+\subsubsection{Insertion Sort}
+Insert into the sorted component at the right position. Takes quadratic time. Can be spotted by looking for an increasing sorted component
+\subsubsection{Selection Sort}
+\subsubsection{Merge Sort}
+\subsubsection{Quick Sort}
+Literally worse than merge sort in that it's not stable \textit{and} potentially slower given on our choice of pivot. I propose we call this gaslighting sort.
+\subsection{Binary Search Trees}
+\subsection{Graphs}
+\subsubsection{DFS/BFS}
+what is there to explain. $O(V + E)$.
+\subsubsection{Dijkstra}
+Single-source shortest path, finding the shortest path from the source vertex $s$ to all destinations $d$. We should end up with a shortest path tree with all shortest paths from $s$ to every node $d$. We do best first search, finding the shortest edge and relaxing every edge $v \to w$ at vertex $v$.
+
+This is like BFS but with priority queue instead of regular queue. Complexity is $\Theta(E \log V + V \log V)$ because of the $E$ priority changes, $V$ adds and removes, all of which take $\Theta(\log V)$ time.
+\subsubsection{A* Search}
+We create another heuristics function $h(v, t)$, which is the estimate of distance between the current vertex $v$ and the destination vertex $t$. Instead of visiting in order of $d(s, v)$ we visit in order of $d(s, v) + h(v, t)$. 
+
+If we run our heuristic incorrectly, we run the risk of not finding the correct shortest path. If $h$ is too far from the actual distance from $v$ to $t$. Our heuristic must be admissible and consistent, meaning that $h(v, d) \leq d(t, v)$ and for each neighbor of $w$, $h(v, t) \leq d(v, w) + h(w, t)$. Rest is out of scope.
+\subsection{Minimum Spanning Trees}
+\subsubsection{Kruskal's Algorithm}
+\subsubsection{Prim's Algorithm}
+\end{document}

@@ -1,0 +1,213 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=0.5in, top=1in, bottom=0.3in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\usepackage{sectsty}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\lhead{Problemset 1}
+\rhead{Albert Ye}
+
+\title{Problemset 1}
+\author{albert ye}
+\date{May 2022}
+
+
+\begin{document}
+\maketitle
+
+\section{Solving a System of Equations}
+
+\begin{align*}
+	a+b+c &= 16 \\
+	2a+3b &= 23 \\
+	a+2b+3c &= 35
+\end{align*}
+
+We can reduce this into a matrix equation: 
+\[\begin{bmatrix}1 & 1 & 1 \\ 2 & 3 & 0 \\ 1 & 2 & 3 \end{bmatrix}
+\begin{bmatrix}a \\ b \\ c \end{bmatrix} = 
+\begin{bmatrix}16 \\ 23 \\ 35 \end{bmatrix}.\]
+
+We can use augmented matrix form to reduce the matrix.
+\[\left[\begin{array}{ccc|c} 1 & 1 & 1 & 16 \\ 2 & 3 & 0 & 23 \\ 1 & 2 & 3 & 35 \end{array} \right]\]
+\[\implies \left[\begin{array}{ccc|c} 1 & 1 & 1 & 16 \\ 0 & 1 & -2 & -9 \\ 0 & 1 & 2 & 19 \end{array} \right]\]
+\[\implies \left[\begin{array}{ccc|c} 1 & 1 & 1 & 16 \\ 0 & 1 & -2 & -9 \\ 0 & 0 & 4 & 28 \end{array} \right]\]
+\[\implies \left[\begin{array}{ccc|c} 1 & 1 & 1 & 16 \\ 0 & 1 & 0 & 5 \\ 0 & 0 & 1 & 7 \end{array} \right]\]
+\[\implies \left[\begin{array}{ccc|c} 1 & 0 & 0 & 4 \\ 0 & 1 & 0 & 5 \\ 0 & 0 & 1 & 7 \end{array} \right].\]
+
+Therefore, we have $a=4, b=5, c=7$. \qed
+
+\section{Integration Purgatory}
+\begin{enumerate}[label=\alph*.]
+	\item 
+	\begin{align*}
+		\int_0^\infty \sin(t) e^{-t} dt &= -\int_0^\infty \sin(t) d(e^{-t}). \\
+		\int \sin(t) d(e^{-t}) &= \sin(t) e^{-t} - \int e^{-t} d(\sin t) \\
+		- \int \sin(t) e^{-t} dt &= \sin(t) e^{-t} - \int e^{-t} \cos t dt. \\
+		\int \cos t e^{-t} dt &= -\int \cos t d(e^{-t}) \\
+		&= -(\cos t e^{-t} - \int e^{-t} d(\cos t)) \\
+		&= -(\cos t e^{-t} + \int \sin(t) e^{-t} dt) \\
+		- \int \sin(t) e^{-t} dt &= \sin(t) e^{-t} + \cos(t) e^{-t} + \int \sin(t) e^{-t} dt \\
+		-2 \int \sin(t) e^{-t} dt &= (\sin t + \cos t) e^{-t} \\
+		\int \sin(t) e^{-t} dt &= - e^{-t} \left( \dfrac{\sin t + \cos t}{2} \right).
+	\end{align*}
+
+	Therefore, we have 
+	\[\int_0^\infty \sin(t) e^{-t} dt = 
+		\lim_{t \to \infty}-e^{-t}\left( \dfrac{\sin t + \cos t}{2} \right) + 
+		e^{0}\left( \dfrac{\sin 0 + \cos 0}{2} \right) = 0 + \frac{1}{2} = \boxed{\frac{1}{2}}.\] \qed
+
+	\item We want to find values of $x$ such that
+	\begin{align*}
+		\frac{d}{dx} \int_0^{x^2} e^{t^2} dt &= 0.
+	\end{align*}
+
+	Let $F = \int e^{t^2} dx$. Then, the integral we 
+	want to find becomes $F(x^2) - F(0)$. We know that 
+	$\frac{d}{dx} F(x) = e^{x^2}$, so applying the chain 
+	rule, we have $F(x^2) = e^{x^4} (2x)$ and $F(0) = e^{0} \cdot 0$.
+	Therefore, 
+	\[\frac{d}{dx} \int_0^{x^2} e^{t^2} dt = e^{x^4}(2x).\]
+
+	This equals $0$ either when $e^{x^4}$ reaches zero (which is never), or $2x$ reaches 
+	zero (which happens at $x = 0$). We know that $\int_c^c f(x) dx = 0$ for any $c \in \RR$
+	and function $f$ in terms of $x$, so the minimum value is $\int_0^0 e^{t^2} dt = \boxed{0}$.
+	\qed
+	\item \begin{align*}{}
+		\int \int_R 2x + y dA &= \int_0^1 \int_0^x 2x+y dy dx \\
+		&= \int_0^1 \left(2xy + \frac{y^2}{2}\right|^x_0 dx \\ 
+		&= \int_0^1 2x^2 + \frac{x^2}{2} dx \\ 
+		&= \int_0^1 2.5x^2 dx = \left(\frac{2.5x^3}{3}\right|^1_0 = \boxed{\frac{5}{6}}.
+	\end{align*}
+	\qed
+\end{enumerate}
+
+\section{Implication}
+\begin{enumerate}[label=\alph*.]
+	\item True, because the two statements basically say
+	the same thing. $\exists x \exists y$ means there exists 
+	both an $x$ and a $y$ that satisfy $Q(x,y)$, while 
+	$\exists y \exists x$ means the exact same thing.
+	\item False. Consider $y=x$. For all $x$, there exists a $y$
+	such that $y = x$; but there doesn't exist a $y$ such that 
+	$y = x$ for all $x$. 
+	\item True, because if there exists an $x$ that 
+	satisfies $Q(x,y)$ for all $y$, then for all $y$ there must exist an 
+	$x$ that satisfies $Q(x, y)$ because the original $x$ works.
+	\item False. Take $x=y=1$. There exists $x,y$ that satisfy this 
+	but this does not hold for all $y$ (obviously). 
+\end{enumerate}
+
+\section{Logical Equivalence?}
+\begin{enumerate}[label=\alph*.]
+	\item True, if $P(x) \land Q(x)$ is true for all $x$, then $P(x)$ must 
+	be true for all $x$ and $Q(x)$ must be true for all $x$ necessarily. And if 
+	$P(x)$ and $Q(X)$ are both true for all $x$, then $P(x) \land Q(x)$ must also 
+	be true for all $x$ because there are no $x$ such that either component of the 
+	AND relation is false.
+	\item False, $P(x) \lor Q(x)$ being true for all $x$ does not mean that 
+	either $P(x)$ is true for all $x$ or $Q(x)$ is true for all $x$.
+	\item True, if there exists an $x$ such that $P(x) \lor Q(x)$ holds 
+	then there must exist an $x$ such that either $P(x)$ holds or $Q(x)$ 
+	holds. These basically mean the same thing, since if $P(x)$ or 
+	$Q(x)$ hold for $x$, then $P(x) \lor Q(x)$ must hold for $x$.
+	\item False, if $P(x) \land Q(x)$ is true, there must be one $x$ 
+	that satisfies both; but the right hand side can have different 
+	$x$'s for $P, Q$.
+\end{enumerate}
+
+\section{Preserving Set Operations}
+\begin{enumerate}[label=\alph*.]
+	\item Imagine we have a set $P$ such that $f^{-1}(A) = P$, and 
+	another set $Q$ such that $f^{-1}(B) = Q$. We know that if $x \in P$
+	and $x \in Q$, then $f(x)$ must be in both $A$ and $B$ by definition of image.
+	So if there is an $x$ such that $x \in P \cap Q$, then $f(x) \in A \cap B$ must 
+	follow.
+
+	If $x$ is not in $P$, then by definition of preimage, $f(x)$ cannot be in $A$,
+	and the same logic applies for $Q$ and $B$. Therefore, if there is an element 
+	in both $A$ and $B$, it must be in both $P$ and $Q$. This, along with the previous 
+	paragraph, confirms that $f^{-1}(A \cap B) = f^{-1}(A) \cap f^{-1}(B)$. \qed 
+	\item Define $P, Q$ similarly. Then $f^{-1}(A \setminus B) = f^{-1}(A \setminus (A \cap B)).$
+	We know from part (a) that $f^{-1}(A \cap B) = P \cap Q$. The set of inputs in $A$ that also 
+	are in $B$ is $P \cap Q$, so we must exclude $P \cap Q$ from the preimage of $A \setminus B$.
+
+	Since all other elements of $P$ do not map to elements of $B$ by definition of preimage, 
+	we can conclude that the preimage of $A \setminus B$ is $P \setminus (P \cap Q) = P \setminus Q$.
+	Substituting in the original terms, we have $f^{-1}(A \setminus B) = f^{-1}(A) \setminus f^{-1}(B)$.
+	\qed
+	\item $A \cap B$ is the set of values that are elements of both $A$ and $B$. It follows 
+	that every element of $f(A \cap B)$ must be an element of $f(A)$ because $A \cap B \subset A$,
+	and $f(A \cap B)$ must be an element of $f(B)$ becaues $A \cap B \subset B$ as well. Thus,
+	$f(A \cap B) \in f(A) \cap f(B)$. \qed
+
+	Consider the line $y=3$. Let $A$ be the negative numbers and $B$ be the positive numbers. Then 
+	$A \cap B = \null$ but $f(A) \cap f(B)$ is not null.
+	\item $A \setminus B$ is everything in $A$ excluding $A \cap B$. Since $f(A \cap B) \subset 
+	f(A) \cap f(B)$, we have that $f(A) \setminus (f(A) \cap f(B))$ is a superset of $f(A \setminus 
+	(A \cap B))$. \qed
+	
+	The same example from before still applies to this situation Let $A$ be $[0, 4]$ and $B$ be 
+	$[3, 8]$. Then $f(A \setminus B) = \{3\}$ but $f(A) \setminus f(B) = \null$.
+\end{enumerate}
+
+\section{Prove or Disprove}
+\begin{enumerate}[label=\alph*.]
+	\item If $n$ is odd, it immediately follows that $n^2 = n \cdot n$ is odd. Moreover, $4n$ is 
+	guaranteed to be even. So $n^2 + 4n \equiv 1 + 0 \pmod 2 \equiv 1 \pmod 2$, so $n^2+4n$ is odd.
+	\qed
+	\item Assume for the sake of contradiction that $a > 11$, and $b > 4$. Then, we would have
+	$a+b > 11+4 = 15$, meaning that $a+b > 15$, which contradicts the fact $a+b \leq 15$. Therefore,
+	for $a+b \leq 15$ we must have $a \leq 11$ or $b \leq 4$. \qed
+	\item Assume for the sake of contraduction that $r$ is rational. Then, we can express $r$ as 
+	$\frac{p}{q}$ for $p, q \in \ZZ$. Then, $r^2 = \frac{p^2}{q^2}$, and clearly if $p, q \in \ZZ$
+	then $p^2, q^2 \in \ZZ$. Thus, $r^2$ must also be rational. Therefore, the contrapositive must also 
+	be true: if $r^2$ is not rational, then $r$ cannot be positive. \qed
+	\item False. Consider $n = 10$. Then $5n^3 = 5000$ while $n! = 3628800$. Clearly, in this case,
+	$n! > 5n^3$. \qed
+\end{enumerate}
+
+\section{Rationals and Irrationals}
+
+Let the rational number be expressed as $\frac{p}{q}$ for $p, q \in \ZZ$, 
+and let the irrational number be $r$.
+We seek to prove that $\frac{pr}{q}$ cannot be rational. Assume for the sake of contradiction 
+that $\frac{pr}{q}$ is a rational number, which we can call $\frac{a}{b}$ for $a, b \in \ZZ$.
+
+We find the quotient of $\frac{a}{b}$ and $\frac{p}{q}$, which is $\dfrac{\frac{a}{b}}{\frac{p}{q}} = 
+\frac{aq}{bp}$. As $a, b, p, q$ are all integers, $\frac{aq}{bp}$ must be rational, contradicting the 
+claim that $r$ is irrational. Therefore, we know the contrapositive is true: 
+if $r$ is irrational, then $\frac{pr}{q}$ must also be irrational. \qed
+
+\section{Twin Primes}
+\begin{enumerate}[label=\alph*.]
+	\item If $p$ is not of the form $3k+1$ or $3k-1$, that means that $p \equiv 0 \pmod 3$ because 
+	the numbers of the form $3k+1$ are the ones with residue 1 modulo 3, and the numbers of the 
+	form $3k-1$ are the ones with residue 2 modulo 3. Hence, $p$ cannot be prime if it isn't 
+	among one of these forms. \qed
+	\item Assume we have another two twin prime pairs surrounding a value $k$. Then, we need $k-2$ and $k+2$
+	to both be prime. However, none of $k, k-2, k+2$ are equivalent modulo 3, meaning that each of them 
+	will have to take a different residue modulo 3, so one of the values must be divisible by 3.
+	This means the only valid set of $k, k-2, k+2$ 
+	must contain 3. Going through all triplets of $k-2, k, k+2$, the only two pairs that work would be 
+	$(3,5)$ and $(5, 7)$. Thus, $5$ is the only possible number that is part of two twin prime pairs.
+	\qed
+\end{enumerate}
+
+\section{Sundry}
+I worked on this alone, but I discussed the approaches towards some problems with my roommate
+Saathvik Selvan.
+
+\end{document}
