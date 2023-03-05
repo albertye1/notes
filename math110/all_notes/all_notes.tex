@@ -163,10 +163,37 @@ Continuing from previuos lecture\dots
 
 So how are we going to restrict $W_1, W_2$? The only case is if one of the spaces is a subspace of the other.
 
-\subsection{Sums}
+\subsection{Sums (possibly direct)}
 How are we going to replace the union? With a sum!
 
 \begin{definition}
 	The \vocab{sum} $W_1 + W_2$ is defined as $W_1 + W_2 = \{w_1 + w_2 : w_1 \in W_1, w_2 \in W_2\}$.
 \end{definition}
+
+\begin{theorem}
+	The sum of two vector spaces $W_1$ and $W_2$ is itself a vector space.
+\end{theorem}
+
+\begin{proof}
+	Zero: $0_{\in W_1} + 0_{\in W_2} = 0$ must hold by definition.
+
+	Additive closurse: Take two already-summed vectors $u = w_1 + w_2, v = y_1 + y_2$. Therefore, our total is $u + v = (w_1 + y_1) + (w_2 + y_2)$. Our first term must be in $W_1$, and our second term must be in $W_2$, so $u$ must be in $W_1 + W_2$.
+
+	Multiplicative closer: Given a scalar $\lambda$ and a vector $u = w_1 + w_2$, we have that the product is $\lambda u = \lambda(w_1 + w_2) = \lambda w_1 + \lambda w_2$, where $w_1 \in W_1, w_2 \in W_2$. Note that the first term is once again in $W_1$ and the second term in $W_2$, so $u$ must be in $W_1 + W_2$.
+\end{proof}
+
+A special case is the \vocab{direct sum}, which is if any vector $u \in W_1 \oplus W_2$ can be split uniquely as $u = w_1 + w_2$, where the summands belong to their corresponding spaces.
+
+How do we determine if $W_1 + W_2$ is direct?
+\begin{enumerate}
+	\item Our sum is direct iff $0 = 0_{\in W_1} + 0_{\in W_2}$ is the \textbf{only} way to get $0$ in $W_1 + W_2$.
+	\item Our sum is direct iff $W_1 \cap W_2 = \{0\}$.
+\end{enumerate}
+
+Notice that Criterion 1 generalizes to more than 2 subspaces, but Criterion 2 doesn't. Consider the example of $(x, y, 0), (0, 0, z), (0, y, y)$. The pairwise intersections are trivial, but it's still not a direct sum.
+
+\chapter{Week 3}
+\section{Lecture 5}
+\subsection{Linear Independence}
+
 \end{document}
