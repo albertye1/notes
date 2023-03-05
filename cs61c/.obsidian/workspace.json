@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CALL.md",
+                "file": "State Graph Guide.md",
                 "mode": "preview",
                 "source": false
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CALL.md",
+                "file": "State Graph Guide.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "CALL.md",
+                "file": "State Graph Guide.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CALL.md"
+                "file": "State Graph Guide.md"
               }
             }
           }
@@ -195,14 +195,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "08bf0ba204b64108",
+  "active": "2530fc50fff8cf4a",
   "lastOpenFiles": [
+    "RISC-V Operation Types.md",
+    "Waveform Diagram Guide.md",
+    "State Graph Guide.md",
+    "CALL.md",
     "Untitled",
     "Basic RISC-V Notation.md",
-    "CALL.md",
-    "State Graph Guide.md",
-    "Waveform Diagram Guide.md",
-    "Binary Numbers Guide.md",
-    "RISC-V Operation Types.md"
+    "Binary Numbers Guide.md"
   ]
 }
