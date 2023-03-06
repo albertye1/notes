@@ -13,31 +13,19 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Basic RISC-V Notation.md",
+                "file": "CALL.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "2530fc50fff8cf4a",
+            "id": "d4ff0793ff1eac64",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "State Graph Guide.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "857c89bb28e213ca",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Waveform Diagram Guide.md",
+                "file": "C.md",
                 "mode": "source",
                 "source": false
               }
@@ -49,7 +37,19 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "State Graph Guide.md",
+                "file": "Number Notations.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "179948759bfe6eb8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Waveform Diagrams.md",
                 "mode": "source",
                 "source": false
               }
@@ -61,14 +61,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Basic RISC-V Notation.md",
+                "file": "RISC-V Operation Types.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -134,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "State Graph Guide.md",
+                "file": "Number Notations.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "State Graph Guide.md",
+                "file": "Number Notations.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "State Graph Guide.md"
+                "file": "Number Notations.md"
               }
             }
           }
@@ -195,14 +195,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2530fc50fff8cf4a",
+  "active": "c9675cf9374244be",
   "lastOpenFiles": [
+    "C.md",
+    "Number Notations.md",
+    "Waveform Diagrams.md",
+    "Combinational Logic.md",
     "RISC-V Operation Types.md",
-    "Waveform Diagram Guide.md",
-    "State Graph Guide.md",
     "CALL.md",
-    "Untitled",
-    "Basic RISC-V Notation.md",
-    "Binary Numbers Guide.md"
+    "RISC-V Notation.md",
+    "State Graphs.md",
+    "Binary Numbers Guide.md",
+    "Untitled"
   ]
 }

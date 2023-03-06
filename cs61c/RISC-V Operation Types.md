@@ -80,6 +80,7 @@ All operations are 32 bits, which are partitioned between different parameters.
 	* Jumps have 21-bit immediates, so up to $2^{18}$ instructions up/down.
 ## Translation
 * it's not hard to translate a 32-bit number into an instruction.
+	* First, translate the whole number into *base 2*.
 	* Look at the table to see how the number is broken down
 	* Last 7 digits will *always* be an opcode, and then we can use that to find what the operation type is
 	* If there is a funct3 or funct7, we can use that to find the operation itself

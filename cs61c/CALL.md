@@ -49,7 +49,6 @@
 	* External J-type ops
 	* Loads and stores using `gp` to access `.data` variables
 		* includes S and I type ops
-	* 
 ### Procedure
 1. Put together text segments from each .o file
 2. Put together data segments from each .o file, then add this to the end of the original
