@@ -26,6 +26,20 @@
 1. **Object File Header:** size and position of other pieces of obj file
 2. **Text Segment**: machine code
 3. **Data Segment**: binary representation of static data in the source file
+### Information Tables
+4. **Relocation table**: list of items the file needs addresses of later
+	* Relocate which?
+		* **NOT** PC relative addr
+		* **ALWAYS** external function ref
+		* **ALWAYS** static data ref (e.g. using `la`)
+		* External J-type ops
+		* Loads and stores using `gp` to access `.data` variables
+			* includes S and I type ops
+5. **Symbol table**: list of items in the file usable by other files
+	* labels, useful for function calling
+	* data, anything in the `.data`, or variables that can be accessed across files
+Completely unrelated to info tables, but
+6. **Debugging information**. This is just after the information tables and there's not much to say about it
 ### Producing Machine Code
 * Simple Case
 	* Arithmetic, logic shifts, etc
@@ -38,17 +52,10 @@
 * You may bring in a library file `lib.o`, and other object files. The linker `ln` is supposed to resolve all the assembled symbols.
 	* Other executables: for example, what happens to even like `scanf`? That's not part of the code itself, it must be linked in.
 	* References to static data
-	* Assembler writes these in the **relocation info** and **symbol table**.
+	* Assembler writes these in the **relocation table** and **symbol table**. (Specified above)
 * Having a linker is why we don't need to recompile *everything* if we change one line in one file. Saves us a lot of time.
 	* Linux source code is 20M lines of code, maybe compiling that many loc is bad if done everytime a file changes
 * The linker outputs the final executable
-* Relocate which?
-	* **NOT** PC relative addr
-	* **ALWAYS** external function ref
-	* **ALWAYS** static data ref
-	* External J-type ops
-	* Loads and stores using `gp` to access `.data` variables
-		* includes S and I type ops
 ### Procedure
 1. Put together text segments from each .o file
 2. Put together data segments from each .o file, then add this to the end of the original

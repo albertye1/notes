@@ -181,6 +181,7 @@ headfont=\normalfont\bfseries\color{darkred}
 \declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
 
 % RED BOXES %
+\declaretheorem[style=redbox,name=Example,within=section]{example, ex}
 \declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
 \declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
 \declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
@@ -240,3 +241,6 @@ headfont=\normalfont\bfseries\color{darkred}
 %%%%%
 %END_FOLD
 %%%%%
+
+%%% VOCAB %%%
+\newcommand{\vocab}[1]{\textbf{\color{darkgreen}#1}}

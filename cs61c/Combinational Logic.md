@@ -11,6 +11,7 @@
 * $t_{clk-to-q} + t_{shortest-comp-path} \geq t_{hold}$
 * $t_{clk-to-q} + t_{longest-comp-path} + t_{setup} \leq t_{clock-period}$
 	* Using above relations, we can find the maximum hold time and the minimum clock period time.
+* The combinational path is anything that happens 
 ## Other Timing Things
 * Finding the computational paths of shortest and longest length is basically just going through all registers and gates, and checking the propagation time of them all. The shortest time to loop is the shortest computational path, and the longest time to loop is the longest computational path. 
 	* clk to q, setup, and hold times not included.

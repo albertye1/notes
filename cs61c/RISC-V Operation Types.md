@@ -76,6 +76,9 @@ All operations are 32 bits, which are partitioned between different parameters.
 	* `0-6`: opcode
 	* `7-11`: rd
 	* `12-31`: immediate (stored in order `[20|10:1|11|19:12]` because the circuits are a lot simpler this way)
+* Usually `jal` and `jalr`.
+	* `jal` jumps and links to some label in the graph
+	* `jalr` jumps the PC to a line specified in the register, offset by a certain immediate 
 * Note that the immediate is stored in an even stranger pattern
 	* Jumps have 21-bit immediates, so up to $2^{18}$ instructions up/down.
 ## Translation

@@ -7,6 +7,15 @@ Two ways to store primitive data
 	* Also 32 bits
 
 Registers and immediates can be set with operations, see [[RISC-V Operation Types]]
+
+## Important Registers
+* `x0` is the register that stores 0 under any circumstance.
+* `ra` is the **r**eturn **a**ddress
+	* when jumping into a function, we always set the PC back to `ra` at the end.
+	* need to make sure `ra` points to the correct place, otherwise the function will run incorrectly
+* `sp` is the **s**tack **p**ointer
+	* in order to store any information on the stack, we need to update this value to make space on the stack.
+
 ## Calling Conventions
 * There are two types of registers
 	* `ak` and `tk` registers are assumed to be garbage after an inner call ($k$ can be any number such that the register exists). They are *temporary* registers.

@@ -37,7 +37,19 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "RISC-V Hardware.md",
+                "file": "Finite State Machines.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4044f802f17e9ad1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Pipelining.md",
                 "mode": "source",
                 "source": false
               }
@@ -76,7 +88,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -142,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "RISC-V Hardware.md",
+                "file": "Pipelining.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -159,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "RISC-V Hardware.md",
+                "file": "Pipelining.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "RISC-V Hardware.md"
+                "file": "Pipelining.md"
               }
             }
           }
@@ -203,17 +215,18 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2b4fdbd9d8bf0dc3",
+  "active": "4044f802f17e9ad1",
   "lastOpenFiles": [
-    "Combinational Logic.md",
-    "Number Notations.md",
-    "RISC-V Hardware.md",
-    "State Graphs.md",
+    "Finite State Machines.md",
+    "Pipelining.md",
     "Waveform Diagrams.md",
+    "Combinational Logic.md",
+    "CALL.md",
     "RISC-V Notation.md",
     "RISC-V Operation Types.md",
     "C.md",
-    "CALL.md",
+    "RISC-V Hardware.md",
+    "Number Notations.md",
     "Binary Numbers Guide.md",
     "Untitled"
   ]
