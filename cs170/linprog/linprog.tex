@@ -12,6 +12,20 @@
 
 \begin{document}
 \maketitle
+\section{Linear Programs}
+A linear program is a 
+
+\section{Simplex}
+The idea behind simplex is simple. Our linear program is bounded by a polygon, and our goal is to find the optimal point on that polygon. We can see that optimal point must be on a vertex, so we just keep going to the next better vertex until our vertex is better than all neighboring vertices. Once it's better than all neighboring vertices, we see that it must be the best element in the graph or something.
+
+The fact that optimality is gotten at a vertex can be seen through level curves. If a level curve intersects a line, then there is a better level curve that must also intersect the line.
+
+There are two implementation issues:
+\begin{enumerate}
+    \item Finding the starting "feasible vertex"
+    \item How to find neighboring vertices?
+\end{enumerate}
+
 \section{Duality}
 We want to find $\max 5x_1 + 4x_2$ such that 
 \begin{align*}
@@ -114,7 +128,11 @@ There are $n$ experts $E_1, \ldots, E_n$. Every day, they make a prediction. On 
     \item You incur the loss $l_i^{(t)}$
 \end{enumerate}
 
-Allowed to pick a random expert on the $t$th day.
+Allowed to pick a random expert on the $t$th day. We have a probability distribution $p^{(t)} = (p_1^{(t)}, p_2^{(t)}, \ldots, p_n^{(t)})$ such that we pick expert $E_i$ with probability $p_i^{(t)}$.
+
+The \vocab{expected loss} on the $t$th day is \[a^{(t)} = \sum{i=1}{n} p_i^{(t)} \cdot l_i^{(t)}.\] 
+
+The expected loss after $T$ days is then \[A^T = \sum{t = 1}{T} a^{(t)}.\] The loss of expected $E_i$ after $T$ days is \[L_i^T = \sum{i = 1}{T} l_i^{(t)},\] and our \vocab{regret} $R^T = \text{(expected loss after }T\text{ days)} - \text{(loss of best expert)} = A^T - \min_{1 \leq i \leq n} L_i^t.$
 
 \begin{remark}
 Surprising features of the model:
@@ -131,4 +149,36 @@ Surprising features of the model:
 
     $\therefore$ after time $T$, \vocab{average regret} $\frac{R^T}{T} \leq \frac{2 \sqrt{\ln n}}{\sqrt T}$, so as $T \to \infty$, $\frac{R^T}{T} \to 0$.
 \end{theorem}
+
+For each timestep, we update the weight $p_i^{(t + 1)} = p_i^{(t)}(1 - \epsilon)^{l(t)}$, where $l(t) = 0$ if it's correct and $l(t) = 1$ if it's wrong.
+
+Regret is bounded to $R_T \leq \epsilon T + \frac{\ln n}{\epsilon}$. This becomes $R_T \leq 2 \sqrt{T \ln n}$ if $\epsilon = \sqrt{\frac{\ln n}{T}}$.
+
+\section{Reductions}
+Reducing problem A to problem B means we have a black-box subroutine to solve problem B, we can then solve A.
+
+The good news is if B is fast, then A is fast. But the bad news is, if A is hard then we know that B must be hard as well.
+
+\begin{ex}
+    The maximum bipartite matching can be reduced to max flow. 
+    
+    More formally, the input of the matching problem is a bipartite graph with two sets $L$ and $R$ with some edges between $E \subseteq L \times R$. 
+
+    A matching is a subset of edges such that no pair of edges touch the same vertex. A \textbf{matching} is the matching that includes the most number of vertices.
+\end{ex}
+
+An even more general case of the perfect bipartite matching in the flows notes, and the solution is pretty much similar. Just hook $s$ to all vertices in $L$ with capacity $1$, and hook all vertices in $R$ to $t$ with capacity $1$. Also, set the capacities of each edge in the bipartite graph to $1$ and going from $L$ to $R$.
+
+\begin{ex}
+    Any polynomial-time algorithm can be reduced to a linear program. 
+\end{ex}
+
+\begin{ex}
+    Matrix inversion can be reduced to matrix multiplication, and vice versa.
+\end{ex}
+
+THe bad news is related to NP-completeness.
+
+\section{Multiplicative Weights}
+
 \end{document}
