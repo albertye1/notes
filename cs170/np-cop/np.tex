@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage{michael}
+
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\lhead{NP-Completeness}
+\rhead{Albert Ye}
+
+\title{NP-Completeness}
+\author{Albert Ye}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    \section{P vs. NP}
+    So far, we have seen problems such as polynomial multiplication ($O(n \log n)$), minimum spanning trees ($O((n + m) \log n)$). 
+
+    These are all \vocab{efficiently solvable} problems, meaning they are solvable in at most polynomial time.
+
+    \begin{defn}[P]
+        P, which stands for "polynomial", is the \vocab{complexity class} of all problems that are efficiently solvable.
+    \end{defn}
+
+    \begin{defn}[NP]
+        NP, which stands for "nondeterministic polynomial", is the class of problems whose solutions can be verified efficiently.
+    \end{defn}
+
+    The motivation for calling NP NP was not a very good definition and involved something about random algorithms. 
+
+    \begin{ex}[3-coloring]
+        Input: Graph $G = (V, E) (n = |V|)$. 
+
+        Solution: A coloring $C : V \to \{R, G, B\}$ s.t. each edge receives two different colors of vertex.
+    \end{ex}
+
+    Trivial alg: Try all colorings, and there are $3^n$ total colorings, which is exponential time, which is really bad.
+
+    Best alg: $1.3289^n$ time, after throwing all of our algorithmic toolkit at this time. So this problem is currently exponential time. 
+
+    Therefore, we don't know if 3-colorings are in P yet. However, we do know that it is in NP. So we'd verify an input and a solution in $O(n^2)$ time by checking every edge and seeing if all edges $(u, v)$ have $color(u) \neq color(v)$.
+
+    \begin{ex}[Hamiltonian Cycle]
+        Input: Graph $G = (V, E)$
+
+        Solution: tour = cycle visiting each vertex exactly once
+    \end{ex}
+    Trivial alg: Try all $n!$ ways of ordering vartices.
+
+    Best known alg: $O(1.657^n)$, which is still exponential.
+
+    Yet another problem not known to be in P. However, it is in NP. Just need to show that given a graph, and a supposed ordering of vertices, we can check that it corresponds to a tour.
+
+    A slight modification of this problem, the Eulerian Cycle, is in P.
+
+    \begin{ex}[Traveling Salesman Problem]
+        Input: Graph $G = (V, E)$ with edge weights
+
+        Solution: a tour with minimum total weight.
+    \end{ex}
+
+    Best-known alg: Time $O(n^2 2^n)$, the DP that we found in this class.
+
+    However, this is probably not in NP because we would need to compute every other tour to see which one actually has the best weight.
+
+    We have some modifications that are indeed in NP, such as search-TSP. We want to find a tour with total weight $\leq B$, where the "budget" budget is part of the input.
+
+    Things not believed to be in NP:
+    \begin{enumerate}
+        \item Some optimization versions of problems
+        \item Counting versions of problems  (how many 3-colorings?)
+        \item Really, really hard problems (halting)
+    \end{enumerate}
+
+    More formally, NP is typically defined for decision problems and search problems. (More in CS172 for decision problems).
+
+    \begin{thm}
+        $\text{P} \subseteq \text{NP}$
+    \end{thm}
+
+    The biggest open problem in theoretical CS: is P = NP? Obviously, this is true if $N = 1$ because then we would just have $P = P$.
+
+    \section{Approximation Algorithms}
+    There is usually a trade-off between efficiency and accuracy, which is where approximation comes in. 
+
+    Some problems, such as TSP, cannot be approximated in polynomial time. Problems that can have different degrees of accuracy: for example, set cover is $O(\log n)$-approximation.
+
+    \subsection{Sampling}
+    As the num of samples $t$ increases, the error $\epsilon$ and confidence range $\delta$ both decrease. 
+
+    \begin{thm}[Chernoff Bound]
+    Suppose $x_1, \ldots, x_t$ are i.i.d. random variables taking values in $\{0, 1\}$. Let $p = E[x_i] \cdot i$. Then, $\forall \epsilon \geq 0$:
+    \[ P[\left|\frac{1}{t} \sum{}{}x_i - p\right| \geq \epsilon] \leq 2e^{-2\epsilon^2 t}.\]
+    \end{thm}
+
+    We see that this decays exponentially in $t$, so sampling is powerful.
+
+    If we want error $\leq \epsilon$ with probability $> 1 - \delta$ then $t = \lceil\frac{1}{2\epsilon^2} \log \left(\frac{2}{\delta}\right) \rceil$. There is no $n$, so the input size $n$ is completely independent of the sample size. 
+
+    So why is it so difficult to get an accurate result? Like why can't we predict the election? Because it's difficult to get a \textbf{uniformly random sample}. 
+
+    \subsection{(s)Treaming}
+    INPUT: A sequence $\{z_1, z_2, \ldots, z_n\}$ of numbers $\{1, \ldots, M\}$ that "just streams by". The entire input is not stored, and input is seen exactly once.
+
+    Memory is polynomial in terms of $\log M, \log N$.
+\end{document}

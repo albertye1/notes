@@ -56,6 +56,42 @@
             }
           },
           {
+            "id": "ffe845e3f2561ecc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Caches.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "fbb00dea848275b1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Pipelining.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f226a6ecec158706",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Finite State Machines.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "c9675cf9374244be",
             "type": "leaf",
             "state": {
@@ -88,7 +124,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -215,18 +251,24 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4044f802f17e9ad1",
+  "active": "fbb00dea848275b1",
   "lastOpenFiles": [
-    "Finite State Machines.md",
-    "Pipelining.md",
-    "Waveform Diagrams.md",
-    "Combinational Logic.md",
-    "CALL.md",
-    "RISC-V Notation.md",
-    "RISC-V Operation Types.md",
-    "C.md",
+    "RISC-V Datapath.md",
     "RISC-V Hardware.md",
+    "Untitled.md",
+    "Pipelining.md",
+    "Parallelism.md",
     "Number Notations.md",
+    "Finite State Machines.md",
+    "Combinational Logic.md",
+    "Screenshot 2023-04-29 at 7.07.36 PM.png",
+    "Caches.md",
+    "RISC-V Operation Types.md",
+    "Screenshot 2023-04-03 at 10.46.25 AM.png",
+    "CALL.md",
+    "C.md",
+    "Waveform Diagrams.md",
+    "RISC-V Notation.md",
     "Binary Numbers Guide.md",
     "Untitled"
   ]
