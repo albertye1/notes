@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{michael}
+\setcounter{section}{-1}
+
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\lhead{Fraleigh Abstract Algebra}
+\rhead{Albert Ye}
+
+\title{Fraleigh Problems}
+\author{Albert Ye}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Sets and Relations}
+\subsection{Important Info}
+\subsection{Problems}
+\begin{enumerate}
+    \item $\{-\sqrt{3}, \sqrt{3}\}$
+    \item $\varnothing$
+    \item $\{-60, -30, -20, -12, -10, -6, -5, -3, -2, -1, 1, 2, 3, 5, 6, 10, 12, 20, 30, 60\}$
+    \item $\{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11\}$.
+    \item Not well-defined. $\{n \in \ZZ^+ | n > 100\}$
+    \item Well-defined. $\varnothing$
+    \item Well-defined. $\varnothing$
+    \item Not well-defined.
+    \item Well-defined. $\QQ$
+    \item Well-defined. $\{n | 4n \in \ZZ \lor 3n \in \ZZ\}$
+\end{enumerate}
+\section{Groups and Subgroups}
+\subsection{Introduction and Examples}
+Read this and didn't find much interesting
+\subsection{Binary Operations}
+Read this and didn't find much interesting 
+\subsection{Isomorphic Binary Structures}
+\subsubsection{Important Info}
+A \vocab{binary structure} is a set $S$ combined with a binary operation $*$, and is represented as $\langle S, * \rangle$.
+
+\begin{definition}[Isomorphism]
+    A one-to-one function $\phi$ mapping $\langle S, * \rangle$ onto $\langle S', *' \rangle$ such that $\phi(x * y) = \phi(x) *' \phi(y)$ for all $x, y \in S$.
+
+    If this function isn't one-to-one, then this is a \vocab{homomorphism}.
+\end{definition}
+
+\begin{thm}
+    If $\langle S, * \rangle$ has an identity element $e$, and $\langle S', *' \rangle$ is isomorphic with function $\phi$, then $\phi(e)$ is the identity for $\langle S', *' \rangle$.
+\end{thm}
+
+\subsubsection{Exercises}
+\begin{enumerate}
+    \item[1.] We would need to confirm that our relation is injective, surjective, and homomorphic.
+    \item[3.] No, as $3$ in the second set would have no corresponding value in the first set, so surjectivity fails.
+    \item[8.] No, as two matrices can have the same determinant, the homomorphism quality fails.
+    \item[9.] Yes. As the determinant of a $1 \times 1$ matrix is just the value inside, the relation must be injective and surjective. Moreover, as $\det(A \cdot B) = A_{11} \cdot B_{11} = \det A \cdot \det B$, this mapping is a homomorphism. Therefore, $\phi$ is an isomorphism between $\langle M_2(\RR), \cdot \rangle$ and $\langle \RR, \cdot \rangle$.
+    \item[11.] No, as it is not injective because all constant functions map to $0$. 
+    \item[16.] We see that $\phi$ is a bijection from $\ZZ$ to $\ZZ$, Only $n - 1$ can map to $n$, implying injectivity, and $n$ is guaranteed to be taken from $n - 1$, implying surjectivity. 
+
+    For scenario (a), we need for $(a + 1) * (b + 1)$ to equal $a + b + 1$, which can be done by just setting $a * b = a + b - 1$.
+
+    For scenario (b), we need for $(a + 1) + (b + 1)$ to equal $a * b$, which would require $a * b = a + b + 2$.
+    \item[21.] A function $\phi : S \to S'$ is an \textit{isomorphism} if and only if $\phi$ is bijective and $\phi(a) *' \phi(b)$.
+    \item[22.] No correction needed.
+\end{enumerate}
+\end{document}
