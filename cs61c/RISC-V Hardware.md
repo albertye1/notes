@@ -5,3 +5,4 @@
 * arithmetic logic unit
 * performs some arithmetic operation
 # Datapath
+[[RISC-V Datapath]]

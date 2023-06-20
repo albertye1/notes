@@ -1,0 +1,78 @@
+\documentclass{book}
+\usepackage{michael}
+
+\title{Math 104: Real Analysis}
+\author{Albert Ye}
+\date{\today}
+
+\begin{document}
+\maketitle
+\mytoc 
+\chapter{Week 1}
+\section{Lecture 1}
+\subsection{Logic and Sets}
+For clauses $p$, $q$: we have $p \land q$, $p \lor q$, $\lnot p$. These are \textit{and}, \textit{or}, \textit{not}; respectively. 
+
+Moreover, we have $p \implies q$ meaning that $q$ is true if $p$ is true. Moreover, we have $p \iff q$ meaning that $p$ is true if $q$ is true and $q$ is true if $p$ is true.
+
+Other terminology: $:=$ is a definition, $\forall$ is for all, $\exists$ is exists, $a \in A$ means that element $a$ is in the set $A$, $a \notin A$ means that element $a$ isn't in the set $A$.
+
+For sets, we have $\subset, =, \subseteq$ to determine subset and equality relations. Moreover, we have $\cap, \cup$ to represent union and intersections of sets. There is also $A \setminus B$ to denote everything in $A$ but not $B$, and we have $A^C$ to denote every element not in $A$.
+
+\begin{thm}[DeMorgan's Laws]
+    Let $A$ and $B$ be sets. 
+    \begin{enumerate}[label = (\alph*)]
+        \item $(A \cup B)^C = A^C \cap B^C$
+        \item $(A \cap B)^C = A^C \cup B^C$
+        \item $A \setminus (B \cap C) = (A \setminus B) \cup (A \setminus C)$
+        \item $A \setminus (B \cup C) = (A \setminus B) \cap (A \setminus C)$
+    \end{enumerate}
+\end{thm}
+
+\subsection{Indexed Sets}
+Let $\Lambda$ be a set and suppose for each $a \in \Lambda$ there is a set $A_a$. The set $\{A_a : a \in \Lambda\}$ is called a \vocab{collection of sets indexed by $\Lambda$}. In this case, $\Lambda$ is called the \vocab{indexing set} for this collection.
+
+\[\bigcup_{a \in A} = \{x | x \in A_a \textrm{ for some } a \in A\}\]
+\[\bigcap_{a \in A} = \{x | x \in A_a \textrm{ for all } a \in A\}.\]
+
+We can generalize DeMorgan's laws to indexed collections: 
+\begin{thm}[Generalized DeMorgan]
+    If $\{B_a : a \in \Lambda\}$ is an indexed collection of sets and $A$ is a set, then 
+    \[A \setminus \bigcup_{a \in \Lambda} B_a = \bigcap_{a \in \Lambda} (A \setminus B_a),\]
+    \[A \setminus \bigcap_{a \in \Lambda} B_a = \bigcup_{a \in \Lambda} (A \setminus B_a).\] 
+\end{thm}
+
+\subsection{Set of Natural Numbers}
+We set $\NN$ to be all positive integers, $\ZZ$ to be all integers, and $\NN_0$ to be all nonnegative integers.
+
+\begin{definition}[Peano Axioms]
+    \begin{enumerate}
+        \item $1 \in \NN$.
+        \item If $n \in \NN$, then $n + 1 \in \NN$. We'll call this the \vocab{successor}.
+        \item $1$ is not the successor of any element
+        \item If $n, m \in NN$ have the same successor, then $n = m$. 
+        \item (Induction) If $S \subseteq \NN$ with the properties $1 \in S$ and $n \in S \implies n + 1 \in S$, then $S = \NN$. This becomes induction when we have $S$ as the set of elements where a certain property holds.
+    \end{enumerate}
+\end{definition}
+
+So, for induction, we have a base case where we have $P_0$ or $P_1$ or some starting value. And then, we have induction that proves that $P_k$ being true implies $P_{k + 1}$ is true. Then it dominoes over.
+
+Remember that we didn't prove that $P_{n + 1}$ is true, but rather that it can be implied from $P_n$.
+
+\subsection{Set of Rational Numbers}
+We define $\QQ$, the set of rational numbers, by $\QQ := \{\frac{m}{n} | m, n \in \ZZ, n \neq 0\}$.
+
+\begin{remark}
+    $\QQ$ contains all terminating decimals.
+\end{remark}
+
+\begin{remark}
+    If $\frac{m}{n} \in \QQ$ and $r \in \ZZ \setminus \{0\}$, then $\frac{m}{n} = \frac{rm}{rn}$, so we assume that $m, n$ are coprime usually.
+\end{remark}
+
+\begin{definition}[Field Axioms]
+    Remembering these is now an exercise for the reader.
+\end{definition}
+
+We see that the set of rational numbers with addition and multiplication is a field. Going through the axioms is left as an exercise to the reader.
+\end{document}

@@ -4,9 +4,9 @@ The datapath basically turns all of our operations into circuits.
 ![[Screenshot 2023-04-29 at 7.07.36 PM.png]]
 * `PCSel`: if there's a branch or jump, you'll want to make the PC the label instead of `PC + 4`
 * `ImmSel`: Different instruction types have different ways of making immediates. So, we need some way of determining which to use
-* `RegWEn`: do we write to the register rd?
+* `RegWEn`: do we write to the register rd? (no if branch or store)
 * `Bsel`, `Asel`: picking what to add to ALU. `A` is between PC and rs1, while `B` is between immediate and rs2.
-* `ALUSel`: Pick the operation you want to do to ALU
+* `ALUSel`: Pick the operation you want to do to ALU -- add, sub, mul, bsel, etc
 * `MemRW`: should i read or write to the memory
 * `WBsel`: What should I write to the destination register? (only if `RegWEn` is enabled)
 

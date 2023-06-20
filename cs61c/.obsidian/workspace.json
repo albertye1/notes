@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Caches.md",
+                "file": "RISC-V Datapath.md",
                 "mode": "source",
                 "source": false
               }
@@ -73,7 +73,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Pipelining.md",
+                "file": "Combinational Logic.md",
                 "mode": "source",
                 "source": false
               }
@@ -124,7 +124,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -169,6 +169,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "85c679ac36c66907",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -190,7 +198,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Pipelining.md",
+                "file": "RISC-V Datapath.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -207,7 +215,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Pipelining.md",
+                "file": "RISC-V Datapath.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -230,7 +238,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Pipelining.md"
+                "file": "RISC-V Datapath.md"
               }
             }
           }
@@ -251,24 +259,26 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fbb00dea848275b1",
+  "active": "ffe845e3f2561ecc",
   "lastOpenFiles": [
+    "Caches.md",
+    "Pipelining.md",
+    "Combinational Logic.md",
+    "CALL.md",
+    "Untitled 1.md",
+    "61c final cheat sheet.pdf",
+    "Number Notations.md",
     "RISC-V Datapath.md",
     "RISC-V Hardware.md",
-    "Untitled.md",
-    "Pipelining.md",
-    "Parallelism.md",
-    "Number Notations.md",
-    "Finite State Machines.md",
-    "Combinational Logic.md",
-    "Screenshot 2023-04-29 at 7.07.36 PM.png",
-    "Caches.md",
+    "RISC-V Notation.md",
     "RISC-V Operation Types.md",
+    "Untitled.md",
+    "Parallelism.md",
+    "Finite State Machines.md",
+    "Screenshot 2023-04-29 at 7.07.36 PM.png",
     "Screenshot 2023-04-03 at 10.46.25 AM.png",
-    "CALL.md",
     "C.md",
     "Waveform Diagrams.md",
-    "RISC-V Notation.md",
     "Binary Numbers Guide.md",
     "Untitled"
   ]
