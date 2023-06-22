@@ -75,4 +75,156 @@ We define $\QQ$, the set of rational numbers, by $\QQ := \{\frac{m}{n} | m, n \i
 \end{definition}
 
 We see that the set of rational numbers with addition and multiplication is a field. Going through the axioms is left as an exercise to the reader.
+
+\newpage
+\section{Lecture 2}
+\subsection{Ordered Sets}
+\begin{defn}[Ordered Set]
+    We define an \vocab{ordered set} to be a set $S$ with an order satisfying the following criteria:
+    \begin{enumerate}
+        \item $\forall \alpha, \beta \in S$, either $\alpha < \beta, \alpha = \beta, \alpha > \beta$. 
+        \item $\alpha < \beta, \beta < \gamma \implies \alpha < \gamma$.
+        \item $\alpha \leq \beta \implies \alpha + \gamma \leq \beta + \gamma$
+        \item $\alpha \leq \beta, \gamma \geq 0 \implies \alpha \gamma \leq \beta \gamma$
+        \item $\alpha \leq \beta, \beta \leq \alpha \implies \alpha = \beta$
+    \end{enumerate}
+\end{defn}
+
+A set that is a field and an ordered set can be called an \vocab{ordered field}.
+
+\subsection{Defects of $\QQ$}
+\begin{thm}[Irrationality of $\sqrt 2$]
+    There is no $\alpha$ such that $\alpha^2 = 2$.
+\end{thm}
+
+\begin{proof}
+    Suppose for the sake of contradiction that there is $\alpha \in \QQ$ such that $\alpha^2 = 2$. We see that $\alpha = \frac{m}{n}$ for some $m, n \in \ZZ$ such that $\gcd(m, n) = 1$.
+
+    Since $a^2 = 2$, we have $\frac{m^2}{n^2} = 2$, implying that $m^2 = 2n^2$, or $2 | m^2$. As $2$ is prime, we see that $2 | m \implies m = 2p$ for some integer $p$. Then, $(2p)^2 = 2n^2 \implies 4p^2 = 2n^2 \implies n^2 = 2p^2$. Once again, we have that $2 | n$ from above, so $m, n$ are both even. This contradicts the claim that $m, n$ are coprime, so $\sqrt 2$ cannot be expressed in a rational form. 
+\end{proof}
+
+This motivates the concept of incompleteness.
+
+\begin{defn}[Incompleteness]
+    Let $S$ be an ordered set, and let $A \subseteq S$. 
+    \begin{enumerate}
+        \item An element $\beta \in S$ is an \vocab{upper bound} for $A$ if $\alpha \leq \beta, \forall \alpha \in A$. 
+
+        Then, we say that $A$ is \vocab{bounded above}.
+        \item An element $\beta \in S$ is a \vocab{lower bound} for $A$ if $\alpha \geq \beta, \forall A \in A$. 
+        
+        Then, we say that $A$ is \vocab{bounded below}.
+    \end{enumerate}
+\end{defn}
+
+\begin{defn}[Supremum]
+    Suppose $S$ is an ordered set and $A \in S$ is bounded above. Suppose $\exists B \in S$ such that:
+    \begin{enumerate}
+        \item $\beta$ is an upper bound for $A$.
+        \item If $r$ is another upper bound, then $r \geq \beta$.
+    \end{enumerate}
+    Then, we will call $\beta$ the least upper bound, or the \vocab{supremum} ($\sup$) of $A$.
+\end{defn}
+
+The greatest lower bound is then called the \vocab{infimum} ($\inf$) of $A$.
+
+\begin{remark}
+    Supremum and infimum may not exist or belong to $A$.
+\end{remark}
+
+\begin{defn}[Completeness]
+    An ordered set $S$ is said to have the least upper bound property, or \vocab{completeness}, if every upper bounded set has a supremum in $S$.
+\end{defn}
+
+\subsection{Real Numbers}
+\begin{thm}[Real Numbers]
+    There is a unique ordered field $(\RR, +, \cdot, \leq)$ that has the following properties:
+    \begin{enumerate}
+        \item Completeness.
+        \item $\QQ \subseteq \RR$ is an ordered subfield; i.e., $(+, \cdot, \leq)$ restricted to $\QQ$ are the usual $(+, \cdot, \leq)$ on $\QQ$.
+    \end{enumerate}
+\end{thm}
+
+Lecturer says we will be using the result, and not the proof.
+
+There's another theorem with properties of real number arithmetic but honestly I'm too lazy to write it as of now so you'll see it later.
+
+\subsection{Consequences of the Completeness Axiom}
+
+\subsubsection{Existence of Infimum}
+\begin{thm}
+    Let $E \subset \RR$ be a set bounded below. Then $\inf E$ exists in $\RR$.
+\end{thm}
+    
+\begin{proof}
+    Define $-E$ to be $\{-x | x \in E\}$. Then, we see that $-E$ must be bounded above, implying that it must have a supremum by definition of completeness. Then, we let $\sup -E = \beta$. 
+
+    Then, for any $\alpha$ such that $x \geq \alpha \forall x \in E$, then we have $y \leq -\alpha \forall y \in E$. We see that $-\alpha \geq \beta$ by definition of supremum, so $\alpha \leq -\beta$. As a result, $\inf E = -\beta$.
+\end{proof}
+
+\newpage
+\section{Lecture 3}
+\subsection{Archimedean Property}
+\begin{thm}[Archimedean Property]
+    If $a > 0$ and $b > 0$, then for some positive integer $n$, we have $na > b$.
+\end{thm}
+
+\begin{proof}
+    Assume that the Archimedean Property fails. Then, for all positive integers $n$, we have $na < b$ for some positive $a$ and $b$. 
+
+    Now, let's observe $S = \{na | n \in \NN\}$. Then, let $b = \sup S$, which must exist by completeness.
+
+    Consider $b - a$. Since $b$ is a supremum and $a$ is positive, then $\exists s \in S$ such that $s > b - a$. However, $a + s$ must also be in $S$ by definition, and $a + s > a + (b - a) = b$, contradicting the claim that $b = \sup S$.
+\end{proof}
+
+\begin{corollary}
+    \begin{enumerate}
+        \item If $a > 0$, then $\exists n \in \NN$ such that $\frac{1}{n} < a$.
+        \item If $b > 0$, then $\exists n \in \NN$ such that $b < n$.
+    \end{enumerate}
+\end{corollary}
+
+\begin{thm}[Density of $\QQ$]
+    If $a, b \in \RR$ and $a < b$, then $\exists r \in \QQ$ such that $a < r < b$.
+\end{thm}
+
+\begin{proof}
+    This is an exercise for the reader. Till I fill the proof in.
+\end{proof}
+
+\begin{thm}[Existence of $n$th roots]
+    Given any $\alpha \in \RR$, $\alpha > 0$, and any $n \in \NN$, there's a $\beta \in \RR$ s.t. $\beta^n = \alpha$.
+\end{thm}
+
+\begin{proof}
+    This is an exercise for the reader until I feel like writing more about this.
+\end{proof}
+
+\begin{corollary}
+    \begin{enumerate}
+        \item $b_1, b_2 > 0$ s.t. $b_1^n = b_2^n$. Then, $b_1 = b_2$.
+        \item If $a, b > 0$, then $\sqrt[n]{ab} = \sqrt[n]{a}  \sqrt[n]{b}$.
+    \end{enumerate}
+\end{corollary}
+
+\subsection{(Gates to) Infinity}
+We define the set of \vocab{extended reals} to be $\RR^* = \RR \cup \{-\infty\} \cup \{\infty\}$, with the extended order $-\infty < \alpha < \infty$, $\forall \alpha \in \RR$.
+
+Then, $\infty$ is an upper bound for any $E \subset \RR$ and $-\infty$ is a lower bound for any $E \subset \RR$. 
+
+We can extend the definition of $\sup$ and $\inf$ such that
+\begin{itemize}
+    \item $\sup E = \inf$ if $E$ is not bounded above, and 
+    \item $\inf E = -\inf$ if $E$ is not bounded below.
+\end{itemize}
+
+Note that $\RR^*$ does not form a field. As a result, we cannot apply a theorem or exercise stated for real numbers to $\infty$, $-\infty$. This set doesn't have an algebraic structure.
+
+We also denote unbounded intervals using $-\infty, \infty$ instead of real numbers.
+
+\begin{remark}
+    Let $S$ be any nonempty subset of $\RR$. The symbols $\sup S$ and $\inf S$ always make sense. If $S$ is bounded above, then $\sup S$ is a real; otherwise, it is $+\infty$. Same logic applies to lower bounds and $-\infty$.
+
+    Moreover, the statement $\inf S \leq \sup S$ also always makes sense.
+\end{remark}
 \end{document}
