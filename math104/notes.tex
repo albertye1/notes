@@ -227,4 +227,93 @@ We also denote unbounded intervals using $-\infty, \infty$ instead of real numbe
 
     Moreover, the statement $\inf S \leq \sup S$ also always makes sense.
 \end{remark}
+
+\chapter{Week 2}
+\section{Lecture 4}
+\subsection{Limits of Sequences}
+\begin{defn}[Sequence]
+    A \vocab{sequence} is a function $S$ whose domain is a set of the form $\{n \in \ZZ : n \geq m\}$; $m$ is usually $1$ or $0$.
+
+    Or, a sequence is an infinite list of real numbers.
+\end{defn}
+
+Note that we must be careful in ensuring that we have $\ldots$ at the end of our list for repeating sequences, to make clear that our sequence goes to infinity.
+
+Given a sequence $S_1, S_2, \ldots$, we want to figure out what happens to $S_n$ as $n \to \infty$. 
+
+\begin{ex}
+    $S_n = \frac{1}{\sqrt n}, n \in \NN$. The terms seem to "approach" zero.
+\end{ex}
+
+\begin{ex}
+    $S_n = (-1)^n, n \geq 0$. The sequence jumps around, and it appears to not approach any single value.
+\end{ex}
+
+Intuitively: $\lim_{n \to \infty} S_n = S$ means that as $S$ gets large, then $S_n$ goes to $S$.
+
+\subsubsection{Epsilon-Delta}
+
+\begin{defn}[Formal Definition of Convergence]
+    A sequence $S_n$ of real numbers is said to \vocab{converge} to the real number $S$ if:
+
+    \[\forall \epsilon > 0, \exists N = N(\epsilon) \textrm{s. t. } n > N \implies |S_n - S| \leq \epsilon.\]
+\end{defn}
+So, no matter how small $\epsilon$ is, there is a threshold $N$ s.t. once you have $n > N$, then you can guarantee that $S_n$ is at most $\epsilon$ away from $S$.
+
+\begin{defn}[Limits]
+    If $S_n$ converges to $S$, we will write that \[\lim_{n \to \infty} S_n = S, \text{ or } S_n \to S.\] 
+
+    The number $S$ is called the \vocab{limit} of the sequence $(S_n)$. 
+
+    A sequence that doesn't converge to any set number is said to \vocab{diverge}.
+\end{defn}
+
+\begin{remark}
+    \begin{enumerate}
+        \item The threshold $N$ in the first definition can be treated as a positive integer by the Archimedean Property.
+        \item It's traditional to use $\epsilon$ and $\delta$ in situations where the interesting values are small positive values.
+        \item The first definition is an infinite number of statements, one for each $\epsilon$.
+    \end{enumerate}
+\end{remark}
+
+Also, usually $N$ depends on $\epsilon$, usually with an inverse relationship.
+
+\subsection{Proving Limits}
+\begin{ex}
+    $\lim \frac{1}{\sqrt n} = 0$.
+\end{ex}
+
+We see that $|S_n - S| = |\frac{1}{\sqrt n} - 0| = |\frac{1}{\sqrt n}| = \frac{1}{\sqrt n}$. We claim that this is less than $\epsilon$ for some $n$.
+
+We have that $\frac{1}{n} < \epsilon^2 \implies n > \frac{1}{\epsilon^2}$. However, as $n$ is unbounded, we see that there is some $n \in \NN$ such that $n > \frac{1}{\epsilon^2}$. 
+
+But this isn't a rigorous mathematical proof.
+
+\begin{proof}
+    Let's set $N = \frac{1}{\epsilon^2}$. We claim that $|\frac{1}{\sqrt n} - 0| \leq \epsilon$. Setting $n > \frac{1}{\epsilon^2}$ implies that $\frac{1}{n} < \epsilon^2$. Therefore, we have $|]frac{1}{\sqrt n} - 0| = |\frac{1}{\sqrt n}| = \frac{1}{\sqrt n} < \epsilon$. Therefore, our sequence $S_n = \frac{1}{\sqrt n}$ must converge to $0$.
+\end{proof}
+
+\begin{ex}
+    $\lim_{n \to \infty} \frac{2n + 4}{5n + 2} = \frac{2}{5}$.
+\end{ex}
+
+We see that \begin{align*}
+    |S_n - S| &= |\frac{2n + 4}{5n + 2} - \frac{2}{5}| \\
+    &= |\frac{10n + 20 - (10n + 4)}{5(5n + 2)}|\\
+    &= |\frac{16}{25n + 10}| \\
+    &= \frac{16}{25n + 10}.
+\end{align*}
+
+We want this value to be less than $\epsilon$, so we have $\frac{16}{25n + 10} < \epsilon \implies 25n + 10 > \frac{16}{\epsilon} \implies n > \frac{16 - 10 \epsilon}{25\epsilon}$.
+
+\begin{proof}
+    We set $N$ to be $\frac{16 - 10 \epsilon}{25 \epsilon}$ for all $\epsilon > 0$. Then, we claim that for all $n > N$, $|\frac{2n + 4}{5n + 2} - \frac{2}{5}| < \epsilon$.
+
+    We see from above that this is equivalent to $\frac{16}{25n + 10} < \epsilon$. However, we know that $n > N \implies n > \frac{16 - 10 \epsilon}{25 \epsilon}$. Then, we have 
+    \[ \frac{16}{25n + 10} < \frac{16}{25\left(\frac{16 - 10 \epsilon}{25 \epsilon} \right) + 10} = \frac{16}{\frac{16 - 10 \epsilon}{\epsilon} + 10} = \frac{16}{\frac{16}{\epsilon}} = \epsilon.\]
+
+    Therefore, our sequence $S_n = \frac{2n + 4}{5n + 2}$ does indeed converge to $\frac{2}{5}$.
+\end{proof}
+
+We \textit{must} write the formal proof, because all we do in the first part is find a potential threshold $N$, and not prove that it is valid.
 \end{document}
