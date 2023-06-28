@@ -316,4 +316,174 @@ We want this value to be less than $\epsilon$, so we have $\frac{16}{25n + 10} <
 \end{proof}
 
 We \textit{must} write the formal proof, because all we do in the first part is find a potential threshold $N$, and not prove that it is valid.
+
+\newpage
+\section{Lecture 5}
+\subsection{Limits Theorem for Sequences}
+We start by showing that limits are unique.
+\begin{thm}
+    If $\lim_{n \to \infty} S_n = s$ and $\lim_{n \to \infty} S_n = t$, then $s = t$.
+\end{thm}
+
+\begin{proof}
+    We first reframe this in terms of $\epsilon$. Then, we see that for each $\epsilon > 0$, there exists an $N_1, N_2$ such that $n > N_1 \implies |S_n - s| < \frac{\epsilon}{2}$. Also, $n > N_2 \implies |S_n - t| < \frac{\epsilon}{2}$. Now, we consider $N = \max(N_1, N_2)$. 
+
+    From the Triangle Inequality, we see that for all $n > N$, $|s - t| \leq |S_n - s| + |S_n - t| < \frac{\epsilon}{2} + \frac{\epsilon}{2}$. As a result, $\forall n > N, |s - t| < \epsilon$. Therefore, $|s - t| < \epsilon$ for all $\epsilon > 0$, implying that $|s - t| = 0$, or $s = t$.
+\end{proof}
+
+\begin{defn}[Bounded Sequence]
+    A sequence $S_n$ is said to be \vocab{bounded} if its set of values $\{S_n : n \in \NN\}$ is a bounded set.
+\end{defn}
+
+\begin{thm}
+    Convergent sequences are bounded.
+\end{thm}
+
+\begin{proof}
+    Let $S_n$ be a convergent sequence, and let $S = \lim_{n \to \infty} S_n$. Take $\epsilon = 1$, then we obtain $N \in \NN$ such that \[\forall n > N, |S_n - S| < 1.\] 
+
+    By the triangle inequality, for all $n > N$, we have $|S_n| = |S_n - s + S| \leq |S_n - S| + |S| < 1 + |S|$.
+
+    Now, let $M = \max\{|S_1|, |S_2|, \ldots, |S_N|, |S| + 1$. Then, we see that $|S_n| \leq M, \forall n \in \NN$. Therefore, $(S_n)$ is a bounded sequence.
+\end{proof}
+
+\begin{remark}
+    The converse of the above theorem is not true. Consider $(-1, 1, \ldots)$. Some condition must be added.
+\end{remark}
+
+For cases where we need to prove a sequence is bounded, we should set $\epsilon$ to $1$ and try to find a resulting upper bound.
+
+\subsection{Limit Laws}
+\begin{thm}
+    If $S_n \to S$ and $k \in \RR$, then $k S_n \to k S$. 
+
+    That is, $\lim kS_n = k \lim S_n$.
+\end{thm}
+
+\begin{proof}
+    Let $k \neq 0$, and let $\epsilon > 0$.
+
+    For all $n > N$, we have $|S_n - S| < \frac{\epsilon}{|k|}$. We want to show that $|kS_n - kS| < \epsilon$ for $n > N$ as well.
+
+    Then, \begin{align*}
+        n > N &\implies |k| \cdot |S_n - S| < \epsilon \\
+        n > N &\implies |k S_n - k S| < \epsilon,
+    \end{align*}
+
+    and we are done.
+\end{proof}
+
+\begin{thm}
+    If $s_n \to s$ and $t_n \to t$, then $(s_n + t_n) \to s + t$.
+\end{thm}
+
+\begin{proof}
+    We let $\epsilon > 0$.
+
+    We know that there exists $N_1, N_2 \in \NN$ such that for $n > N_1$, we have $|s_n - s| < \epsilon / 2$, and for $n > N_2$ we have $|t_n - t| < \epsilon / 2$. 
+
+    Then, let $N = \max(N_1, N_2)$. then, $\forall n > N$ we have $|s_n - s| + |t_n - t| < \epsilon$. We have that that $|s_n - s| + |t_n - t| \geq |s_n + t_n - s - t| = |(s_n + t_n) - (s + t)|$, so it follows that $|(s_n + t_n) - (s + t)| < \epsilon / 2 + \epsilon / 2 = \epsilon$.
+\end{proof}
+
+\begin{thm}
+    If $s_n \to s$ and $t_n \to t$, then $s_nt_n \to st$.
+\end{thm}
+
+\begin{proof}
+    I'm gettin lazy 
+\end{proof}
+
+\begin{lemma}
+    If $s_n \neq 0$ for all $n$ and $s_n \to s \neq 0$, then $\frac{1}{s_n} \to \frac{1}{s}$. 
+\end{lemma}
+
+\begin{thm}
+    $\lim \frac{t_n}{s_n} = \frac{\lim t_n}{\lim s_n}$.
+\end{thm}
+
+\begin{thm}
+    We have the following limit laws:
+    \begin{enumerate}[label=(\alph*)]
+        \item $\lim_{n \to \infty} \frac{1}{n^p} = 0$ for $p > 0$.
+        \item $\lim_{n \to \infty} a^n = 0$ if $|a| < 1$
+        \item $\lim_{n \to \infty} n^\frac{1}{n} = 1$.
+        \item $\lim_{n \to \infty} a^{\frac{1}{n}} = 1$ if $a > 0$.
+    \end{enumerate}
+\end{thm}
+
+The proof uses both the binomial and squeeze theorems. Proof happens in the next lecture.
+
+\begin{thm}[Squeze Theorem]
+    Let $(a_n), (b_n), (c_n)$ be sequences such that $a_n \leq b_n \leq c_n$. Then,
+    \begin{enumerate}
+        \item If $a_n \to A$, $b_n \to B$, $c_n \to C$, then $A \leq B \leq C$. 
+        \item If $\lim a_n = \lim c_n = L$, then $\lim b_n$ exists and is equal to $L$.
+    \end{enumerate}
+\end{thm}
+
+\newpage
+\section{Lecture 6}
+\subsection{Proofs of Limit Laws}
+\begin{enumerate}[label = (\alph*)]
+    \item fill out later
+    \item fill out later 
+    \item fill out later 
+    \item fill out later 
+\end{enumerate}
+\subsection{Infinite Limits}
+\begin{defn}[Divergence]
+    There are two cases for divergence. 
+
+    $\lim_{n \to \infty} s_n = \infty$ if for each $M > 0$, there exists an $N$ such that $n > N \implies s_n > M$.
+
+    $\lim_{n \to \infty} s_n = -\infty$ if for each $M < 0$, there exists an $N$ such that $n > N \implies s_n < M$.
+
+    From now on, we'll say that a limit \textbf{converges}, \textbf{diverges to }$+\infty$, or \textbf{diverges to }$-\infty$.
+\end{defn}
+
+We now say that $(s_n)$ \vocab{has a limit}, or the limit \vocab{exists}, if it is convergent or divergent.
+
+\begin{remark}
+    Many sequences don't have limits of $+\infty$, $-\infty$, even when unbounded.
+\end{remark}
+
+\begin{ex}
+    Show that $\lim_{n \to \infty} \sqrt{n - 5} + 3 = +\infty$.
+\end{ex}
+
+\begin{proof}
+    Our first step is to find $N$. We have 
+    \begin{align*}
+        \sqrt{n - 5} + 3 > M &\implies \sqrt{n - 5} > M - 3\\
+        &\implies n - 5 > (M - 3)^2 \\
+        &\implies n > (M - 3)^2 + 5.
+    \end{align*}
+
+    Thus, we let $N = (M - 3)^2 + 5.$
+
+    Next, we let $M > 0$ be given, and let $N = (M - 3)^2 + 5$ s.t. $n > N \implies \sqrt{n - 5}+3 > \sqrt{(M - 3)^2 + 5 - 5} + 3 = M-3 + 3 = M$.
+\end{proof}
+
+\begin{thm}
+    Suppose $s_n \to +\infty$, $t_n \to t$. Then, $s_nt_n \to +\infty$. This is true for any $t > 0$ or $t = +\infty$.
+\end{thm}
+
+\begin{proof}
+    Let $M > 0$. Select a real number $m$ such that $0 < m < \lim t_n$. Regardless of if $t_n \to \infty$, there exist an $N_1$ such that $n > N_1 \implies t_n > m$.
+
+    $S_n \to +\infty$ implies that there exists an $N_2$ such that $n > N_2 \implies s_n > \frac{M}{m}$. Now, let $N = \max(N_1, N_2)$. We see that $n > N \implies s_nt_n > \frac{M}{m} \cdot m = M$.
+\end{proof}
+
+\begin{thm}[Duality]
+    If $s_n > 0 \forall n$, then \[s_n \to +\infty \iff \frac{1}{s_n} \to 0.\]
+\end{thm}
+\begin{proof}
+    For the forward direction, let $\epsilon > 0$ be given. Let $M = \frac{1}{\epsilon}$. Since $s_n \to \infty$, then there must exist an $N$ such that $\forall n > N \implies s_n > M = \frac{1}{\epsilon}$. 
+
+    But then, for that same $N$, if $n > N$, we have $|\frac{1}{s_n} - 0| = \frac{1}{s_n} < \frac{1}{M} = \epsilon$ from the previous paragraph. This implies that $|\frac{1}{s_n} - 0| = 0$, or the limit is $0$. \qed
+
+    For the backwards direction, we let $M > 0$ be given. Let $\epsilon = \frac{1}{M}$. Then, since $\frac{1}{s_n} \to 0$, there exists an $N$ such that $\forall n > N$, $|\frac{1}{s_n}| = \frac{1}{s_n} < \epsilon = \frac{1}{M}$.
+
+    But for the same $N$, we have $n > N \implies S_n > \frac{1}{\epsilon} = \frac{1}{\frac{1}{M}} = M$, so the limit must tend to infinity.
+\end{proof}
 \end{document}

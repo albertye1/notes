@@ -19,3 +19,9 @@
 \contentsline {subsection}{\numberline {2.1.1}Limits of Sequences}{11}{subsection.2.1.1}%
 \contentsline {subsubsection}{Epsilon-Delta}{11}{ex.2.2}%
 \contentsline {subsection}{\numberline {2.1.2}Proving Limits}{12}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Lecture 5}{14}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Limits Theorem for Sequences}{14}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Limit Laws}{14}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Lecture 6}{16}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Proofs of Limit Laws}{16}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Infinite Limits}{16}{subsection.2.3.2}%
