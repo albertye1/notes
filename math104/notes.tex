@@ -486,4 +486,75 @@ We now say that $(s_n)$ \vocab{has a limit}, or the limit \vocab{exists}, if it 
 
     But for the same $N$, we have $n > N \implies S_n > \frac{1}{\epsilon} = \frac{1}{\frac{1}{M}} = M$, so the limit must tend to infinity.
 \end{proof}
+
+\section{Lecture 7}
+\subsection{Monotonic Sequences}
+\begin{defn}[Monotonicity]
+    A sequence $(s_n)$ is increasing if $s_{n + 1} \geq s_n$ for all $n$, and decreasing of $s_{n + 1} \leq s_n$ for all $n$. If either of these describes a sequence, that sequence is \vocab{monotonic}.
+\end{defn}
+
+The following theorem shows why we care about monotonic sequences:
+
+\begin{thm}
+    Let $(s_n)$ be a sequence. 
+
+    \begin{enumerate}
+        \item If $(s_n)$ is increasing and bounded above then $(s_n)$ converges.
+        \item If $(s_n)$ is decreasing and bounded below then $(s_n)$ converges.
+    \end{enumerate}
+\end{thm}
+
+\begin{corollary}
+    All monotonic sequences that are bounded converge.
+\end{corollary}
+
+\begin{thm}
+    \begin{enumerate}
+        \item An increasing unbounded sequence diverges to $+\infty$.
+        \item A decreasing unbounded sequence diverges to $-\infty$.
+    \end{enumerate}
+\end{thm}
+
+\begin{proof} $\qquad$
+    \begin{enumerate}
+        \item We claim for the sake of contradiction that $(s_n)$ is unbounded but does not diverge. Then, for some $M > 0$, there exists $s_n$ such that $s_n$
+        \item Similar argument.
+    \end{enumerate}
+\end{proof}
+
+\subsection{Cauchy Sequences}
+
+\begin{defn}
+    A sequence $(s_n)$ of real numbers is called a \vocab{Cauchy sequence} if \[\forall \epsilon > 0 \exists N \in \NN \textrm{ s.t. } n, m > N \implies |s_n - s_m| < \epsilon.\] 
+    
+    In other words, the terms get closer and closer to each other.
+\end{defn}
+
+\begin{lemma}
+    If a sequence is convergent, it's a Cauchy sequence.
+\end{lemma}
+
+\begin{proof}
+    Suppose $(s_n)$ is convergent, say $s_n \to s$. Then, let $\epsilon > 0$ be given. Then, there must exist an $N$ such that $n > N \implies |s_n - s| < \epsilon/2$. However, for any $m > N$ we also have $s_m - s < \epsilon/2$. Then, it follows that $|s_n - s| + |s_m - s| < \epsilon$. Moreover, from the Triangle Inequality, $|s_n - s_m| = |s_n - s + s - s_m| \leq |s_n - s| + |s_m - s|$, so we have $|s_n - s_m| < \epsilon$.
+\end{proof} 
+
+And what about the other direction?
+\begin{lemma}
+    Cauchy sequences are bounded.
+\end{lemma}
+
+The proof is similar for that of the proof that convergent sequences are bounded.
+
+\begin{proof}
+    Let $(s_n)$ be a Cauchy sequence. Then, taking $\epsilon = 1$, $\exists N \in \NN$ such that $m, n > N \implies |s_n - s_m| = 1$. 
+\end{proof}
+
+We see that for bounded sequences that don't converge, taking the supremum of all elements $n > N$ for each $N$ leads to a convergent sequence. So even when there's no limit, we can still find a way to get a sequence with a limit.
+
+\begin{defn}[$\lim \sup$]
+    Let $(s_n)$ be a sequence in $\RR$. We define,
+    \[\lim \sup s_n = \lim_{n \to \infty} \sup \{s_n : n > N\}.\] 
+
+    $\lim \inf$ can be defined similarly.
+\end{defn}
 \end{document}

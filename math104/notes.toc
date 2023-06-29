@@ -25,3 +25,6 @@
 \contentsline {section}{\numberline {2.3}Lecture 6}{16}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Proofs of Limit Laws}{16}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Infinite Limits}{16}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Lecture 7}{17}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Monotonic Sequences}{17}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Cauchy Sequences}{17}{subsection.2.4.2}%
