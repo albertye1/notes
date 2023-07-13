@@ -557,4 +557,53 @@ We see that for bounded sequences that don't converge, taking the supremum of al
 
     $\lim \inf$ can be defined similarly.
 \end{defn}
+
+\chapter{Week 3}
+\section{Lecture 8}
+\subsection{Subsequences}
+\subsection{$\lim \inf$ and $\lim \sup$, again}
+\section{Lecture 9}
+\subsection{Series}
+The sequence of partial sums is $s_n = \sum{k = m}{n} a_k$. Then, the infinite series $\sum{k = m}{n} a_n$ is said to \vocab{converge} if $(s_n)$ of partial sums converges to real number $s$. Thus, $\sum{n = m}{\infty} a_n = S$ means $\lim s_n = s$, or $\lim_{n = \infty} \left(\sum{k = m}{n} a_k\right) = s$. If $s$ doesn't exist or is $+\infty$, then we say $s$ \vocab{diverges}. 
+
+Take, as an example, the geometric series. $\sum{n = 0}{\infty} ar^n = a + ar + ar^2 + \cdots$. The partial sum is then $s_n = \sum{k = 0}{n} ar^k = a \sum{k = 0}{n}r^k$. Multiplying this by $r$ gives us 
+\begin{align*}
+    rs_n &= a\sum{k = 0}{n} r^{k + 1} \\
+    &= a(r^{k + 1} - 1 + \sum{k = 0}{n} r^k) \\
+    &= a(r^{k + 1} - 1) + s_n \\
+    \implies (r - 1)s_n = a(r^{n + 1} - 1).
+\end{align*}
+
+If $r \neq 1$, then we see that $s_n = \frac{a(1 - r^{n + 1})}{1 - r}$. Taking the limit to $\infty$ when $|r| < 1$ givse us $\frac{a(1 - 0)}{1 - r} = \frac{a}{1 - r}$. In all other cases, we have a divergent sequence.
+
+\begin{thm}
+    A series converges iff it satisfies the Cauchy criterion.
+\end{thm}
+
+\begin{corollary}[Divergence Test]
+    If $\sum{}{} a_n$ converges, then $\lim_{n = \infty} a_n = 0$. Converse not true -- see harmonic series.
+\end{corollary}
+
+\section{Lecture 10}
+
+\subsection{Comparison Test}
+\begin{defn}[Comparison Test]
+    Let $\sum{}{} a_n$ be a sequence where $a_n \geq 0$. Then, for a series $\sum{}{} b_n$:
+    \begin{itemize}
+        \item If $|b_n| \leq a_n$ and $\sum{}{} a_n$ converges, then $\sum{}{} b_n$ converges.
+        \item IF $|b_n| \geq a_n$ and $\sum{}{} a_n$ diverges, then $\sum{}{} b_n$ diverges.
+    \end{itemize}
+\end{defn}
+
+\begin{defn}[Absolutely Convergent]
+    If a series $\sum{}{} |a|_n$ is convergent, then so is $\sum{}{} a_n$. We call such a sequence \vocab{absoltuely convergent}.
+\end{defn}
+
+\begin{corollary}
+    If a sequence is absolutely convergent, then it's convergent.
+\end{corollary}
+
+\subsection{Ratio Test}
+\begin{defn}[Ratio Test]
+\end{defn}
 \end{document}

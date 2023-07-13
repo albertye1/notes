@@ -28,3 +28,12 @@
 \contentsline {section}{\numberline {2.4}Lecture 7}{17}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}Monotonic Sequences}{17}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}Cauchy Sequences}{17}{subsection.2.4.2}%
+\contentsline {chapter}{\numberline {3}Week 3}{19}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Lecture 8}{19}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Subsequences}{19}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}$\qopname \relax m{lim}\qopname \relax m{inf}$ and $\qopname \relax m{lim}\qopname \relax m{sup}$, again}{19}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Lecture 9}{19}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Series}{19}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.3}Lecture 10}{20}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Comparison Test}{20}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Ratio Test}{20}{subsection.3.3.2}%
