@@ -557,4 +557,111 @@ We see that for bounded sequences that don't converge, taking the supremum of al
 
     $\lim \inf$ can be defined similarly.
 \end{defn}
+
+\chapter{Week 3}
+
+\chapter{Week 4}
+
+\chapter{Week 5}
+\section{Lecture 14}
+\section{Lecture 15}
+\section{Lecture 16}
+\begin{thm}[Mean Value Theorem]
+\end{thm}
+
+\begin{thm}[Cauchy's MVT]
+\end{thm}
+\section{Lecture 17}
+\subsection{Riemann Integral}
+\begin{defn}
+    Let $[a, b]$ be a given interval. By a \vocab{partition} $P$ of $[a, b]$ we mean a finite set of points $x_0, x_1, \ldots, x_n$, where $a = x_0 \leq x_1 \leq \ldots \leq x_{n - 1} \leq x_n = b$.
+
+    For any $i = 1, \ldots, n$, we define $\Delta x_i = x_i - x_{i - 1}$. 
+\end{defn}
+
+Then, we take Riemann sums.
+
+Suppose $f : [a, b] \to \RR$ is bounded. Let $P$ be a partition of $[a, b]$. We put $M_i = \sup f(x), x_{i-1} \leq x \leq x_i$, and $m_i = inf f(x) x_{i-1} \leq x \leq x_i$. 
+
+Then, $M_i$ gets too much area and $m_i$ loses area. That is $U(P, f) = \sum{i = 1}{n} M_i \Delta x_i$, and $L(P, f) = \sum{i = 1}{n} m_i \Delta x_i$. 
+
+The upper Riemann integrals of $f$ are $\int{a}{\overline b} f dx = \inf U(P, f)$. The lower Riemann integrals of $f$ are $\int{\underline a}{b} f dx = \sup L(P, f)$.
+
+There must exist $m, M \in \RR$ such that $m \leq f(x) \leq M$. Thus, $m(b - a) \leq f(x)(b - a) \leq M(b - a)$. Thus, for every $P$, $m(b - a) \leq \sum{i = 1}{n} m_i \Delta x \leq \sum{i = 1}{n} M_i \Delta x \leq M(b - a)$.
+
+If lower and upper integrals are equal, then we just have integral. Another name for lower/upper integrals are Darboux integrals.
+
+\begin{defn}
+    Given a partition $P$, a partition $P^*$ is called a \vocab{refinement} of $P$ if $P \subseteq P^*$ (that is, if every point of $P$ is a point of $P^*$). 
+\end{defn}
+
+Given two partitions $P_1, P_2$, we call $P*$ the \vocab{common refinement} if $P^* = P_1 \cup P_2$.
+
+\begin{thm}
+    Let $f: [a, b] \to \RR$ be bounded and monotonic. Then, $f \in R[a, b]$.
+
+    This means $f$ is a Riemann integrable function. This means it must have upper and lower Riemann integrals the same.
+\end{thm}
+
+\chapter{Week 6}
+\section{Metric Spaces}
+\begin{defn} Let $X$ be a set. A \vocab{metric} (distance function) $d$ on $X$ is a function $d : X \times X \to \RR, (x, y) \to d(x, y)$.
+\end{defn}
+
+\begin{defn}[Metric Space]
+    A metric space is comprised of a set $X$, distance function $d : X \times X \to \RR$.
+
+    We have multiple properties to make $(X, d)$ a metric space:
+    \begin{enumerate}
+        \item \textbf{Positivity}. $d(x, y) > 0$ if $x \neq y$, $x, y \in X$ or $d(x, x) = 0$.
+        \item \textbf{Symmetry}. $d(x, y) = d(y, x)$, for all $x, y \in X$.
+        \item \textbf{Triangle Inequality}.
+    \end{enumerate}
+\end{defn}
+
+\begin{ex}
+    $(\RR, d)$ is a metric space with $d(x, y) := |x - y|$. 
+\end{ex}
+
+Clearly, $d$ is a metric on $\RR$, as $d : \RR \times \RR \to \RR$. This satisfies:
+\begin{enumerate}
+    \item $d(x, y) = |x - y| > 0, d(x, x) = |x - x| = 0$ for all $x \neq y, x, y \in \RR$.
+    \item $d(y, x) = |y - x| = |-(x - y)| = |x - y| = d(x, y)$ for all $x, y \in \RR$.
+    \item $d(x, y) = |x - y| = |x - z + z - y| \leq |x - z| + |z - y| = d(x, z) + d(z, y)$ for all $x, y, z \in \RR$.
+\end{enumerate}
+
+\begin{defn}[Euclidean Space]
+    For $n \geq 1$, define $n$-dimensional Euclidean space:
+    \[\RR^n = \{\vec x = (x_1, \ldots, x_n) | x_j \in \RR, 1 \leq j \leq n \}.\] 
+\end{defn}
+
+\begin{ex}[Discrete Metric]
+    Let $x$ be any set. Define $d_d(x, y) = \begin{cases} 1 & x \neq y \\ 0 & x = y \end{cases}$.
+\end{ex}
+\begin{enumerate}
+    \item Positivity holds by definition.
+    \item $d_d (x, y) = d_d (y, x) = 1$ for $x \neq y$.
+    \item $d_d (x, y) \leq d_d (x, z) + d_d (z, y)$
+\end{enumerate}
+
+\begin{defn}[balls]
+    Let $(X, d)$ be a metric space.
+    
+    For any $x \in X$, $r > 0$,
+    \begin{enumerate}
+        \item The subset $B_r(x) := \{y \in X | d(x, y) < r\}$ is called the \vocab{open ball} centered at $x$ with radius $r$.
+        \item The subset $\overline{B_r(x)} := \{y \in X | d(x, y) \leq r\}$ is called the \vocab{closed ball} centered at $x$ with radius $r$.
+        \item An open ball centered at $x$ is also a \vocab{neighborhood} of $x$.
+    \end{enumerate}
+\end{defn}
+
+In $\RR$, each open/closed ball is equivalent to a finite open/closed interval.
+
+\begin{defn}[Openness]
+    Let $(X, d)$ be a metric space. A subset $A \subset X$ is called \vocab{open} if $A = \phi$ or if for every $x \in A$, there exists some open ball $B_r(x) \subset A$ for some $r > 0$.
+\end{defn}
+
+\begin{thm}
+    Any open ball is open.
+\end{thm}
 \end{document}
