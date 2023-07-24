@@ -28,13 +28,12 @@
 \contentsline {section}{\numberline {2.4}Lecture 7}{17}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}Monotonic Sequences}{17}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}Cauchy Sequences}{17}{subsection.2.4.2}%
-\contentsline {chapter}{\numberline {3}Week 3}{19}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Week 4}{21}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Week 5}{23}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Lecture 14}{23}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Lecture 15}{23}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Lecture 16}{23}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Lecture 17}{23}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Riemann Integral}{23}{subsection.5.4.1}%
-\contentsline {chapter}{\numberline {6}Week 6}{25}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Lecture 18 - Metric Spaces}{25}{section.6.1}%
+\contentsline {chapter}{\numberline {3}Week 4}{19}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Week 5}{21}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Lecture 14}{21}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Lecture 15}{21}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Lecture 16}{21}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Lecture 17}{21}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Riemann Integral}{21}{subsection.4.4.1}%
+\contentsline {chapter}{\numberline {5}Week 6}{23}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Lecture 18 - Metric Spaces}{23}{section.5.1}%

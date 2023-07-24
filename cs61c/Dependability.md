@@ -1,0 +1,1 @@
+In a warehouse, you need to make sure that your machines are working, and sometimes they will need maintenance.
