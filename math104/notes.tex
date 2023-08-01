@@ -558,6 +558,8 @@ We see that for bounded sequences that don't converge, taking the supremum of al
     $\lim \inf$ can be defined similarly.
 \end{defn}
 
+\chapter{Week 3}
+
 \chapter{Week 4}
 
 \chapter{Week 5}
@@ -662,4 +664,126 @@ In $\RR$, each open/closed ball is equivalent to a finite open/closed interval.
 \begin{thm}
     Any open ball is open.
 \end{thm}
+
+\section{Lecture 20}
+\begin{thm}
+    If $X$ is a metric space and $E \subset X$:
+    \begin{enumerate}
+        \item $\overline E$ is closed.
+        \item $E = \overline E \iff$ $E$ is closed.
+        \item $\overline E \subset F$ for every closed set $F \subset X$ s.t. $\overline E \subset F$.
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    If $E = X$, then we see that it must be closed by definition. If not, then for any $X \in \overline{E}^C$, we show that there must be some open ball $B_r(x) \subset \overline{E}^C$. 
+
+    Suppose this is false. Then, for 
+\end{proof}
+
+\begin{thm}
+    Let $E$ be a nonempty set of real numbers which is bounded above. Let $Y = \sup E$. Then, $y \in \overline E$. Hence, $Y \in E$ if $E$ is closed.
+\end{thm}
+
+\begin{thm}[Bolzano-Weierstrass]
+    Every bounded sequence in $\RR^k$ has a convergent subsequence.
+\end{thm}
+
+\section{Lecture 21}
+\subsection{Compactness}
+First, we need to define a couple of terms before we define compactness. A \vocab{family} of sets is a collection of subsets of $X$. 
+
+\begin{defn}[Open Cover]
+    An \vocab{open cover} of $E \in (X, d)$, which we will call $\{ G_\alpha \}$, is a family of sets such that $E \subset \bigcup_\alpha G_\alpha$.
+
+    In other words, each point in $E$ must also be in one of the sets $G_\alpha$.
+\end{defn}
+
+\begin{defn}[Compact]
+    A set $E$ is considered \vocab{compact} if any open cover of $E$ has a finite subcover.
+\end{defn}
+
+\begin{thm}[Heine-Borel]
+    A set $E$ is compact if and only if it is closed and bounded.
+\end{thm}
+
+\begin{proof}
+    Suppose $E$ is compact. Then, for each $m \in \NN$, let $U_m$ consist of all $x$ in $\RR^k$ such that $\max \{|x_j| : j = 1,2,3,\ldots, k\} < m$.
+
+    The family $\mathcal{U} = \{U_m : m \in N\}$ is an open cover of $E$, so a finite subfamily of $\mathcal{U}$ covers $E$. If $U_{m_0}$ is the largest member of the subfamily, then we see that $E \subseteq U_{m_0}$. Thus, $E$ must be bounded, as each $U_m$ is bounded for finite $m$.
+
+    To show that $E$ is closed, we prove that its complement is open. Consider a point $x_0 \in E^C$. For $m \in \NN$, let $V_m = \{x \in \RR^k : d(x, x_0) > \frac{1}{m}\}$. Then, each $V_m$ is open in $\RR^k$, and $\mathcal{V} = \{V_m\}$ covers $E$ since the union of all $V_m$ is $\RR^k \setminus \{x_0\}$. Since $E$ can be covered by finitely many $V_m$, we see that $E \subset \{X \in \RR^k: d(x, x_0) > \frac{1}{m_0}$. Then, $\{X \in \RR^k: d(x, x_0) < \frac{1}{m_0}\} \subset E^C$. Thus, $x_0$ must be interior $E^C$ for any $x_0 \in E^C$, so $E^C$ must be open and $E$ must be closed. \qed
+
+    Now, suppose $E$ is closed and bounded. Since $E$ is bounded, $E$ is the subset of a set having the form $F = \{x \in \RR^k : |x_j| \leq m \forall j \in [1, k]\}$. 
+
+    Note that $F$ is a $k$-cell, or a rectangle in $k$ dimensions. We define the \vocab{diameter} of a $k$-cell to be \[\sup \{d(x, y) \forall x, y \in F\}.\] Now, we have the following lemma:
+
+    \begin{lemma}
+        Every $k$-cell $F$ in $\RR^k$ is compact.
+    \end{lemma}
+
+    \begin{proof}
+        We assume for the sake of contradiction that $F$ is not compact. Then, there must be some open cover $\mathcal{U}$ of $F$ such that there is no finite subcover that covers $F$.
+
+        Let the diameter of $F$ be $\delta$. We see that if $F$ cannot be covered by a finite subcover, then it must contain a $k$-cell $F_1$ of diameter $\frac \delta 2$ such that $F_1$ is also not able to be contained by any finite subcover.
+
+        Repeating this logic infinitely, we have that $F \supset F_1 \supset F_2 \supset F_3 \supset \cdots$, and no $F_n$ is able to be fit into a finite subcover. However, we see that $\bigcap_{i = 1}^\infty F_i = x_0$ for some $x_0$. This contradicts the claim we initially made because $x_0$ can fit into a finite subcover by definition.
+    \end{proof}
+
+    This lemma concludes our proof.
+\end{proof}
+
+\chapter{Week 7}
+\section{Lecture 22}
+\begin{hw}
+    Let $X$ be the set of continuous functions from $[a, b]$ to $\RR$. For all $x, y \in X$ let $d(x, y)$ be \[d(x, y) = \max \{ |x(t) - y(t) \}.\]
+
+    Show that $(X, d)$ is a metric space.
+\end{hw}
+
+\begin{proof}
+    We only need to confirm that $d$ is a valid metric in $X$.
+\end{proof}
+
+\begin{hw}
+    Let $(X, d)$ be a metric space. Suppoes $\rho$ is defined as \[\rho(x, y) = \frac{d(x, y)}{1 + d(x, y)}.\] 
+
+    Show that $\rho$ is a metric on $X$. (Note that the new metric $\rho$ is bounded because $\rho(x, y) < 1$ for all $x, y \in X$.)
+\end{hw}
+
+\begin{proof}
+    Once again, we only need to prove that this is a metric.
+
+    \textbf{Positivity.} Note that $d(x, y) \geq 0$, so for any nonnegative $d(x, y)$, we find $\rho(x, y)$ to have a nonnegative numerator and positive denominator. Furthermore, $\rho(x, y)$ only equals $0$ when $d(x, y) = 0$, or $x = y$. Therefore, positivity must be satisfied.
+
+    \textbf{Commutativity.} $\rho(y, x) = \frac{d(y, x)}{1 + d(y, x)} = \frac{d(x, y)}{1 + d(x, y)} = \rho(x, y)$.
+
+    \textbf{Triangle Inequality.} $\rho(x, y) + \rho(y, z) = \frac{d(x, y)}{1 + d(x, y)} + \frac{d(y, z)}{1 + d(y, z)}$.
+\end{proof}
+
+\begin{hw}
+    Let $A$ be a subset of $(M, D)$. Prove that 
+    \begin{enumerate}
+        \item $A = \Cap\{C : A \subset C, C \text{ closed}\}$.
+        \item $A - \overline A$ if and only if $A$ is closed.
+    \end{enumerate}
+\end{hw}
+
+\subsection{Back to Compactness}
+\begin{defn}
+    Assume $(X, d)$ is a metric space. A subset $K \in X$ is called \vocab{sequentially compact}, if every sequence of points in $K$ has a convergent subsequence converging to a point in $K$.
+\end{defn}
+
+It follows that if a subset $K$ is compact, then it is sequentially compact.
+
+\subsection{Continuity and Limits}
+Let $(X, d_X), (Y, d_Y)$ be metric spaces. 
+
+\begin{defn}
+    Let $E \subset X$ and $f: E \to Y$.
+    \begin{enumerate}
+        \item If $x_0 \in E'$, we say $\lim_{x \to x_0} f(x) = y_0$ if $\forall \epsilon > 0 \exists \delta > 0$ such that \[d_X(x, x_0) < \delta \implies d_y(f(x), y_0) < \epsilon,\] for any $x \in E \setminus \{x_0\}$.
+        \item $f$ is said to be \vocab{continuous} at $x_0 \in E$ if $\lim_{x \to x_0} f(x) = f(x_0) \iff \forall \epsilon > 0 \exists \delta > 0$ such that \[d_X(x, x_0) < \delta \implies d_Y(f(x), f(x_0)) < \epsilon.\] 
+    \end{enumerate}
+\end{defn}
 \end{document}
