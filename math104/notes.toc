@@ -45,3 +45,5 @@
 \contentsline {section}{\numberline {7.1}Lecture 22}{29}{section.7.1}%
 \contentsline {subsection}{\numberline {7.1.1}Back to Compactness}{30}{subsection.7.1.1}%
 \contentsline {subsection}{\numberline {7.1.2}Continuity and Limits}{30}{subsection.7.1.2}%
+\contentsline {section}{\numberline {7.2}Lecture 23}{30}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Continuity and Limits, continued}{30}{subsection.7.2.1}%

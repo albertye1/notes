@@ -786,4 +786,28 @@ Let $(X, d_X), (Y, d_Y)$ be metric spaces.
         \item $f$ is said to be \vocab{continuous} at $x_0 \in E$ if $\lim_{x \to x_0} f(x) = f(x_0) \iff \forall \epsilon > 0 \exists \delta > 0$ such that \[d_X(x, x_0) < \delta \implies d_Y(f(x), f(x_0)) < \epsilon.\] 
     \end{enumerate}
 \end{defn}
+
+\section{Lecture 23}
+\subsection{Continuity and Limits, continued}
+\begin{definition}[Pointwise Convergence]
+    A sequence of functions $f_n$ is \vocab{pointwise convergent} to a particular function if $\lim_{n \to \infty} f_n(x) = f(x)$ for every $x$ in the domain of $f$.
+\end{definition}
+
+However, pointwise convergence is weak in a number of scenarios, and uniform convergence provides a stronger definition of convergence.
+
+\begin{definition}[Uniform Convergence] 
+    A sequence of functions $f_n$ is \vocab{uniformly convergent} on $S$ to a function $f$ if for each $\epsilon > 0$ there exists a number $N$ such that $|f_n(x) - f(x)| < \epsilon$ for all $X \in S$ and all $n > N$.
+\end{definition}
+
+Consider the example $f_n(x) = x^n$ over the domain $[0, 1]$. 
+
+We see that $\lim_{n \to \infty} f_n(x) = 0$ for all $x \in [0, 1)$ and $1$ for $x = 1$. Therefore $(f_n)$ is pointwise convergent to $f(x) = \begin{cases} 0 & x \in [0, 1) \\ 1 & x = 1 \end{cases}$.
+
+Each $x^n$ is continuous, so even for large $n$ there must be $x$ that are infinitesimally close to $1$. However, for uniform convergence to $f(x)$, we need all values that are not $1$ to converge to $0$. As this is impossible for any function $x^n$, this sequence cannot be universally convergent.
+
+The professor says to compare pointwise and uniform convergence to getting in A+ in one versus all classes.
+
+\begin{thm}
+    The uniform limit of continuous functions is continuous.
+\end{thm}
 \end{document}
