@@ -665,6 +665,93 @@ In $\RR$, each open/closed ball is equivalent to a finite open/closed interval.
     Any open ball is open.
 \end{thm}
 
+\section{Lecture 19 - Also metric spaces}
+\subsection{Types of Points in Set}
+\begin{defn}[Interior Point]
+    Let $E \subset X$. A point $x \in X$ is said to be an \vocab{interior point} of $E$ if it has a neighborhood $U$ lying entirely enside $E$, that is, $U \subset E$.
+\end{defn}
+
+In other words, an interior point is a point $x \in E$ if $\exists r = r(x) > 0$ such that $B_r(x) \subset E$. The set of interior points is called the \vocab{interior} of $E$, or $E^\circ = \{ X \in E | \exists r = r(x) > 0, B_r(x) \subset E\}$.
+
+\begin{ex}
+    $E = [-3, 3] \ \{0\} \implies E^\circ = (-3, 0) \cup (0, 3)$. 
+\end{ex}
+
+\begin{thm}
+    $E$ open $\iff$ $E^\circ = E$.
+
+    Also, $E^\circ$ is the largest open set in $E$.
+\end{thm}
+
+\begin{proof}
+    Suppose $E$ is open. Then, any $x \in E$ must be an interior point by definition of openness (there must be some open ball $B_r(x) \subset E$ for each $x$). As such, $E \subseteq E^\circ$. But we know that $E^\circ \subseteq E$, so $E^\circ$ must be open.
+
+    Suppose that $U \subset E$ and $U$ is an open subset of $X$. Then, if $x \in U$, there exists an $r > 0$ such that $B_r(x) \subset U$ but $U \subset E \implies B_r(x) \subset E$. Therefore, $x \in E^\circ$, so $U \subset E^\circ$. 
+\end{proof}
+
+\begin{thm}
+    Assume $(X,d)$ is a metric space.
+    \begin{enumerate}
+        \item Both $\emptyset$ and $X$ are open.
+        \item If $\{E_\alpha\}_{\alpha \in \Lambda}$ is a collection of open sets, then $\bigcup_{\alpha\in \Lambda} E_\alpha$ is open.
+        \item If $E_1, E_2, \ldots, E_N$ is a finite collection of open sets, then $\bigcap_{i = 1}^N E_i$ is open.
+    \end{enumerate}
+\end{thm}
+
+\begin{remark}
+    The above theorem is not true for arbitrary intersections. Consider $I_n = (-\frac{1}{n}, -\frac{1}{n}) \subset (\RR, 1 \cdot 1)$ open but $\bigcap_{i=1}^\infty I_i$ is not open as it is the null set.
+\end{remark}
+
+\begin{defn}[Limit Points]
+    Let $E \subset (X, d)$. A point $x \in X$ is called a \vocab{limit point} of $E$ if $\forall r > 0$, $B_r(x)$ intersects $E$ at some point other than $x$, i.e. $x$ is a limit point of $E$ if for any neighborhood $B_r(x)$, there exists a $y \in B_r(x) \cap E$ s.t. $y \neq x$.
+\end{defn}
+
+We use $E'$ to determine all of the limit points of $E$, and use $\overline{E} = E \cup E'$ to denote the intersection of $E$ with its limit point set, calling it the \vocab{closure} of $E$ in $X$. Points in $E \setminus E'$ are called \vocab{isolated}. 
+
+We have a bunch of definitions coming up, so let $(X, d)$ be a metric space and $E \subset X$. 
+
+\begin{defn}[Complement]
+    The complement $E^C$ of $E$ is the set of all points $x \in X$ such that $x \notin E$. 
+\end{defn}
+
+\begin{defn}[Closed]
+    $E \subset X$ is called \vocab{closed} if every limit point of $E$ is a point of $E$, that is, $E' \subset E$. 
+\end{defn}
+
+\begin{defn}[Perfect]
+    $E$ is \vocab{perfect} if $E$ is closed and if every point of $E$ is a limit point.
+\end{defn}
+
+\begin{defn}
+    $E$ is \vocab{bounded} if there is a real number $M$ and a point $y \in X$ such that $d(x, y) < M \forall X \in E$. 
+\end{defn}
+
+\begin{thm}
+    A set $E$ is open iff its complement is closed.
+\end{thm}
+
+\begin{corollary}
+    A set $F$ is closed iff its complement is open.
+\end{corollary}
+
+\begin{thm} 
+    Assume $(X, d)$ is a metric space. 
+    \begin{enumerate}
+        \item Both $X$ and $\emptyset$ are closed.
+        \item For any finite collection $F_1, \ldots, F_n$ of closed sets, $\bigcup_{i = 1}^n F_i$ is closed.
+        \item For any collection $\{F_\alpha\}$ of closed sets, $\bigcap_{\alpha} F_\alpha$ is closed.
+    \end{enumerate}
+\end{thm}
+
+\begin{thm}
+    If $X$ is a metric space and $E = X$, then
+    \begin{enumerate}
+        \item $\overline E$ is closed.
+        \item $E = \overline E$ iff $E$ is closed.
+        \item $\overline E \subset F$ for every closed set $F \subset X$ s.t. $E \subset F$.
+    \end{enumerate}
+\end{thm}
+
 \section{Lecture 20}
 \begin{thm}
     If $X$ is a metric space and $E \subset X$:
