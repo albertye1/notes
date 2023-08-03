@@ -810,4 +810,68 @@ The professor says to compare pointwise and uniform convergence to getting in A+
 \begin{thm}
     The uniform limit of continuous functions is continuous.
 \end{thm}
+
+\section{Lecture 24}
+
+\begin{remark}
+    If $f_n$ uniformly converges to $f$, then in particular $f_n$ pointwise converges to $f$. 
+\end{remark}
+
+\begin{thm}
+    Let $E \subseteq R$ and $f_n: E \to \RR$. $f_n$ is uniformly convergent to $f$ if and only if for all $\epsilon > 0$, there exists $N$ such that $m, n \geq N$ implies $|f_n(x) - f_m(x)| < \epsilon$.
+\end{thm}
+
+\begin{proof}
+    Suppose $f_n$ is uniformly convergent to $f$ on $E$. Then $\exists N$ such that $n \geq N, x \in E$ implies that $|f_n(x) - f(x)| < \frac{\epsilon}{2}$, so that 
+    $|f_n(x) - f_m(x)| \leq |f_n(x) - f(x)| + |f(x) - f_m(x)| < \frac{\epsilon}{2} + \frac{\epsilon}{2} < \epsilon$.
+
+    We don't need to use $N_1, N_2$ because we are using the same sequence.
+
+    Conversely, let $x \in E$. Since $(f_n)$ is uniformly Cauchy, in particular $(f_n(x))$ is a Cauchy set. So $\lim_{n \to \infty} f_n(x)$ exists. Let $f(x) = \lim_{n \to \infty} f_n(x)$, i.e., $f_n \to f$ pointwise.
+
+    We claim that $f_n$ is uniformly convergent to $f$ on $E$. Let $\epsilon > 0$. There exists $N$ such that $n, m > N$ and $x \in E$ implies $|f_n(x) - f_m(x)| < \frac{\epsilon}{2}$. Let $m \to \infty$. Since absolute value is continuous, it follows that $|f_n(x) - f(x)| = \lim_{m \to \infty} |f_n(x) - f_m(x)| \leq \frac{\epsilon}{2} < \epsilon$.
+
+    Therefore, $f_n$ is uniformly convergent to $f$.
+\end{proof}
+
+In other words, we now have that the Cauchy property implies uniform convergent.
+
+\begin{thm}
+    Suppose $f_n(x) \to f(x)$, $x \in E$. Let $M_n = \sup_{x \in E} |f_n(x) - f(x)|$. Then, $f_n$ is uniformly convergent to $f$ on $E$ if and only if $M_n \to 0$ as $n \to \infty$.
+\end{thm}
+
+\begin{proof}
+    Suppose $(f_n)$ is uniformly convergent to $f$. Let $\epsilon > 0$, $\exists N$ such that $\forall n > N, x \in E$ $|f_n(x) - f(x)| < \epsilon$. Then, $\forall n > N, 0 \leq M_n = \sup |f_n(x) - f(x)| \leq \epsilon$. Thus, $0 \leq |M_n| \leq \epsilon$ for all $n > N$, so $M_n \to 0$.
+
+    Conversely, let $\epsilon > 0$. Then, there exists $N$ such that $n > N \implies M_n < \frac{\epsilon}{2}$, that is, $\forall x \in E$ $|f_n(x) - f(x)| < \frac{\epsilon}{2}$.
+    
+    Now, let $n, m > 0$
+\end{proof}
+
+\begin{thm} 
+    Let $f_n : E \to \RR$ be continuous at $x \in E$. If $f_n$ uniformly converges to $f$ on $E$, then $f$ is continuous at $x$.
+\end{thm}
+
+We can generalize this theorem for the following statement on interchanging limits:
+
+Let $f_n : E \to \RR$ and $f_n$ uniformly converges to $f$ on $E$. Suppose $x_0$ is a limit point of $E$ and $\lim_{x \to x_0} f_n(x) = A_n$. Then, $(A_n)$ converges, $\lim_{x \to x_0} f(x)$ exists.
+
+$\lim_{x \to x_0} f(x) = \lim_{x \to x_0} \lim_{n \to \infty} f_n(x) = \lim_{n \to \infty} \lim_{x \to x_0} f_n(x) = \lim_{n \to \infty} A_n$.
+
+\section{Lecture 25}
+\subsection{Integration}
+\begin{thm}
+    Let $f_n \in R[a, b]$ and $f_n$ uniformly converges to $f$ on $[a, b]$. Then, $f \in R[a, b]$. Moreover, \[\int{a}{b} f(t)dt = \lim_{n \to \infty} \int{a}{b} f_n(t)dt.\] 
+\end{thm}
+
+\subsection{Differentiation}
+\begin{thm}[Rudin 7.17]
+    Suppose $(f_n)$ is a set of differentiable functions on $[a, b]$ such that 
+    \begin{enumerate}
+        \item $f_n \to f$ pointwise on $[a, b]$. 
+        \item $f'_n \to g$ uniformly on $[a, b]$.
+    \end{enumerate}
+
+    Then, $f_n \to f$ uniformly on $[a, b]$, and $f$ is differentiable on $[a, b]$. Moreover $f'(x) = g(x)$ for all $x \in [a, b]$, that is, $f'(x) = \lim_{n \to \infty} f_n'(x) \forall a \leq x \leq b$.
+\end{thm}
 \end{document}

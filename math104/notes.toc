@@ -47,3 +47,7 @@
 \contentsline {subsection}{\numberline {7.1.2}Continuity and Limits}{30}{subsection.7.1.2}%
 \contentsline {section}{\numberline {7.2}Lecture 23}{30}{section.7.2}%
 \contentsline {subsection}{\numberline {7.2.1}Continuity and Limits, continued}{30}{subsection.7.2.1}%
+\contentsline {section}{\numberline {7.3}Lecture 24}{31}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Lecture 25}{31}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Integration}{31}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Differentiation}{32}{subsection.7.4.2}%
