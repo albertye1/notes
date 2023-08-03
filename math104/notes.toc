@@ -38,16 +38,18 @@
 \contentsline {subsection}{\numberline {5.4.1}Riemann Integral}{23}{subsection.5.4.1}%
 \contentsline {chapter}{\numberline {6}Week 6}{25}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Lecture 18 - Metric Spaces}{25}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Lecture 20}{26}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Lecture 21}{26}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Compactness}{26}{subsection.6.3.1}%
-\contentsline {chapter}{\numberline {7}Week 7}{29}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Lecture 22}{29}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Back to Compactness}{30}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Continuity and Limits}{30}{subsection.7.1.2}%
-\contentsline {section}{\numberline {7.2}Lecture 23}{30}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}Continuity and Limits, continued}{30}{subsection.7.2.1}%
-\contentsline {section}{\numberline {7.3}Lecture 24}{31}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Lecture 25}{31}{section.7.4}%
-\contentsline {subsection}{\numberline {7.4.1}Integration}{31}{subsection.7.4.1}%
-\contentsline {subsection}{\numberline {7.4.2}Differentiation}{32}{subsection.7.4.2}%
+\contentsline {section}{\numberline {6.2}Lecture 19 - Also metric spaces}{26}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Types of Points in Set}{26}{subsection.6.2.1}%
+\contentsline {section}{\numberline {6.3}Lecture 20}{28}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Lecture 21}{28}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Compactness}{28}{subsection.6.4.1}%
+\contentsline {chapter}{\numberline {7}Week 7}{31}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Lecture 22}{31}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Back to Compactness}{32}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Continuity and Limits}{32}{subsection.7.1.2}%
+\contentsline {section}{\numberline {7.2}Lecture 23}{32}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Continuity and Limits, continued}{32}{subsection.7.2.1}%
+\contentsline {section}{\numberline {7.3}Lecture 24}{33}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Lecture 25}{33}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Integration}{33}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Differentiation}{34}{subsection.7.4.2}%
