@@ -560,6 +560,96 @@ We see that for bounded sequences that don't converge, taking the supremum of al
 
 \chapter{Week 3}
 \section{Lecture 8}
+\subsection{Subsequence}
+\begin{defn}[Subsequence]
+    A \vocab{subsequence} of $(s_n)$ is a sequence of the form: $(t_k)$, for $k \in \NN$ where for every $k$ $\exists$ an $n_k \in \NN$ such that $t_n = s_{n_k}$.
+\end{defn}
+
+\begin{thm}
+    Let $(s_n)$ be a sequence.
+    \begin{enumerate}[label = (\roman*)]
+        \item If $t \in \RR$, there exists a subseq. of $(s_n) \to t$, if and only if the set $\{n \in \NN : |s_n - t| < \epsilon\}$ is infinite for all $\epsilon > 0$.
+        \item If the sequence $(s_n)$ isn't bounded above, it has a subseq. with limit $+\infty$.
+        \item The same thing, but for $(s_n)$ not bounded below and with limit $-\infty$.
+    \end{enumerate}
+\end{thm}
+
+\begin{ex}
+    $(s_n)$ is a sequence with positive numbers such that $\inf \{ S : n \in \NN \} = 0$. Show that this sequence must have a subsequence converging to $0$, monotonically.
+\end{ex}
+
+\begin{proof}
+    We claim that $\{n \in \NN : |s_n - 0| \le \epsilon\}$ is infinite for all $\epsilon > 0$. This must be true, because for some otherwise, for some $\epsilon_0 > 0$, there are an infinite number of real numbers $\epsilon$ for which $\epsilon_0 > \epsilon > 0$. Therefore, the size of each described set must be infinite for the infimum of $S$ to be $0$.
+\end{proof}
+
+\begin{thm}
+    If $(s_n)$ converges, then every subsequences converges to the same limit.
+\end{thm}
+ 
+\begin{proof}
+    Let $(s_{n_k})$ denote a subsequence of $(s_n)$; we see that for all $k \in \NN$, $n_k \geq k$. We know that for any $\epsilon > 0$ and $\lim s_n = S$, there is an $N$ such that $n > N \implies |s_n - S| < \epsilon$. Then, $k > N \implies n_k > N \implies |s_{n_k} - S| < \epsilon$.
+
+    Therefore, $\lim_{k \to \infty} s_{n_k} = S$.
+\end{proof}
+
+\begin{thm}
+    Every sequence $(S_n)$ has a monotonic subsequence.
+\end{thm}
+
+\begin{proof}
+    Let the $n$th term be "dominant" if it is greater than all following terms.
+
+    Then, we have two options.
+    \begin{enumerate}
+        \item There are infinite dominant terms, which means taht all dominant terms form a decreasing subsequence.
+        \item There are finite dominant terms, in which case we look for a value $n_1$ such that $S_{n_1}$ is larger than the largest dominant term. Then, $S_{n_1}$ is not the largest term for all $n > n_1$, so there must exist $n_2 > n_1$ such that $S_{n_2} \geq S_{n_1}$. Replacing $1$ and $2$ with $i$ and $i+1$ gives us the same results, so we are done by induction.
+    \end{enumerate}
+\end{proof}
+
+\begin{thm}[Bolzano-Weierstrass]
+    Every bounded sequence has a convergent subsequence.
+\end{thm}
+
+\begin{proof}
+    Every bounded sequence must have a monotonic subsequence, which must converge because it is bounded.
+\end{proof}
+
+\begin{defn}[Subsequential Limit]
+    A \vocab{subsequential limit} is any real number or infinity that is the limit of some subsequence of $(s_n)$.
+\end{defn}
+
+When a sequence has limit $s$, then all subsequences have limit $s$, so $\{s\}$ is the set of subsequential limits. This becomes interesting only when there are no limits.
+
+\begin{thm}
+    Let $(s_n)$ be any sequence. There exists a monotonic subsequence whose limit is $\lim \sup s_n$, and a monotonic subsequence whose limit is $\lim \inf s_n$.
+\end{thm}
+
+\begin{thm}
+    Let $(s_n)$ be any sequence in $\RR$, and let $S$ denote the set of subsequential limits of $(s_n)$.
+
+    \begin{enumerate}[label=(\roman*)]
+        \item $S$ is nonempty.
+        \item $\sup S = \lim \sup s_n, \inf S = \lim \inf s_n$.
+        \item $\lim s_n$ exists iff $S$ has exactly one element, namely $\lim s_n$.
+    \end{enumerate}
+\end{thm}
+
+\begin{thm}
+    Let $S$ denote the set of subsequential limits of a sequence $(s_n)$. Suppose $(t_n)$ is a sequence in $S \cap \RR$ and that $t = \lim t_n$. Then, $t$ belongs to $S$.
+\end{thm}
+
+\subsection{$\lim \sup$ and $\lim \inf$ again}
+Recall the definitions for $\lim \sup$ and $\lim \inf$:
+\[\lim \sup s_n = \lim_{N \to \infty} \sup \{s_n : n > N\} = \sup S,\] 
+\[\lim \inf s_n = \lim_{N \to \infty} \inf \{s_n : n > N\} = \inf S.\]
+
+\begin{thm}
+    If $(s_n)$ converges to a positive real number $s$ and $(t_n)$ is any other sequence, then \[\lim \sup s_nt_n = s \cdot \lim \sup t_n.\]
+
+    We define $s \cdot \infty = \infty$.
+\end{thm}
+
+The hypothesis $s > 0$ cannot be extended to $s = 0$. Consider $s_n = \frac{1}{n}, t_n = -n^2$. Then, the LHS is $\infty$ and the RHS is $0 \cdot (-\infty)$. 
 \section{Lecture 9}
 \subsection{Series}
 Consider a sequence of partial sums: $s_n = \sum{k = m}{n} a_k$. The infinite series $\sum{n = m}{\infty} a_n$ is said to \vocab{converge} if $(s_n)$ of partial sums converges to a real number $S$. Then, $\sum{n = m}{\infty} a_n = S$.
@@ -606,11 +696,104 @@ Let $\Sigma a_n$ be a series and let $\alpha = \lim \sup |a_n|^\frac{1}{n}$. The
     \item Gives no information otherwise.
 \end{itemize}
 
-\chapter{Week 4}
+\subsection{Integral Test}
+\[\int{a}{\infty} f(x) dx = \lim_{t \to \infty} \int{a}{t} f(x) dx.\] 
 
+\begin{thm}[$p$-series]
+    $\sum{}{} \frac{1}{n^p}$ converges if and only if $p > 1$.
+\end{thm}
+
+With this, we can define the \vocab{Integral Test}. We use this when:
+\begin{itemize}
+    \item tests in previous sections don't work
+    \item terms of $\sum{}{} a_n$ are nonnegative 
+    \item decreasing function $f$ on $[1, \infty)$ such that $f(n) = a_n \forall n$.
+    \item integral is easy enough to compute.
+\end{itemize}
+
+The test states:
+
+If $\lim_{n \to \infty} \int{1}{n} f(x) dx = +\infty$, then series diverges. Else, series converges.
+
+\begin{thm}[Alternating Series Theorem]
+    If $a_1 \geq a_2 \geq \cdots \geq a_n \geq 0$, and $\lim a_n = 0$, then the alternating series $\sum{}{} (-1)^{n + 1} a_n$ converges. Moreover, partial sums $s_n$ of sequences satisfy $|s - s_n| \leq a_n$.
+\end{thm}
+
+We see that the harmonic series $a_n = \frac{1}{n}$ diverges, but the alternating harmonic series $a_n = (-1)^n \frac{1}{n}$ converges as a result.
+
+\chapter{Week 4}
+\section{Lecture 11}
+\subsection{Continuity}
+\begin{defn}
+    Let $E \subset \RR$. A \vocab{real-valued function} is a rule $f : E \to \RR$ such that $y = f(x) \in \RR$ for all $x \in E$.
+
+    Then, we say that $E$ is the \vocab{domain} of $f$, and $f(E) = \{f(x) : x \in E\}$ is the \vocab{range}, or the image.
+\end{defn}
+
+The epsilon-delta definition of continuity parallels the definition for limits:
+\begin{defn}
+    Let $f : E \to \RR$, and $x_0 \in E$. Then, $f$ is continuous at $x_0$ if, for all $\epsilon > 0$, there exists $\delta > 0$ such that $x \in E$ and $|x - x_0| < \delta$ implies $f(x) - f(x_0) < \epsilon$.
+\end{defn}
+
+Notice the new $\delta$ parameter added. We say that $\epsilon$ and $\delta$ define a \vocab{neighborhood}.
+
+\begin{thm}
+    Let $f: E \to \RR$. Then, $f$ is continuous at $x_0 \in E$ iff for all $\epsilon > 0$, there exists $\delta > 0$ such that $x \in E$ and $|x - x_0| < \epsilon \implies |f(x) - f(x_0)| < \epsilon$.
+\end{thm}
+
+\begin{thm}
+    Let $f : E \to \RR$.  If $f$ is continuous at $x_0 \in E$, then $|f|, kf$ are continuous at $x_0$.
+\end{thm}
+
+\begin{thm}
+    Let $f, g$ be real functions that are continuous at $x_0$ on $\RR$. Then
+    \begin{enumerate}[label=(\roman*)]
+        \item $f + g$ is cont. at $x_0$
+        \item $fg$ is cont. at $x_0$
+        \item $f/g$ is cont. at $x_0$ if $g(x_0) \neq 0$.
+    \end{enumerate}
+\end{thm}
+
+\subsection{Bounded Functions}
+\begin{thm}
+    If a function $f : [a, b] \to \RR$ is continuous then $f$ is bounded and has a minimum and maximum.
+\end{thm}
+
+\begin{thm}[Intermediate Value Theorem]
+    If $f: I \to \RR$ is continuous and $I$ is an interval, then $f$ has the intermediate value property on $I$:
+
+    For any $a, b \in I$, $a < b$, and $y$ btwn. $f(a), f(b)$, then there exists $x \in [a, b]$ such that $f(x) = y$.
+\end{thm}
+
+\begin{proof}
+    WLOG let $f(a) < y < f(b)$. 
+
+    Let $S := \{x \in [a, b] | f(x) < y\}$. Since $a \in S$, $S \neq 0$. Moreover, $S$ is bounded above by $b$. So, there is an $x_0 \in [a, b]$ such taht $x_0 = \sup S$.
+
+    We claim that $f(x_0) = y$.
+
+    For all $n \in \NN$, there is an $x_n \in S$ such that $x_0 - \frac{1}{n} < x_n \leq x_0$. Thus, $\lim x_n = x_0$. Now, since $f(x_n) < y$ for all $n \in \NN$, we see that $f(x_0) = \lim_{n \to \infty} f(x_n) \leq y$. Therefore, $f(x_0) \leq y$. 
+
+    Now, suppose we have a sequence $t_n = \min(b, x_0 + \frac{1}{n})$. Since $x_0 \leq t_n \leq x_0 + \frac{1}{n} \implies \lim t_n = x_0$. Each $t_n \in [a, b]$ but not in $S$, so $f(t_n) \geq y$. Thus, $f(x_0) = \lim f(t_n) \geq y$.
+
+    As a result, we have $f(x_0) \leq y$ and $f(x_0) \geq y$, implying that $f(x_0) = y$.
+\end{proof}
+
+\begin{corollary}
+    If $I$ is an interval or single point, then $f(I)$ is also an interval or single point for continuous $f$.
+\end{corollary}
+
+We can use this corollary to find roots.
+
+\begin{thm}
+    Let $I \subset \RR$ be an interval and $f: I \to \RR$ be monotonic. If $f(I)$ is also an interval, then $f$ is continuous.
+\end{thm}
 \chapter{Week 5}
 \section{Lecture 14}
+\subsection{Uniform Continuity}
 \section{Lecture 15}
+\subsection{Limits of Functions}
+\subsection{Basic Properties of Derivative}
 \section{Lecture 16}
 \begin{thm}[Mean Value Theorem]
 \end{thm}
@@ -649,6 +832,7 @@ Given two partitions $P_1, P_2$, we call $P*$ the \vocab{common refinement} if $
     This means $f$ is a Riemann integrable function. This means it must have upper and lower Riemann integrals the same.
 \end{thm}
 
+\subsection{L'Hopital's Rule}
 \chapter{Week 6}
 \section{Lecture 18 - Metric Spaces}
 \begin{defn} Let $X$ be a set. A \vocab{metric} (distance function) $d$ on $X$ is a function $d : X \times X \to \RR, (x, y) \to d(x, y)$.
