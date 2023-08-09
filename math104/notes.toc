@@ -1,55 +1,62 @@
 \contentsline {chapter}{Contents}{3}{chapter*.1}%
-\contentsline {chapter}{\numberline {1}Week 1}{5}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Lecture 1}{5}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Logic and Sets}{5}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}Indexed Sets}{5}{subsection.1.1.2}%
-\contentsline {subsection}{\numberline {1.1.3}Set of Natural Numbers}{6}{subsection.1.1.3}%
-\contentsline {subsection}{\numberline {1.1.4}Set of Rational Numbers}{6}{subsection.1.1.4}%
-\contentsline {section}{\numberline {1.2}Lecture 2}{7}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Ordered Sets}{7}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Defects of $\mathbb {Q}$}{7}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Real Numbers}{8}{subsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.2.4}Consequences of the Completeness Axiom}{8}{subsection.1.2.4}%
-\contentsline {subsubsection}{Existence of Infimum}{8}{subsection.1.2.4}%
-\contentsline {section}{\numberline {1.3}Lecture 3}{9}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Archimedean Property}{9}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}(Gates to) Infinity}{9}{subsection.1.3.2}%
-\contentsline {chapter}{\numberline {2}Week 2}{11}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Lecture 4}{11}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Limits of Sequences}{11}{subsection.2.1.1}%
-\contentsline {subsubsection}{Epsilon-Delta}{11}{ex.2.2}%
-\contentsline {subsection}{\numberline {2.1.2}Proving Limits}{12}{subsection.2.1.2}%
-\contentsline {section}{\numberline {2.2}Lecture 5}{14}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Limits Theorem for Sequences}{14}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Limit Laws}{14}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Lecture 6}{16}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Proofs of Limit Laws}{16}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Infinite Limits}{16}{subsection.2.3.2}%
-\contentsline {section}{\numberline {2.4}Lecture 7}{17}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Monotonic Sequences}{17}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Cauchy Sequences}{17}{subsection.2.4.2}%
-\contentsline {chapter}{\numberline {3}Week 3}{19}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Week 4}{21}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Week 5}{23}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Lecture 14}{23}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Lecture 15}{23}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Lecture 16}{23}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Lecture 17}{23}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Riemann Integral}{23}{subsection.5.4.1}%
-\contentsline {chapter}{\numberline {6}Week 6}{25}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Lecture 18 - Metric Spaces}{25}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Lecture 19 - Also metric spaces}{26}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Types of Points in Set}{26}{subsection.6.2.1}%
-\contentsline {section}{\numberline {6.3}Lecture 20}{28}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Lecture 21}{28}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Compactness}{28}{subsection.6.4.1}%
-\contentsline {chapter}{\numberline {7}Week 7}{31}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Lecture 22}{31}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Back to Compactness}{32}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Continuity and Limits}{32}{subsection.7.1.2}%
-\contentsline {section}{\numberline {7.2}Lecture 23}{32}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}Continuity and Limits, continued}{32}{subsection.7.2.1}%
-\contentsline {section}{\numberline {7.3}Lecture 24}{33}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Lecture 25}{33}{section.7.4}%
-\contentsline {subsection}{\numberline {7.4.1}Integration}{33}{subsection.7.4.1}%
-\contentsline {subsection}{\numberline {7.4.2}Differentiation}{34}{subsection.7.4.2}%
+\contentsline {chapter}{\numberline {1}Week 1}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Lecture 1}{7}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Logic and Sets}{7}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Indexed Sets}{7}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Set of Natural Numbers}{8}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}Set of Rational Numbers}{8}{subsection.1.1.4}%
+\contentsline {section}{\numberline {1.2}Lecture 2}{9}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Ordered Sets}{9}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Defects of $\mathbb {Q}$}{9}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Real Numbers}{10}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Consequences of the Completeness Axiom}{10}{subsection.1.2.4}%
+\contentsline {subsubsection}{Existence of Infimum}{10}{subsection.1.2.4}%
+\contentsline {section}{\numberline {1.3}Lecture 3}{11}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Archimedean Property}{11}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}(Gates to) Infinity}{11}{subsection.1.3.2}%
+\contentsline {chapter}{\numberline {2}Week 2}{13}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Lecture 4}{13}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Limits of Sequences}{13}{subsection.2.1.1}%
+\contentsline {subsubsection}{Epsilon-Delta}{13}{ex.2.2}%
+\contentsline {subsection}{\numberline {2.1.2}Proving Limits}{14}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Lecture 5}{16}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Limits Theorem for Sequences}{16}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Limit Laws}{16}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Lecture 6}{18}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Proofs of Limit Laws}{18}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Infinite Limits}{18}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Lecture 7}{19}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Monotonic Sequences}{19}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Cauchy Sequences}{19}{subsection.2.4.2}%
+\contentsline {chapter}{\numberline {3}Week 3}{21}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Lecture 8}{21}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Lecture 9}{21}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Series}{21}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.3}Lecture 10}{21}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Comparison Test}{21}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Ratio Test}{22}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Root Test}{22}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}Week 4}{23}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Week 5}{25}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Lecture 14}{25}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Lecture 15}{25}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Lecture 16}{25}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Lecture 17}{25}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Riemann Integral}{25}{subsection.5.4.1}%
+\contentsline {chapter}{\numberline {6}Week 6}{27}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Lecture 18 - Metric Spaces}{27}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Lecture 19 - Also metric spaces}{28}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Types of Points in Set}{28}{subsection.6.2.1}%
+\contentsline {section}{\numberline {6.3}Lecture 20}{30}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Lecture 21}{30}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Compactness}{30}{subsection.6.4.1}%
+\contentsline {chapter}{\numberline {7}Week 7}{33}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Lecture 22}{33}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Back to Compactness}{34}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Continuity and Limits}{34}{subsection.7.1.2}%
+\contentsline {section}{\numberline {7.2}Lecture 23}{34}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Continuity and Limits, continued}{34}{subsection.7.2.1}%
+\contentsline {section}{\numberline {7.3}Lecture 24}{35}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Lecture 25}{35}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Integration}{35}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Differentiation}{36}{subsection.7.4.2}%

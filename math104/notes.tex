@@ -559,6 +559,52 @@ We see that for bounded sequences that don't converge, taking the supremum of al
 \end{defn}
 
 \chapter{Week 3}
+\section{Lecture 8}
+\section{Lecture 9}
+\subsection{Series}
+Consider a sequence of partial sums: $s_n = \sum{k = m}{n} a_k$. The infinite series $\sum{n = m}{\infty} a_n$ is said to \vocab{converge} if $(s_n)$ of partial sums converges to a real number $S$. Then, $\sum{n = m}{\infty} a_n = S$.
+
+Thus, $\sum{n = m}{\infty} a_n = S$ means taht $\lim s_n = S$, or $\lim_{n \to \infty} \sum{k = m}{n} a_k = S$. If $S$ doesn't exist or is $\pm \infty$, then we say that $(s_n)$ \vocab{diverges}.
+
+\begin{thm}
+    A series converges iff it satisfies the Cauchy criterion.
+    
+    Recall that the Cauchy criterion is the property that for each $\epsilon > 0$, $\exists N$ such that $n \geq m > N \implies |s_n - s_{m-1}| \leq \epsilon$.
+\end{thm}
+
+\begin{proof}
+    Suppose the Cauchy criterion is satisfied. Then, 
+\end{proof}
+
+\section{Lecture 10}
+\subsection{Comparison Test}
+Let $\Sigma a_n$ be a series where $a_n \geq 0$. Then, for a series $\Sigma b_n$:
+\begin{itemize}
+    \item If $|b_n| \leq a_n$ and $\Sigma a_n$ converges, then $\Sigma b_n$ converges.
+    \item If $|b_n| \geq a_n$ and $\Sigma a_n$ diverges, then $\Sigma a_n$ diverges.
+\end{itemize}
+
+\begin{defn}[Absolute Convergence]
+    If a series $\Sigma |a_n|$ is convergent, then so is $\Sigma a_n$. We say such a series is \vocab{absolutely convergent}.
+\end{defn}
+
+It follows that if a sequence is absolutely convergent, then it is convergent.
+
+\subsection{Ratio Test}
+A series $s_n$ of nonzero terms:
+\begin{itemize}
+    \item Converges absolutely if $\lim \sup |\frac{a_{n+1}}{a_n} < 1$
+    \item Diverges if $\lim \inf |\frac{a_{n+1}}{a_n} > 1$ 
+    \item Gives no information otherwise.
+\end{itemize}
+
+\subsection{Root Test}
+Let $\Sigma a_n$ be a series and let $\alpha = \lim \sup |a_n|^\frac{1}{n}$. The series $\Sigma a_n$
+\begin{itemize}
+    \item Converges absolutely if $\alpha < 1$
+    \item Diverges if $\alpha > 1$
+    \item Gives no information otherwise.
+\end{itemize}
 
 \chapter{Week 4}
 
@@ -961,4 +1007,18 @@ $\lim_{x \to x_0} f(x) = \lim_{x \to x_0} \lim_{n \to \infty} f_n(x) = \lim_{n \
 
     Then, $f_n \to f$ uniformly on $[a, b]$, and $f$ is differentiable on $[a, b]$. Moreover $f'(x) = g(x)$ for all $x \in [a, b]$, that is, $f'(x) = \lim_{n \to \infty} f_n'(x) \forall a \leq x \leq b$.
 \end{thm}
+
+\begin{proof}
+    Let $\epsilon > 0$. Choose $N$ such that $n \geq N, m \geq N$ implies \[|f_n(x_0) - f_m(x_0)| \leq \frac{\epsilon}{2}.\] As $f_n'$ converges uniformly, \[f_n'(t) - f_m'(t)| < \frac{\epsilon}{2(b-a)} (a \leq t \leq b).\] 
+
+    Apply the Mean Value Theorem to the function $f_n - f_m$, and we get that \[|f_n(x) - f_m(x) - f_n(t) + f_m(t)| \leq \frac{|x = t| \epsilon}{2(b - a)} \leq \frac \epsilon 2.\] 
+
+    Then, the inequality $|f_n(x) - f_m(x)| \leq |f_n(x) - f_m(x) - f_n(x_0) + f_m(x_0)| + |f_n(x_0) - f_m(x_0)|$ implies that $|f_n(x) - f_m(x)| < \epsilon$, for $x \in [a, b], n, m \geq N$. Thus, $(f_n)$ converges uniformly on $[a, b]$. \qed
+
+    Let $f(x) = \lim f_N(x) (a \leq x \leq b)$. Fix a point $x$ on $[a, b]$ and define $\phi_n(t) = \frac{f_n(t) - f_n(x)}{t - x}, \phi(t) = \frac{f(t) - f(x)}{t - x}$. Then, $\lim_{t \to x} \phi_n(t) = f_n'(x)$ for all $n \in N$. 
+
+    Then, we see that \[|\phi_n(t) - \phi_m(t)| \leq \frac{\epsilon}{2(b - a)} (n, m \geq N),\] so that $(\phi_n)$ converges uniformly, for $t \neq x$. Since $(f_n)$ converges to $f$, we conclude that $\lim_{n \to \infty} \phi_n(x) = \phi(x)$.
+
+    Swapping limits, we see that $\lim_{t \to x} \phi(t) = \lim_{n = \infty} f_n'(x)$.
+\end{proof}
 \end{document}
