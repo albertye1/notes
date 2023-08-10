@@ -830,11 +830,47 @@ We see that $f$ is not uniformly continuous because the domain isn't closed.
 \subsection{Limits of Functions}
 \subsection{Basic Properties of Derivative}
 \section{Lecture 16}
-\begin{thm}[Mean Value Theorem]
+\begin{thm}
+    Let $f : [a, b] \to \RR$. If $f$ has a local max or local min at a point $x \in (a, b)$, and if $f'(x)$ exists, then $f'(x) = 0$.
 \end{thm}
 
-\begin{thm}[Cauchy's MVT]
+\begin{proof}
+    Assume $x_0$ is a local maximum. A similar argument would work for local minimum.
+
+    Then, there exists $\delta > 0$ such that $f(x_0) \geq f(x)$, such that $a < x_0 - \delta < x < x_0 + \delta < b$.
+
+    Then, it follows that $\frac{f(x) - f(x_0)}{x - x_0}$ is $\geq 0$ when $x < x_0$ and is $\leq 0$ when $x > x_0$. This means that as $x \to x_0$, $f'(x^+) \geq 0$ and $f'(x^-) \leq 0$. However, these two valeus must be equal because $f'(x)$. Thus, the only possible value for $f'(x)$ is $0$.
+\end{proof}
+
+\begin{thm}[Mean Value Theorem]
+    Let $f$ be continuous on $[a, b]$ and differentiable on $(a, b)$.
+
+    Then, $\exists c \in (a, b)$ such that $f'(c) = \frac{f(b) - f(a)}{b - a}$.
 \end{thm}
+
+\begin{proof}
+    Consider $h(x) = f(x) - \frac{f(b) - f(a)}{b - a} \cdot x$.
+
+    Then, we have three conditions: $h(x)$ is continuous over $[a, b]$ and differentiable over $(a, b)$, and $h(a) = h(b)$.
+
+    We can then use Rolle's Theorem, outlined below, to finish.
+\end{proof}
+
+\begin{thm}[Cauchy's MVT]
+    Assume $f, g : [a, b] \to \RR$ are continuous, and differentiable on $(a, b)$. Then, there exists $x_0$ in $(a, b)$, such that \[g'(x_0)(f(b) - f(a)) = f'(x_0)(g(b) - g(a)).\]
+\end{thm}
+
+\begin{corollary} 
+    $f$ is constant on $(a, b)$ if $f'(x) = 0$ for all $x \in (a, b)$.
+\end{corollary}
+
+This is proved directly by the Mean Value Theorem.
+
+\begin{corollary}
+    Let $f$ and $g$ be differentiable functions on $(a, b)$ such that $f' = g'$ on $(a, b)$. 
+
+    Then, there exists $C$ such that $f(x) = g(x) + C$ for all $x \in (a, b)$.
+\end{corollary}
 \section{Lecture 17}
 \subsection{Riemann Integral}
 \begin{defn}
@@ -861,13 +897,24 @@ If lower and upper integrals are equal, then we just have integral. Another name
 
 Given two partitions $P_1, P_2$, we call $P*$ the \vocab{common refinement} if $P^* = P_1 \cup P_2$.
 
+\begin{lemma}
+    If $P \subseteq P^*$, then $L(P, f) \leq L(P^*, f) \leq U(P^*, f) \leq U(P, f)$.
+\end{lemma}
+
+\subsection{Integrability}
 \begin{thm}
     Let $f: [a, b] \to \RR$ be bounded and monotonic. Then, $f \in R[a, b]$.
 
     This means $f$ is a Riemann integrable function. This means it must have upper and lower Riemann integrals the same.
 \end{thm}
 
-\subsection{L'Hopital's Rule}
+\begin{thm}
+    $f \in R([a, b])$ iff for all $\epsilon > 0$, there exists a partition $P$ such that $U(P, f) - L(P, f) < \epsilon$.
+\end{thm}
+
+\begin{thm}
+    \[\int{\underline{a}}{b} f(x) \leq \int{a}{\overline{b}} f(x).\]
+\end{thm}
 \chapter{Week 6}
 \section{Lecture 18 - Metric Spaces}
 \begin{defn} Let $X$ be a set. A \vocab{metric} (distance function) $d$ on $X$ is a function $d : X \times X \to \RR, (x, y) \to d(x, y)$.
