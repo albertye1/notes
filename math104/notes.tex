@@ -791,6 +791,41 @@ We can use this corollary to find roots.
 \chapter{Week 5}
 \section{Lecture 14}
 \subsection{Uniform Continuity}
+Recall that $f(x)$ is continuous at $x_0$ if for $\epsilon > 0$, there exists $\delta (x_0, \epsilon)$ such that $|x - x_0| < \delta \implies |f(x) - f(x_0)| < \epsilon$. Note here that $f$ depends on $\epsilon > 0$, and on $x_0$ in $E$. In this section, we find a case where $\delta$ can be chosen to only depend on $\epsilon$.
+
+\begin{defn}
+    We say $f: E \to \RR$ is \vocab{uniformly continuous} if $\forall \epsilon > 0$ there exists a $\delta = \delta(\epsilon)$, s.t. for all $x, y \in E$, $|x - y| < \delta \implies f(x) - f(y) < \epsilon$.
+\end{defn}
+
+\begin{lemma}
+    $P ; E \to \RR$ is not uniformly continuous on $E$ iff there exists $\epsilon > 0$ such that $\forall n \in \NN$, there exists $x_n, y_n \in E$ such that $|x_n - y_n| < \frac{1}{n}$ but $|f(x_n) - f(y_n)| \geq \epsilon$.
+\end{lemma}
+
+\begin{proof}
+    Note that if $f$ is not uniformly continuous, then $|x_0 - y_0| < \frac{1}{n}$, then $|f(x_0) - f(y_0)| \geq \epsilon$.
+
+    Suppose $\epsilon > 0$ exists such that for all $n \in \NN$, there exists $x_n, y_n \in E$ such that $|x_n - y_n| \leq \frac{1}{n}$, but $|f(x_n) - f(y_n)| \geq \epsilon$ and $f$ is uniformly continuous. Then, $\exists \delta$ such that $|x - y| < \delta \implies |f(x) - f(y)| < \epsilon$. From the Archimedean Property, there exists $n \in \NN$ such that $\frac{1}{n} < \delta$ and $x_n, y_n$ as above.
+
+    Then, $|x_n - y_n| < \frac{1}{n} < \delta$, but $|f(x_n) - f(y_n)| \geq \epsilon$. This contradicts our initial claim that $f$ is uniformly continuous.
+\end{proof}
+
+\begin{thm}
+    Let $f$ be continuous on a closed interval $[a, b]$, then it is uniformly continuous on $[a, b]$. 
+\end{thm}
+
+\begin{proof}
+    Let $(s_n)$ be a Cauchy sequence in $S$ and let $\epsilon > 0$ such that $\forall x, y \in S$,
+    \begin{align}
+        |x - y| < \delta \implies |f(x) - f(y)| < \epsilon.
+    \end{align}
+    Now, since $(s_n)$ is a Cauchy sequence, $\exists N$ such that $m, n > N \implies |s_n - s_m| < \delta$ for some $\delta$. By (1), we see that $m, n > N$ implies $f(s_n) - f(s_m) < \epsilon$, that is, $(f(s_n))$ is Cauchy.
+\end{proof}
+
+\begin{ex}
+    $f : (0, 1) \to \RR, f(x) = \frac{1}{x^2}$.
+\end{ex}
+
+We see that $f$ is not uniformly continuous because the domain isn't closed.
 \section{Lecture 15}
 \subsection{Limits of Functions}
 \subsection{Basic Properties of Derivative}
