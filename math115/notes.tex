@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=0.5in, top=0.8in, bottom=0.3in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\usepackage{sectsty}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\lhead{Math 115 - Introduction to Number Theory}
+\rhead{Albert Ye}
+
+\title{A Bad Introduction to Number Theory}
+\author{albert ye}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Lecture 1}
+\begin{definition}
+    An integer $p \neq 0, 1, -1$ is \vocab{prime} if the only integers which divide $p$ are $\pm 1$ and $\pm p$.
+\end{definition}
+
+Recall that the integers $\ZZ = \{\ldots, -3, -2, -1, 0, 1, 2, 3, \ldots\}$, $\NN = \{0, 1, 2, 3, \ldots\}$.
+
+\begin{theorem}[Twin Prime Conjecture]
+    There are infinitely many $p \in \NN$ such that $p$ is prime and $p + 2$ is prime.
+\end{theorem}
+
+Yitang Zhang proved bounded gaps between primes, so there are infinitely many prime $p, p + N$.
+
+\begin{theorem}[Goldbach Conjecture]
+    Every even number can be written as the sum of two primes.
+\end{theorem}
+
+Vinagradar proved that every odd number can be written as the sum of $3$ primes. The proof should use something called sieves.
+
+\begin{proposition}
+    There are infinitely many primes.
+\end{proposition}
+
+\begin{proof}
+    Suppose not and $p_1, \ldots, p_n$ are all the primes. Then, let $p_1\cdots p_n + 1 = N$. 
+    
+    As we will see, every integer admits a unique decomposition into a product of primes.
+\end{proof}
+
+\subsection{Counting Primes}
+Let $\pi(x) : N \to \NN$ return the number of primes $p$ such that $0 < p < x$.
+
+Then, $\pi(x)$ is unbounded: $\lim_{x \to \infty} \pi(x) = \infty$. 
+
+\begin{theorem}[Prime Number Theorem]
+    \[\lim \frac{\pi(x)}{x / \log x} = 1.\] In other words, $\pi(x) \to \frac{x}{\log x}$>
+\end{theorem}
+
+A better approximation is $\mathrm{Li}(x) = \int_{2}^x \frac{dt}{\log t}$. The error for $\mathrm{Li}(x)$ is $|\pi(x) - \mathrm{Li}(x)| = O(\log x \sqrt x)$.
+
+\begin{theorem}[Uniqueness of Prime Factorization]
+    Every integer $0 \neq n \in \ZZ$ can be written as \[n = (-1)^{Z(n)} \prod_{p \text{ prime}} p^{a_p} \qquad a_p \in \NN,\] where all but finitely many $a_p$ are zero, $\epsilon(n) = \begin{cases} 0 & n > 0 \\ 1 & n < 0\end{cases}$.
+\end{theorem}
+
+To prove this, we first look at a lemma:
+\begin{lemma}
+    If $a, b \in \ZZ$ and $b > 0$, there exist integers $q, r$ such that $a = qb + r$ and $0 \leq r < b$.
+\end{lemma}
+
+\begin{proof}
+    Consider the set of integers of the form $\{a - xb | x \in \ZZ\} = S$. The set $S$ contains infinitely many positive integers, so contains a least positive integer $r = a - qb$.
+
+    \begin{remark}
+        This property does not hold for $S \subset \QQ$. Consider $S = \{1, \frac{1}{2}, \frac{1}{4}, \ldots\}$. 
+    \end{remark}
+\end{proof}
+
+The rest of the proof will follow later.
+
+\begin{definition}
+    Let $a_1, \ldots, a_n$ be integers. Denote $(a_1, \ldots, a_n)$ to be the set $\{b_1a_1 + \cdots + b_na_n | b_i \in \ZZ\}$.
+\end{definition}
+
+\end{document}
