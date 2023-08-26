@@ -16,12 +16,25 @@
 \usepackage{circuitikz}
 \allsectionsfont{\normalfont\sffamily\bfseries}
 
+\usepackage{hyperref}
+\usepackage{nameref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\urlstyle{same}
+
 \setlength{\parindent}{0pt}
 \pagestyle{fancy}
 \lhead{Math 115 - Introduction to Number Theory}
 \rhead{Albert Ye}
 
-\title{A Bad Introduction to Number Theory}
+\title{Common Core 5th Grade Curriculum}
 \author{albert ye}
 \date{\today}
 
@@ -68,12 +81,15 @@ Then, $\pi(x)$ is unbounded: $\lim_{x \to \infty} \pi(x) = \infty$.
 
 A better approximation is $\mathrm{Li}(x) = \int_{2}^x \frac{dt}{\log t}$. The error for $\mathrm{Li}(x)$ is $|\pi(x) - \mathrm{Li}(x)| = O(\log x \sqrt x)$.
 
+\subsection{Prime Factorization}
 \begin{theorem}[Uniqueness of Prime Factorization]
+    \label{uniq}
     Every integer $0 \neq n \in \ZZ$ can be written as \[n = (-1)^{Z(n)} \prod_{p \text{ prime}} p^{a_p} \qquad a_p \in \NN,\] where all but finitely many $a_p$ are zero, $\epsilon(n) = \begin{cases} 0 & n > 0 \\ 1 & n < 0\end{cases}$.
 \end{theorem}
 
 To prove this, we first look at a lemma:
 \begin{lemma}
+    \label{lemma:1}
     If $a, b \in \ZZ$ and $b > 0$, there exist integers $q, r$ such that $a = qb + r$ and $0 \leq r < b$.
 \end{lemma}
 
@@ -88,7 +104,92 @@ To prove this, we first look at a lemma:
 The rest of the proof will follow later.
 
 \begin{definition}
+    \label{multset}
     Let $a_1, \ldots, a_n$ be integers. Denote $(a_1, \ldots, a_n)$ to be the set $\{b_1a_1 + \cdots + b_na_n | b_i \in \ZZ\}$.
 \end{definition}
 
+\section{Lecture 2}
+\subsection{Prime Factorization, cont.}
+Recall the theorem of uniqueness of prime factorizations. Also recall that a prime number $p$ is an integer $\neq 0$, so that the only divisors of $p$ are $\pm 1$ and $\pm p$.
+
+\begin{definition}
+    If $0 \neq a \in \ZZ$ and $p \in \ZZ$ is prime, let $\ord_p a$ denote the largest integer $n$ such that $p^n \vert a$, i.e. $a = p^n b$.
+
+    We define $\ord_p 0 = \infty$.
+\end{definition}
+
+\begin{lemma}
+    \label{lemma:2}
+    If $a, b \in \ZZ$, then there exists $d \in \ZZ$ such that $(d) = (a, b)$. Recall Definition \ref{multset} for $(a_1, a_2, \ldots, a_n)$.
+\end{lemma}
+
+
+\begin{proof}
+    Let $d$ be the smallest integer $> 0$ in $(a, b)$. We claim that $(d) = (a, b)$. As $d \in (a, b)$, we see that $(d) \subseteq (a, b)$. We have to show that $(a, b) \subseteq (d)$.
+
+    Take $c \in (a, b)$, then we see from  \ref{lemma:1} that $c = qd + r$ with $0 \leq r < d$. THen $r = c-qd \in (a,b)$. By minimality of $d$, we see that $r = 0$, so $c = qd$ implie $c \in (d)$.
+\end{proof}
+
+\begin{definition}
+    If $a, b \in \ZZ$, then a greatest common divisor $d$ of $a, b$ is an integer which divides $a, b$ such that any other integer $c$ with that property satisfies $c | d$.
+\end{definition}
+
+\begin{remark}
+    If we insist $d \geq 0$, then it is unique. Because if $c, d \geq 0$ are both $\gcd(a, b)$, then $c | d$ and $d | c$, which implies $c = \pm d$, but because of positivity we must have $c = d$.
+\end{remark}
+
+\begin{proposition}
+    If $a, b \in \ZZ$, then the $d$ appearing in \ref{lemma:2} s.t. $d = (a, b)$ is a greatest common divisor of $a, b$.
+\end{proposition}
+
+\begin{proof}
+    If $(d) = (a, b)$, then $a \in (d) = d\ZZ \implies d | a$. If $c \in \ZZ$ is any common divisor of $a$ and $b$, then $c$ divides $an + bm$ for all $m, n \in \ZZ$. As $d \in (a, b)$, $d$ has this form, so $c | d$.
+
+    Thus, by definition, $d$ must be the greatest common divisor.
+\end{proof}
+
+\begin{definition}
+    We say that $a, b \in \ZZ$ are \vocab{relatively prime} if $(a, b) = 1$.
+
+    In other words, the only nonzero integers that divide $a$ and $b$ are $\pm 1$.
+\end{definition}
+
+\begin{lemma}
+    \label{lemma:3}
+    Suppose $a | bc$, and $(a, b) = 1$. Then, $a | c$.
+\end{lemma}
+
+\begin{proof}
+    $(a, b) = 1$ implies $1 = an + bm$ for some $n, m$. So $c = acn + bcm$. Notice that the right term contains $bc$ and the left term contains $a$, so $c$ must be divisible by $a$.
+\end{proof}
+
+\begin{corollary}
+    \label{cor:3}
+    If $p$ is prime and $p | ab$, then $p | a$ or $p | b$.
+\end{corollary}
+
+\begin{proof}
+    If $(p, a) = p$, then we're done as $p | a$.
+
+    Suppose instead that $(p, a) = 1$. From \ref{lemma:3}, we have $p | b$.
+\end{proof}
+
+We take the contrapositive to see that if a prime $p$ doesn't divide $a$ or $b$, then it doesn't divide $ab$.
+
+\begin{proposition}
+    Fix a prime $p$. If $a, b \in \ZZ$, then $\ord_p ab = \ord_p a + \ord_p b$.
+\end{proposition}
+
+\begin{proof}
+    Let $\ord_p a = n, \ord_p b = m$. Then, we see that $a = p^nc, b = p^md$ where $p \not \vert c, p \not \vert d$. So $ab = p^nc \cdot p^md = p^{n+m}(cd)$. We know that $p$ cannot divide $cd$ from \ref{cor:3}, so $\ord_p ab = n + m$.
+\end{proof}
+
+Now, we can finally prove Theorem \ref{uniq}.
+\begin{proof}[Proof of \ref{uniq}]
+    Fix $n \in \ZZ$ and suppose that $n = (-1)^{\epsilon(n)} \prod_{p} p^{a_p}$.
+
+    Then, fix a prime $q$. We see that \[\ord_{q} n = 0 + \sum_{p}a_p \ord_q p = a_q.\] This is because $\ord_q p = \begin{cases}1 & q = p \\ 0 & q \neq p\end{cases}$. This implies that the only factors that will contribute to $\ord_q n$ are the terms of $q$, of which there are $a_q$.
+
+    Hence, $a_p$ for each prime $p$ is determined solely by $n$, so the prime factorization is unique.
+\end{proof}
 \end{document}

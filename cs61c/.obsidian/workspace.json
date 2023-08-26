@@ -68,6 +68,16 @@
             }
           },
           {
+            "id": "64fef045aebfba89",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.3.5"
+              }
+            }
+          },
+          {
             "id": "fbb00dea848275b1",
             "type": "leaf",
             "state": {
@@ -124,7 +134,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -259,7 +269,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "ffe845e3f2561ecc",
+  "active": "64fef045aebfba89",
   "lastOpenFiles": [
     "Caches.md",
     "Pipelining.md",
