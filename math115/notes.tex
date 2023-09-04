@@ -192,4 +192,106 @@ Now, we can finally prove Theorem \ref{uniq}.
 
     Hence, $a_p$ for each prime $p$ is determined solely by $n$, so the prime factorization is unique.
 \end{proof}
+
+\section{Lecture 3}
+
+\begin{lemma}
+    \label{lemma:3:1}
+    Every nonconstant irreducible polynomial has a factorization into nonconstant irreducible polynomials.
+\end{lemma}
+
+\section{Lecture 4}
+\subsection{Factorization of Polynomials}
+Recall \ref{lemma:3:1} from last lecture.
+
+Again let $k = \QQ, \RR, \CC$. 
+
+\begin{definition}
+    A nonzero polynomial is called \vocab{monic} if the coefficient of its leading term is $1$.
+\end{definition}
+
+\begin{definition}
+    If $p(x) \in k[x]$ is nonconstant irreducible, and $0 \neq q(x) \in k[x]$ is any other polynomial. Let $\ord_p q$ be defined as the greatest integer $n \geq 0$ such that $p^n(x) \vert g(x)$ but $p^{n+1}(x) \not \vert g(x)$.
+\end{definition}
+
+\begin{theorem}
+    \label{polyfac}
+    Every nonconstant polynomial $g(x)$ admits a unique factorization of the form $g(x) = c \prod_{p(x)} p(x)^{a_p}$, where $c \in k^x = k \setminus \{0\}$ and the product is over all irreducible, nonconstant, monic polynomials.
+
+    Then, $a_p = \ord_p g$, and $c$ is the leading term of $g$.
+\end{theorem}
+
+We start with the following lemma: 
+
+\begin{lemma}
+    If $f(x), g(x) \in k[x]$ are polynomials with $0 \neq g(x)$ then we can find polynomials $q(x)$ and $r(x)$ with either $r(x) = 0$ or $0 \leq \deg r(x) < \deg g(x)$ s.t. $f(x) = q(x)g(x) + r(x)$.
+\end{lemma}
+
+\begin{proof}
+    If $g|f$, then $g(x)q(x) = f(x)$ for some $q(x)$, and let $r(x) = 0$. Suppose otherwise, and $f \neq 0$. Consider the set $f(x) \in \{f(x) - h(x)g(x), h(x) \in k[x]\}$, and let $q(x)$ be such that $r(x) = f(x) - q(x)g(x)$ is of least degree in this set. 
+
+    It remains to show $r = 0$ or $\deg r < \deg g$. Suppose otherwise, and that $r(x)$ has leading term $ax^d$ and $g(x)$ has leading term $bx^n$ with $d \geq n$. Let $m9x) = \frac{a}{b} x^{d - n} g(x)$. Then $m(x)$ is a polynomial such that $\deg(r(x) - m(x)) < \deg r(x)$. 
+
+    However, $r(x) - m(x) = f(x) - (q(x) + \frac{a}{b} x^{d - n}) g(x)$, so $r(x) - m(x) \in S$. This contradicts the definitions of $r(x)$.
+\end{proof}
+
+\begin{definition}
+    If $f_1(x), \ldots, f_n(x)$ are polynomials, let $(f_1, f_2, \ldots, f_n)$ be defined similarly to integers.
+\end{definition}
+
+\begin{lemma}
+    Given $f(x), g(x) \in k(x)$, there is a $d(x) \in k[x]$ s.t. $(f, g) = (d)$. 
+\end{lemma}
+
+\begin{proof}
+    Let $d(x)$ be a polynomial of least degree in $(f, g)$. We have $(d) \subset (f, g)$. Let $c(x) \in (f, g)$. Then, if $d \vert c$, we're done. If not, then there exists $q(x), r(x)$ s.t. $c(x) = q(x)d(x) + r(x)$, with $\deg r(x) < \deg d(x)$. Then $r(x) = c(x) - q(x)d(x) \in (f, g)$, which is a contradiction as $\deg r < \deg d$. 
+\end{proof}
+
+\section{Lecture 5}
+Continue proving \ref{polyfac}.
+
+\begin{definition}
+    We say $f(x), g(x) \in k[x]$ are \vocab{relatively prime} if $(f, g) = 1$.
+\end{definition}
+
+\begin{definition} 
+    A greatest common divisor, or $\gcd$ of $f$ and $g \in k[x]$ is a polynomial $d(x)$ which divides $f$ and $g$ and has the property that if $c(x) \in k[x]$ divides $f$ and $g$ then $c | d$. (Ambiguous up to a scalar.)
+\end{definition}
+
+\begin{lemma}
+    \label{poly:div}
+    If $f$ and $g$ are relatively prime and $f | gh$, then $f | h$. 
+\end{lemma}
+
+\begin{proof}
+    If $(f, g) = 1$ then $1 = a(x)f(x) + b(x)g(x)$. So $h(x) = a(x)f(x)h(x) + b(x)g(x)h(x) = f(x)(a(x)h(x) + b(x)j(x))$ for some other polynomial $j(x)$. Then, $f(x) | h(x)$.
+\end{proof}
+
+If $d(x) = (f(x), g(x))$ and $x \in k^x$ then $\alpha d$ is also a gcd o $f$ and $g$; $(\alpha d) = (d)$. 
+
+Now, recall that a nonconstant polynomial $f(x)$ is \vocab{irreducible} if its only divisors are of the form $\alpha f$ or $\alpha$ ($\alpha \in k^*$); i.e. if any polynomial divides $f$, it's either a scalar or a scalar multiple of $f$.
+
+\begin{lemma}
+    If $p(x)$ is irreducible and $p | fg$, then $p | f$ or $p | g$. 
+\end{lemma}
+
+\begin{proof}
+    $(p, f) = (1)$ or $(p) = (\alpha p)$ for all $x \in k^*$. If $(p, f) = (p)$, then $p | f$. Otherwise, $(p, f) = (1)$, so from Lemma \ref{poly:div} we have $p | g$. 
+\end{proof}
+
+\begin{definition}[Order in Polynomial Terms]
+    If $p$ is a nonconstant polynomial and $g \neq f \in k[x]$ then $\ord_p f$ is the largest $a \in \ZZ_{\geq 0}$ such that $p^a | f$. 
+\end{definition}
+
+\begin{lemma}
+    If $p(x) \in k[x]$ is irreducible and $a, b \in k[x]$, then $\ord_p(ab) = \ord_p(a) + \ord_p(b)$. 
+\end{lemma} 
+
+Finally, we can prove \ref{polyfac}. 
+
+\begin{proof}
+    Weite $0 \neq f(x) = c \prod_p p(x)^{a_p}$. For every monic irreducible polynomial $q$, $\ord_q f = \sum_f a_p \ord_q p$, and we see that $\ord_q p = \begin{cases}1 & q = p \\ 0 & q \neq p.\end{cases}$. This must be $a_q$.
+
+    The scalar $c$ is the leading coefficient of $f$, so every polynomial factorization uniquely determines one polynomial. 
+\end{proof}
 \end{document}
