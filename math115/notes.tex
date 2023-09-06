@@ -294,4 +294,79 @@ Finally, we can prove \ref{polyfac}.
 
     The scalar $c$ is the leading coefficient of $f$, so every polynomial factorization uniquely determines one polynomial. 
 \end{proof}
+
+\section{Lecture 6}
+\begin{proposition}
+    If $k = \QQ, \RR, \CC$ (any field) then $k[x]$ contains infinitely many irreducible polynomials.
+\end{proposition}
+
+\begin{proof}
+    Suppose not, and $p_1(x), \ldots, p_n(x)$ exhaust the irreducible polynomials. Thus $q(x) = 1 + p_1(x)p_2(x) \cdots p_n(x)$ is a polynomial not divisible by the $p_i(x)$, but it must factor into a product of the $p_i(x)$, a contradiction. 
+\end{proof}
+
+\begin{lemma}
+    Every integer $n \neq 0$ can be written as $n = ab^2$ where $a$ is squarefree.
+\end{lemma}
+
+\begin{definition}
+    An integer $n \neq 0$ is squarefree if it isn't divisible by the square of any prime.
+\end{definition}
+
+\begin{proof}
+    If $|n| = 1$ then it's squarefree. If $|n| > 1$ then $n = (-1)^{\epsilon(n)} p_1^{2a_1 + b_1} \cdots p_m^{2a_m + b_m}$, where $b_i$ is either $0$ or $1$ for all $i$. Then, in turn, \[n = [p_1^{2a_1}\cdots p_m^{2a_m}][(-1)^{\epsilon(n)} p_1^{b_1}\cdots p_m^{b_m}].\] We see that the first term is $b^2$ and the second term is a squarefree $a$.
+\end{proof}
+
+\begin{definition}
+    $\nu(n) = $number of positive divisors 
+
+    $\sigma(n) = $sum of positive divisors 
+\end{definition}
+
+\begin{proposition}
+    Let $n \in \ZZ_{> 1}$ have a prime factorization $n = p_1^{a_1} \cdots p_m^{a_m}$. Then,
+    \begin{itemize}
+        \item $\nu(n) = (a_1 + 1)(a_2 + 1)\cdots(a_n + 1)$
+        \item $\sigma(n) = \left(\sum_{i = 0}^{a_1} p_1^i\right) \cdots \left(\sum_{i = 0}^{a_n} p_n^i\right)$.
+    \end{itemize}
+\end{proposition}
+
+Recall that $\sum_{n = a}^b x^n = \frac{x^{b + 1} - x^a}{x - 1}$, so $\sigma(n) = \left(\frac{p_1^{a_1 + 1} - 1}{p_1 - 1}\right) \cdots \left(\frac{p_n^{a_n + 1} - 1}{p_n - 1}\right)$.
+
+\begin{definition}
+    An integer $> 0$ is \vocab{perfect} if $\sigma(n) = 2n$.
+\end{definition}
+
+Euler claimed that every even perfect number can be written as $2^m(2^{m + 1} - 1)$, where $2^{m + 1} - 1$ is a Mersenne prime.
+
+\begin{definition}
+    The Mobius $\mu : Z_{> 0} \to \{0, \pm 1\}$ returns $\mu(n) = 0$ if $n$ is not squarefree, $\mu(1) = 1$, and if $n > 1$, $n = p_1, \ldots, p_m$, then $\mu(n) = (-1)^m$.
+\end{definition}
+
+\begin{proposition}
+    If $n > 1$ then $\sum_{d | n} \mu(d) = 0$.
+\end{proposition}
+
+\begin{proof}
+    $n = p_1^{a_1} \cdots p_m^{a_m}$. Notice that for any $a_i > 1$, we can ignore and take mod $2$ because non-squarefree implies a Mobius of $0$.
+    
+    Therefore, $\sum_{d|n} \mu(d) = \sum \mu(p_1^{\epsilon_1} \cdots p_m^{\epsilon_m}) = (1 - 1)^m = 0$.
+\end{proof}
+
+\begin{definition}
+    If $f, g$ are two functions $\ZZ_{> 0} \to \CC$, then the Dirichlet convolution of $f$ and $g$ is defined to be $f \cdot g)(n) = \sum_{d | n} f(d)g(\frac{n}{d})$.
+\end{definition}
+
+\begin{remark}
+    Dirichlet convolution is assoviative; given $f, g, h : \ZZ_{> 0} \to \CC$, then $((f \cdot g) \cdot h)(n) = (f \cdot (g \cdot h))(n) = \sum f(d_1) g(d_2) h(d_3)$,
+\end{remark}
+
+\begin{definition}
+    Let $1(n) = \begin{cases}1 & n = 1 \\ 0 & n > 1\end{cases}$. Then, $(f * 1)(N) = \sum_{d | n} f(d)$. 
+\end{definition}
+
+\begin{theorem}[Mobious Inversion]
+    If $f : \ZZ_{> 0} \to \CC$ and $F(n) = \sum_{d | n) f(d)}$, then $\mu \times f = f$.
+
+    I kinda zoned out here
+\end{theorem}
 \end{document}
