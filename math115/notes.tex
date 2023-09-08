@@ -338,7 +338,7 @@ Recall that $\sum_{n = a}^b x^n = \frac{x^{b + 1} - x^a}{x - 1}$, so $\sigma(n) 
 
 Euler claimed that every even perfect number can be written as $2^m(2^{m + 1} - 1)$, where $2^{m + 1} - 1$ is a Mersenne prime.
 
-\begin{definition}
+\begin{definition}[Mobius Mu Function]
     The Mobius $\mu : Z_{> 0} \to \{0, \pm 1\}$ returns $\mu(n) = 0$ if $n$ is not squarefree, $\mu(1) = 1$, and if $n > 1$, $n = p_1, \ldots, p_m$, then $\mu(n) = (-1)^m$.
 \end{definition}
 
@@ -353,20 +353,57 @@ Euler claimed that every even perfect number can be written as $2^m(2^{m + 1} - 
 \end{proof}
 
 \begin{definition}
-    If $f, g$ are two functions $\ZZ_{> 0} \to \CC$, then the Dirichlet convolution of $f$ and $g$ is defined to be $f \cdot g)(n) = \sum_{d | n} f(d)g(\frac{n}{d})$.
+    If $f, g$ are two functions $\ZZ_{> 0} \to \CC$, then the Dirichlet convolution of $f$ and $g$ is defined to be $(f \cdot g)(n) = \sum_{d | n} f(d)g(\frac{n}{d})$.
 \end{definition}
 
 \begin{remark}
-    Dirichlet convolution is assoviative; given $f, g, h : \ZZ_{> 0} \to \CC$, then $((f \cdot g) \cdot h)(n) = (f \cdot (g \cdot h))(n) = \sum f(d_1) g(d_2) h(d_3)$,
+    Dirichlet convolution is associative; given $f, g, h : \ZZ_{> 0} \to \CC$, then $((f \cdot g) \cdot h)(n) = (f \cdot (g \cdot h))(n) = \sum f(d_1) g(d_2) h(d_3)$,
 \end{remark}
 
 \begin{definition}
     Let $1(n) = \begin{cases}1 & n = 1 \\ 0 & n > 1\end{cases}$. Then, $(f * 1)(N) = \sum_{d | n} f(d)$. 
 \end{definition}
 
-\begin{theorem}[Mobious Inversion]
-    If $f : \ZZ_{> 0} \to \CC$ and $F(n) = \sum_{d | n) f(d)}$, then $\mu \times f = f$.
-
-    I kinda zoned out here
+\begin{theorem}[Mobius Inversion]
+    If $f : \ZZ_{> 0} \to \CC$ and $F(n) = \sum_{d | n) f(d)}$, then $\sum_{d|n} F(d) \mu\left(\frac{n}{d}\right) = f(n)$, or as we simplify it, $\mu \times F = f$.
 \end{theorem}
+
+\section{Lecture 7}
+\begin{definition}[Euler Totient]
+    We define $\phi: \ZZ_{> 0} \to \ZZ_{> 0}$. $\phi(n)$ is the number of integers in $[1, n]$ relatively prime to $n$. 
+
+    $\phi(1) = 1$, $\phi(p) = p-1$ for prime $p$.
+\end{definition}
+
+\begin{proposition}
+    $(\phi \cdot )(n) = \sum_{d | n} \phi(d) = n$.
+\end{proposition}
+
+\begin{proof}
+    Consider the set $\left\{\frac{1}{n}, \frac{2}{n}, \ldots, \frac{n}{n}\right\}$. Write these fractions in lowest terms. 
+    
+    For each $d | n$, we wish to count the functions above with $d$ in lowest terms. These fractions will be a subset of the fractions $\frac{a}{n}$ where $\frac{n}{d} | a$, i.e. a subset of the fractions $\left\{\frac{1}{d}, \frac{2}{d}, \ldots, \frac{d}{d}\right\}$. There are $\phi(d)$ many fractions on this list with $d$ in the domain, when written in lowest terms.
+
+    So if $J_d \subset \left\{\frac{1}{n}, \frac{2}{n}, \ldots, \frac{n}{n}\right\}$ corresponds to the fractions of denominator $d$ in lowest terms, then $S = \bigcup_{d | n} J_d$, and $n = |S| = \sum_{d | n} |J_d| = \sum_{d | n} \phi(d)$. 
+\end{proof}
+
+With Mobius inversion, we have $\phi = (\phi \cdot 1) \cdot \mu$, and we know that $(\phi \cdot 1) = id$ where $id(n) = n$, so we have $\mu \cdot id = \sum_{d | n} \mu(d) \frac{n}{d}$. Now, let $n = p_1^{a_1}\cdots p_m^{a_m}$.  Then,
+\begin{align*}
+    \mu \cdot id &= n - \sum_{i} \frac{n}{p_i} + \sum_{i < j} \frac{n}{p_ip_j} - \sum_{i < j < k} \frac{n}{p_ip_jp_k} \cdots \\
+    &= n\left(1 - \frac{1}{p_1}\right)\left(1 - \frac{1}{p_2}\right)\cdots \left(1 - \frac{1}{p_m}\right) = \phi(m).
+\end{align*}
+
+\begin{theorem}
+    $\sum_{p \text{ prime}} \frac{1}{p}$ diverges.
+\end{theorem}
+
+\begin{proof}
+    Of $n \in \ZZ_{> 0}$, let $p_1, \ldots, p_{\pi(n)}$ be the primes $\leq n$ and let \[\lambda(n) = \prod_{i = 1}^{\pi(n)} \left(1 - \frac{1}{p_i}^{-1}\right).\] Notice that each inner value for the product term is $\sum_{a = 0}^\infty \left(\frac{1}{p_i}\right)^a$. 
+
+    Then, $\lambda(n) = \sum \frac{1}{p_1^{a_1} \cdots p_{\pi(n)}^a}$, where the sum is over all $\pi(n)$-tuples $(a_1, \ldots, a_{\pi(n)}) \in \ZZ_{\geq 0}^{\pi(n)}$.
+
+    Now, we claim $\lambda(n) \to \infty$ as $1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n} < \lambda(n)$.
+
+    "I'll pick it up next time" -Owen Barrett
+\end{proof}
 \end{document}
