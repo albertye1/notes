@@ -387,10 +387,10 @@ Euler claimed that every even perfect number can be written as $2^m(2^{m + 1} - 
     So if $J_d \subset \left\{\frac{1}{n}, \frac{2}{n}, \ldots, \frac{n}{n}\right\}$ corresponds to the fractions of denominator $d$ in lowest terms, then $S = \bigcup_{d | n} J_d$, and $n = |S| = \sum_{d | n} |J_d| = \sum_{d | n} \phi(d)$. 
 \end{proof}
 
-With Mobius inversion, we have $\phi = (\phi \cdot 1) \cdot \mu$, and we know that $(\phi \cdot 1) = id$ where $id(n) = n$, so we have $\mu \cdot id = \sum_{d | n} \mu(d) \frac{n}{d}$. Now, let $n = p_1^{a_1}\cdots p_m^{a_m}$.  Then,
+From Mobius inversion, we have $\phi = (\phi \cdot 1) \cdot \mu$. We know that $(\phi \cdot 1) = id$ where $id(n) = n$, so we have $\mu \cdot id = \sum_{d | n} \mu(d) \frac{n}{d}$. Now, let $n = p_1^{a_1}\cdots p_m^{a_m}$.  Then,
 \begin{align*}
-    \mu \cdot id &= n - \sum_{i} \frac{n}{p_i} + \sum_{i < j} \frac{n}{p_ip_j} - \sum_{i < j < k} \frac{n}{p_ip_jp_k} \cdots \\
-    &= n\left(1 - \frac{1}{p_1}\right)\left(1 - \frac{1}{p_2}\right)\cdots \left(1 - \frac{1}{p_m}\right) = \phi(m).
+    \mu \cdot id &= n - \sum_{i} \frac{n}{p_i} + \sum_{i < j} \frac{n}{p_ip_j} - \sum_{i < j < k} \frac{n}{p_ip_jp_k} \cdots \text{ (by definition of Mobius inversion)}\\
+    &= n\left(1 - \frac{1}{p_1}\right)\left(1 - \frac{1}{p_2}\right)\cdots \left(1 - \frac{1}{p_m}\right) = \phi(n).
 \end{align*}
 
 \begin{theorem}
