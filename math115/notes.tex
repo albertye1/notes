@@ -76,7 +76,8 @@ Let $\pi(x) : N \to \NN$ return the number of primes $p$ such that $0 < p < x$.
 Then, $\pi(x)$ is unbounded: $\lim_{x \to \infty} \pi(x) = \infty$. 
 
 \begin{theorem}[Prime Number Theorem]
-    \[\lim \frac{\pi(x)}{x / \log x} = 1.\] In other words, $\pi(x) \to \frac{x}{\log x}$>
+    \label{pnt}
+    \[\lim \frac{\pi(x)}{x / \log x} = 1.\] In other words, $\pi(x) \to \frac{x}{\log x}$.
 \end{theorem}
 
 A better approximation is $\mathrm{Li}(x) = \int_{2}^x \frac{dt}{\log t}$. The error for $\mathrm{Li}(x)$ is $|\pi(x) - \mathrm{Li}(x)| = O(\log x \sqrt x)$.
@@ -338,6 +339,8 @@ Recall that $\sum_{n = a}^b x^n = \frac{x^{b + 1} - x^a}{x - 1}$, so $\sigma(n) 
 
 Euler claimed that every even perfect number can be written as $2^m(2^{m + 1} - 1)$, where $2^{m + 1} - 1$ is a Mersenne prime.
 
+\subsection{Mobius Function}
+
 \begin{definition}[Mobius Mu Function]
     The Mobius $\mu : Z_{> 0} \to \{0, \pm 1\}$ returns $\mu(n) = 0$ if $n$ is not squarefree, $\mu(1) = 1$, and if $n > 1$, $n = p_1, \ldots, p_m$, then $\mu(n) = (-1)^m$.
 \end{definition}
@@ -351,6 +354,8 @@ Euler claimed that every even perfect number can be written as $2^m(2^{m + 1} - 
     
     Therefore, $\sum_{d|n} \mu(d) = \sum \mu(p_1^{\epsilon_1} \cdots p_m^{\epsilon_m}) = (1 - 1)^m = 0$.
 \end{proof}
+
+\subsection{Dirichlet Convolution}
 
 \begin{definition}
     If $f, g$ are two functions $\ZZ_{> 0} \to \CC$, then the Dirichlet convolution of $f$ and $g$ is defined to be $(f \cdot g)(n) = \sum_{d | n} f(d)g(\frac{n}{d})$.
@@ -369,6 +374,7 @@ Euler claimed that every even perfect number can be written as $2^m(2^{m + 1} - 
 \end{theorem}
 
 \section{Lecture 7}
+\subsection{Prime Counting}
 \begin{definition}[Euler Totient]
     We define $\phi: \ZZ_{> 0} \to \ZZ_{> 0}$. $\phi(n)$ is the number of integers in $[1, n]$ relatively prime to $n$. 
 
@@ -411,5 +417,119 @@ Also consider $\pi(x) = \frac{x}{\log x}(1 + \left(\frac{1}{\log x}\right)$.
 \end{proof}
 
 \section{Lecture 8}
-We go back to \ref{8:1}.
+We go back to \ref{8:1}. Because of a fire alarm, there wasn't anything else covered.
+
+\section{Lecture 9}
+\subsection{Estimates for Prime Counting Function}
+
+Last time, we proved that $\sum_{p} \frac{1}{p}$ for prime $p$ diverges. 
+
+We go back to \ref{pnt}, the Prime Number Theorem.
+
+\begin{theorem*}[Prime Number Theorem]
+    \[\pi(x) = \frac{x}{\log x} \left(1 + O\left(\frac{1}{\log x}\right)\right).\]
+\end{theorem*}
+
+\begin{theorem}
+    \[\sum_{p \text{ prime}, p \leq n} \frac{1}{p} = \log \log n + C.\]
+\end{theorem}
+
+\begin{proof}
+    Sketch: We turn $p$ into a function of $\pi(x)$, and then use $\pi(n)$
+\end{proof}
+We let $\theta(x) = \sum_{p \leq x, p \text{ prime}} \log p$. 
+
+\section{Lecture 10}
+\subsection{Estimates for Prime Counting Function}
+\begin{lemma}
+    $\theta(x) = \sum_{p \leq x, p \text{ prime}} \log p < (4 \log 2) x$. 
+\end{lemma}
+
+\begin{proposition}
+    There exists a constant $C_2 \in \RR_{> 0}$ such that $\pi(x) < \frac{c_2 x}{\log x}$.
+\end{proposition}
+
+\begin{proof}
+    \begin{align*}
+        \theta(x) &= \sum_{p \leq x, p \text{ prime}} \log p \\
+        &> \sum_{p \geq \sqrt x, p \text{ prime}}^{p \leq x} \log p \\
+        &\geq \log \sqrt x (\pi(x) - \pi(\sqrt x)) \\
+        &= \log \sqrt x \pi(x) - \sqrt x \log \sqrt x.
+        \\ 
+        \pi(x) &\leq \frac{2\theta(x)}{\log x} + \sqrt x \\
+        &< (8 \log 2) \frac{x}{\log x} + \sqrt x \\
+        &< (2 + 8 \log 2) \frac{x}{\log x} < \frac{2x}{\log x}.
+    \end{align*}
+
+    Therefore, we see that $c_2 \geq 2$ works. 
+\end{proof}
+
+\begin{proposition}
+    There exists a constant $c_1 \in \RR \geq 0$ such that $\frac{c_1 x}{\log x} < \pi(x)$.
+\end{proposition}
+
+\begin{proof}
+    $\theta(x) \sim \dbinom{2n}{n} = \left(\frac{n+1}{1} \right)\left(\frac{n+2}{2} \right)\cdots\left(\frac{2n}{n} \right) \geq 2^n$.
+
+    Let $t_p = \lfloor \frac{\log 2n}{\log p} \rfloor = \log_p 2n.$
+    We also see that $n \log 2 \leq \sum_{p \leq n, p \text{ prime}} t_p \log p = \sum_{p \leq n, p \text{ prime}} \lfloor \frac{\log 2n}{\log p} \rfloor \log p = K$.
+
+    If $\log p > \frac{1}{2} \log (2n)$, then $\frac{\log 2n}{\log p} < 2$ and its floor is $1$.
+
+    Then, $K = \sum_{p \text{ prime}, p \leq \sqrt{2n}} \lfloor \frac{\log 2n}{\log p}\rfloor \log p + \sum_{p\text{ prime}, 2n > p > \sqrt{2n}} \log p \leq \theta(2n)$.
+
+    Putting in $n \log 2 \leq K$, we have $n \log 2 \leq \sqrt{2n}\log 2n + \theta(2n)$, so $\theta(2n) \geq n \log 2 - \sqrt{2n} \log 2n$.
+
+    Next time, we'll show that this estimate for $\theta$ implies a lower bound for $\pi(x)$.
+\end{proof}
+
+\section{Lecture 11}
+\subsection{Announcements}
+Brief summary of topics covered:
+
+1.1, 1.2, entirety of Chapter 2, 3.1, 3.2. The hardest parts are also not easy to test, and should not be memorized. Because that would be absolutely fucking evil.
+
+\subsection{Estimates for Prime Counting Function}
+Last time, we were trying to prove:
+\begin{theorem}
+    \[\pi(x) < \frac{c_2}{\log x}, \] for some constant $c_2 \in \RR$. 
+\end{theorem} 
+
+\subsection{Congruence}
+We define $a \equiv b \pmod n$ to mean that $n | (a - b)$.
+
+\begin{definition}
+    The relation of congruence defines an \vocab{equivalence relation} $a R b$. An equivalence relation is a relation which is revlexive, symmetric, and transitive.
+
+    \begin{itemize}
+        \item $a \equiv a$
+        \item $a \equiv b \implies b \equiv a$
+        \item $a \equiv b, b \equiv c \implies a \equiv c$.
+    \end{itemize}
+\end{definition}
+
+Given a set $S$ and an equivalence relation $R$, on $S$ we can form the set $[x] = \{y \in S | y R x\}$. 
+
+In our case, $a \in \ZZ \implies \overline a := [a] = \{b \in \ZZ | a \equiv b \pmod n\}$.
+
+\begin{definition}
+    If $a \in \ZZ$, $\overline a$ is called $= \{a + nb | b \in \ZZ\}$ the \vocab{congruence class} of $a$ for the modulus $n$.
+\end{definition}
+
+\begin{proposition}
+    The equivalence classes for $R$ on $S$ partition $S$.
+
+    That is, every $x \in S$ is in some equivalence class $(x \in [k])$, and given $x, y \in S$, either $[x] = [y]$ or $[x] \cap [y] = \emptyset$.
+\end{proposition}
+
+\begin{proof}
+    If $z \in [x] \cap [y]$, $x R z$ and $z R y$ so $x R y$, so any $w \in S$ has the property that $wRx = wRy \implies [x] = [y]$.
+\end{proof}
+
+For congruence, this boils down to the fact that 
+\begin{itemize}
+    \item $\overline a = \overline b \iff a \equiv b \pmod n$.
+    \item $\overline a \neq b \iff \overline a \cap \overline b = \emptyset$
+    \item There are precisely $n$ congreunce classes modulo $n$.
+\end{itemize}
 \end{document}
