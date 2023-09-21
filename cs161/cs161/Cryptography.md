@@ -81,3 +81,32 @@
 			* Kerchhoff's Principle
 			* Known plaintext attack
 			* Chosen plaintext attack
+
+## Block Ciphers
+* An encryption/decryption algorithm that encrypts blocks of a fixed size
+* $E_k(M) = C$: Inputs a $k$-bit key $K$ and an $n$-bit plaintext $M$, outputs an $n$-bit ciphertext $C$.
+* $D_k(C) = M$: Inputs a $k$-bit key, $n$-bit ciphertext $C$. Outputs an $n$-bit plaintext $M$.
+
+### ECB
+* $E(K, M) = C_1 + C_2 + \cdots + C_m$, where $m$ is number of blocks.
+* Deterministic -- biggest problem
+    * Once you find out the keys everything else is joever.
+
+### CBC
+* Cipher block chaining mode
+    * Introduces randomness
+    * XOR with the first plaintext, and then block-cipher that.
+    * Use the previous ciphertext block to encrypt the next ciphertext block
+        * Encryption: $C_0 = IV$
+        * Decryption: $P_i = D_k(C_i) \oplus C_{i-1}$.
+
+### CTR
+* Slightly worse than CBC
+    * Appends a nonce to the counter, to find which block is being encrypted
+    * there is much information leakage thorugh IV reuse.
+        * Encryption: $C_i = E_k(IV + i) \oplus M_i$
+        * Decrytpion: $M_i = E_k(IV + i) \oplus C_i$
+        * the $i$ is the counter post-nonce, and the $+$ here is string concatenation.
+
+### IND-CPA Security
+* A cipher is called IND-CPA secure if the attacker can't gain any info about the message given its ciphertext.

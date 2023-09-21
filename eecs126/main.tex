@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage[portrait, margin=0.5in, top=0.8in, bottom=0.3in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\usepackage{sectsty}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\lhead{EECS 126}
+\rhead{Albert Ye}
+
+\title{EECS 126}
+\author{albert ye}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Conditional Expectation}
+Notice that $E[X | Y]$ is a random variable, but $E[X | Y = y]$ is a number. We can call $E[X | Y]$ a function $g(Y)$, where then $E[X | Y = y] = g(y)$ is just a value in the function.
+
+\section{Moment Generating Functions}
+\begin{definition}
+    The \vocab{moment generating function} (also known as a transform) associated with a RV $X$, is a function $M_X(s)$ of a scalar parameter $s$ defined by $M_X(s) = E(e^{sX})$.
+\end{definition}
+
+the simpler notation $M(S)$ can be used whenever the underlying random variable $X$ is clear from context. In more detail, when $X$ is a discrete random variable, the corresponding MGF is given by \[M(s) = \sum_{x} e^{sx} p_X(x).\] Analogously, when continuous, we just replace the summation with an integral to get \[M(s) = \int_{-\infty}^{\infty} e^{sx} f_X(x) dx.\]
+
+Just an example so that I know what the reference is here:
+\begin{example}[Discrete Example]
+    Let \[p_X(x) = \begin{cases} \frac{1}{2} & x = 2 \\ \frac{1}{6} & x = 3 \\ \frac{1}{3} & x = 5. \end{cases}\]
+    Then the corresponding transform is \[M(s) = E(e^{sx}) = \frac{1}{2} + \frac{1}{6} e^{3s} + \frac{1}{3} e^{5s}. \]
+\end{example}
+
+\begin{example}[Continuous Example]
+    Let $X$ be an exponential RV with parameter $\lambda$: \[f_X(x) = \lambda e^{-\lambda x} \qquad x \geq 0.\]
+
+    Then, \begin{align*}
+        M(s) &= \lambda \int_{0}^{\infty} e^{sx} e^{-\lambda x} dx \\
+        &= \lambda \int_{0}^{\infty} e^{(s - \lambda)x} dx \\
+        &= \lambda \left(\frac{e^{(s - \lambda)x}}{s - \lambda}\right|_0^{\infty} \\
+        &= \frac{\lambda}{\lambda - s}.
+    \end{align*}
+\end{example}
+
+Notice, in above examples, that MGF is a \textbf{function} of parameter $s$, and not a number. We can also find MGF's for functions of $X$:
+
+\begin{proposition}[MGF of Linear Function of RV]
+    Let $Y = aX + b$. Then,
+    \[M_Y(s) = E(e^{s(aX + b)}) = e^{sb} E(e^{saX}) = e^{sb} M_X(sa).\]
+\end{proposition}
+
+From our previous example, we see that $M_X(s) = \frac{1}{1 - s}$ where $X$ is the exponential distribution
+
+\subsection{Moments}
+Now that we've established what a moment generating function is, now it's time to understand what is being generated.
+
+Let's do a generic MGF \[M(s) = \int_{-\infty}^{\infty} e^{sx} f_X(x) dx.\] Now, we take the derivative of this. 
+\begin{align*} 
+    \frac{d}{ds} M(s) &= \frac{d}{ds} \int_{-\infty}^{\infty} e^{sx} f_X(x) dx \\
+    &= \int_{-\infty}^\infty \frac{d}{ds} e^{sx} f_X(x) dx \\
+    &= \int_{-\infty}^\infty xe^{sx} f_X(x) dx.
+\end{align*}
+
+When $s = 0$, we have that this evaluates to $\int_{-\infty}^\infty xf_X(x) dx = E(X)$. If we differentiate $n$ times, then we will get \[\left(\frac{d^n}{ds^n} M(s)\right|_{s = 0} = \int_{-\infty}^{\infty} x^n f_X(x) dx = E(X^n).\]
+
+\subsection{Inversion}
+\begin{proposition}[Inversion Property]
+    The MGF $M_X(s)$ associated with an RV $X$ uniquely determines the CDF of $X$, assuming that $M_X(s)$ is finite for all $s$ in some interval $[-a, a]$ for positive $a$. 
+\end{proposition}
+
+\subsection{Sum of Independent Random Variables}
+\begin{proposition}
+    Addition of independent random variables corresponds to multiplication of transforms. 
+\end{proposition}
+
+\begin{proof}
+    Let $Z = X + Y$. $M_Z(s) = E(e^{sZ}) = E(e^{s(X+Y)}) = E(e^{sX}e^{sY}).$ Since $X, Y$ are independent, $e^{sX}$ and $e^{sY}$ are independent random variables for any fixed $s$. Thus, $E(e^{sX}e^{sY}) = E(e^{sX}) E(e^{sY}) = M_X(s)M_Y(s)$.
+\end{proof}
+
+We can further extend this; if $X_1, \ldots, X_n$ is a collection of independent random variables and $Z = X_1 + \cdots + x_n$, then $M_Z(s) = M_{X_1}(s) \cdots M_{X_n}(s)$. 
+
+\section{$\sigma$-algebra}
+\begin{definition}[$\sigma$-algebra]
+	Given a sample space $\Omega$, a set $\mathcal{F} \subseteq 2^{\Omega}$ is a $\sigma$-algebra if:
+	\begin{enumerate}
+		\item $\Omega \in \mathcal{F}$
+		\item If any event $A$ is in $\mathcal{F}$, then its complement $\Omega \setminus A$ is also in $\mathcal{F}$.
+		\item For countably many events $A_1, A_2, \ldots, A_n, \ldots \in \mathcal{F}$, their union $A = \bigcup_{i=1}^\infty A_i \in \mathcal{F}$.
+	\end{enumerate}
+\end{definition}
+\end{document}

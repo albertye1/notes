@@ -513,7 +513,7 @@ Given a set $S$ and an equivalence relation $R$, on $S$ we can form the set $[x]
 In our case, $a \in \ZZ \implies \overline a := [a] = \{b \in \ZZ | a \equiv b \pmod n\}$.
 
 \begin{definition}
-    If $a \in \ZZ$, $\overline a$ is called $= \{a + nb | b \in \ZZ\}$ the \vocab{congruence class} of $a$ for the modulus $n$.
+    If $a \in \ZZ$, $\overline a = \{a + nb | b \in \ZZ\}$ is called the \vocab{congruence class} of $a$ for the modulus $n$.
 \end{definition}
 
 \begin{proposition}
@@ -532,4 +532,42 @@ For congruence, this boils down to the fact that
     \item $\overline a \neq b \iff \overline a \cap \overline b = \emptyset$
     \item There are precisely $n$ congreunce classes modulo $n$.
 \end{itemize}
+
+\section{Lecture 12}
+\subsection{Equivalence Classes, Continued}
+The set of equivalence classes modulo $n$ is defined as $\ZZ / n\ZZ$. 
+
+\begin{lemma}
+	The set $\ZZ /n\ZZ$ admits addition and multiplication by the formulas:
+	\begin{itemize}
+		\item $\overline{a} + \overline{b} = \overline{a + b}$.
+		\item $\overline{a} \cdot \overline{b} = \overline{ab}$.
+	\end{itemize}
+\end{lemma}
+
+\begin{proof}
+	To check that $+$ and $\cdot$ are defined in this way are well-defined, we must show that we'd get the same thing when changing the representatives, i.e., replacing $\overline a$ by $a + kn$ for $k \in \ZZ$. 
+
+	\[\overline{a + kn + b + jn} = \overline{a + b} \implies a + kn + b + jn \equiv a + b \pmod n,\] which is true after removing all obvious multiples of $n$. The proof for $\overline{ab}$ is too long to fit in the margins, but it works similarly.
+\end{proof}
+
+An application of this is finding which polynomials in $\ZZ[x]$ have no integer solutions. 
+
+
+\begin{remark}
+	If $a \equiv b \pmod n$, then $a^m \equiv b^m \pmod n$.
+
+	Let $p(x) = c_mx^m + \cdots + c_1x + c_0$ for integer $c_i$. If $a \equiv b \pmod n$, we further see that $p(\overline a) := \overline{p(a)}$ must equal $p(\overline b)$. Therefore, $c_ma^m \equiv c_mb^m \pmod n$, so $\overline{c_m}a^m = \overline{c_m}b^m$.
+\end{remark}
+
+Now, we suppose $n = 2$. Then, $p(0) = c_0$, $p(1) = c_n + c_{n-1} + \cdots + c_0$. If $p(x)$ has a solution in the integers, then it must have a solution mod $2$ ($p(k) = 0\implies p(\overline k)  \overline 0$. So, any $p(x) \in k[x]$ with integer solutions must have $p(\overline 0) = \overline 0$ or $p(\overline 1) = \overline 1$. 
+\begin{proposition}
+	Any $p(x)$ with $c_0$ odd and $\sum_{i = 0}^n c_i$ odd has no integer solutions. 
+\end{proposition}
+
+Now, for the general criterion modulo $n$:
+
+\begin{theorem}
+	If $c_0 \not \equiv 0 \pmod n$, and $\sum_{i = 0}^m k^i c_i \not \equiv 0 \pmod n$ for all $0 < k < n$, then $p(x)$ has no integer solutions.
+\end{theorem}
 \end{document}
