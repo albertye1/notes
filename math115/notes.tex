@@ -485,6 +485,7 @@ We let $\theta(x) = \sum_{p \leq x, p \text{ prime}} \log p$.
 
 \section{Lecture 11}
 \subsection{Announcements}
+\label{sec.11.1}
 Brief summary of topics covered:
 
 1.1, 1.2, entirety of Chapter 2, 3.1, 3.2. The hardest parts are also not easy to test, and should not be memorized. Because that would be absolutely fucking evil.
@@ -570,4 +571,49 @@ Now, for the general criterion modulo $n$:
 \begin{theorem}
 	If $c_0 \not \equiv 0 \pmod n$, and $\sum_{i = 0}^m k^i c_i \not \equiv 0 \pmod n$ for all $0 < k < n$, then $p(x)$ has no integer solutions.
 \end{theorem}
+
+\section{Lecture 13}
+\subsection{Announcements}
+Topics of the test: same as in \ref{sec.11.1}.
+
+Need to know the facts about divergence $\sum_{p} \frac{1}{p}$, $\frac{c_1x}{\log x} < \pi(x) < \frac{c_2x}{\log x}$, but don't need to remember the whole proofs for all of them.
+
+Also there is another book with a lot of review problems: Niven, Montgomery, and Zuckerman, \textit{An Introdution to the Theory of Numbers}, 5e. §1.2, §1.3, §4.2, §4.3 are good practice. If not much time, because of tests like the 126 midterm, just review and understand solutions for the questions assigned. 
+
+\subsection{Diophantine Equations}
+We're looking for solutions to $ax \equiv b \pmod m$. Because if $x_0$ solves $ax_0 \equiv b \pmod m$, then so does $x_0 + km$.
+
+\begin{lemma}
+	Let $d := (a, m)$ and let $a' = \frac{a}{d}$, $m' = \frac{m}{d}$.
+	The equation $ax \equiv b \pmod m$ admits a solution iff $d | b$. 
+
+	If $d|b$ then there are exactly $d$ solutions.
+
+	If $x_0$ is a solution, tnen $x_0 + m', x_0 + 2m', \ldots, x_0 + (d-1)m'$ is a list of all solutions to $ax \equiv b \pmod m$.
+\end{lemma}
+
+\begin{proof}
+	For the first claim: suppose we've found a solution $x_0$ to $ax \equiv b \pmod m$, i.e. $m | (ax_0 - b)$. So, $ax_0 = b \equiv km$ for source $k \in \ZZ$. As $d | a$ and $d | m$, $d| b$. Conversely, if $d | b$, then set $c = \frac{d}{b}$. Because $d = (a, m)$ we can find $x_0', y_0' \in \ZZ$ such that $ax_0' + my_0' = d$. Multiplying by $c$, we have $cax_0' + cmy_0' = b$, so $x_0 = cx_0'$ solves $ax_0 \equiv b \pmod m$. \qed 
+
+	For the second claim: suppose $x_0$ and $x_1$ both solve $ax \equiv b \pmod m$. So, $ax_0 - b = k_1 m$ and $ax_1 - b \equiv k_2 m$. Then, this means that $a(x_0 - x_1) \equiv 0 \pmod m$. $d = (a, m)$, so $m | a(x_0 - x_1)$ implies $\frac{m}{d} = m'$ divides $x_0 - x_1$, so $x_1 = x_0 + km'$ for some $k \in \ZZ$. 
+
+	If$x_0$ solves $ax \equiv b \pmod m$, then $x_0 + km'$ does too for every $k \in \ZZ$. $akm'$ is divisible by $m$ so they must be $\equiv 0 \pmod m$, so $ax_0 \equiv a(x_0 + km') \pmod m$. 
+
+	We claim that $x, y \in x_0 , x_0 + m', \ldots, x_0 + (d-1)m'$ are inequivalent modulo $m$, which follows as $(x_0 + k_1m') - (x_0 + k_2m') = (k_1 - k_2) m'$ and $0 < k_1 - k_2 < d$, since $0 \leq k2 < k_1 < d$. Therefore, this is not equivalent to $0$ modulo $m$. \qed
+
+	For our third claim: if $x_0 + km'$ is any solution to $ax \equiv b \pmod m$, hen $k \equiv k' \pmod d$ for some $k' \in [0, d)$. Then, we have $km' \equiv k'm' \pmod m$, so $x_0 + km' \equiv x_0 + k'm' \pmod m$.
+\end{proof}
+
+\begin{corollary}
+	if $(a, m) = 1$, the equation $ax \equiv b \pmod m$ has exactly one solution.
+\end{corollary}
+
+\begin{corollary}
+	If $m = p$ is prime, then $ax \equiv b \pmod p$ has only one solution provide $p \not\vert a$. 
+\end{corollary}
+
+\begin{remark}
+	If $m$ is not prime, then $m = m_1 m_2$ with $0 < m_1, m_2 < m$ so $m_1 m_2 \equiv 0 \pmod m$. So in $\ZZ / m\ZZ$, $\overline{m_1} \neq 0 \neq \overline{m_2}$ but $\overline{m_1} \overline{m_2} = 0$. 
+	Then, $\overline m_1$ cannot have an inverse $\overline{m_1}^{-1}$ because then $\overline{m_2} = \overline{m_1}^{-1} \overline{m_1} \overline{m_2} = \overline{m_1}^{-1} \overline{0} = 0$.
+\end{remark}
 \end{document}
