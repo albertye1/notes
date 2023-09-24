@@ -100,4 +100,23 @@ We can further extend this; if $X_1, \ldots, X_n$ is a collection of independent
 		\item For countably many events $A_1, A_2, \ldots, A_n, \ldots \in \mathcal{F}$, their union $A = \bigcup_{i=1}^\infty A_i \in \mathcal{F}$.
 	\end{enumerate}
 \end{definition}
+
+\section{Modes of Convergence}
+\subsection{Pointwise}
+\begin{definition}[Pointwise Convergence]
+	Fix $\omega \in \Omega$, $\{X_n(\omega)\}_{n=1}^\infty$ converges \vocab{pointwise} if it becomes a real-valued sequence. 
+\end{definition}
+
+Usually, people don't use this because of reasons highlighted in 104.
+\subsection{Almost Sure}
+\begin{definition}[Almost Sure Convergence] 
+	$\{x_n\}_{n=1}^\infty$ converges \vocab{almost surely} to $X$ if $P(\{\omega : \omega \in \Omega, \lim_{n \to \infty} X_n(\omega) = X(\omega)\}) = 1$.
+\end{definition}
+
+This gets rid of $\omega$ with probability $0$. If you find an $\omega$ such that convergence doesn't hold, it's fine as long sa $P(\omega) = 0$. 
+
+\subsubsection{Checking for Almost Sure Convergence}
+There are a couple ways to check if some sequence converges almost surely.
+\subsection{In Probability}
+This is a weaker bound for convergence than almost sure convergence.
 \end{document}
