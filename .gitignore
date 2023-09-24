@@ -5,6 +5,7 @@
 **/.obsidian/
 **/*.log
 **/*.aux
+**/*.dvi
 **/*.fdb_latexmk
 **/*.fls
 **/*.out

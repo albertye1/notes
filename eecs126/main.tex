@@ -27,8 +27,94 @@
 
 \begin{document}
 \maketitle
-\section{Conditional Expectation}
+\section{Probability Space}
+\subsection{Definition}
+Essentially from 70. Events happen with some probability in a larger probability space that contains all events that can happen.
+\subsection{Axioms of Probability}
+\begin{proposition}[Axioms]
+	\begin{enumerate}
+		\item (Positivity) $P(\omega > 0)$ for any event $\omega$ in probability space $\Omega$. 
+		\item (Totality) In any sample space $\Omega$, $P(\Omega) = 1$.
+		\item (Additivity) If $A_1, A_2, \ldots, A_n$ are independent, then \[\sum_{i=1}^n A_i = \bigcup_{i = 1}^n A_i.\] 
+	\end{enumerate}
+\end{proposition}
+
+From just this, we can get some useful information, such as the union bound.
+\begin{theorem}[Union Bound]
+	\[P\left(\bigcup_{i = 1}^n A_i\right) = \sum_{i = 1}^n P(A_i).\]
+\end{theorem}
+
+The proof is left as an exercise to the student, probably in the homework.
+\subsection{$\sigma$-algebra}
+\begin{definition}[$\sigma$-algebra]
+	Given a sample space $\Omega$, a set $\mathcal{F} \subseteq 2^{\Omega}$ is a $\sigma$-algebra if:
+	\begin{enumerate}
+		\item $\Omega \in \mathcal{F}$
+		\item If any event $A$ is in $\mathcal{F}$, then its complement $\Omega \setminus A$ is also in $\mathcal{F}$.
+		\item For countably many events $A_1, A_2, \ldots, A_n, \ldots \in \mathcal{F}$, their union $A = \bigcup_{i=1}^\infty A_i \in \mathcal{F}$.
+	\end{enumerate}
+\end{definition}
+
+\newpage
+\section{Conditional Probability}
+\subsection{Definition}
+\subsection{Total Probability}
+\subsection{Bayes' Rule}
+\subsection{Continuous Bayes}
+
+\newpage
+\section{It Depends}
+\subsection{Independence / (Un)correlation}
+\subsection{Conditional Expectation}
 Notice that $E[X | Y]$ is a random variable, but $E[X | Y = y]$ is a number. We can call $E[X | Y]$ a function $g(Y)$, where then $E[X | Y = y] = g(y)$ is just a value in the function.
+\subsection{Iterated Expectation}
+
+\newpage
+\section{Distributions}
+\subsection{Joint Distribution}
+\subsection{Marginal Distribution}
+\subsection{Derived Distribution}
+
+\newpage
+\section{Random Variables}
+\subsection{Discrete}
+\subsubsection{Bernoulli}
+\begin{itemize}
+	\item PMF: $p_X(k) = \begin{cases}p & k = 1 \\ 1=p & k = 0\end{cases}$
+	\item Expected value: $p$
+	\item Variance: $p(1 - p)$.
+\end{itemize}
+\subsubsection{Binomial}
+\begin{itemize}
+	\item PMF: $p_X(k) = \binom{n}{k} p^k(1 - p)^{n - k}$ over all $k \in 0, 1, \ldots, n$.
+	\item Expected value: $np$
+	\item Variance: $np(1 - p)$.
+\end{itemize}
+
+Run a Bernoulli test $n$ times, find how many are positive.
+\subsubsection{Geometric}
+\begin{itemize}
+	\item PMF: $p_X(k) = (1 - p)^{k - 1} p$, for $k = 1, 2, \ldots$.
+	\item Expected value: $\frac{1}{p}$
+	\item Variance: $\frac{1 - p}{p^2}$.
+\end{itemize}
+
+Here, each trial has a $p$ probability of success, and we want to find the \# of trials until one success.
+\subsubsection{Poisson}
+\begin{itemize}
+	\item PMF: $p_X(k) = \frac{\lambda^k(e^{-\lambda})}{k!}$.
+	\item Expected value: $\lambda$
+	\item Variance: $\lambda$
+\end{itemize}
+
+Used to simulate arrivals, I guess. More useful later, with Poisson processes.
+\subsection{Continuous}
+\subsubsection{Uniform}
+\subsubsection{Exponential}
+\subsubsection{Gaussian}
+\subsubsection{Joint Gaussian}
+The main tips for Joint Gaussian are to approach it as a sort of vectorized Gaussians over a certain number $N$ of dimensions. 
+Most of the addition / whatever operations in a Gaussian can be remodeled as a Joint Gaussian.
 
 \section{Moment Generating Functions}
 \begin{definition}
@@ -91,15 +177,12 @@ When $s = 0$, we have that this evaluates to $\int_{-\infty}^\infty xf_X(x) dx =
 
 We can further extend this; if $X_1, \ldots, X_n$ is a collection of independent random variables and $Z = X_1 + \cdots + x_n$, then $M_Z(s) = M_{X_1}(s) \cdots M_{X_n}(s)$. 
 
-\section{$\sigma$-algebra}
-\begin{definition}[$\sigma$-algebra]
-	Given a sample space $\Omega$, a set $\mathcal{F} \subseteq 2^{\Omega}$ is a $\sigma$-algebra if:
-	\begin{enumerate}
-		\item $\Omega \in \mathcal{F}$
-		\item If any event $A$ is in $\mathcal{F}$, then its complement $\Omega \setminus A$ is also in $\mathcal{F}$.
-		\item For countably many events $A_1, A_2, \ldots, A_n, \ldots \in \mathcal{F}$, their union $A = \bigcup_{i=1}^\infty A_i \in \mathcal{F}$.
-	\end{enumerate}
-\end{definition}
+\section{Concentration Inequalities}
+\begin{theorem}[Markov's Inequality]
+\end{theorem}
+
+\begin{theorem}[Chebyshev's Inequality]
+\end{theorem}
 
 \section{Modes of Convergence}
 \subsection{Pointwise}
