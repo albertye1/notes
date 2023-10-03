@@ -616,4 +616,98 @@ We're looking for solutions to $ax \equiv b \pmod m$. Because if $x_0$ solves $a
 	If $m$ is not prime, then $m = m_1 m_2$ with $0 < m_1, m_2 < m$ so $m_1 m_2 \equiv 0 \pmod m$. So in $\ZZ / m\ZZ$, $\overline{m_1} \neq 0 \neq \overline{m_2}$ but $\overline{m_1} \overline{m_2} = 0$. 
 	Then, $\overline m_1$ cannot have an inverse $\overline{m_1}^{-1}$ because then $\overline{m_2} = \overline{m_1}^{-1} \overline{m_1} \overline{m_2} = \overline{m_1}^{-1} \overline{0} = 0$.
 \end{remark}
+
+\section{Lecture 14}
+\subsection{Inverse}
+The main question for today is when $a \in \ZZ / n \ZZ$ has a multiplicative inverse. 
+
+\begin{theorem}[Euler's Theorem] 
+	if $m > 1$ is an integer an $(a, m) = 1$, then $a^{\phi(m)} \equiv 1 \pmod m$. 
+\end{theorem}
+
+We also have a corollary: 
+\begin{corollary}
+	If $p$ is prime and $p$ doesn't divide $a$, then $a^{p-1} \equiv 1 \pmod p$. 
+\end{corollary}
+
+This corollary is Fermat's little theorem.
+
+\begin{proof}
+	Form the set $S$ of units in $\ZZ / m \ZZ$. $|S| = \phi(m)$ and $a \in S$ as $(a, m) = 1$. We claim that $s = \{as | s \in S\}$. 
+
+	We see that $S$ is bijective to $S$, so we see that $S$ is bijective to $aS$, as $a$ is relatively prime to $m$. We see that \[\prod_{s \in S} s = \prod_{s \in S} as = a^{|S|} a^{\phi(m)} \prod_{s \in S} s.\] Taking the inverse, we see that $a^{\phi(m)} \equiv 1 \pmod m$. 
+\end{proof}
+
+\subsection{Chinese Remainder Theorem}
+\begin{theorem}[Chinese Remainder Theorem]
+	Suppose that $m = m_1, \ldots, m_t$ and that $(m_i, m_j) = 1$. For all $1 \leq i < j \leq t$, let $b_1, \ldots, b_t \in \ZZ$ and consider the system of congruences \begin{align*}x &\equiv b_1 \pmod{m_1},\\ x &\equiv b_2 \pmod{m_2}, \\ &\ldots \\ x &\equiv b_t \pmod{m_t}.\end{align*} 
+	This system has a solution and any two solutions differ by a multiple of $m$.  
+\end{theorem}
+
+That is, any system of congruences centered around $x$ must have a unique $x$ modulo $m$, where $m$ is the product of all moduli in the system, and all moduli in the system are coprime.
+
+\begin{lemma}
+	If $m \in \ZZ$ and $a_1, \ldots, a_t$ are each relatively prime to $m$, then $a-1, \ldots, a_t$ is. 
+\end{lemma}
+
+\begin{lemma}
+	If $a_1, \ldots, a_t$ divide $n \in \ZZ$ and $(a_i, a_j) = 1$ for $1 \leq i < j \leq t$, then $a_1 \cdots a_t | n$.
+\end{lemma}
+
+\begin{proof}
+	The integers $a_i$ determine a partition of a subset of the prime factors of $n$, by definition.
+\end{proof}
+
+I honestly tuned out the proof of CRT oops
+
+\section{Lecture 15}
+161 
+
+\section{Lecture 16}
+\subsection{The Primitive Element}
+\begin{theorem}[Primitive Element] 
+	\label{16.1}
+	For each prime $p$, there is an $\alpha \in \ZZ / p\ZZ$ s.t. $(\ZZ / p\ZZ)^* = \{1, \ldots, p + 1\} = \{\alpha, \alpha^2, \ldots, \alpha^{p+1}\}$.
+\end{theorem}
+
+\begin{proposition}
+	If $d | p - 1$, then $x^d \equiv 1 (p)$ has exactly $d$ solutions in $\ZZ / p\ZZ$.
+\end{proposition}
+
+We are finally making it into the abstract algebra class with this next one:
+\begin{definition}[Group] 
+	A \vocab{group} is a set $S$ endowed with a binary operation $\cdot$, with the property that $x \cdot y \in S$
+
+	\begin{enumerate} 
+		\item If $x, y, z \in S$, $(x \cdot y) \cdot z = x \cdot (y \cdot z)$. \textit{(associativity)}
+		\item There is an element $e \in S$ s.t. $e \cdot x = x = x \cdot e$ for all $x \in S$. \textit{(identity)}
+		\item For any $x \in S$ there exists $x^{-1} \in S$ s.t. $x \cdot x^{-1} = e = x^{-1} \cdot x$. \textit{(invertibility)}
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Cyclic Group] 
+	A group is \vocab{cyclic} if there exists an element $g \in G$ such that every $x \in G$ equals $g^i$ for some $i$ depending on $x$. 
+\end{definition}
+
+So, Theorem \ref{16.1} essentially wants us to prove that $((\ZZ / p\ZZ), \times)$ forms a cyclic group!
+
+\begin{definition}[Order] 
+	If $x \in G$ and $G$ is a inite group, then the order $\ord x$ of $x$ is the least positive integer such that $x^{\ord x} = e$.
+
+	$\ord e = 1, \ord x > 1$ if $x \neq e$.
+\end{definition}
+
+\begin{lemma} 
+	If $G$ is a finite abelian group of order $n$, then if $x \in G, x^n = e$.
+\end{lemma}
+
+\begin{corollary}
+	If $G$ is finite (abelian) and $x \in G$, then $\ord x | |G|$.
+\end{corollary}
+
+\begin{proof}[Proof of Primitive Element]
+	If $d | p-1$, let $\psi(d)$ denote the number of elements of $(\ZZ / p\ZZ)^*$ of order $d$. An element $a \in (\ZZ / p\ZZ)^*$ satisfies $a^d = 1$ if and only if $\ord a | d$ If $d = c \cdot \ord a$, then $a^d = (a^{\ord a})^c = 1^c = 1$. Conversely, if $a^d = 1 \in \ZZ/p\ZZ$, then I claim $\ord a | d [a^{(\ord a, d)} = 1$.
+
+	From the proposition, we see that $d = \sum_{c | d} \psi(c)$. Taking the Mobius inversion, we get that $psi = \phi$, so there is an element of $(\ZZ / p\ZZ)$ with order $p-1$. \qed
+\end{proof}
 \end{document}

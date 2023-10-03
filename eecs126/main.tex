@@ -16,6 +16,8 @@
 \usepackage{circuitikz}
 \allsectionsfont{\normalfont\sffamily\bfseries}
 
+\newcommand{\Var}{\mathrm{Var}}
+
 \setlength{\parindent}{0pt}
 \pagestyle{fancy}
 \lhead{EECS 126}
@@ -55,6 +57,7 @@ The proof is left as an exercise to the student, probably in the homework.
 	\end{enumerate}
 \end{definition}
 
+The biggest note is that $\Omega$ must be in a $\sigma$-algebra in order for any of the axioms of probability to apply.
 \newpage
 \section{Conditional Probability}
 \subsection{Definition}
@@ -72,6 +75,9 @@ Notice that $E[X | Y]$ is a random variable, but $E[X | Y = y]$ is a number. We 
 \newpage
 \section{Distributions}
 \subsection{Joint Distribution}
+\begin{definition}[Joint Distribution]
+	A joint distribution $f_{X, Y}(x, y)$ 
+\end{definition}
 \subsection{Marginal Distribution}
 \subsection{Derived Distribution}
 
@@ -179,10 +185,14 @@ We can further extend this; if $X_1, \ldots, X_n$ is a collection of independent
 
 \section{Concentration Inequalities}
 \begin{theorem}[Markov's Inequality]
+	$P(X > a) = \dfrac{E(X)}{a}$.
 \end{theorem}
 
 \begin{theorem}[Chebyshev's Inequality]
+	$P(|X - E(X)| > a) = \dfrac{\Var(X)}{a^2}$.
 \end{theorem}
+
+Used in lieu of confidence interval tests. 
 
 \section{Modes of Convergence}
 \subsection{Pointwise}
