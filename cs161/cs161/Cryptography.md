@@ -229,3 +229,101 @@ zzzzz cs 70
 	* Then sign $H(M)$
 * Why do digital signatures use a hash?
 	* Allows signing arbitrarily long message
+* For RSA, we encrypt the hash with the private key.
+	* If we just try to simply send the message and signature, someone could fake authenticity with some engineering of the message and signature.
+# Certificates
+* Public-key cryptography is great! Can communicate securely without a shared secret
+	* Everybody encrypts with the public key, but only the owner can decrypt!
+	* But there's a catch...
+* Public-key cryptography alone isn't secure against man-in-the-middle attacks!
+	* Scenario:
+		* Alice wants to send to Bob
+		* Alice asks Bob for public key
+		* Bob sends public key
+		* Alice encrypts message with Bob's pub key an sends to Bob
+	* So what can Mallory do?
+		* Send a different public key over, and then she can decrypt and send
+* Idea to avoid this: ***Sign*** Bob's public key to prevent tampering. 
+	* But if bob signs his public key, we will need the public key to verify the signature.
+	* So... you kind of get stuck in a loop
+	* You cannot gain trust if you trust nothing, so you need a root of trust. Trust.
+* **Trust-on-first-use**
+	* the first time you communicate, trust the public key that is used and warn the user if it changs in the future
+		* Used in SSH and a couple other protocols
+	* idea: attacks aren't frequent, so assume you aren't being attacked the first time you communicate.
+	* no cryptographic proof, just hope. depends on the threat model if this is good or not :/
+* Enter certificates.
+	* A signed endorsement of someone's public key, containing at least two things: the **identity** of the person, and the **key**. 
+	* Abbreviated notation:
+		* Encrypted under a public key $PK$ --> $(\text{Message})_{PK}$. 
+		* Signing under a private key $SK$ --> $(\text{Message})_{SK}$. 
+			* **Recall**: A signed message must contain the message along w/ the signature; you can't send the signature alone
+	* Scenario: Alice wants Bob's public key, and Alice trusts EvanBot
+		* EvanBot is then the rust anchor.
+		* If we trust $PK_E$, a certificate we would trust is ("Bob's public key is $PK_E$")$_{SK_E}$. 
+* Who creates certificates?
+	* Trusted Directory
+		* make a central, trusted directory (TD) from where you can fetch anyone's public key.
+		* but now let's assume that $A$ runs the TD.
+			* But then A is probably very busy. So this isn't very scalable. 
+			* There is also a single point of failure. If the directory fails, cryptography stops working
+			* If the directory is compromised, you can't trust anyone and it's difficult to recover.
+			* **Essentially: We need more ~~bullets~~ anchors of trust.**
+	* Certificate Authorities
+		* Addressing scalability: Hierarchical trust.
+			* The roots of trust delegate trust and signing power to other authority
+			* So, $A$ is the **root CA**. But can delegate **intermediate CA**s $B$ and $C$.
+* Addressing scalability: Multiple trust anchors
+	* There are ~150 root CA's who are implicitly trusted by most devices
+	* Public keys are hard-coded into operating systems & devices
+	* Each delegation step can restrict the scope of a certificate's validity
+	* Creating cert is an *offline* task. cert create once, and then served when needed
+* Revocation
+	* Periodically release a list of invalidated certificates
+	* So users must periodically download a certification revocation list (CRL)
+* How to authenticate the list?
+	* the CA signs the list!
+* Drawbacks
+	* lists can get large
+		* mitigated by shorter expiration dates (don't have to list expired ones)
+		* until user downloads list, they will still keep trusting
+# Passwords
+* Storing passwords
+	* How does the service check that password is correct?
+		* Bad idea 1: Store a file listing every user's password
+			* Problem: what if an attacker hacks into the service? Now the attacker knows all the passwords!
+		* Bad idea 2: Encrypt every user's password before storing it?
+			* But attacker can still decrypt everything....
+		* We need a way to verify passwords **without** storing any information that would allow someone to recover the original password.
+	* Password Hashing
+		* Hash the password submitted by the user. Check if it matches the password hash in the file.
+		* We need the hash to be deterministic and one-way. It has to generate the same thing every time, but we don't want the hash to be reversed.
+	* Attacks
+		* But what if two different users decide to use **password123** as their password?
+			* Hashes are deterministic: They'll have the same password hash. So, an attacker can see which users are using the same passwords
+		* Brute Force
+			* Most people use insecure, common passwords
+			* An attacker can pre-compute hashes for common passwords, and compare against stolen passwords file.
+			* **Dictionary attack**: Hash an entire ditionary of common passwords
+		* **Rainbow tables**. An algorithm for computing hashes that makes brute-force attacks easier.
+			* Leverage the internal properties of hashing.
+	* **Salted** hashes
+		* Tasty!
+		* Solution #1 to above attacks: Add a unique, random salt for each user
+		* Salt: A random, public value designed to make brute force attacks harder
+			* For each user, store username, salt, H(password || salt)
+			* To verify a user: look up their salt in the passwords file, compute H(password || salt), and check if it matches the hash in the file.
+			* Salts should be long and random.
+			* Salts are not secret.
+		* Brute-force attacks are now harder
+			* Assume there are $M$ passwords, $N$ users
+			* Unsalted: Hash all possible passwords, then lookup all users' hashes => $O(M + N)$
+			* Salted: Hash all passwords for each user's salt => $O(MN)$.
+	* Slower Hashes
+		* Cryptographic hashes are usually designed to be fast.
+		* But password hashes are usually designed to be slow. Legit users only need to submit a few password tries. User will not notice if it takes 0.00001 seconds or 0.1 seconds for the server to check a password
+		* Attackers need to compute millions of hashes. sing a slow hash can slow the attacker by a large factor
+		* We aren't changing asymptotic difficulty of attacks. We're adding a large constant factor, which can have a huge practical impact for the attacker.
+* Offline and Online Attacks
+	* Offline: The attacker performs all the computation themselves
+	* Online: Attacker interacts w/ the service.
