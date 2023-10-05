@@ -1,6 +1,12 @@
 *Not cryptocurrency. That, unfortunately, comes later.*
 # Notation
 * In lecture notes, Alice & Bob are always sender and receiver, Eve is the eavesdropper, Mallory is man-in-the-middle.
+- Roadmap
+
+Trait | Symmetric-key | Asymmetric-key
+---|---|---
+**Confidentiality** | one time pads, block ciphers, stream ciphers | rsa, elgamal encryption
+**Integrity**, **Authentication** | MACs | digital signatures
 # Basics
 * Three Goals of Cryptography
 	* Confidentiality - adversary cannot *read* our messages
@@ -39,12 +45,11 @@
 			* Eve can only trick Bob into decrypting
 		* **Chosen plaintext-ciphertext**
 			* Eve can trick anyone.
-* Symmetric-Key Encryption
-	* The next few schemes are symmetric-key encryption schemes
-		* Encryption schemes aim to provide confidentiality, only
-		* Symmetric-key means alice and bob share the same secrete key that the attacker doesn't know
-* What is a Confidentiality?
-	* New propaganda documentary out now
+# Symmetric-Key Encryption
+* The next few schemes are symmetric-key encryption schemes
+	* Encryption schemes aim to provide confidentiality, only
+	* Symmetric-key means Alice and Bob share the same secrete key that the attacker doesn't know
+* Definition of Confidentiality
 	* "An adversary cannot read our messages" is not very specific.
 		* What if Eve can read 1st half of Alice's message?
 		* Or can figure out the words "Dear Bob"?
@@ -57,13 +62,14 @@
 			* Eve knows $M_b = M_0$ r $M_b = M_1$.
 			* Eve reads the ciphertext and tries to guess which message was sent.
 			* If probability that Eve correctly guesses which message was sent is $\frac{1}{2}$, **then** scheme is confidential.
-	* IND-CPA
-		* Eve may choose plaintexts to send to Alice and receives their ciphertexts.
-		* Eve issues a pair of plaintexts $M_0$ and $M_1$ to Alice
-		* It's insecure if a guess can wind the game with more than $\frac{1}{2}$ probability.
-	* Edge Cases
-		* Length
-			* Cryptographic schemes are (usually) allowed to leak the length
+## IND-CPA
+* Eve may choose plaintexts to send to Alice and receives their ciphertexts.
+* Eve issues a pair of plaintexts $M_0$ and $M_1$ to Alice
+* It's insecure if a guess can win the game with more than $\frac{1}{2}$ probability.
+* **In sum:** A cipher is called IND-CPA secure if the attacker can't gain any info about the message given its ciphertext.
+* Edge Cases
+	* Length
+		* Cryptographic schemes are (usually) allowed to leak the length
 ## Ciphers
 * Caesar
 	* One of the earliest cryptographic schemes 
@@ -84,7 +90,6 @@
 			* Kerchhoff's Principle
 			* Known plaintext attack
 			* Chosen plaintext attack
-
 ## Block Ciphers
 * An encryption/decryption algorithm that encrypts blocks of a fixed size
 * $E_k(M) = C$: Inputs a $k$-bit key $K$ and an $n$-bit plaintext $M$, outputs an $n$-bit ciphertext $C$.
@@ -111,9 +116,7 @@
         * Decrytpion: $M_i = E_k(IV + i) \oplus C_i$
         * the $i$ is the counter post-nonce, and the $+$ here is string concatenation.
 
-### IND-CPA Security
-* A cipher is called IND-CPA secure if the attacker can't gain any info about the message given its ciphertext.
-
+**Remember** that although these symmetric-key schemes provide confidentiality, they do not provide integrity or authentication.
 # MAC's 
 * detect if something has been changed 
 
