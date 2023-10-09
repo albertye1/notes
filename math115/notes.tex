@@ -710,4 +710,67 @@ So, Theorem \ref{16.1} essentially wants us to prove that $((\ZZ / p\ZZ), \times
 
 	From the proposition, we see that $d = \sum_{c | d} \psi(c)$. Taking the Mobius inversion, we get that $psi = \phi$, so there is an element of $(\ZZ / p\ZZ)$ with order $p-1$. \qed
 \end{proof}
+
+\section{Lecture 17}
+Reminder that not all $n$ are cyclic; example is $n = 4$.
+
+\begin{theorem}
+	\label{17.1}
+	If $p$ is an odd prime and $l \in \ZZ_{> 0}$, $(\ZZ / p^l \ZZ)^*$ possess a primitive element, so it is cyclic. 
+\end{theorem} 
+
+\begin{lemma}
+	If $p$ is prime and $1 \leq k \leq p$, then $\dbinom{p}{k}$ is divisible by $p$.
+\end{lemma} 
+
+\begin{proof} 
+	$\dbinom{p}{k} = \dfrac{p!}{k!(p-k)!}$, and $k < p, p-k < p$ so $p$ does not divide $k!, (p-k)!$. Thus, there must be a factor of $p$.
+\end{proof}
+
+\begin{lemma}
+	If $a \equiv b \pmod{p^l}$, then $a^p \equiv b \pmod{p^{l+1}}$. 
+\end{lemma}
+
+\begin{proof}
+	$a = b + cp^l$, so \begin{align*}
+		a^p &= (b+cp^l)^p \\
+		&= b^p + \binom{p}{1}b^{p-1} cp^l + A
+	\end{align*}
+	where $p^{2l} | A$. As $2l \geq l + 1$, $a^p \equiv b^p \pmod{p^{l+1}}$.
+\end{proof}
+
+\begin{corollary}
+	If $l \geq 2$ and $p \neq 2$, then $(1 + ap)^{p^{l-1}} \equiv 1 + ap^{l-1} \pmod{p^l}$ for all $a \in \ZZ$.
+\end{corollary}
+
+\begin{proof}
+	induct on $l$. If $l = 2$, then $(1 + ap)^1 = 1 + ap^1$.
+
+	Assume it holds for some $l \geq 2$, we prove it for $l + 1$.
+
+	\begin{align*}
+		(1 + ap)^{p^{l-1}} &= ((1 + ap)^{p^{l-2}})^p.
+	\end{align*}
+
+	From Lemma $2$, we have thta this is congruent to $(1 + ap^{l-1})^p$ modulo $p^{l + 1}$. 
+	And then, $(1 + ap^{l-1})^p = 1 + \binom{p}{1}ap^{l-1} + B$, so all the terms in $B$ are divisible by $p^{1 + 2(l-1)}$, except for the last term $a^p p^{p(l-1)}$. 
+
+	We'll be done if we can show $p^{l+1} | p^{1 + 2(l-1)}$ and $p^{l + 1} | p^{p(l-1)}$, tha tis, that $1 + 2(l - 1) \geq l + 1$, and $l + 1 \leq p(l - 1)$, since $l \geq 2, p > 2$. Therefore, $B \equiv 0 \pmod{p^{l+1}}$.
+\end{proof}
+
+\begin{corollary}
+	If $p \neq 2$ and $p \not \vert a \in \ZZ_{> 0}$, then $p^{l-1} \equiv \ord(1 + ap) \pmod{p^l}$.
+\end{corollary}
+
+We define $b \in \ZZ_{> 1}$, where $(b, n) = 1$, has order $l \pmod n$ if its order in $(\ZZ/n\ZZ)^*$ is $l$. Equivalently, $l$ is the least $\ZZ_{> 0}$ such that $b^l \equiv 1 \pmod n$. 
+
+\section{Lecture 18}
+Started the proof in lec 17, continue in lec 18.
+\begin{proof}[Proof of \ref{17.1}]
+	There exist primitive roots $\pmod p$. Pick one, call it $g \in \ZZ$. Then, $\overline{g} = \overline{g + p}$ so $g + p$ is also a primitive rood modulo $p$. If $g^{p-1} \equiv 1 \pmod{p^2}$, then $(g + p)^{p-1} \equiv g^{p-1} + (p - 1)g^{p-2} \cdot p \pmod{p^2}$.
+
+	We see that the first term is equivalent to $1$. So, if $p$ does not divide $g^{p-2}$, then the $g^{p -1} + (p-1)g^{p-2} \cdot p \neq 1 \pmod{p^2}$, meaning $g$ is a primitive root mod $p$.
+
+	Now, assume I can find a primitive root modulo $p$, call it $g'$. Then, I claim $g'$ is a primitive root mod $p^l$ for any $l > 0$.
+\end{proof}
 \end{document}

@@ -273,4 +273,82 @@ We let $Z_n = \frac{S_n - n \mu}{\sigma \sqrt{n}}$.
 \end{theorem}
 
 Now we see why normal and poisson distribs are so useful.
+\newpage 
+\section{Information Theory}
+\subsection{Entropy}
+First, we define $\mathcal{X}$ as the range of a random variable $X$ over all events in a probability space. 
+
+\begin{definition}[Entropy] 
+	Given a discrete random variable $X$ and PMF $P_X(x)$, we have \vocab{entropy}
+	\[H(X) = \sum_{x \in \mathcal{X}} P_X(x) \log \frac{1}{P_X(x)}.\] 
+\end{definition}
+
+Furthermore, the average amount of surprise is defined as $E\left[\log \frac{1}{P_X(x)}\right]$.
+
+Moreover, some properties of entropy: 
+\begin{enumerate}
+	\item $H(X) \geq 0$
+	\item $H(X)$ is 
+	\item $H(X) \leq \log |x|$, achieved when $X$ is uniform on $x$.
+\end{enumerate}
+
+Where $x$ is the range of $X(\omega)$ for all $\omega \in \Omega$.
+
+\begin{definition}[Joint Entropy]
+	Joint entropy $(X, Y) \sim P_{X, Y}$:
+	\[H(X, Y) = \sum_{(x, y) \in \mathcal{X} \times \mathcal{Y}} P_{X, Y} (x, y) \log \frac{1}{P_{X, Y}(x, y)}.\]
+\end{definition}
+
+\begin{definition}[Conditional Entropy] 
+	\[H(Y | X) = \sum_{x \in \mathcal{X}} H(Y | X = x).\] 
+\end{definition}
+
+Next, we observe some properties of joint and conditional entropy. 
+
+\begin{proposition} 
+	\begin{enumerate}
+		\item (Chain Rule) \[H(X, Y)  H(X) + H(Y | X) = H(Y) + H(X | Y).\] 
+		\item (Conditioning Reduces Entropy) \[H(Y | X) \leq H(Y).\]
+		\item \[H(X, Y) \leq H(X) + H(Y).\] 
+	\end{enumerate}
+\end{proposition}
+
+\subsection{Mutual Information}
+Created by a Bob Fano, who argued more important than entropy.
+
+\begin{definition}[Mutual Information]
+	We define $I(X, Y)$ as the \vocab{mutual information} between $X$ and $Y$, such that
+	\begin{align*}
+		I(X: Y) &= H(X) - H(X | Y) \geq 0 \\
+				&= H(X) + H(Y) - H(X, Y) \\
+				&= H(Y) - H(Y | X).
+	\end{align*}
+\end{definition}
+
+We can think of $I(X, X) = H(X)$ as well.
+
+\begin{definition}[Kullback-Leibler Divergence] 
+	We can also call this \vocab{relative entropy}. 
+
+	\[D(P \parallel Q) = \sum_{x \in \mathcal{X}} P(X) \log \frac{P(x)}{Q(x)} \geq 0.\]
+\end{definition}
+
+We can see that the mutual information can further be reduced to 
+\begin{align*}
+	I(X : Y) &= \sum_{(x, y) \in \mathcal{X} \times \mathcal{Y}} P_{X, Y}(x, y) \log \frac{P_{X, Y}(x, y)}{P_X(x)P_Y(y)} \\
+			 &= D(P_{X, Y} \parallel P_X \otimes P_Y),
+\end{align*}
+where we define $P_X \otimes P_Y$ as the cross product. 
+
+\subsection{Source Coding}
+	Let $X_1, X_2, \ldots, X_n$ be a string of symbols or binary code or etc. in a file. We want to convert this into some compressed $b(X_1, X_2, \ldots X_n)$.
+\begin{theorem}
+	We assume $X_1, X_2, \ldots, X_n$ are i.i.d as $X$.
+	\begin{enumerate}
+		\item There exists a source code such that 
+			\[\lim_{n \to \infty} E\left[\frac{1}{n} |b(x_1, \cdots, x_n)|\right] \leq H(X) + \epsilon\] for any $\epsilon > 0.$ 
+
+		\item Conversely, no source code can achieve an average length less than $H(X)$ bits per symbol. 
+	\end{enumerate}
+\end{theorem}
 \end{document}
