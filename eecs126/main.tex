@@ -213,6 +213,66 @@ There are a couple ways to check if some sequence converges almost surely.
 \subsection{In Probability}
 This is a weaker bound for convergence than almost sure convergence.
 
+\subsection{In distribution}
+\begin{definition}[In Distribution Convergence]
+	$\{X_n\}_{n=1}^\infty$ converges in distribution (i.d.) to $X$ if for every $x \in \RR$, $P(X = x) = 0$.
+
+	In other words, \[\lim_{n\to\infty} P(X_n \leq x) = 0.\] Denote this as $X_n \to^d x$.
+\end{definition}
+
+There are a couple of notable properties of in distribution convergence: 
+
+\begin{theorem}
+	In probability convergence implies in distribution convergence. 
+\end{theorem}
+
+\begin{proof}
+	Suppose $X_n \to^P x$. 
+\end{proof}
+
+\subsection{Applications}
+\subsubsection{Law of Large Numbers}
+\begin{theorem}[Weak Law of Large Numbers]
+	Let $\{X_n\}_{n-1}^\infty$ be independent and identically distributed (i.i.d) with finite mean $|E[X_1]| < \infty$. Then, 
+	\[\overline{X_n} = \frac{X_1 + X_2 + \cdots + X_n}{n} \to^P E[X_1].\] 
+\end{theorem}
+
+\begin{proof}
+	Recall Chebyshev's Inequality, which gives us \[P(|\bar{X_n} - E[\bar{X_n}]| \geq \epsilon) \leq \frac{E[(\bar{X_n} - E[\bar{X_n}]^2)]}{\epsilon^2}.\]
+
+	Now, we calculate the variance: 
+	\begin{align*} 
+		\Var(\bar{X_n}) &= \Var\left(\frac{1}{n} (X_1 + X_2 + \cdots + X_n)\right) \\
+		&= \frac{1}{n^2} \Var(X_1 + X_2 + \cdots + X_n) \\
+		&= \frac{1}{n^2} (\Var(X_1) + \Var(X_2) + \Var(X_3) + \cdots + \Var(X_n)) \\
+		&= \frac{\Var(X_1)}{n},
+	\end{align*} 
+	because $X_i$ are i.i.d.
+
+	Applying Chebyshev gives us 
+	\[\lim_{n \to \infty} P(|\bar{X_n} - E[X_1]| \geq \epsilon) \leq \lim_{n \to \infty} \frac{\Var(X_1)}{n \epsilon^2} = 0.\] 
+
+	Thus, $\bar{X_n}$ converges in probability to $E[X_1]$. 
+\end{proof}
+
+The strong law of large numbers has the same claim, except instead of in probability convergence it's almost sure convergence. 
+
+\subsubsection{Central Limit Theorem}
+Once again let $\bar{X_n} = \frac{X_1 + X_2 + \cdots + X_n}{n}, S_n = X)1 + X_2 + \cdots + X_n$. Then, we know \[\Var(S_n) = n \Var(X_1) \to \infty.\]
+
+We let $Z_n = \frac{S_n - n \mu}{\sigma \sqrt{n}}$.
+\begin{theorem}[Central Limit Theorem]
+	We have $\{X_n\}_{n=1}^\infty$ is i.i.d, with mean $\mu$ and variance $\sigma^2$. 
+
+	Then, $Z_n \to^d \mathcal{N}(0, 1)$.
+\end{theorem}
+
+\begin{theorem}[Poisson Limit Theorem]
+	Let $X_n = B(n \cdot \phi_n)$. Assume $\lim_{n \to \infty} n \cdot \phi_n = \lambda > 0$. Then, 
+	\[X_n \to^d \mathrm{pois}(\lambda).\]
+\end{theorem}
+
+Now we see why normal and poisson distribs are so useful.
 \newpage 
 \section{Information Theory}
 \subsection{Entropy}
