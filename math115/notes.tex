@@ -773,4 +773,38 @@ Started the proof in lec 17, continue in lec 18.
 
 	Now, assume I can find a primitive root modulo $p$, call it $g'$. Then, I claim $g'$ is a primitive root mod $p^l$ for any $l > 0$.
 \end{proof}
+
+\section{Lecture 19}
+Last time we showed that if $m$ has primitive roots and if $(a, m) = 1$, then $x^n \equiv a \pmod m$ has a solution if and only if $a^{\phi(m)/d} \equiv 1 \pmod m$, where $d = (\phi(m), n)$.
+
+\begin{remark}
+    If $x^n \equiv a \pmod m$ has a solution $(a, m, n)$ as above, then it has $(n, \phi(m))$ solutions. 
+\end{remark}
+
+\begin{proof}
+    If $g$ is a primitive root for $m$, $x $
+\end{proof}
+
+In particular, if $m = p$ is prim,e then $x^n \equiv a \pmod p$ has a solution if and only if $a^{(p-1)/d} \equiv d \pmod p$, wherre $d = (p-1, n)$.
+
+If $n = z \neq p$, we have $x^2 \equiv a \pmod p$ has a solution if and only if $a^{(p-1)/z \equiv 1 \pmod p}$.
+
+\begin{lemma}
+    Suppose $m \equiv 2^e p_1^{a_1} \cdots p_l^{a_l}$ if a prime factorization of $m \in \ZZ_{> 0}$ and $(a, m) = 1$. Then $a$ is a quadratic residue mod $m$ iff 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $e = 2$, then $a \equiv 1 \pmod 4$
+
+        If $e \geq 3$, then $a \equiv 1 \pmod 8$.
+        \item $a^{(p_i - 1)/2} \equiv 1 \pmod{p_i}$ for all $i$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+    If $p$ is an odd prime, $p$ not dividing $a$ or $n$, then if $x^n \equiv a \pmod p$ has a solution, then $x^n \equiv a \pmod{p^e}$ is solvable for every $e \geq 1$. All these congruences have the same number of solutions.
+\end{lemma}
+
+\begin{lemma}
+    Let $2^l$ be the highest power of $2$ which divides $n$. Suppose $a$ is odd and that $x^n \equiv a \pmod{2^{2l + 1}}$ is solvable. Then, $x^2 \equiv a \pmod{2^l}$ is solvable for all $e \geq 1$, and all these congruence equations have the same number of solutions.
+\end{lemma}
 \end{document}
+
