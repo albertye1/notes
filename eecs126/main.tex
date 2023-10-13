@@ -291,4 +291,64 @@ where we define $P_X \otimes P_Y$ as the cross product.
 		\item Conversely, no source code can achieve an average length less than $H(X)$ bits per symbol. 
 	\end{enumerate}
 \end{theorem}
+
+\section{Markov Chains}
+\begin{definition}[Markov Chain]
+	$\{X_n\}_{n \in \NN}$ is a discrete-time Markov Chain (DTMC) on state space $\mathcal{X}$ if it satisfies the Markov property: For all positive integers $n$ and feasible sequence of states $x_0, x_1, x_2, \ldots, x_{n+1} \in \mathcal{X}$; 
+	\[\Pr(X_{n+1} = x_{n+1} | X_n = x_n, X_{n-1} = x_{n-1}, \ldots, X_0 = x_0) = P(X_{n+1} = x_{n+1}, X_n = x_n).\]
+\end{definition}
+
+We further denote $P$ as the transition probability matrix, which is done by taking the row statistic of $\mathcal{X}$.
+
+\subsection{Distributions}
+Denote distribution of $X_n$ as $\Pi_n$. Then, $\Pi_n = \Pi_0 P^n$. We have a \vocab{stationarity distribution} $\Pi = \Pi \cdot P$, and this is also called the balance equation. 
+
+\subsection{Recurrence and Transience}
+For $x \in \mathcal{X}$, we define $T_x = \min \{n \in \NN, X_n = n\}$ as the hitting time of $x$, and $T_x^+ = \min \{n \in \ZZ_+ X_n = n\}$.
+
+$T_x$ determines the first time that a Markov chain reaches a certain state, and $T_x^+$ calculates the same thing except ignoring trivial (initial) cases.
+
+Now, some notation.
+Let $\Pr_x(A) = \Pr(A | X_0 = x)$ and $E_x[Z] = E[Z | X_0 = x]$. This is probability and expectation given an initial state in the Markov chain. Furthermore, let $\rho_{x, y} = \Pr_x(T_y^+ < \infty)$, $\rho_x = \rho_{x, x}$. 
+
+\begin{definition}
+	State $x$ is \vocab{recurrent} if $\rho_x = 1$, \vocab{transient} otherwise.
+
+	A recurrent state essentially means that a state in a Markov chain will certainly be reached again.
+\end{definition}
+
+\begin{proposition}
+	Denote $N_x = \sum_{n \in \NN} \mathbb{I}(X_n = x)$. Then, 
+	\begin{enumerate}
+		\item If $x$ is recurrent, then $N_x = \infty$ almost surely.
+		\item If $x$ is transient then $E_x[N_x] = \frac{\rho(x)}{1 - \rho(x)}$. 
+	\end{enumerate}
+\end{proposition}
+
+\subsection{Classification of States}
+\begin{definition}[Communicating Class]
+We say $x$ communicates with $y$ if $\rho_{x, y} > 0$ and $p_{y, x} > 0$. 
+
+A \vocab{communicating class} is a maximal set of states which communicate with each other.
+\end{definition}
+
+\begin{definition}
+	Markov Chain is \vocab{irreducible} if it consists of only a single communicating class.  
+\end{definition}
+
+The class property is a property that's necessarily shared by all members of class. Anyways, now time to start applying the many definitions we've just made:
+
+\begin{theorem}
+	Recurence and transience are class properties.
+\end{theorem}
+
+Are we not going over the proof for this?
+
+\begin{proposition}
+	Every finite state irreducible chain is recurrent.
+\end{proposition}
+
+\begin{proof}
+	Basically prove that one of the states must be recurrent using the fact that there are finite states, and then use the above theorem to see that this is a class property.
+\end{proof}
 \end{document}
