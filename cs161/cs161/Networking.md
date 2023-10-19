@@ -98,3 +98,59 @@
 	* Implement a flag on a cookie that will make it unexploitable by CSRF attacks
 	* Should be sent only when the domain of the cookie **exactly** matches the domain of origin
 	* Issue: Not yet implemented on all browsers.
+
+# Other Web Attacks
+## XSS
+* Update later
+* Websites use untrusted content as control data
+### Stored XSS
+* Attacker's JS is stored on legit server and sent to browsers
+* Classic example: Make a post on a social media
+### Reflected XSS
+* Attacker causes victim to input JS into a request
+* Content is reflected in the server
+* Requires the victim to click the link w/ JS
+
+## Clickjacking
+* Trick the victim into clicking on something from the attacker
+* Main vulnerability: the browser trusts the user's clicks
+	* When user clicks, browser assumes user intended to click
+* Example
+	* Fake DL buttons
+	* Show user one frame when clicking on invis frame
+	* Temporal attack: Change cursor
+	* Cursorjacking: Fake mouse cursor
+* Defenses
+	* Enforce visual integrity; Focus the user's vision on the relevant part of the screen
+	* Enforce temporal integrity: give user time to understand what they're clicking on
+	* Ask the user for confirmation
+	* Frame-busting: The legitimate website forbids other websites from embedding it in an iframe
+## Phishing
+* Trick victim into sending the attacker personal information
+	* Defense: 2FA
+		* Vulnerable to relay attacks
+		* Vulnerable to social engineering attacks: Trick humans to subvert 2FA
+		* Example: Authentication tokens for generating secure 2F codes
+		* Example: Security keys
+# SQL
+*)': DROP TABLE;*
+* HTTP gets information between client and web server
+	* But what if web server needs to call data from a db server?
+* SQL Syntax Info
+	* `SELECT`: Select certain data from a table
+		* `SELECT *` gets everything.
+		* can select rows or strings.
+	* `SET` sets all values to a new number
+		* Can filter with `WHERE`
+	* `DELETE` deletes all rows satisfying a `WHERE` condition.
+
+## SQL Injection
+* Weird requests get appended in SQL as SQL, so it could be put into the 
+* Blind SQL injection:
+	* Not all SQL queries are used in a visible way
+	* Visible: shopping carts, comment threads, list of accounts
+	* Blind: Password verification, account creation
+	* Some SQL vulnerabilities only return T/F to determine whether your exploit worked!
+
+# CAPTCHA
+verify ur not an evan bot
