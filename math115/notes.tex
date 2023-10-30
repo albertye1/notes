@@ -943,4 +943,102 @@ The Jacobi system essentially expands the Legendre symbol to composite denominat
 \end{proposition}
 
 We prove this proposition somehow, then use the proof of that to prove the theorem 
+
+\section{Lecture 24}
+\begin{theorem}[Quadratic Reciprocity] 
+	If $p, q$ are odd primes then \[(p/q)(q/p) = (-1)^{((p-1)/2 \cdot (q-1)/2))}.\]
+\end{theorem}
+
+Our proof will use the roots of unity. 
+
+\section{Lecture 25} 
+\subsection{Algebraic Numbers}
+\begin{definition} 
+	A complex number $s$ is an \vocab{algebraic number} if it satisfies a polynomial equation with rational coefficient. 
+
+	It is an \vocab{algebraic integer} if it satisfies a monic polynomial equation with rational coefficients.
+
+	These are represented as $\bar{\QQ}, \bar{\ZZ}$, respectively.
+\end{definition}
+
+If a number is not algebraic, then it is \vocab{transcendental}. 
+\section{Lecture 26}
+\subsection{Rings, Fields}
+\begin{definition}[Ring] 
+	A \vocab{ring} $R$ is a set $R$ closed under binary operations $+$ and $\cdot$, with the property that 
+	\begin{enumerate}
+		\item $(R, +)$ is an abelian group. 
+		\item Multiplication is associative: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$ 
+		\item Multiplication distributes over addition: $a \cdot (b + c) = a \cdot b + a \cdot c$.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Field]
+	A commutative ring, where every nonzero element has a multiplicative inverse is called a \vocab{field}.
+\end{definition}
+
+\begin{proposition}
+	$\overline{\ZZ}$ forms a ring. 
+\end{proposition}
+
+\begin{definition}
+	A finite $\ZZ$-submodule of $\CC$ is a subset $\mathbf{V}$ of $\CC$ with the property that 
+	\begin{enumerate} 
+		\item $v + w \in \mathbf{V}$ if $v, w \in \mathbf{V}$.
+		\item There exist $v_1, \ldots, v_n \in \mathbf{V} \subset \CC$ so that $\mathbf{V} = \{a_1v_1 + \cdots + a_nv_n \mid a_i \in \ZZ\}$.
+	\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+	If we have a finite $\ZZ$-submodule $\mathbf{V}$ of $\CC$, and $\alpha \in \CC$ such that $\alpha \mathbf{V} = \mathbf{V}$, then $\alpha$ is an algebraic integer.
+\end{lemma}
+
+\begin{proof} 
+	$\alpha$ on $\mathbf{V}$ is given an $n \times n$ matrix with integer coefficients.
+\end{proof}
+
+\begin{proposition}
+	If $\alpha$ is an algebraic number, then $\alpha$ is a root of an irreducible unique monic polynomial $g(x) \in \QQ[x]$. If $h(x) \in \QQ[x]$ has $h(\alpha) = 0$, then $g(n) \mid h(x)$. 
+\end{proposition}
+
+\begin{proof}
+	Here, we assume that $g(x)$ is irreducible. If $g(x) \nmid h(x)$, then $(g(x), h(x)) = 1$. Then, it follows that $r(x)g(x) + s(x)h(x) = 1$ for some $r, s$ and any $x$. However, for $x = \alpha$, we have $g(\alpha) = h(\alpha) = 0$, so this cannot be true. Therefore, $g(x) \mid h(x)$. 
+\end{proof}
+
+Therefore, the $g(x)$ so described is called the \vocab{minimal polynomial} of $\alpha$.
+
+\begin{definition} 
+	If $\alpha \in \CC$, let $\QQ(x)$ denote the smallest subfield of $\CC$ containing $\QQ$ and $\alpha$.
+\end{definition}
+
+Then $\QQ(x) = \left\{ \frac{g(x)}{h(x)} \mid g(x), h(x) \in \QQ[x], h(x) \in 0\right\}$. $g(x), h(x)$ are polynomials, and $g(x)$ is obtained by substituting $\alpha$ for $x$.
+
+\section{Lecture 27} 
+\subsection{Congruence} 
+If $\omega_1, \omega_2, \gamma \in \ZZ$, we say $\omega_1 \equiv \omega_2 \pmod \gamma$ if $(\omega_1 - \omega_2) = \alpha \gamma$, with $\alpha \in \bar{\ZZ}$.
+
+\begin{lemma}
+	If $p$ is a prime, $\omega_1, \omega_2 \in \ZZ$, then $(\omega_1 + \omega_2)^p \equiv \omega_1^p + \omega_2^p \pmod p$.
+\end{lemma}
+
+\begin{proof}
+	This is essentially a proof that all of the middle terms are divisible by $p$.
+	$(\omega_1 + \omega_2)^p$ can be expanded via the binomial theorem, to get 
+	that $\left( \frac{p}{n} \right)$ and $p \mid \dbinom{p}{n}$ if $1 \leq n \leq p$.
+
+	A proof of the quadratic character of $2$ via Gaussian sums:
+\end{proof}
+
+\begin{definition}
+	$g_a = \sum_{t = 0}^{p-1} \left(\frac{t}{p}\right) \zeta^{at}$ is an example of a quadratic Gauss sum.
+\end{definition}
+
+\begin{lemma}
+	h
+\end{lemma}
+
+\begin{corollary}
+	\[p^{-1} \sum_{t = 0}^{p - 1} \zeta^{t(x - y)} = \delta(x, y) = \begin{cases} 1 & x \not \equiv y \pmod p \\ 0 & x \equiv y \pmod p \end{cases}.\] 
+\end{corollary} 
+
 \end{document}

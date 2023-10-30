@@ -521,4 +521,30 @@ There are two ways to look at a Poisson process: the counts and the inter-arriva
 \end{definition}
 
 Essentially what is happening is that when something arrives, we flip a (weighted) coin and flip a switch to determine which process it actually reaches.
+
+\subsection{Random Incidence Property} 
+Let $N \sim \mathrm{PP}(\lambda)$. 
+
+Then, 
+\begin{enumerate} 
+	\item The expected interarrival time is $\frac{1}{\lambda}$. 
+	\item Fix time $t$ in the process, what is the expected length of the 
+		interarrival interval which $t$ falls into? 
+\end{enumerate} 
+
+Then, we want to find 
+\begin{align*}
+	\EE[T_{i+1} - T_i] &= \EE[(t - T_i) + (T_{i+1} - t)] \\
+					   &= \EE[(t - T_i)] + \EE[T_{i+1} - t] \\
+					   &= \EE[(t - T_i)] + \frac{1}{\lambda}.
+\end{align*}
+
+Now, fix a value $\tau$. Then, $\Pr(t - T_i > T) = \Pr(N(t-\tau, t) = 0) = \Pr(N(\tau) = 0) = \Pr(\pois(\lambda \tau) = 0) = e^{- \lambda \tau}$.
+As a result, $\Pr(t - T_i > \tau) = \begin{cases} e^{-\lambda \tau} & 0 \leq \tau \leq t \\ 0 & \tau > t \end{cases}$.
+
+Taking the integrals, we see that 
+\[\EE[t - T_i] = \int_{0}^{\infty} \Pr(t - T_i > \tau) d \tau = \int_{0}^t e^{-\lambda \tau} d\tau = \frac{1 - e^{-\lambda t}}{\lambda}.\] 
+As $t$ goes to $\lambda$, then this converges to $\frac{1}{\lambda}$. 
+
+Thus, $\EE[T_{i+1} - T_i] = \boxed{\frac{2}{\lambda}}$.
 \end{document}
