@@ -2,7 +2,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
-\usepackage{dirtytalk}
 \usepackage[portrait, margin=0.5in, top=0.8in, bottom=0.3in]{geometry}
 \usepackage{amsmath, amssymb}
 \setlength{\parskip}{1em}
@@ -787,6 +786,12 @@ unsure. missed it. oops
 		\item $-1$ if $a$ is a quadratic nonresidue modulo $p$.
 	\end{itemize}
 \end{definition}
+
+\begin{lemma}[Gauss's Lemma] 
+	Consider the set of least residues $S = \{ -(p-1)/2, -(p-3)/2, \ldots, -1, 1, 2, \ldots, (p-1)/2 \}$. Let $\mu$ be the number of least residues $a, 2a, \ldots, (p-1)a/2$ that are negative.
+
+	Then, $(a / p) = (-1)^{\mu}$. 
+\end{lemma}
 
 \section{Lecture 21}
 \subsection{Quadratic Reciprocity}
