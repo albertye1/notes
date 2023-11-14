@@ -16,8 +16,10 @@
 \usepackage{circuitikz}
 \allsectionsfont{\normalfont\sffamily\bfseries}
 
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\EE}{\mathbb{E}}
 \newcommand{\Var}{\mathrm{Var}}
-
+\newcommand{\pois}{\mathrm{pois}}
 \setlength{\parindent}{0pt}
 \pagestyle{fancy}
 \lhead{EECS 126}
@@ -351,4 +353,198 @@ where we define $P_X \otimes P_Y$ as the cross product.
 		\item Conversely, no source code can achieve an average length less than $H(X)$ bits per symbol. 
 	\end{enumerate}
 \end{theorem}
+
+\section{Markov Chains}
+\begin{definition}[Markov Chain]
+	$\{X_n\}_{n \in \NN}$ is a discrete-time Markov Chain (DTMC) on state space $\mathcal{X}$ if it satisfies the Markov property: For all positive integers $n$ and feasible sequence of states $x_0, x_1, x_2, \ldots, x_{n+1} \in \mathcal{X}$; 
+	\[\Pr(X_{n+1} = x_{n+1} | X_n = x_n, X_{n-1} = x_{n-1}, \ldots, X_0 = x_0) = P(X_{n+1} = x_{n+1}, X_n = x_n).\]
+\end{definition}
+
+We further denote $P$ as the transition probability matrix, which is done by taking the row statistic of $\mathcal{X}$.
+
+\subsection{Distributions}
+Denote distribution of $X_n$ as $\Pi_n$. Then, $\Pi_n = \Pi_0 P^n$. We have a \vocab{stationarity distribution} $\Pi = \Pi \cdot P$, and this is also called the balance equation. 
+
+\subsection{Recurrence and Transience}
+For $x \in \mathcal{X}$, we define $T_x = \min \{n \in \NN, X_n = n\}$ as the hitting time of $x$, and $T_x^+ = \min \{n \in \ZZ_+ X_n = n\}$.
+
+$T_x$ determines the first time that a Markov chain reaches a certain state, and $T_x^+$ calculates the same thing except ignoring trivial (initial) cases.
+
+Now, some notation.
+Let $\Pr_x(A) = \Pr(A | X_0 = x)$ and $E_x[Z] = E[Z | X_0 = x]$. This is probability and expectation given an initial state in the Markov chain. Furthermore, let $\rho_{x, y} = \Pr_x(T_y^+ < \infty)$, $\rho_x = \rho_{x, x}$. 
+
+\begin{definition}
+	State $x$ is \vocab{recurrent} if $\rho_x = 1$, \vocab{transient} otherwise.
+
+	A recurrent state essentially means that a state in a Markov chain will certainly be reached again.
+\end{definition}
+
+\begin{proposition}
+	Denote $N_x = \sum_{n \in \NN} \mathbb{I}(X_n = x)$. Then, 
+	\begin{enumerate}
+		\item If $x$ is recurrent, then $N_x = \infty$ almost surely.
+		\item If $x$ is transient then $E_x[N_x] = \frac{\rho(x)}{1 - \rho(x)}$. 
+	\end{enumerate}
+\end{proposition}
+
+\subsection{Classification of States}
+\begin{definition}[Communicating Class]
+We say $x$ communicates with $y$ if $\rho_{x, y} > 0$ and $p_{y, x} > 0$. 
+
+A \vocab{communicating class} is a maximal set of states which communicate with each other.
+\end{definition}
+
+\begin{definition}
+	Markov Chain is \vocab{irreducible} if it consists of only a single communicating class.  
+\end{definition}
+
+The class property is a property that's necessarily shared by all members of class. Anyways, now time to start applying the many definitions we've just made:
+
+\begin{theorem}
+	Recurence and transience are class properties.
+\end{theorem}
+
+Are we not going over the proof for this?
+
+\begin{proposition}
+	Every finite state irreducible chain is recurrent.
+\end{proposition}
+
+\begin{proof}
+	Basically prove that one of the states must be recurrent using the fact that there are finite states, and then use the above theorem to see that this is a class property.
+\end{proof}
+
+\subsection{Big Theorem}
+\begin{theorem} 
+	Suppose a markov chain is irreducible with a stationary distribution $\Pi$. Then, 
+	\[\Pi(x) = \frac{1}{\EE_X[T_X^+]}\] 
+\end{theorem}
+
+To prove this, we introduce another claim.
+
+\begin{theorem} 
+	Suppose a Markov chain is irreducible, aperiodic, and has stationary distribution $\Pi$. Then, as $n \to \infty$, $P_n(x, y) \to \Pi(y)$ for all $x, y$.
+\end{theorem}
+
+The \textbf{aperiodic} assumption is correct, because if the result is periodic, then it is clear to see that this convergence is not true. 
+
+Moreover, $P_n(x, y) = \Pr(X_n = y \mid x_0 = x)$.
+
+\begin{proof} 
+	Let $\mathcal{X}^2 = \mathcal{X} \times \mathcal{X}$, and we define a new transition probability $\bar{P}$ on $\mathcal{X}^2$. 
+	Then, we define $\bar{P}((x_1, y_1), (x_2, y_2)) = P(x_1, x_2) P(y_1, y_2)$. We claim that $\bar{P}$ is irreducible.
+
+	Since $P$ is irreducible, there exist $K, L$ such that $P_K(x_1, x_2) > 0$, $P_L(y_1, y_2) > 0$. 
+
+	\begin{lemma}
+		For irreducible aperiodic Markov Chain there exists $m_0$ such that $P_m(x, x) > 0$ for all $m > m_0$, where $m_0$ depends on $x$.
+	\end{lemma}
+
+	\begin{proof} 
+		\begin{align*}
+			\Pr(X_n = y, T \leq n) &= \sum_{m = 1}^n \sum_{x} \Pr(T = m, X_m = x, Y_n = y) \\
+								   &= \sum_{m = 1}^n \sum_{x} \Pr(T = m, X_m = x) P(Y_n = y | X_m = x, T = m) \\
+								   &= \sum_{m = 1}^n \sum_{x} \Pr(T = m, X_m = x) P(Y_n = y | Y_m = x) \\
+								   &= \Pr(Y_n = y, T \leq n).
+		\end{align*}
+
+		We can extend the Markov property here by applying it recursively to state that conditioned on some event $X_m$ in Markov chain, a future event $X_n$ is conditionally independent of \textbf{all} past events $(X_0, \ldots, X_{m-1})$.
+	\end{proof}
+
+	Using the aperiodicity lemma, we know that for $M$ large enough, $P_{K+M}(x_1, x_2) > 0$, and $P_{L+M}(y_1, y_2) > 0$. It then follows that $\bar{P}_{K+L+M}((x_1, y_1), (x_2, y_2)) > 0$.  
+
+	I honestly am completely lost for the rest of the proof I'll figure it out later...
+\end{proof}
+
+\subsection{Reversibility}
+Asking the following question: Does the Markov Chain still work when played in reverse? 
+
+We let $(Y_0, Y_1, \ldots, Y_n) \equiv (X_n, X_{n-1}, \ldots, X_0)$. 
+
+\begin{lemma} 
+	$Y_n$ is still a Markov Chain with transition matrix $\hat{P}$, where 
+	\[\hat{P}(x, y) = \frac{\Pi(y) P(y, x)}{\Pi(x)}.\] 
+\end{lemma}
+
+\begin{definition}[Reversibility] 
+	We say that a Markov chain is \vocab{reversible} if $\hat{P} = P$.
+
+	The detailed balance equation states that $\Pi(x) P(x, y) = \Pi(y) P(y, x)$.
+\end{definition}
+
+\section{Poisson Process}
+This is based on exponential distributions having the memoryless property. 
+
+So if we have $X \sim \mathrm{Exp}(\lambda)$, then $f_X(x) = \lambda e^{-\lambda x}, x \geq 0$, then the CDF is $P(x > t) = e^{-\lambda t}$. 
+We then have the following property: $\Pr(X > t + s \mid X > t) = \Pr(X > s)$. 
+
+\begin{definition}[Poisson Process] 
+Fix $\lambda > 0$. Assume that inter-arrival times $s_1, s_2, \ldots$ are i.i.d. $\mathrm{Exp}(\lambda)$. For each $x \geq 1$, define \[T_n = \sum_{j = 1}^n S_j, T_0 = 0.\]
+Moreover, \[N(t) = \max(n > 0 : T_n \leq t).\] We call the continuous time stochastic process $\{N(t)\}_{t > 0}$ the \vocab{Poisson process} $\mathrm{PP}(\lambda)$.
+\end{definition}
+
+Next, we define the Big Theorem of Poisson processes with its primary key properties.
+\begin{definition}[Increment of Poisson Process] 
+	\[N(T_1, T_2) = N(_2) - N(T_1), T_2 \geq T_1.\]
+\end{definition}
+
+\begin{theorem}[Big Theorem]
+	$\qquad$
+	\begin{enumerate}
+		\item \textbf{Stationary Increment.} $N(t, t + s)$ has the same distribution as $N(s)$.
+		\item \textbf{Independent Increment.} For $0 < t_1 < t_2 < \ldots < t_k$ the set of random variables $N(t_1), N(t_1, t_2), \ldots, N(t_{k-1}, t_k)$ are jointly independent.
+		\item $N(t) \sim \pois(\lambda t)$.
+	\end{enumerate}
+\end{theorem}
+
+We can generalize Poisson processes into multiple dimensions with the Poisson random field, so $\pois(\int_{A} \lambda)$ finds the Poisson process over arrivals in a region $A$.
+
+\begin{definition}[Erlang Distribution] 
+	\[f_{T_n}(t) = \frac{\lambda^n t^{n-1} e^{\lambda t}}{(n-1)!}\]
+\end{definition}
+
+There are two ways to look at a Poisson process: the counts and the inter-arrivals.
+
+\begin{theorem}
+	Let $S_1, S_2, \ldots$ be some set of almost surely positive inter-arrival times and define $T_n = \sum_{j=1}^n S_j$, $N(t) = \max(n \geq 0 : T_n \leq t)$.
+
+	If $\{N(t)\}_{t \geq 0}$ has stationary independent increments, and $N(t) \sim \pois(\lambda t)$, then $S_1, S_2, \ldots$ are i.i.d. $\mathrm{Exp}(\lambda)$ random variables.
+\end{theorem}
+
+\begin{definition}[Splitting] 
+	$N \sim \mathrm{PP}(\lambda)$, and $B_1, B_2, \ldots \sim \mathrm{Bern}(p)$. 
+
+	The splitting process essentially assigns to one of $N_0$ or $N_1$. 
+	\[N_0(t) = |\{ i : B_i = 0, i \leq N(t)\}|\] 
+	\[N_1(t) = |\{ i : B_i = 1, i \leq N(t)\}|\]
+	Then $N_1 \sim \mathrm{PP}(\lambda p), N_0 \sim \mathrm{PP}(\lambda(1 - p))$, so without being given any knowledge of $N$, we have that $N_0, N_1$ are independent.  
+\end{definition}
+
+Essentially what is happening is that when something arrives, we flip a (weighted) coin and flip a switch to determine which process it actually reaches.
+
+\subsection{Random Incidence Property} 
+Let $N \sim \mathrm{PP}(\lambda)$. 
+
+Then, 
+\begin{enumerate} 
+	\item The expected interarrival time is $\frac{1}{\lambda}$. 
+	\item Fix time $t$ in the process, what is the expected length of the 
+		interarrival interval which $t$ falls into? 
+\end{enumerate} 
+
+Then, we want to find 
+\begin{align*}
+	\EE[T_{i+1} - T_i] &= \EE[(t - T_i) + (T_{i+1} - t)] \\
+					   &= \EE[(t - T_i)] + \EE[T_{i+1} - t] \\
+					   &= \EE[(t - T_i)] + \frac{1}{\lambda}.
+\end{align*}
+
+Now, fix a value $\tau$. Then, $\Pr(t - T_i > T) = \Pr(N(t-\tau, t) = 0) = \Pr(N(\tau) = 0) = \Pr(\pois(\lambda \tau) = 0) = e^{- \lambda \tau}$.
+As a result, $\Pr(t - T_i > \tau) = \begin{cases} e^{-\lambda \tau} & 0 \leq \tau \leq t \\ 0 & \tau > t \end{cases}$.
+
+Taking the integrals, we see that 
+\[\EE[t - T_i] = \int_{0}^{\infty} \Pr(t - T_i > \tau) d \tau = \int_{0}^t e^{-\lambda \tau} d\tau = \frac{1 - e^{-\lambda t}}{\lambda}.\] 
+As $t$ goes to $\lambda$, then this converges to $\frac{1}{\lambda}$. 
+
+Thus, $\EE[T_{i+1} - T_i] = \boxed{\frac{2}{\lambda}}$.
 \end{document}

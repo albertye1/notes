@@ -2,7 +2,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
-\usepackage{dirtytalk}
 \usepackage[portrait, margin=0.5in, top=0.8in, bottom=0.3in]{geometry}
 \usepackage{amsmath, amssymb}
 \setlength{\parskip}{1em}
@@ -534,7 +533,7 @@ For congruence, this boils down to the fact that
     \item There are precisely $n$ congreunce classes modulo $n$.
 \end{itemize}
 
-\section{Lecture 12}
+\section{Lecture 12} 
 \subsection{Equivalence Classes, Continued}
 The set of equivalence classes modulo $n$ is defined as $\ZZ / n\ZZ$. 
 
@@ -773,6 +772,311 @@ Started the proof in lec 17, continue in lec 18.
 
 	Now, assume I can find a primitive root modulo $p$, call it $g'$. Then, I claim $g'$ is a primitive root mod $p^l$ for any $l > 0$.
 \end{proof}
+
+\section{Lecture 19}
+Last time we showed that if $m$ has primitive roots and if $(a, m) = 1$, then $x^n \equiv a \pmod m$ has a solution if and only if $a^{\phi(m)/d} \equiv 1 \pmod m$, where $d = (\phi(m), n)$.
+
+\begin{remark}
+    If $x^n \equiv a \pmod m$ has a solution $(a, m, n)$ as above, then it has $(n, \phi(m))$ solutions. 
+\end{remark}
+
+\begin{proof}
+    If $g$ is a primitive root for $m$, $x $
+\end{proof}
+
+In particular, if $m = p$ is prim,e then $x^n \equiv a \pmod p$ has a solution if and only if $a^{(p-1)/d} \equiv d \pmod p$, wherre $d = (p-1, n)$.
+
+If $n = z \neq p$, we have $x^2 \equiv a \pmod p$ has a solution if and only if $a^{(p-1)/z \equiv 1 \pmod p}$.
+
+\begin{lemma}
+    Suppose $m \equiv 2^e p_1^{a_1} \cdots p_l^{a_l}$ if a prime factorization of $m \in \ZZ_{> 0}$ and $(a, m) = 1$. Then $a$ is a quadratic residue mod $m$ iff 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $e = 2$, then $a \equiv 1 \pmod 4$
+
+        If $e \geq 3$, then $a \equiv 1 \pmod 8$.
+        \item $a^{(p_i - 1)/2} \equiv 1 \pmod{p_i}$ for all $i$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+    If $p$ is an odd prime, $p$ not dividing $a$ or $n$, then if $x^n \equiv a \pmod p$ has a solution, then $x^n \equiv a \pmod{p^e}$ is solvable for every $e \geq 1$. All these congruences have the same number of solutions.
+\end{lemma}
+
+\begin{lemma}
+    Let $2^l$ be the highest power of $2$ which divides $n$. Suppose $a$ is odd and that $x^n \equiv a \pmod{2^{2l + 1}}$ is solvable. Then, $x^2 \equiv a \pmod{2^l}$ is solvable for all $e \geq 1$, and all these congruence equations have the same number of solutions.
+\end{lemma}
+
+\section{Lecture 20}
+unsure. missed it. oops
+
+\begin{definition}[Legendre Symbol] 
+	$\frac{a}{p}$ is defined as the Legendre Symbol, which equals:
+	\begin{itemize}
+		\item $0$ if $a \equiv 0 \pmod p$
+		\item $1$ if $a$ is another quadratic residue modulo $p$
+		\item $-1$ if $a$ is a quadratic nonresidue modulo $p$.
+	\end{itemize}
+\end{definition}
+
+\begin{lemma}[Gauss's Lemma] 
+	Consider the set of least residues $S = \{ -(p-1)/2, -(p-3)/2, \ldots, -1, 1, 2, \ldots, (p-1)/2 \}$. Let $\mu$ be the number of least residues $a, 2a, \ldots, (p-1)a/2$ that are negative.
+
+	Then, $(a / p) = (-1)^{\mu}$. 
+\end{lemma}
+
+\section{Lecture 21}
+\subsection{Quadratic Reciprocity}
+The question we're trying to answer is when primes are squares modulo $n$.
+
+We introduced a set $S = \{-\frac{p-1}{2}, \ldots, -1, 1, \ldots, \frac{p-1}{2}\}$, which we call the \vocab{set of least residues} modulo $p$.
+
+If $a\in\ZZ, p \not \vert a$, we form $\{a, 2a, \ldots, \frac{p-1}{2} a\}$ and we ask how many of this set are negative least residues mod $p$. Call this number $\mu$.
+
+\begin{lemma}[Gauss' Lemma] 
+	\[(-1)^\mu = (a / p), \text{ where } (p \nmid a).\]
+\end{lemma}
+
+\begin{proof}
+	For each integer $1 \leq l \leq \frac{p-1}{2}$, let $\pm m_l$ be the least residue corresponding to $la$, where $m_l > 0$. As $l$ ranges over $1, 2, \ldots, \frac{p-1}{2}$, the number of negative signs appearing in the $\pm m_l$ is given by $\mu$.
+
+	We claim now that $\left\{m_l | 1 \leq l \leq \frac{p-1}{2}\right\} = \{1, \ldots, (p-1)/2\}$. 
+
+	We have \[\prod{l = 1}^{(p-1)/2} la = (-1)^\mu \prod_{i = 1}^{(p-1)/2} i.\] 
+	This then equals \[a^{\frac{p-1}{2}} \left(\frac{p-1}{2}\right)! = (-1)^\mu \left(\frac{p-1}{2}\right)! \pmod p.\] 
+
+	Plugging in the Legendre symbol gives us $\left(\frac{a}{p}\right) = a^{\frac{p-1}{2}} \equiv (-1)^\mu \pmod p$.
+\end{proof}
+
+\begin{proposition}
+	$\left(\frac{2}{p}\right) \equiv (-1)^{\frac{p-1}{8}}$. 
+\end{proposition}
+
+\begin{proof}
+	In this case $a = 2$, and $\mu$ is the number of numbers in the set $2, 2 \cdot 2, 3 \cdot 2, \ldots, 2\left(\frac{p-1}{2}\right)$
+	which are strictly greater than $\frac{p-1}{2}$. Let $m$ be the integer characterized by 
+	$2m \leq \frac{p-1}{2}$ and $2(m + 1) > \frac{p-1}{2}$. So $\mu = \frac{p-1}{2}= k$. So $\mu = \frac{p-1}{2} = m$.
+\end{proof}
+
+\begin{corollary}
+	Infinitely many primes of the form $8k + 2$.
+\end{corollary}
+
+\begin{proof}
+	Suppose not and $p_1, \ldots, p_n$ are all of them. Then, $n = (1 \cdot p_1, \cdot \cdots \cdot c_n)^2$, where $\lambda \equiv 0 \pmod n$ and $ n \equiv 0 \pmod p$ if $p | n$.
+
+	Moreover, $Z$ is also a square modulo any $p | n$. So if $p | n, p \equiv 1, 7 \pmod 8$. Then, $\frac{n}{2} \equiv 7 \pmod 8$. Not all the prime divisors of $\frac{n}{2}$ can be $\equiv 1 \pmod 8$, so there exists a prime $p \nmid n$ such tat $p \equiv 7 \pmod 8)$, where $p \neq p_i$. 
+
+	To be continued...
+\end{proof}
+
+\begin{theorem}[Quadratic Reciprocity]
+	\label{qr}
+	\begin{enumerate}[label=(\alph*)] 
+		\item $(-1 / p) = (-1)^{(p-1)/2}$
+		\item $(2 / p) = (-1)^{(p^2-1)/8}$
+		\item $(p/q)(q/p) = (-1)^{((p-1)/2)((q-1)/2)}$.
+	\end{enumerate}
+
+	If one of $p$ or $q$ is $\equiv 1 \pmod 4$, then $p$ is a quadratic residue mod $q$ iff $q$ is a residue mod $p$. 
+
+	If both $p$ and $q$ are $\equiv 3 \pmod 4$, then $p$ is a residue iff $q$ is a nonresidue.
+\end{theorem}
+
+This further implies that if either $p$ or $q$ is equivalent to $1$ modulo $4$, then $(p/q) = (q/p)$. If both are $3$ modulo $4$, then $(p/q) = -(q/p)$. 
+
+\section{Lecture 22}
+\begin{theorem}
+	\begin{enumerate}[label=(\roman*)] 
+		\item If $q \equiv 1 \pmod 4$ then $q$ is a residue mod $p$ iff $p \equiv r \pmod q$ where $r$ is a quadratic residue mod $q$. 
+		\item If $q \equiv 3 \pmod 4$, then $q$ is a quadratic residue mod $p$ iff $p \equiv \pm b^2 \pmod{4q}$ for some odd integer $b$ prime to $q$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof} 
+	\begin{enumerate} 
+		\item $(q / p) = (p / q)$.
+		\item
+			If $q \equiv 3 \pmod 4$, then $(q / p) = (-1)^{((p-1)/2)((q-1)/2)} (p/q)$.
+
+			Assume that $p \equiv \pm b^2 \pmod{4q}$ where $b$ is odd and $(b, q) = 1$.
+
+			If $p \equiv b^2 \pmod{4q}$, then $p \equiv b^2 \equiv 1 \pmod 4$, so $(q / p) \equiv (p / q)$, and $p \equiv b^2 \pmod q$ so $(p / q) = 1$. So, $(q / p) = (1)(1) = 1$.
+
+			If $p \equiv -b^2 \pmod{4q}$, then $p \equiv 3 \pmod 4$, so $(q / p) = -(p / q)$. As $p \equiv -b^2 \equiv q$ as well, we see that $(-b^2 / q) = (-1 / q)(b / q)^2  -1$. Therefore, $(p / q) = (-b^2 / q) = -1$, so $(q / p) = (-1)(-1) = 1$.
+	\end{enumerate}
+\end{proof}
+
+\begin{example} 
+	For which primes is $a = 6$ a quadratic residue?
+\end{example}
+
+We have \[(6 / p) = (2 / p) (3 / p) = 1 \iff (2 / p) = 1, (3 / p) = 1 \text{ or } (2 / p) = -1, (3 / p) = -1.\]
+
+For the first case, we have $p \equiv \pm 1 \pmod 8$ and $p \equiv \pm 1 \pmod{12}$, so $p \equiv \pm 1 \pmod{24}$.
+
+For the second case, we have $p \equiv \pm 3 \pmod 8$ and $p \equiv \pm 5 \pmod{12}$. The first congruence becomes $p \equiv \mp 5 \pmod 8$, so we see once again that both are simultaneously true if $p \equiv \pm 5 \pmod 24$.
+
+Therefore, primes $p$ such that $p \equiv \pm 1$ or $p \equiv \pm 5$.
+
+\begin{theorem}
+	Suppose $a$ is a nonsquare integer. Then, there are infinitely many primes for which $a$ is a quadratic nonresidue.
+\end{theorem}
+
+\begin{corollary} 
+	If $a$ is a quadratic residue mod every prime, it is a square. 
+\end{corollary}
+
+\section{Lecture 23}
+The main focus for today is to prove the below theorem:
+\begin{theorem}
+	If $n \in \ZZ$ is a nonsquare integer, then $n$ is a quadratic nonresidue for infinitely many primes.
+\end{theorem}
+
+\begin{definition}[Jacobi symbol] 
+	If $b \in \ZZ_{>0}$ is an odd integer with prime factorization $b = p_1 \cdots p_n$ and $a \in \ZZ$, then the symbol $(a/b) := (a/p_1)(a/p_2)\ldots(a/p_n)$ where 
+	everything on the RHS is a Legendre symbol.
+\end{definition}
+The Jacobi system essentially expands the Legendre symbol to composite denominators.
+
+\begin{lemma}
+	Let $r, s$ be odd integers. Then, $$(rs - 1)/ 2 \equiv (r-1)/2 + (s-1)/2 \pmod 2$$ and $$(r^2s^2 - 1) \equiv (r^2 - 1)/8 + (s^2 - 1)/ 8 \pmod 2.$$
+\end{lemma}
+
+\begin{proof}
+	If $r, s$ are odd, then $(r - 1)(s - 1) \equiv 0 \pmod 4$. Therefore, $rs - 1 \equiv (r-1) + (s-1) \pmod 4$. Dividing by $2$ gives us that $(rs - 1)/2 \equiv (r - 1)/2 + (s - 1)/2 \pmod 2$. \qed
+
+	We observe that $4 | r^2 - 1$. Therefore, 
+	\begin{align*}
+		(r^2 - 1)(s^2 - 1) &\equiv 0 \pmod {16} \\
+		\implies r^2s^2 - r^2 - s^2 + 1 &\equiv 0 \pmod {16} \\
+		\implies r^2s^2 - 1 &\equiv (r^2 - 1) + (s^2 - 1) \pmod{16}.
+	\end{align*}
+
+	Dividing by $8$ gives us $(r^2s^2 - 1)/8 \equiv (r^2 - 1)/8 + (s^2 - 1)/8 \pmod 2$.
+\end{proof}
+
+\begin{corollary}
+	If $r_1, \ldots, r_n$ are odd integers, then 
+	\[\sum_{i = 1}^n (r_i - 1)/2 \equiv (r_1\cdots r_n - 1)/2 \pmod 2\] and 
+	\[\sum_{i = 1}^n (r_i^2 - 1)/2 \equiv (r_1^2\cdots r_n^2 - 1)/ 8 \pmod 2.\] 
+\end{corollary}
+
+\begin{proof}
+	Induct on $n$, $n = 2$ by the above lemma. Assume the result for $n$ and then for $n+1$ we have 
+	\begin{align*}
+		\sum_{i = 1}^{n+1} (r_i - 1)/2 &= \sum_{i=1}^n (r_i - 1)/2 + (r_{n+1}-1)/2 \\
+									   &= (r_1 \cdots r_n - 1)/2 + (r_{n+1}-1)/2 \\
+									   \equiv (r_1 \cdots r_{n+1} - 1)/2 \pmod 2.
+	\end{align*}
+\end{proof}
+
+\begin{proposition}
+	\begin{enumerate}[label=(\roman*)] 
+		\item $(-1 / b) = (-1)^{(b-1)/2}$ 
+		\item $(2 / b) = (-1)^{(b^2 - 1)/8}$
+		\item $(a / b_1b_2) = (a/b_1)(a/b_2)$.
+	\end{enumerate}
+\end{proposition}
+
+We prove this proposition somehow, then use the proof of that to prove the theorem 
+
+\section{Lecture 24}
+\begin{theorem}[Quadratic Reciprocity] 
+	If $p, q$ are odd primes then \[(p/q)(q/p) = (-1)^{((p-1)/2 \cdot (q-1)/2))}.\]
+\end{theorem}
+
+Our proof will use the roots of unity. 
+
+\section{Lecture 25} 
+\subsection{Algebraic Numbers}
+\begin{definition} 
+	A complex number $s$ is an \vocab{algebraic number} if it satisfies a polynomial equation with rational coefficient. 
+
+	It is an \vocab{algebraic integer} if it satisfies a monic polynomial equation with rational coefficients.
+
+	These are represented as $\bar{\QQ}, \bar{\ZZ}$, respectively.
+\end{definition}
+
+If a number is not algebraic, then it is \vocab{transcendental}. 
+\section{Lecture 26}
+\subsection{Rings, Fields}
+\begin{definition}[Ring] 
+	A \vocab{ring} $R$ is a set $R$ closed under binary operations $+$ and $\cdot$, with the property that 
+	\begin{enumerate}
+		\item $(R, +)$ is an abelian group. 
+		\item Multiplication is associative: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$ 
+		\item Multiplication distributes over addition: $a \cdot (b + c) = a \cdot b + a \cdot c$.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Field]
+	A commutative ring, where every nonzero element has a multiplicative inverse is called a \vocab{field}.
+\end{definition}
+
+\begin{proposition}
+	$\overline{\ZZ}$ forms a ring. 
+\end{proposition}
+
+\begin{definition}
+	A finite $\ZZ$-submodule of $\CC$ is a subset $\mathbf{V}$ of $\CC$ with the property that 
+	\begin{enumerate} 
+		\item $v + w \in \mathbf{V}$ if $v, w \in \mathbf{V}$.
+		\item There exist $v_1, \ldots, v_n \in \mathbf{V} \subset \CC$ so that $\mathbf{V} = \{a_1v_1 + \cdots + a_nv_n \mid a_i \in \ZZ\}$.
+	\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+	If we have a finite $\ZZ$-submodule $\mathbf{V}$ of $\CC$, and $\alpha \in \CC$ such that $\alpha \mathbf{V} = \mathbf{V}$, then $\alpha$ is an algebraic integer.
+\end{lemma}
+
+\begin{proof} 
+	$\alpha$ on $\mathbf{V}$ is given an $n \times n$ matrix with integer coefficients.
+\end{proof}
+
+\begin{proposition}
+	If $\alpha$ is an algebraic number, then $\alpha$ is a root of an irreducible unique monic polynomial $g(x) \in \QQ[x]$. If $h(x) \in \QQ[x]$ has $h(\alpha) = 0$, then $g(n) \mid h(x)$. 
+\end{proposition}
+
+\begin{proof}
+	Here, we assume that $g(x)$ is irreducible. If $g(x) \nmid h(x)$, then $(g(x), h(x)) = 1$. Then, it follows that $r(x)g(x) + s(x)h(x) = 1$ for some $r, s$ and any $x$. However, for $x = \alpha$, we have $g(\alpha) = h(\alpha) = 0$, so this cannot be true. Therefore, $g(x) \mid h(x)$. 
+\end{proof}
+
+Therefore, the $g(x)$ so described is called the \vocab{minimal polynomial} of $\alpha$.
+
+\begin{definition} 
+	If $\alpha \in \CC$, let $\QQ(x)$ denote the smallest subfield of $\CC$ containing $\QQ$ and $\alpha$.
+\end{definition}
+
+Then $\QQ(x) = \left\{ \frac{g(x)}{h(x)} \mid g(x), h(x) \in \QQ[x], h(x) \in 0\right\}$. $g(x), h(x)$ are polynomials, and $g(x)$ is obtained by substituting $\alpha$ for $x$.
+
+\section{Lecture 27} 
+\subsection{Congruence} 
+If $\omega_1, \omega_2, \gamma \in \ZZ$, we say $\omega_1 \equiv \omega_2 \pmod \gamma$ if $(\omega_1 - \omega_2) = \alpha \gamma$, with $\alpha \in \bar{\ZZ}$.
+
+\begin{lemma}
+	If $p$ is a prime, $\omega_1, \omega_2 \in \ZZ$, then $(\omega_1 + \omega_2)^p \equiv \omega_1^p + \omega_2^p \pmod p$.
+\end{lemma}
+
+\begin{proof}
+	This is essentially a proof that all of the middle terms are divisible by $p$.
+	$(\omega_1 + \omega_2)^p$ can be expanded via the binomial theorem, to get 
+	that $\left( \frac{p}{n} \right)$ and $p \mid \dbinom{p}{n}$ if $1 \leq n \leq p$.
+
+	A proof of the quadratic character of $2$ via Gaussian sums:
+\end{proof}
+
+\begin{definition}
+	$g_a = \sum_{t = 0}^{p-1} \left(\frac{t}{p}\right) \zeta^{at}$ is an example of a quadratic Gauss sum.
+\end{definition}
+
+\begin{lemma}
+	h
+\end{lemma}
+
+\begin{corollary}
+	\[p^{-1} \sum_{t = 0}^{p - 1} \zeta^{t(x - y)} = \delta(x, y) = \begin{cases} 1 & x \not \equiv y \pmod p \\ 0 & x \equiv y \pmod p \end{cases}.\] 
+\end{corollary} 
+
 
 \section{Lecture 19}
 Last time we showed that if $m$ has primitive roots and if $(a, m) = 1$, then $x^n \equiv a \pmod m$ has a solution if and only if $a^{\phi(m)/d} \equiv 1 \pmod m$, where $d = (\phi(m), n)$.
