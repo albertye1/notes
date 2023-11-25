@@ -1,4 +1,5 @@
 *clearly i came to college to do networking!*
+*on another note, a lot of the things i've taken for granted are used here. like i was always wondering why you NEEDED a wi-fi password for your own security. i thought it was like unloading bandwidth but the reminders really got me questioning shit.*
 # Low Level Stuff
 We can think of networks via the OSI model: A layered model of protocols.
 
@@ -48,10 +49,9 @@ We also have multiple types of attackers:
 * Can also use tools like `arpwatch` to track ARP responses for suspicious activity
 
 ## DHCP
+*the stuff i say i'd "learn later" when i was learning just how linux worked*
 * get configurations when first connecting to a network
-
 Four steps:
-
 1. **Client discover**: Client broadcasts a request for configuration
 2. **DHCP Offer**: Any DHCP server can respond with a configuration offer.
 	* Usually only one dhcp server responds
@@ -62,10 +62,76 @@ Four steps:
 	* the chosen dhcp server gives offer to client.
 4. **DHCP acknowledgement:** The chosen server confirms that its configuration has been given to the client.
 
+### DHCP Spoofing
+* works similarly to ARP spoofing: new member has no way of verifying the DHCP response.
+* so sender usually only expects one DHCP server to respond, so they will accept 1st response
+	* another **race condition** like ARP
+* similarly, require attacker to be in the same LAN and allow attacker to be an MITM attacker.
+	* attacker claims gateway router's address is actually their address
+	* so any messages meant for the gateway router are sent to the MITM
+	* attacker can also claim that the DNS address is their address, with similar results.
+### Defenses
+* It's actually hard to defend against so we don't
+* Instead, we rely on defenses provided in higher layers...
 ## WPA
-* communicate securely to a wireless local network.
+*i still remember when i was like 13 first installing Ubuntu on my laptop and i had to connect to the school wifi. it was really confusing because like the settings to connect to the wifi had like a bunch of different auth versions and whatnot. so it was there i got to understand SORT OF how this protocol worked (not entirely).*
+A bottom-layer protocol to communicate securely to a wireless local network.
 * something with a passphrase being passed from client to server
+* Wi-Fi: A layer 2 protocol that wirelessly connects machines in a LAN
+	* Access Point: A machine that will help you connect to the network
+	* SSID: The name of the Wi-Fi network
+	* Password: Optionally, a password to secure WiFi communications
+* WPA2 is a protocol for securing Wi-Fi network communications with cryptography
+* Design goals:
+	* Everyone with the Wi-Fi password can join the network
+	* Messages sent over the network are encrypted with keys
+	* An attacker who does not know the Wi-FI password cannot learn the keys
+WPA Handshake
+1. The client sends an authentication request to the access point
+2. Both use the password to derive the `psk` (pre-shared key)
+3. Both then exchange random **nonces**. 
+4. Both use the `psk`, nonces, and MAC addresses to derive the `ptk` (pairwise transport keys)
+5. Both exchange MICs (these are MACs from the crypto unit) to ensure no one has tampered with the nonces, and that the `ptk` was correctly derived
+6. Access point encrypts and sends `gtk` (group temporal key) to the client, used for broadcasts that anyone can decrypt
+7. Client acknowledges receiving `gtk`.
 
+### WPA handshake, in summary
+
+^556fab
+
+* it's kind of intuitive given how you connect, but there are some authentication layers you don't just get based off of intuition.
+-> Authentication Request
+(derive `psk` from wifi password)
+<- ANonce
+(client derives `ptk` from `psk`, nonces, MAC addresses)
+-> SNonce + MIC 
+(server derives `ptk` from `psk`, nonces, MAC addresses)
+<- MIC + `gtk`
+-> ACK of receipt of `gtk`.
+
+### WPA-PSK Attacks
+* **Rogue AP**: Pretend to be an AP, and offer your own ANonce to the client.
+	* If you know the password / `psk`, you can complete the 4-way handshake with the client and become an MITM
+* **Offline BF Attack**: People tend to choose bad passwords, and we can easily check whether or not our guess is correct
+	* Nonces sent unencrypted, and client and AP MAC addresses are public
+	* Eavesdropper guesses a password and derives:
+		* password -> `psk`
+		* `psk` + nonces + MAC addresses -> `ptk`
+		* eavesdropper checks that MIC's match
+* **No forward secrecy**: An eavesdropper who records the values of ANonce and SNonce can derive the key if they later learn the password or PSK.
+	* Compare to DHE: An eavesdropper can't learn the key even if they record $g^a$, $g^b$ and compromise the computer
+## WPA-Enterprise
+* Core issue: Every client starts w/ same `psk` to derive the `ptk`
+	* Fix: have each user use their own username and password instead!
+* Instead of using a `psk`, use a randomly generated key by an authentication server
+	* For your client to trust the auth server, you accept a digital certificate
+	* Form a secure channel to the authentication server, which lets you enter your username and password
+	* If the username and password are correct, the authentication server sends a one-time key to use instead of `psk`.
+* Rest of the handshake proceeds similar to above [[#^556fab]]
+### WPA-Enterprise Attacks
+* defends against the aforementioned attacks
+* but it's still vulnerable to higher-layer attacks like arp or dhcp spoofing. 
+* WPA is a layer 1 protocol and can't cover these attacks!
 # TCP
 ## Ports
 * Ports help us distinguish between different applications on the same computer or server.
@@ -123,7 +189,7 @@ Four steps:
 
 # TLS Handshake
 
-* step 1:
+* step 1: 
 * step 2:
 * step 3: Premaster Secret
 	* rsa
@@ -177,3 +243,6 @@ This is similar to 61C's comparch unit in terms of finally understanding up to t
 	* Victim will cache the bad DNS, thus "poisoning" the cache
 * Defense: Bailiwick Checking
 	* Limit the amount of damage a malicious name server can do
+# Denial-of-Service Attacks
+## SYN flooding
+denying myself the service of looking through this shit

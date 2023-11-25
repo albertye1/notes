@@ -133,19 +133,30 @@
 		* Example: Authentication tokens for generating secure 2F codes
 		* Example: Security keys
 # SQL
-*)': DROP TABLE;*
+*)': DROP TABLE websites; --*
 * HTTP gets information between client and web server
 	* But what if web server needs to call data from a db server?
 * SQL Syntax Info
 	* `SELECT`: Select certain data from a table
 		* `SELECT *` gets everything.
 		* can select rows or strings.
+		* Example: `SELECT * FROM bots` selects all columns from the table `bots`.
+	* `WHERE`: Filters out certain rows according to some condition. Similar to C but just remember `=` instead of `==` and `<>` instead of `!=`
 	* `SET` sets all values to a new number
 		* Can filter with `WHERE`
 	* `DELETE` deletes all rows satisfying a `WHERE` condition.
+	* `CREATE` creates a new table
+	* `DROP TABLE` deletes a specified table
+	* `UNION` works similar to a `;` in joining two commands
+	* `--` comments out all following blocks of code
 
 ## SQL Injection
-* Weird requests get appended in SQL as SQL, so it could be put into the 
+* Weird requests get appended in SQL as SQL, so it could be entered and hijack the backend code.
+	* Protection: Escape sequences for critical characters that prevent SQL from executing in storage
+	* Other protection: Parse a prepared SQL statement, and then insert the data
+		* We will never parse any untrusted data
+		* Not part of the SQL standard, so they rely on the actual SQL implementation to implement prepared statements.,
+		* Must rely on API to correctly convert prepared statement into impl-specific protocol.
 * Blind SQL injection:
 	* Not all SQL queries are used in a visible way
 	* Visible: shopping carts, comment threads, list of accounts
@@ -153,4 +164,13 @@
 	* Some SQL vulnerabilities only return T/F to determine whether your exploit worked!
 
 # CAPTCHA
-verify ur not an evan bot
+*verify ur not an evan bot*
+* should be easy for humans but hard for robots to solve
+* issues:
+	* arms race: CAPTCHAs need to get harder as they're being trained to solve
+	* accessibility: harder CAPTCHAs are harder for humans to solve
+	* ambiguity: what if the validator doesn't know the solution either
+	* not all bots are bad: CAPTCHAs can't distinguish good bots from bad bots
+* attacks:
+	* outsourcing attack -- paying humans to solve the CAPTCHA for you
+		* so it just distinguishes attackers who want to pay vs attackers who don't
