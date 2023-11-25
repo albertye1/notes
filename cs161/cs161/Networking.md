@@ -37,15 +37,35 @@ We also have multiple types of attackers:
 * Required to be in the same LAN as the sender to pull off the attack, and now the attacker can be an MITM attacker!
 ### Defenses
 * Use **switches** to avoid broadcasts and ARP requests.
+* Anytime Alice wants to send a message to Bob, she sends the message to a switch w/ the cache of IP/MAC mappings.
+	* Since everyone uses the switch its cache is larger than an individual user's cache
+* If Bob's MAC address is in the cache, the switch sends the message directly to Bob
+* Otherwise, the switch broadcasts the message
 * Benefits:
-	* security
-	* efficiency
-	* isolation
+	* security -- reduces the number of broadcasts
+	* efficiency -- more requests sendable
+	* isolation -- some switches can implement VLAN's, which split a LAN into several isolated parts.
+* Can also use tools like `arpwatch` to track ARP responses for suspicious activity
+
+## DHCP
+* get configurations when first connecting to a network
+
+Four steps:
+
+1. **Client discover**: Client broadcasts a request for configuration
+2. **DHCP Offer**: Any DHCP server can respond with a configuration offer.
+	* Usually only one dhcp server responds
+	* offer includes IP for client, IP of DNS, and gateway router's IP address
+	* each offer also has an expiration time (how long the user can use this configuration)
+3. **Client request:** The client broadcasts which config it has chosen.
+	* If multiple dhcp servers made offers, the ones that weren't chosen discard their offer
+	* the chosen dhcp server gives offer to client.
+4. **DHCP acknowledgement:** The chosen server confirms that its configuration has been given to the client.
+
 ## WPA
 * communicate securely to a wireless local network.
 * something with a passphrase being passed from client to server
-## DHCP
-* get configurations when first connecting to a network
+
 # TCP
 ## Ports
 * Ports help us distinguish between different applications on the same computer or server.
