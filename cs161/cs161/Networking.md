@@ -1,4 +1,51 @@
 *clearly i came to college to do networking!*
+# Low Level Stuff
+We can think of networks via the OSI model: A layered model of protocols.
+
+1. Communication of bits
+2. Local frame delivery
+	* ethernet: the most common layer 2 protocol
+	* MAC addresses: 6-byte addressing system used by ethernet
+3. Global packet delivery
+4. Transport of data
+5. not mentioned
+6. not mentioned
+7. Apps and Services (the web)
+
+We also have multiple types of attackers:
+
+* Man-in-the-middle: Can modify or delete packets, and read packets. Mallory from the cryptography unit has made a comeback
+* On-path atacker: Can read packets -- sort of like the eavesdropper from before.
+* Off-path attacker: Cannot modify, delete, or read packets.
+
+## ARP
+* Occurs in layer 2 and 3 of this process.
+* translate IP addresses to MAC addresses, assuming knowledge of only the former. 
+* Assume Alice knows Bob's IP: `1.2.3.4`.
+	* Broadcasts to everyone in the LAN: "What is the MAC address of `1.2.3.4`?"
+	* If Bob is outside the LAN, the router will respond with its MAC address. So if Alice wants to send a packet to Bob, she sends it to the router.
+	* The router can forward packet to other LANs to reach Bob.
+	Alternatively, if ALice knows what addresses belong to the LAN, she will request the router's IP.
+* All received ARP replies are cached, even if no request was sent.
+* Bob responds by sending message only to Alice: My IP is `1.2.3.4` and my MAC address is `ca:fe:f0:0d:be:ef`.
+### ARP Spoofing
+* can send a message pretending to be somebody else's IP. Literally you can just say your IP is the received IP but use the wrong MAC address.
+	* all types of attackers can do this, although it might be harder if you can't read or modify packets.
+	* is also a race between the attacker and the legitimate user
+* Now the sender has no way of verifying the ARP response, as they're only expending one machine to respond.
+	* **Race condition**: As long as the attacker responds faster, the requester will accept the attacker's response.
+* Required to be in the same LAN as the sender to pull off the attack, and now the attacker can be an MITM attacker!
+### Defenses
+* Use **switches** to avoid broadcasts and ARP requests.
+* Benefits:
+	* security
+	* efficiency
+	* isolation
+## WPA
+* communicate securely to a wireless local network.
+* something with a passphrase being passed from client to server
+## DHCP
+* get configurations when first connecting to a network
 # TCP
 ## Ports
 * Ports help us distinguish between different applications on the same computer or server.
