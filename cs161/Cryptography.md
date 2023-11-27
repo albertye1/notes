@@ -118,6 +118,9 @@ Trait | Symmetric-key | Asymmetric-key
 
 **Remember** that although these symmetric-key schemes provide confidentiality, they do not provide integrity or authentication.
 # MAC's 
+
+^9968c9
+
 * detect if something has been changed 
 
 ## Cryptographic Hashes

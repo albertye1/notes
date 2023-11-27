@@ -33,7 +33,7 @@
 \lhead{Math 115 - Introduction to Number Theory}
 \rhead{Albert Ye}
 
-\title{Common Core 5th Grade Curriculum}
+\title{Math 115 - Introduction to Number Theory}
 \author{albert ye}
 \date{\today}
 
@@ -1110,5 +1110,35 @@ If $n = z \neq p$, we have $x^2 \equiv a \pmod p$ has a solution if and only if 
 \begin{lemma}
     Let $2^l$ be the highest power of $2$ which divides $n$. Suppose $a$ is odd and that $x^n \equiv a \pmod{2^{2l + 1}}$ is solvable. Then, $x^2 \equiv a \pmod{2^l}$ is solvable for all $e \geq 1$, and all these congruence equations have the same number of solutions.
 \end{lemma}
+
+\section{Cubic Equations}
+Today, we'll look at solutions of $x^2 + y^2 = 1$ in $\ZZ / p\ZZ$ for $p \equiv 1 \pmod 3$.
+
+Recall the definition of Jacobi sumbs gives us $J(\chi, \chi) = \sum_{a + b = 1} \chi(a) \chi(b)$ for cubic character $\chi$.
+
+For $\omega$ a 3rd root of unity, we see that $\chi$ takes values in $\{1, \omega, \omega^2\}$. So this means that $J(\chi, \chi) = a + b\omega$.
+
+\begin{proposition}
+	We have that $a \equiv -1 \pmod 3$ and $b \equiv 0 \pmod 3$.
+\end{proposition}
+
+\begin{proposition}
+	Let $A = 2a - b$ and $B = b / 3$. Then, $4p = A^2 + 27B^2$ and $A \equiv 1 \pmod 3$.
+\end{proposition}
+
+\begin{theorem}
+	Suppose $p \equiv 1 \pmod 3$. Then, there are integers $\overline{A}$ and $B$ such that $4p = A^2 + 27B^2$. If we ask that $A \equiv 1 \pmod 3$, then $A$ is unieuqly determined.
+
+Moreover, we would have that $N(x^3 + y^3 = 1) = 2p + A$.
+\end{theorem}
+
+\begin{proof}
+	We recall that $N(x^3 + y^3 = 1) = p \cdot 2 + 2 \Re J(\chi, \chi)$.
+
+	Therefore, as $J(\chi, \chi) = a + b\omega$, we observe that $\Re J(\chi, \chi) = a - b/2$. So, $2 \Re J(\chi, \chi) = 2a - b = A \equiv 1 \pmod 3$.
+\end{proof}
+
+\section{General $n$}
+This is 8.4 in the book.
 \end{document}
 

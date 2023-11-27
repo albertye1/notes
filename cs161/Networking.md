@@ -91,7 +91,7 @@ WPA Handshake
 2. Both use the password to derive the `psk` (pre-shared key)
 3. Both then exchange random **nonces**. 
 4. Both use the `psk`, nonces, and MAC addresses to derive the `ptk` (pairwise transport keys)
-5. Both exchange MICs (these are MACs from the crypto unit) to ensure no one has tampered with the nonces, and that the `ptk` was correctly derived
+5. Both exchange [[Cryptography#^9968c9|MICs]] (these are MACs from the crypto unit) to ensure no one has tampered with the nonces, and that the `ptk` was correctly derived
 6. Access point encrypts and sends `gtk` (group temporal key) to the client, used for broadcasts that anyone can decrypt
 7. Client acknowledges receiving `gtk`.
 
@@ -127,7 +127,7 @@ WPA Handshake
 	* For your client to trust the auth server, you accept a digital certificate
 	* Form a secure channel to the authentication server, which lets you enter your username and password
 	* If the username and password are correct, the authentication server sends a one-time key to use instead of `psk`.
-* Rest of the handshake proceeds similar to above [[#^556fab]]
+* Rest of the handshake proceeds similar to [[#^556fab|above]]
 ### WPA-Enterprise Attacks
 * defends against the aforementioned attacks
 * but it's still vulnerable to higher-layer attacks like arp or dhcp spoofing. 
@@ -211,7 +211,7 @@ WPA Handshake
 	* record numbers are encrypted & used for security
 	* while sequence numbers are unencrypted and are used for correctness in the layer belowso
 
-So finally, we have **HTTPS:** HTTP over a TLS connection.
+So finally, we have **HTTPS:** [[Internet#^f055ef|HTTP]] over a TLS connection.
 This is similar to 61C's comparch unit in terms of finally understanding up to the top-level of networking, and also similar in that I pretty much understood nothing.
 # DNS
 * need to reconcile IP address and domain names.

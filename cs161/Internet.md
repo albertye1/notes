@@ -1,5 +1,8 @@
 *welcome to the internet*
 # HTTP
+
+^f055ef
+
 ## Cookies
 * Customizing HTTP responses
 	* HTTP is a request-response protocol, so the web server processes each request independently of other requests.

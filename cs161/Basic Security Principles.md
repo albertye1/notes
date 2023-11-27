@@ -33,3 +33,8 @@
 	* Do not think about how to make your code secure, think about how to write secure code
 * Assume the attacker knows everything about the system.
 	* That is, you can't use aspects of the system to provide some sort of defence
+
+Course has 3 units:
+1. [[Memory Safety Vulnerability]]
+2. [[Cryptography]]
+3. [[Networking]]
