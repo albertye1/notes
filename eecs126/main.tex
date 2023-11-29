@@ -547,4 +547,69 @@ Taking the integrals, we see that
 As $t$ goes to $\lambda$, then this converges to $\frac{1}{\lambda}$. 
 
 Thus, $\EE[T_{i+1} - T_i] = \boxed{\frac{2}{\lambda}}$.
+
+\section{Estimators}
+\subsection{Hilbert Space}
+\subsection{Gram-Schmidt}
+\subsection{LLSE}
+\subsection{MMSE}
+
+\section{Kalman Filter}
+Start with discrete time linear system models.
+
+\begin{example}
+	We have a particle moving along a line at fixed velocity. Observed every $\Delta$ time units. 
+
+	So, we have $\begin{bmatrix}x_{k+1} \\ y_{k+1}\end{bmatrix} = \begin{bmatrix} x_k + y_k \Delta \\ y_k \end{bmatrix} = \begin{bmatrix}1 & \Delta \\ 0 & 1 \end{bmatrix}$.
+
+	Now we have $x_{k+1} = Ax_k$, for some matrix $A$ and $x_k \in \RR^2$.
+\end{example}
+
+Today we'll cover this example but with noise, i.e. $x_{k+1} = Ax_{k} + V_k$.
+
+\begin{example}
+	Particle moving under fixed acceleration, once again with discrete time and time step $\Delta$. Then, 
+	\[\begin{bmatrix}x_{k+1} \\ y_{k+1} \\ z_{k+1} \end{bmatrix} = \begin{bmatrix} x_{k} + y_{k} \Delta \\ y_{k} + z_{k} \Delta \\ z_k \end{bmatrix}.\] We can then get a similar matrix: \[\begin{bmatrix} 1 & \Delta & 0 \\ 0 & 1 & \Delta \\ 0 & 0 & 1 \end{bmatrix}.\]
+\end{example}
+
+More generally, in continuous time we have a dynamical system $\left[\frac{d}{dt} x\right] = A x(t)$ for some matrix $A$ starting at $X(0)$. 
+The solution is $x(t) = e^{At} x(0)$, using the taylor series $e^{At} \sum_{n = 1}^\infty \frac{(At)^n}{n!}$.
+
+In discrete time, $x_{k+1} = Ax_k$ where $A = e^{A_c \Delta}$.
+
+\subsection{Noisy dynamics model}
+Let's return to our original value, 
+$x_{k+1} = Ax_{k} + V_{k}$, where $V_k$ is the noise. We now assume that the state cannot be measured. 
+We have the model for observation: $Y_k = CX_k + W_k$, where $C$ is a fixed scalar and $W_k$ is the observation noise.
+
+We're interested in computing $L[X_n \mid Y_1, \ldots, Y_{n-1}], n \geq 0$. At $n = 0$, this means $\EE[X_0] = 0$.
+We'll see that we need $L[X_n \mid Y_1, \ldots, Y_{n-1}$ as an intermediary. This can be called a \vocab{1-step predictor}.
+
+Recall: If $(U, V)$ are jointly defined, $U \in \RR^m$ and $V \in \RR^n$, then $L[U \mid V]$ denotes the LLSE estimate of $U$ given $V$, and has the form $KV$ for $K \in \RR^{m \times n}$, where $\EE[(U - KV) V^T] = 0$, i.e. $\Sigma_{UV} - K\Sigma_V = 0$.
+
+\begin{example}
+	Suppose $V = \begin{bmatrix} V_1 \\ V_2 \\ V_3 \end{bmatrix}$, where $V_3 = V_1 + V_2$, for $n = 3, m = 1$. Say $V = V_1 + V_2$. Then, $K = \begin{bmatrix} 1 & 1 & 0 \end{bmatrix}$ gives $KV = V_1 + V_2$. But $K = \begin{bmatrix} 0 & 0 & 1 \end{bmatrix}$ also gives the same thing. 
+
+	We have that $L[U \mid V] = V_1 + V_2$.
+\end{example}
+
+The most important property we'll use: 
+\begin{lemma}[Orthogonal Updates]
+\[L[X \mid Y, Z] = L[X \mid Y] L[X \mid Z - L[Z \mid Y]].\]
+\end{lemma}
+Essentially, we're finding an orthogonal basis of the span of $Y$ and $Z$, and then add the individual projections.
+
+It suffices to prove that
+\[\EE[(X - L[X \mid Y] - L[X \mid W]) Y^T] = 0,\] 
+\[\EE[(X - L[X \mid Y] - L[X \mid W]) Z^T] = 0.\]
+
+\subsubsection{Scalar Case} 
+We see that $x_n = a x_{n-1} + v_n$, for $n \geq 1$. Then, $y_n = x_n + w_n$. All the $w_n$ are i.i.d. with $\EE[w_n] = 0$, and $\EE[w_n^2] = \sigma_{w}^2 < \infty$. 
+Notice we've ignored the constant $C$ here, this is because if $C$ is nonzero, it doesn't matter, and if $C = 0$, then the data is just noise and completely meaningless.
+
+From the key lemma:
+$L[X_n \mid y_1, \ldots, y_n] = L[x_n \mid y_1, \ldots, y_{n - 1}] + L[x_n \mid \hat{y}_n]$. 
+
+$\hat{x}_{n \mid n} = \hat{x}_{n \mid n - 1} + k_n y_n$. We need to write $\hat{x}_{n \mid n-1}$ in terms of $\hat{x_{n - 1 \mid n - 1}}$. We have 
+\[\hat{x}_{n \mid n} = L[x_n \mid y_1, \ldots, y_{n - 1}] = L[ax_{n - 1} \mid y_1, \ldots, y_{n-1}] = a\hat{x}_{n-1 \mid n-1}.\]
 \end{document}

@@ -91,4 +91,55 @@ Other topics: Malware, Tor, BTC
 		* Optional: Server anonymity with onion services
 	* Performance: Reasonably low-latency. Obviously slower than normal connections
 	* Tor protects against local adversaries
-	* 
+## Tor Circuit
+* We basically just encrypt a bunch of stuff 
+	* Sender queries the directory server and chooses 3 relays
+	* Forms TLS connection with an entry node, then 2nd through the first, then 3rd through the 2nd, then connect to the exit node, then to recipient.
+	* 1st relay knows Alice sent, 3rd knows sends to Bob, so to them it's all anonymous
+* Exit Node
+	* Can see the message and the recipient
+	* The exit node, is then a man-in-the-middle attacker
+	* Not a worry if [[Networking#^4a8bd7|TLS]] is used.
+## Weaknesses
+### Timing Attack
+* A network attacker who has a full global view of the network can learn that Alice and Bob are talking
+	* Exploit a timing attack: Observe when Alice sends a message, when Bob receives a message, and link the two together.
+* Global adversaries aren't part of the threat model, and thus aren't protected against.
+### Distinguishable Traffic
+* You need your specs to be as commonplace as possible.
+* Defense: Tor bridges
+	* Entry nodes not viewable on any public list
+## Tor In Practice
+* Benefit: Free to use
+	* Mostly funded by the US government
+	* By using Tor, users "pay" by providing traffic for other users to hide in.
+	* Drawback: Exit nodes are a man-in-the-middle attacker
+		* However, your internet is ALSO full of MITMs so get fucked
+	* Drawback: Performance
+	* Drawback: Usability tradeoffs for full anonymity
+* Tor for Censorship Resistance
+	* Tor hides the sites a user is connecting to
+	* Censors can easily block access to all public Tor entry points
+		* Bridge services provide a set of unlisted entry points, so they can't be blocked by IP
+	* Censors can block traffic that looks like Tor traffic
+		* Pluggable transports make traffic look more like normal traffic
+	* Censors can pretend to be a tor client to see if an endpoint is a Tor node.
+	* Arms race b/w Tor and censors.
+* Hosting Illegal Services on Tor
+	* Tor onion services are often used for services widely considered illegal around the world.
+		* Legitimate hosting services like Cloudflare will refuse to host these services
+		* Most countries will take legal action against things
+		* **SUPER** illegal -peyrin
+	* Dark Markets: Marketplaces for illegal goods
+		* Silk road -- libertarians and free market people start doing shit
+		* You can buy drugs here
+		* "Places I would advise staying away from... makes a lot of money these days" -peyrin
+		* ppl scamming asw
+	* Cybercrime forums: Websites for discussing illegal activities
+# Bitcoin
+* Should've been part of [[Cryptography]] but we out of time
+* Sending and receiving money without trusting a central
+## Identity and Transactions
+* Trusted, public ledger.
+## Bitcoin (Nick's version)
+* Nick Weaver FUCKING HATES bitcoin
