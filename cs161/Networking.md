@@ -1,5 +1,4 @@
 *clearly i came to college to do networking!*
-*on another note, a lot of the things i've taken for granted are used here. like i was always wondering why you NEEDED a wi-fi password for your own security. i thought it was like unloading bandwidth but the reminders really got me questioning shit.*
 # Low Level Stuff
 We can think of networks via the OSI model: A layered model of protocols.
 
@@ -74,7 +73,6 @@ Four steps:
 * It's actually hard to defend against so we don't
 * Instead, we rely on defenses provided in higher layers...
 ## WPA
-*i still remember when i was like 13 first installing Ubuntu on my laptop and i had to connect to the school wifi. it was really confusing because like the settings to connect to the wifi had like a bunch of different auth versions and whatnot. so it was there i got to understand SORT OF how this protocol worked (not entirely).*
 A bottom-layer protocol to communicate securely to a wireless local network.
 * something with a passphrase being passed from client to server
 * Wi-Fi: A layer 2 protocol that wirelessly connects machines in a LAN
@@ -107,7 +105,7 @@ WPA Handshake
 -> SNonce + MIC 
 (server derives `ptk` from `psk`, nonces, MAC addresses)
 <- MIC + `gtk`
--> ACK of receipt of `gtk`.
+-> ACK of receipt of `gtk`. 
 
 ### WPA-PSK Attacks
 * **Rogue AP**: Pretend to be an AP, and offer your own ANonce to the client.
@@ -206,7 +204,7 @@ WPA Handshake
 		* client verifies signature, then generates a secret $b$ and computes $g^b \pmod p$.
 		* client and server now share premaster secret $g^{ab} \pmod p$.
 	* both of these strategies work. which one is better? diffie hellman.z
-## Replay Attacks
+### Replay Attacks
 * add record numbers in the encrypted TLS message. every message uses a unique RN, but if an attacker replays a message the number will be repeated
 	* this means we can detect record numbers
 * TLS record numbers are **not** TCP sequence number
@@ -248,3 +246,33 @@ This is similar to 61C's comparch unit in terms of finally understanding up to t
 # Denial-of-Service Attacks
 ## SYN flooding
 denying myself the service of looking through this shit
+# Firewalls
+* Certain conditions for accepting or not accepting traffic going in and out of a certain server.
+* A couple attributes of firewalls:
+	* **Network-based**: Determines what traffic is allowed to enter or exit a network
+	* **Host-based**: Determines what information can be sent to or from certain hosts in the network
+* Firewalls all have some sort of policy, which can be customized.
+	* **Default-Allow**: Defaults to allowing all traffic
+	* **Default-Deny**: Defaults to denying all traffic
+	* Essentially here, we have to pick between blacklisting suspicious traffic or whitelisting desired traffic.
+	* On top of a default-allow or default-deny policy, certain rules can be added, depending on whether or not the firewall is **stateless** or **stateful**.
+* Stateless Packet Filters
+	* Have no history
+	* All decisions must be made from the information of the packet
+	* Can have trouble implementing complex policies with knowledge of history
+	* Ex: `Allow inbound traffic in response to an outbound connection`.
+		* Can be implemented in TCP by only allowing traffic with the ACK flag set.
+			* If the internal computer sees an ACK packet without having formed a connection, it will drop packet / send RST.
+		* Can't be implemented in UDP.
+	* But in most cases, you're limited to just anything you can implement via knowledge from the ALC
+		* So this is like sender, port, and whether or not it's UDP or TCP
+* Stateful Packet Filters
+	* Keep state in the implementation of the packet filter.
+	* This allows us to check things like the intended recipient, the size, what type of request (http, ftp) the packet is, 
+	* Downside is that u actually need to brain to see what to put the states as.
+### Subverting Packet Filters
+* Consider an example: Deny all connections containing the word "root"
+	* Split the word across packets
+	* Send the split packets out of order, to be reassembled by TCP by sequence number.
+* IP Packets have a TTL, so using the TTL the attacker can find how many hops to a server. So, an attacker can send packets with a shorter TTL that go past the firewall, but not to the recipient.
+	* This only works if the recipient is farther than the firewall.

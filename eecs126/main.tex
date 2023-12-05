@@ -604,6 +604,11 @@ It suffices to prove that
 \[\EE[(X - L[X \mid Y] - L[X \mid W]) Z^T] = 0.\]
 
 \subsubsection{Scalar Case} 
+First, some notation:
+\begin{definition}
+	Let $\hat{x}$ be the observation and $\tilde{x}$ be the error.
+\end{definition}
+
 We see that $x_n = a x_{n-1} + v_n$, for $n \geq 1$. Then, $y_n = x_n + w_n$. All the $w_n$ are i.i.d. with $\EE[w_n] = 0$, and $\EE[w_n^2] = \sigma_{w}^2 < \infty$. 
 Notice we've ignored the constant $C$ here, this is because if $C$ is nonzero, it doesn't matter, and if $C = 0$, then the data is just noise and completely meaningless.
 
@@ -613,5 +618,26 @@ $L[X_n \mid y_1, \ldots, y_n] = L[x_n \mid y_1, \ldots, y_{n - 1}] + L[x_n \mid 
 $\hat{x}_{n \mid n} = \hat{x}_{n \mid n - 1} + k_n y_n$. We need to write $\hat{x}_{n \mid n-1}$ in terms of $\hat{x_{n - 1 \mid n - 1}}$. We have 
 \[\hat{x}_{n \mid n} = L[x_n \mid y_1, \ldots, y_{n - 1}] = L[ax_{n - 1} \mid y_1, \ldots, y_{n-1}] = a\hat{x}_{n-1 \mid n-1}.\]
 
+<<<<<<< HEAD
 The vector case isn't in scope for the final.
+=======
+\subsection{Innovation and Gain}
+We call the projection of $x_n$ onto $\tilde{y_n}$ $k_n \tilde{y_n}$, as it's a linear function of $\tilde{y_n}$.
+
+\[\hat{x}_{n \mid n} = L[x_n \mid x_1, \ldots, x_n] = L[x_n \mid x_1, \ldots, x_{n-1}] + L[x_1 \mid \tilde[x_1 \mid \tilde{y_n}].\]
+
+\begin{definition}[Kalman Gain] 
+	\[k_n = \frac{\sigma^2_{n \mid n}}{\sigma^2_{n \mid n-1} + \sigma^2_{w}}\]
+\end{definition}
+
+\begin{proof}
+	We first find $\sigma_{n \mid n}$.
+	\begin{align*}
+		\sigma^2_{n \mid n} &= \EE[(x_n - \hat{x}_{n \mid n})^2] \\
+							&= \EE[(x_n - (\hat{x}_{n \mid n-1} + k_n \hat{y_n})] \\
+							&= \EE[((1 - k_n) \hat{x}_n - k_n w_n)^2] \\
+							&= (1 - k_n)^2 \sigma^2_{n \mid n-1} + k_n^2 \sigma^2_{w}.
+	\end{align*}
+\end{proof}
+>>>>>>> 112efed79e9cd961ccd01f61873bebcace9d18e6
 \end{document}
