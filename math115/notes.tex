@@ -22,7 +22,7 @@
     linkcolor=blue,
     filecolor=magenta,      
     urlcolor=cyan,
-    pdftitle={Overleaf Example},
+    pdftitle={Math 115 Notes},
     pdfpagemode=FullScreen,
     }
 
@@ -1114,7 +1114,7 @@ If $n = z \neq p$, we have $x^2 \equiv a \pmod p$ has a solution if and only if 
 \section{Cubic Equations}
 Today, we'll look at solutions of $x^2 + y^2 = 1$ in $\ZZ / p\ZZ$ for $p \equiv 1 \pmod 3$.
 
-Recall the definition of Jacobi sumbs gives us $J(\chi, \chi) = \sum_{a + b = 1} \chi(a) \chi(b)$ for cubic character $\chi$.
+Recall the definition of Jacobi sums gives us $J(\chi, \chi) = \sum_{a + b = 1} \chi(a) \chi(b)$ for cubic character $\chi$.
 
 For $\omega$ a 3rd root of unity, we see that $\chi$ takes values in $\{1, \omega, \omega^2\}$. So this means that $J(\chi, \chi) = a + b\omega$.
 
@@ -1140,5 +1140,18 @@ Moreover, we would have that $N(x^3 + y^3 = 1) = 2p + A$.
 
 \section{General $n$}
 This is 8.4 in the book.
+
+\section{Lecture -1}
+I missed so many lectures I think I have to start counting backwards now oops.
+
+Today, we are observing the equation $a_1 x_1^{n_1} + \cdots + a_r x_r^{n_r} = b$, where $a_i \in \ZZ$, $b \in \ZZ$. In the integers, we have that $x^2 + y^2 = 1$ in $\ZZ / p\ZZ$ is just a bunch of integers.
+
+\begin{proposition}
+	If $\chi_1, \ldots, \chi_r$ are nontrivial characters, then: 
+	\begin{itemize}
+		\item if $\chi_1 - \chi_r \neq \epsilon$, then $|J(\chi_1, \ldots, \chi_r)| = p^{(r-1)/2}$.
+		\item if $\chi_1 - \chi_r = \epsilon$, then $|J(\chi_1, \ldots, \chi_r)| = p^{(r-2)/2}$.
+	\end{itemize}
+\end{proposition}
 \end{document}
 

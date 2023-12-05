@@ -31,6 +31,7 @@
 * Use fail-safe defaults
 * Design in security from the start
 	* Do not think about how to make your code secure, think about how to write secure code
+	* This is for you Microsoft. We'd update all our shit if you redesigned it to be secure
 * Assume the attacker knows everything about the system.
 	* That is, you can't use aspects of the system to provide some sort of defence
 

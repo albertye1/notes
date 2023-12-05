@@ -17,7 +17,7 @@
 	* Sending cookies
 		* Browser automatically attaches relevant cookies to every request
 		* Server uses cookies to customize responses and connect related requests
-* Parts of a cookie
+* Parts of a cookie / Flags of note
 	* Domain and Path
 		* **domain attribute** and **path attribute** define which requests the browser should attach the cookie for
 		* The **domain attribute** usually looks like the domain in a url (`toon.cs161.org`)
@@ -71,13 +71,16 @@
 * How might we trick the victim into making a POST request?
 	* Example POST request: Submitting a form
 	* Strategy #1: Trick the victim into clicking a link
-		* **Note**: clicking a link makes a GET request, so the link can't directly make the malicious POSt request.
+		* **Note**: clicking a link makes a GET request, so the link can't directly make the malicious POST request.
+		* So instead, you'll have to specify the method you want to request if you're trying to make an exploit here.
 		* The link can open an attacker's website, which contains some JS that makes the actual malicious POST
 	* Strategy #2: Put some JS on a website the victim will visit
 		* Example: Pay for an advertisement on the website and put JavaScript in the ad.
 * CSRF is one of the top 10 software weaknesses, despite the age of the attack.
 * Can even perform CSRF on IoT devices, especially because these generally use default paswords.
-	* Imagine your smart refrigerator gets hacked or smth that's gotta be depressing. This is why I'm not buying into all this smart x smart y stuff
+	* Imagine your smart refrigerator gets hacked or smth
+### Defense: HTML Sanitization
+* Replace HTML code with some escape codes, for example angle brackets, parentheses, slashes. So nothing that is actually in the URL can get compiled into web code.
 ### Defense: CSRF Tokens
 * Example: HTML forms
 	* Forms are vulnerable to CSRF
@@ -104,7 +107,12 @@
 
 # Other Web Attacks
 ## XSS
-* Update later
+* Relies on flaws in the Same-Origin Policy
+	* Basically says that if the website has the same scheme, host and port. So this means using http:// or https:// when required, and an identical domain name. Different subdomains, however, are ok.
+	* However, there are a few things that don't need to be of the same origin:
+		* **JavaScript**: runs with the origin of the page that loads it
+		* **Images**: have the origin of the pages they come from
+		* **Frames**: have the origin of the retrieval URL
 * Websites use untrusted content as control data
 ### Stored XSS
 * Attacker's JS is stored on legit server and sent to browsers
