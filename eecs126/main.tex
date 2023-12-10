@@ -548,10 +548,50 @@ As $t$ goes to $\lambda$, then this converges to $\frac{1}{\lambda}$.
 
 Thus, $\EE[T_{i+1} - T_i] = \boxed{\frac{2}{\lambda}}$.
 
+\section{CTMCs}
+
 \section{Estimators}
+\subsection{MAP and MLE}
+
+
+\subsection{Hypothesis Test}
+During hypothesis testing, we are given two options: A null hypothesis $H_0$ and an alternative hypothesis $H_1$. We want to determine whether or not $H_0$ or $H_1$ is the accurate hypothesis, and reject the other.
+
+An example would be a speedrunner getting a bunch of lucky piglin trades. The null hypothesis is that the rates of ender pearls during piglin trades is the same as in the vanilla game, and the alternative hypothesis is that the rate of ender pearls was tweaked. The calculations in the example provided reveal that the speedrunner was cheating and also looks like Rumplestiltskin.
+
+Moreover, let $A$ be the acceptance region: the region for which we think that $H_0$ should be more likely than $H_1$.
+
+There are two possible statistical errors:
+\begin{enumerate}
+	\item \vocab{Type-I Error} - Also known as probability of fales alarm: $\alpha(A) = \Pr_{H_0} (x \not \in A)$.
+		This value is also known as the confidence value.
+	\item \vocab{Type=2 Error} - $\beta(A) = \Pr_{H_1} (x \in A)$.
+	\end{enumerate}
+
+\begin{definition}[Neyman-Pearson Test]
+	The \vocab{Neyman-Pearson Test}, also known as the \vocab{Likelihood Ratio Test}, is defined as follows:
+
+	\begin{enumerate}
+		\item Accept $H_0$ if $L(x) < c$
+		\item Reject $H_0$ with probability $\gamma$ if $L(x) = c$.
+		\item Reject $H_0$ if $L(x) > c$
+	\end{enumerate}
+
+	This usage of $L(x)$ characterizes the acceptance region $A$.
+\end{definition}
+
+\begin{lemma}[Neyman-Pearson]
+	The Neyman-Pearson test is the most powerful test. 
+
+	More strongly, consider a particular choice of $c$ in the Likelihood Ratio Test, such that 
+	\[\Pr_{H_0}(L(x) > c) + \gamma \Pr_{H-0} (L(x) = c) = \alpha_0, \Pr_{H_1}(L(x) < c) + (1 - \gamma) \Pr_{H_1}(L(x) = c) = \beta_0 \]
+
+	Suppose there's some other test with rejection region $A$, which achieves a smaller or equal false rej probability $\Pr_{H_0} (X \in A) \leq a_0$ then $\Pr_{H_1}(x \not \in A) \geq \beta_0$. There is a strict inequality $\Pr_{H_1} (X \not \in A) > \beta_0$ when $\Pr_{H_0} (X \in A) < \alpha_0$.
+\end{lemma}
 \subsection{Hilbert Space}
 \subsection{Gram-Schmidt}
 \subsection{LLSE}
+The approximation for LLSE is 
 \subsection{MMSE}
 
 \section{Kalman Filter}

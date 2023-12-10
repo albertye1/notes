@@ -139,7 +139,8 @@ WPA Handshake
 * Client chooses initial sequence number x, its bytes and sends a SYN packet to the server
 * Server chooses an initial sequence number y for its bytes and responds with a SYN-ACK packet
 * Client then returns with an ACK packet
-* Once both hosts have sync'd sequence numbers, then connection is "established"
+	* sequence number = y + 1, ACK number = x + 1, saying that it's acknowledged the packets with sequence number x + 1.
+* Once both hosts have sync'd sequence numbers, then connection is "established".
 
 ## Sending and Receiving Data
 * TCP handlers on each side track which TCP segments have been received for each connection
@@ -159,6 +160,7 @@ WPA Handshake
 	* indicator that the user is acknowledging the receipt of something (in ack num)
 	* p much always set except for 1st packet
 * SYN
+	* first send from client to 
 * FIN
 	* ends a connection
 	* needs ACK
@@ -177,11 +179,14 @@ WPA Handshake
 	* **RST Injection**: Spoofing a RST packet to forcibly terminate a connection.
 		* Same reqs as packet injection, so easy for on-path and MITM attackers, but hard for off-path attackers
 		* Often used in censorship scenarios to block access to sites.
+### Defenses
+* Using TLS
+* Use true random, unpredictable sequence numbers.
 # UDP
 * non-reliably sending packets
 * only the ports
 * same possibilities for attacks as TCP, but they're easier to pull off.
-* why use???
+* why use?
 	* much faster than TCP. usually used by low-latency, high-speed applications where errors are ok
 	* i.e. video streaming, games
 
@@ -189,8 +194,11 @@ WPA Handshake
 
 ^4a8bd7
 
-* step 1: 
-* step 2:
+* step 0: Standard TCP 3-way handshake 
+* step 1: Hello
+	* Client sends a random number
+	* Server sends a random number, an encryption protocol, and a signed copy of the server's public key.
+* step 2: Certificate
 * step 3: Premaster Secret
 	* rsa
 		* client randomly generates a premaster secret (ps)
@@ -243,6 +251,8 @@ This is similar to 61C's comparch unit in terms of finally understanding up to t
 	* Victim will cache the bad DNS, thus "poisoning" the cache
 * Defense: Bailiwick Checking
 	* Limit the amount of damage a malicious name server can do
+## DNSSEC
+* Only calling the server
 # Denial-of-Service Attacks
 ## SYN flooding
 denying myself the service of looking through this shit
