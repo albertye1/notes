@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage[portrait, margin=0.5in, top=0.8in, bottom=0.3in]{geometry}
+\usepackage{amsmath, amssymb}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm} 
+\usepackage[mdthm,simplethm]{test}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{physics}
+\usepackage{sectsty}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+
+\usepackage{hyperref}
+\usepackage{nameref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Math 115 Notes},
+    pdfpagemode=FullScreen,
+    }
+
+\urlstyle{same}
+
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\lhead{Math 115 - Final Review}
+\rhead{Albert Ye}
+
+\title{Math 115 - Final Review}
+\author{albert ye}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	All of the material between the second midterm and the final.
+	\section{Unit Groups}
+	\section{Gauss Sums}
+	\section{Jacobi Sums}
+	Some initial definitions would help provide some context:
+	\begin{definition}[Multiplicative Character]
+		We call $\chi$ a \vocab{multiplicative character} if $\chi(ab) = \chi(a) \chi(b)$, over all $a, b \in F_p$.
+	\end{definition}
+
+	We have a couple other rules for this function:
+	\begin{enumerate}
+		\item $\chi(1) = 1$
+		\item $\chi(a)$, over any $a$, is a $p - 1$th root of unity
+		\item $\chi(a^{-1}) = \chi(a)^{-1} = \overline{\chi(a)}$.
+	\end{enumerate}
+
+	We also have the identity character $\varepsilon$, where $\varepsilon(a) = 1$ over all $a \in F_p$. 
+
+	\begin{definition}[Jacobi Sum] 
+		The \vocab{Jacobi sum} of two multiplicative characters $\chi, \lambda$, given $a, b \in F_p$ for some prime $p$, is $J(\chi, \lambda) = \sum_{a + b = 1} \chi(a) \lambda(b)$.
+	\end{definition}
+
+	There are also a couple theorems you should know, and one you should know the proof of:
+	\begin{theorem}
+		$\qquad$
+		\begin{enumerate}
+			\item $J(\epsilon, \epsilon) = p$.
+			\item $J(\epsilon, \chi) = 0$.
+			\item $J(\chi, \chi^{-1}) = - \chi(-1)$.
+			\item If $\chi \lambda \neq \epsilon$, then \[J(\chi, \lambda) = \frac{g(\chi)g(\lambda)}{g(\chi)(\lambda)}.\] 
+		\end{enumerate}
+	\end{theorem}
+
+	This one we need to prove: The first two statements can be done just by checking the sum over all $a, b \in F_p$ such that $a + b = 1$. 
+
+	The third statement is true because $\chi(a) \chi^{-1}(b) = \chi(a) \chi(b^{-1}) = \chi\left(\frac{a}{b}\right)$, so we're summing over $\chi(a(1-a)^{-1})$. We see that this maps to every value but $-1$, so we have that our sum includes everything but $\chi(-1)$. But as the sum of everything is $0$, we have $J(\chi, \chi^{-1}) = -\chi(-1)$.
+
+	The last statement is true because 
+\end{document}
