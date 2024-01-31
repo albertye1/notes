@@ -241,7 +241,6 @@ This is similar to 61C's comparch unit in terms of finally understanding up to t
 * DNS uses UDP, as it is designed to be lightweight and fast. 
 	* Any access that involves a domain name is preceded by a DNS query, so we want DNS lookups to be fast.
 	* Can fit queries and responses in just one UDP message -- DNS payload.
-		* Z
 * DNS Lookup Walkthrough
 	* `dig inorecurse eecs.berkeley.edu $198.41.0.4`. Get answer:
 		* `opcode: QUERY, status: NOERROR, id, 26114, flags: qr: QUERY: 1, ANSWER: Q, AUTHORITY: 13, ADDITIONL: 27`.
@@ -251,8 +250,56 @@ This is similar to 61C's comparch unit in terms of finally understanding up to t
 	* Victim will cache the bad DNS, thus "poisoning" the cache
 * Defense: Bailiwick Checking
 	* Limit the amount of damage a malicious name server can do
+## DNS over TLS
+* First, consider DNS over a TLS connection.
+	* Our goal here is integrity, not confidentiality, since DNS records are public to begin with.
+	* We want to prevent things like cache poisoning.
+* Idea: TLS is end-to-end secure, so let's send all DNS requests and responses over TLS.
+* Issues with this design
+	* Performance - DNS should be fast, but TLS is slow
+	* Caching - TLS doesn't help with caching
+	* Security - Doesn't protect against malicious name servers
+	* Security - Doesn't defend against malicious recursive resolvers.
+		* Recursive resolves are practically MITM's
+* **Object security** vs **Channel security**
+	* Channel security is securing the communication channel that you're passing through. DNS over TLS does this
+	* Object security is securing a piece of data in transit or storage
+	* Secure DNS requires both **object** and **channel** security. 
 ## DNSSEC
-* Only calling the server
+A better solution involves a return to [[Cryptography]] topics.
+* an extension of DNS protocol that ensures integrity on the results
+A couple design questions for this protocol:
+1) what kind of cryptographic primitive should we use to ensure integrity?
+	1) prolly MAC's or digital signatures 
+	2) digital signatures are better since we want *everyone* to be able to verify integrity, and not just one person.
+2) How to ensure return record is correct? 
+	1) Recall digital signatures: Only the owner of private key can sign records. Everyone else can verify
+	2) Name server should sign record with their public key
+	3) Should verify record with their public key
+3) What should name server send to ensure integrity on a record?
+	1) The record
+	2) Signature over the record, signed with the private key
+	3) The public key
+	4) Issues with design?
+		1) Name server can be malicious
+		2) How to ensure no one's tampered with the public key?
+		3) Solution is to use certificates.
+4) How does a name server delegate trust to a child name server?
+	1) Parent must sign child's pub key
+5) PKI's need a trust anchor. Who do we implicitly trust in DNSSEC?
+	1) We implicitly trust the top of the certificate hierarchy, which is the root name server.
+### Design
+* Sign records
+	* Digital signatures provide integrity
+	* Digital signatures defeat network attackers
+	* Signatures can be cached with the records for object security.
+* Public Key Infrastructure (Certificates)
+	* Name servers can be arranged into a hierarchy, as in ordinary DNS.
+	* Parents can delegate trust to children
+	* Trust anchor: We implicitly trust the root nameserver
+	* PKI defeats malicious name servers.
+### Steps of a Lookup
+
 # Denial-of-Service Attacks
 ## SYN flooding
 denying myself the service of looking through this shit
