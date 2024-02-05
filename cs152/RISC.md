@@ -9,10 +9,22 @@
 		* pipelined only counts after the initial stage
 * data hazards
 	* data-dependence: read-after-write.
+		```
+		ADD x1, x2, x3
+		SW x4, 4(x1)
+		```
 	* anti-dependence: write-after-read. why should we care?
 		* in cases with multiple processes
 		* out-of-order ISA's
+		```
+		ADD x1, x2, x3
+		SUB x2, x4, x5
+		```
 	* output-dependence: write-after-write
+		```
+		ADD x1, x2, x3
+		SUB x1, x4, x5
+		```
 	* solutions
 		* interlock: wait until the hazard clears, or wait for some operand so it can be read
 		* bypass: short-circuit the operand
