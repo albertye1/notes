@@ -36,4 +36,31 @@ else
 	* Single character: $L(C)=\{c\}$ for any $c \in \Sigma$.
 	* Concatenation: $L(AB) = \{ ab \mid a \in L(A) \land b \in L(B)\}$. 
 	* Union: $L(A \mid B) = \{s \mid s \in L(A) \lor s \in L(B)\}$.
-	* Iteration
+	* Iteration: $L(A^*) = \{\text{""}\} \cup L(A) \cup L(AA) \cup L(AAA) \cup \ldots$
+	* $A^+ = A A^*$.
+* Example
+	* Email address (i.e. `ksen@berkeley.edu`)
+	* $\Sigma$ = $\{a, b, \ldots, z\} \cup \{., @\}$.
+	* name = $\{a, b, \ldots, z\}^+$
+	* address = `name @ name (. name)*`
+* Next: Given a string $s$, regex $R$, is $s \in L(R)$?
+#### Lexical Spec
+1. select a set of tokens
+2. write a regex for the lexemes of each token
+	1. number = `digit*`
+	2. keyword = `'if' | 'else' | ...`
+3. construct $R$, matching all lexemes for all tokens
+4. if $s \in L(R)$, then $s$ is a lexeme.
+	1. furthermore, $s \in L(R_i)$ for some $i$.
+	2. this $i$ determines the token that is reported
+5. let the input be $x_1, \ldots, x_n$.
+6. it must be that $x_1, \ldots, x_i \in L(R_j)$ for some $i$ and $j$.
+Ambiguities:
+- Sometimes, the algorithm can be ambiguous.
+	- `R = ws | int | ident | '+'`
+	- `foo+3`
+		- `f`, `fo`, `foo` also match R as identifier, but not `foo+`.
+	- **Maximal Munch Rule**: Pick the **longest possible substring** that matches R.
+- Sometimes, there are words that can be matched to multiple specss.
+	- Use the first one in the regex that matches.
+## Finite Automata
