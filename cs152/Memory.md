@@ -51,6 +51,7 @@
 	* slot = cache way
 	* 1 bin -> fully associative, 1 slot/bin -> direct mapped, $M$ slots / $N$ bins where $M, N > 1$ -> set associative
 * fixed # of slots per bin, slots read out in parallel
+* essentially, read through [[Cache Old Notes]].
 ### Replacement Policy
 - In an associative cache, which block from a set should be evicted when set becomes full?
 	- random
@@ -59,3 +60,26 @@
 	- not most-recently used
 - second-order effect only matters when you miss!
 	- you are trying to minimize the miss rate so usually hopefully replacement policy hopefully doesn't matter that much
+## Victim cache
+* Small associative backup cache under the L1 cache, holding recently evicted lines.
+	* First look up in direct-mapped (L1) cache
+	* If miss, look in the victim cache
+	* If hit in victim cache, swap w/ evicted line from L1
+	* If miss in VC, then L1 victime -> VC, VC victim -> ??
+## Early Restart / Critical Word First
+* Don't wait for full block before restarting CPU
+* **early restart**: as soon as requested word of block arrives, send to CPU and let CPU continue
+* **critical word first**: request missed word first from memory and send to CPU as soon as it arrives; let CPU continue executing while filling the rest of the words in the block
+	* with larger & larger blocks, we see that cw first becomes more popular
+## Prefetching
+- Speculate on future instruction and data accesses and fetch them into cache(s)
+- Varieties of prefetching
+	- Hardware
+	- Software
+	- Mixed schemes
+- What types of misses does prefetch affect?
+	- compulsory, because of the cold start thing
+### Goals
+- useful -- should produce hits
+- timely -- not late, not too early
+- cache & bandwidth pollution -- avoid this
