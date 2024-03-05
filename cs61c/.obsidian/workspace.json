@@ -56,18 +56,6 @@
             }
           },
           {
-            "id": "ffe845e3f2561ecc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "RISC-V Datapath.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "64fef045aebfba89",
             "type": "leaf",
             "state": {
@@ -134,7 +122,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -208,7 +196,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "RISC-V Datapath.md",
+                "file": "Pipelining.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -225,7 +213,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "RISC-V Datapath.md",
+                "file": "Pipelining.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -248,7 +236,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "RISC-V Datapath.md"
+                "file": "Pipelining.md"
               }
             }
           }
@@ -269,28 +257,28 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "ffe845e3f2561ecc",
+  "active": "4044f802f17e9ad1",
   "lastOpenFiles": [
     "61c final cheat sheet.pdf",
-    "Finite State Machines.md",
-    "Dependability.md",
     "Pipelining.md",
+    "CALL.md",
+    "C.md",
     "Parallelism.md",
     "OS.md",
+    "Number Notations.md",
+    "Finite State Machines.md",
+    "Dependability.md",
+    "Combinational Logic.md",
+    "Caches.md",
+    "RISC-V Datapath.md",
     "Waveform Diagrams.md",
     "Untitled.md",
-    "Caches.md",
-    "Combinational Logic.md",
-    "CALL.md",
     "Untitled 1.md",
-    "Number Notations.md",
-    "RISC-V Datapath.md",
     "RISC-V Hardware.md",
     "RISC-V Notation.md",
     "RISC-V Operation Types.md",
     "Screenshot 2023-04-29 at 7.07.36 PM.png",
     "Screenshot 2023-04-03 at 10.46.25 AM.png",
-    "C.md",
     "Binary Numbers Guide.md",
     "Untitled"
   ]

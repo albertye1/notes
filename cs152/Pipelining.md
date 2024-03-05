@@ -1,3 +1,6 @@
+[[#^650b99]]
+
+
 * Initially: The 5-stage pipeline!
 	* Mostly to deal with higher latency load, float ops?
 	* Branching, only if coming from another long latency operation.
@@ -112,4 +115,81 @@ Later topics, which will be in a separate doc, include out-of-order pipelining
 * At front end of the pipeline, we are doubling up on the fetch and the decode.
 	* GPR's and FPR's. When we fetch two instructions s.t. one is an int op and one is a float op, then we send one to GPR and one to FPR so that we can compute things without any added area costs.
 	* Other cases -- either give up or bump forward one. Prof isn't sure.
-* 
+# Not Computer History
+
+^650b99
+
+I'm sorry, the previous section is a jumbled mess of word salad
+- Three types of hazards:
+	- Structural hazard: Instruction using a resource needed by another instruction
+	- Data hazard: Instruction may depend on something produced by an earlier instruction for a data value
+		- Among data hazards, we have multiple subcategorizations:
+		* data-dependence: read-after-write. -- **only one that will show up in RISC 5-stage pipeline, because writes are the final stage of the pipeline.**
+		```
+		ADD x1, x2, x3
+		SW x4, 4(x1)
+		```
+		- anti-dependence: write-after-read. why should we care?
+		* in cases with multiple processes
+		* out-of-order ISA's
+		```
+		ADD x1, x2, x3
+		SUB x2, x4, x5
+		```
+		* output-dependence: write-after-write
+		```
+		ADD x1, x2, x3
+		SUB x1, x4, x5
+		```
+	* solutions
+		* interlock: wait until the hazard clears, or wait for some operand so it can be read
+		* bypass: short-circuit the operand
+		* speculate: guess the value, correct later if wrong
+			* only effective in branching, sp updates, addr disambiguation
+	* 
+	- Control hazard: Same as above, but for a branch instruction.
+- Exception Handling
+	- a **precise exception** is one where you can recover the precise state when the exception happened
+	- if there's let's say something overwritten to a register before the exception actually happens, then the resulting exception will be **imprecise**.
+- Bypassing
+	- allows for use of uncommitted instruction results by following instructions.
+	- from the start / end of one pipeline stage to the start / end of another pipeline stage
+		- cannot be end -> start or smth though
+- Traps
+	* **asynchronous:** trap handler
+		* requests attention by asserting some prioritized interrupt request lines.
+		* saves EPC before enabling interrupts to allow nested interrupts
+			* need an instruction to move EPC into GPRs 
+			* need a way to move further interrupts at least until EPC can be saved. 
+		* needs to read the **cause** register, indicating the reason for the trap.
+		* use a special indirect jump instruction `ERET`, which 
+			* enables interrupds
+			* restores processor to user mode
+			* restores hardware status / control state
+			* sets PC to EPC and resume execution
+			* essentially, pretend nothing happened.
+	* **synchronous traps**: exception handling
+		* caused by exception on a *particular* instruction. 
+		* so this means the instruction can't be completed, must be restarted
+			* may require undoing one or more unfinished instructions
+		* in case of system call trap, instruction is considered complete
+			* `ECALL` in RISC-V causes a trap into a higher privilege mode
+		* exception handling
+			* how to handle multiple simul. exceptions in different pipeline stages? and how/where to handle external async. interrupts?
+			* in the 5-stage pipeline, errors are:
+				* PC address exception
+				* Illegal opcode
+				* Overflow
+				* Data address exception
+			* in the 5-stage pipeline, actions are:
+				* hold exception flags in the pipeline until commit point (M stage)
+				* exceptions in earlier stages override later ones for a given instruction
+				* inject external interrupts @ commit
+				* if trap is at the commit, update the `cause` and `epc` registers, kill all stages, inject handler PC into the fetch stage.
+			* speculation
+				* prediction mechanism
+				* check prediction mechanism
+				* recovery mechanism
+					* only write architectural state at the commit point, so can throw away partially executed instructions after exception.
+					* launch exception harder after flushing pipeline
+				* bypassing allows use of uncommitted inst. results by following instructions

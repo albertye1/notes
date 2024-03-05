@@ -28,7 +28,7 @@
 * Data hazards
 	* Instructions have an unfulfilled data dependency, and we need to use data that has yet to be written
 	* Three cases to consider:
-		* **Register Access**: If the same register is written and read in one cycle: We need to write the value before ID then reads the new value. The solution in this case is to write then read.  
+		* **Register Access**: If the same regist[]()er is written and read in one cycle: We need to write the value before ID then reads the new value. The solution in this case is to write then read.  
 		* **ALU Result:** Instruction depends on WB's regfile write from the previous instruction. We have two solutions: the first is just stalling, which reduces performance; the second is forwarding.
 			* We don't wait for the value to be stored into the regfile, and just grab the operand from the pipeline stage.
 			* This is implemented by adding extra connections in the datapath.
@@ -45,4 +45,4 @@
 	* Solution: Branch Prediction
 		* Every taken branch in the simple RV32I pipeline costs **3 clock cycles.**
 			* If branch not taken, then pipeline is not stalled, the correct instructions are fetched after the branch instruction.
-		* However, if the prediction is incorrect it will still cost 3 clock cycles.
+			* However, if the prediction is incorrect it will still cost 3 clock cycles.

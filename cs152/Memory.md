@@ -83,3 +83,7 @@
 - useful -- should produce hits
 - timely -- not late, not too early
 - cache & bandwidth pollution -- avoid this
+## Loop Fusion
+* Fusing loops with common array calls makes some operations more convenient. 
+## Cache Tiling
+
