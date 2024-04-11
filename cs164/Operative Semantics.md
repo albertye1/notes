@@ -1,0 +1,22 @@
+
+- store: maps memory locations to values
+	- S = [$I_1$ -> 5, $I_2$ -> 7]
+	- special cases (classes without attributes)
+- evaluation judgment is $E, S \vdash e : v, S', R'$ 
+	- $E$ is local variable environment
+	- $S$ is current store
+	- $R$ is return value
+	- If $e$ terminates, then
+		- returned value is $v$
+		- new store is $S'$
+		- new return is $R'$ 
+- classes
+	- $class(A) = (a_1 = e_1, \ldots, a_m = e_m)$ where 
+		- $a_i$ are attributes and methods, including inherited
+		- $e_i$ are the initializers or method defs
+- rules
+	- assignment: $E(ld) = I_{ld}$, $S(I_{ld}) = v$ -> $E, S \vdash id = e : v, S_2, \_$ 
+	- return: $E, S \vdash e : v, S_1, \_$ -> $E, S \vdash \texttt{return } e:\_, S, v$
+	- function invocation: etc. etc. etc. this is all on the slides
+- runtime errors
+	- 

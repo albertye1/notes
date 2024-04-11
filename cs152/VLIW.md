@@ -1,0 +1,1 @@
+Stands for "very long instruction word" -- multiple opts. packed into one function()

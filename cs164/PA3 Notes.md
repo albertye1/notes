@@ -1,0 +1,3 @@
+- currently a bunch of statements. will need to cgen everything.
+- follow the cgen rules that are on the slides: https://drive.google.com/file/d/1NKwK60rpE00sLqMgDDqqLzI4pohC0CqE/view
+- 
